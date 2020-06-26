@@ -1,0 +1,85 @@
+\documentclass[12pt,letterpaper]{report}
+
+\usepackage{sisl-suthesis}
+
+\usepackage{blindtext}
+
+\addbibresource{references}
+
+%% Thesis Metadata
+\dept{Aeronautics and Astronautics}
+
+
+\title{SISL Thesis Template}
+
+\author{Sam Sisler}
+
+
+% adviser and readers
+\principaladviser{Michael Scott}
+\firstreader{Severus Snape}
+\secondreader{Will Hunting}
+
+
+\begin{document}
+
+
+\beforepreface
+
+\prefacesection{Abstract}
+
+\Blindtext
+
+\prefacesection{Acknowledgments}
+
+\Blindtext
+
+\afterpreface
+
+\chapter{Introduction}
+
+\Blindtext
+Previous works applied POMDP methods to autonomous driving problems~\cite{bai2014}.
+
+\chapter{Some Maths}
+
+\blindmathpaper
+
+\chapter{Some Figures}
+
+\Blindtext
+As illustrated in \cref{fig:ml} and demonstrated in other works~\cite{mnih2015}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{xkcd_machinelearning}
+    \caption[Cartoon about machine learning]{Cartoon about machine learning from the website \url{xkcd.com}}
+    \label{fig:ml}
+\end{figure}
+
+\Blindtext
+
+
+\chapter{Some Lists}
+
+\blindtext
+
+\blindenumerate
+
+\blindtext
+
+POMDPs can be solved offline using Monte-Carlo tree search~\cite{silver2010}.
+
+\blinditemize
+
+\blindtext
+
+\blinddescription
+
+\chapter{Conclusion}
+
+\blindtext
+
+\printbibliography
+
+\end{document}

@@ -1,2 +1,2 @@
 # Thesis
-PhD Thesis
+PhD Thesis, template from SISL wiki
