@@ -2,83 +2,39 @@
 
 \usepackage{sisl-suthesis}
 
-\usepackage{blindtext}
-
 \addbibresource{references}
 
 %% Thesis Metadata
 \dept{Aeronautics and Astronautics}
 
 
-\title{SISL Thesis Template}
+\title{Algorithms for Black-Box Safety Validation of Autonomous Systems}
 
-\author{Sam Sisler}
+\author{Anthony Corso}
 
 
 % adviser and readers
-\principaladviser{Michael Scott}
-\firstreader{Severus Snape}
-\secondreader{Will Hunting}
+\principaladviser{Mykel J. Kochenderfer}
+\firstreader{Dorsa Sadigh}
+\secondreader{Marco Pavone}
 
 
 \begin{document}
-
-
 \beforepreface
 
 \prefacesection{Abstract}
-
-\Blindtext
+\input{chapters/abstract}
 
 \prefacesection{Acknowledgments}
-
-\Blindtext
+\input{chapters/acknowledgments}
 
 \afterpreface
 
 \chapter{Introduction}
-
-\Blindtext
-Previous works applied POMDP methods to autonomous driving problems~\cite{bai2014}.
-
-\chapter{Some Maths}
-
-\blindmathpaper
-
-\chapter{Some Figures}
-
-\Blindtext
-As illustrated in \cref{fig:ml} and demonstrated in other works~\cite{mnih2015}.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.7\textwidth]{xkcd_machinelearning}
-    \caption[Cartoon about machine learning]{Cartoon about machine learning from the website \url{xkcd.com}}
-    \label{fig:ml}
-\end{figure}
-
-\Blindtext
-
-
-\chapter{Some Lists}
-
-\blindtext
-
-\blindenumerate
-
-\blindtext
-
-POMDPs can be solved offline using Monte-Carlo tree search~\cite{silver2010}.
-
-\blinditemize
-
-\blindtext
-
-\blinddescription
+\input{chapters/introduction}
 
 \chapter{Conclusion}
-
-\blindtext
+\input{chapters/conclusion}
 
 \printbibliography
 
