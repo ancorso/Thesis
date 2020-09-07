@@ -1,6 +1,70 @@
 \documentclass[12pt,letterpaper]{report}
-
 \usepackage{sisl-suthesis}
+
+% Todos
+\usepackage{regexpatch}
+\makeatletter
+\xpatchcmd{\@todo}{\setkeys{todonotes}{#1}}{\setkeys{todonotes}{inline,#1}}{}{}
+\makeatother
+
+% Upright bold
+\usepackage{vector}
+\renewcommand{\vec}[1]{\vect{#1}}
+
+
+\usepackage{csquotes}
+\usepackage{dsfont}
+\newtheorem{proposition}{Proposition}
+
+% Figures
+\usepackage{subcaption}
+
+% Algorithms
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage[noend]{algpseudocode}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{multirow}
+\renewcommand{\arraystretch}{1.2}   
+\usepackage{makecell}
+\usepackage{mathtools}
+
+% TikZ
+\usepackage{tikz}
+\usepackage{soul}
+
+\usetikzlibrary{arrows,fit} % for problem diagram
+\usetikzlibrary{positioning} % for problem diagram
+\usetikzlibrary{arrows.meta,calc,shapes} %
+
+\setul{0.8ex}{0.4ex}
+
+\definecolor{c1}{rgb}{0.102, 0.3686, 0.3294}
+\definecolor{c2}{rgb}{0.3216, 0.1569, 0.30196}
+\definecolor{c3}{rgb}{0.7765, 0.8196, 0.77255}
+\definecolor{c4}{rgb}{0.82353, 0.75686, 0.59216}
+\definecolor{c5}{rgb}{0.5412, 0.0902, 0.09804}
+
+
+\def \radius {5cm}
+\def \stem {33}
+\def \margin {10} % margin in angles, depends on the radius
+\def \nsize {4cm}
+\def \half {0.5cm}
+\def \head {0.5cm}
+
+\tikzset{nstyle/.style={draw, circle, minimum size=\nsize}}
+
+
+% For interpretable Validation chapter:
+\newcommand{\T}{\textsc{T}}
+\newcommand{\F}{\textsc{F}}
+\newcommand{\A}{\textsc{A}}
+\newcommand{\True}{\textsc{True}}
+\newcommand{\False}{\textsc{False}}
+\newcommand{\Arbitrary}{\textsc{Arbitrary}}
 
 \addbibresource{references}
 
@@ -8,7 +72,7 @@
 \dept{Aeronautics and Astronautics}
 
 
-\title{Algorithms for Black-Box Safety Validation of Autonomous Systems}
+\title{Algorithms for the Safety Validation of Black-box Autonomous Systems}
 
 \author{Anthony Corso}
 
@@ -22,6 +86,13 @@
 \begin{document}
 \beforepreface
 
+% - Thesis outline
+%     - 20-24 pages on chapter 2
+%     - Omit Related work in the chapter sections
+%     - Replace conclusion with discuss - can relate to prior approaches 
+%         - First paragraph is summary and then you can talk about whatever
+%         - Talk about implementations in approach, background, 
+
 \prefacesection{Abstract}
 \input{chapters/abstract}
 
@@ -32,6 +103,24 @@
 
 \chapter{Introduction}
 \input{chapters/introduction}
+
+\chapter{Background}
+\input{chapters/background}
+
+\chapter{Sample Systems}
+\input{chapters/sample_systems}
+
+\chapter{Interpretable Safety Validation}
+\input{chapters/interpretable_validation}
+
+\chapter{Approximating the Distribution Over Failures}
+\input{chapters/distribution_over_failures}
+
+\chapter{Scalability Through Scene Decomposition}
+\input{chapters/scene_deomposition}
+
+\chapter{Efficient Iterative Safety Validation}
+\input{chapters/iterative_validation}
 
 \chapter{Conclusion}
 \input{chapters/conclusion}

@@ -1,0 +1,30 @@
+\section{Background}
+
+\section{Approach}
+
+\begin{figure}[!t]
+\centering
+\input{figures/scene_decomposition/a2t_network}
+\caption{The A2T network. Dashed lines represent backpropagation for learning parameters. }
+\label{fig:A2T_Network}
+\vskip -0.5cm
+\end{figure}
+
+\begin{algorithm}
+\caption{MC evaluation with function approximation}
+    \label{alg:mc_policy_eval}
+\begin{algorithmic}[1]
+    \Function{MCPolicyEval}{$\tilde{v}_\theta$, $N_{\rm iter}$, $N_{\rm samp}$, $\alpha$}
+    \For{$N_{\rm iter}$ iterations}
+        \State $S, G \gets$ Rollouts($\tilde{v}_\theta$, $N_{\rm samp}$) \label{line:rollouts}
+        \State $J = \frac{1}{N_{\rm samp}} \sum_{j=1}^{N_{\rm samp}} (G_j - v(S_j))^2$ \label{line:mse}
+        \State $\theta \gets \theta - \alpha \nabla_\theta J$ \label{line:update}
+    \EndFor
+    \State \textbf{return} $\tilde{v}_\theta$
+    \EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+\section{Experiments}
+
+\section{Discussion}

@@ -1,0 +1,65 @@
+\resizebox{0.9\textwidth}{!}{%
+\begin{tikzpicture}
+% Arrows
+\draw[fill=gray!20,line width=1pt] (144:\radius + \half) arc (144:72 + \stem:\radius+\half) -- (72 + \stem:\radius+\half+\head) -- (72 + \stem - \margin:\radius) -- (72+\stem:\radius-\half-\head) -- (72+\stem:\radius-\half) arc (72+\stem:144:\radius-\half)--cycle;
+
+\draw[fill=gray!20,line width=1pt] (72:\radius + \half) arc (72:0 + \stem:\radius+\half) -- (0 + \stem:\radius+\half+\head) -- (0 + \stem - \margin:\radius) -- (0+\stem:\radius-\half-\head) -- (0+\stem:\radius-\half) arc (0+\stem:72:\radius-\half)--cycle;
+
+\draw[fill=gray!20,line width=1pt] (0:\radius + \half) arc (0:-72 + \stem:\radius+\half) -- (-72 + \stem:\radius+\half+\head) -- (-72 + \stem - \margin:\radius) -- (-72+\stem:\radius-\half-\head) -- (-72+\stem:\radius-\half) arc (-72+\stem:0:\radius-\half)--cycle;
+
+\draw[fill=gray!20,line width=1pt] (-72:\radius + \half) arc (-72:-144 + \stem:\radius+\half) -- (-144 + \stem:\radius+\half+\head) -- (-144 + \stem - \margin:\radius) -- (-144+\stem:\radius-\half-\head) -- (-144+\stem:\radius-\half) arc (-144+\stem:-72:\radius-\half)--cycle;
+
+\draw[fill=gray!20,line width=0pt] (-144:\radius + \half) arc (-144:-216 + \stem:\radius+\half) -- (-216 + \stem:\radius+\half+\head) -- (-216 + \stem - \margin:\radius) -- (-216+\stem:\radius-\half-\head) -- (-216+\stem:\radius-\half) arc (-216+\stem:-144:\radius-\half)--cycle;
+
+
+\node[nstyle, fill=c1!80, ] at (144:\radius) (test)
+{\includegraphics[height=2.\nsize]{figures/introduction/blueprint}};
+\node[text width=8cm, anchor=west] at (-13cm, 4.4cm) {\setulcolor{c1} {\LARGE{\ul{\bf 1. Define Requirements}}} \\ 
+\Large
+\begin{itemize}
+\item Temporal logic
+\item Dangerous states
+\end{itemize}
+};
+
+\node[nstyle, fill=c2!80] at (72:\radius) {\includegraphics[height=2.\nsize]{figures/introduction/eng}};
+\node[text width=8cm, anchor = west] at (3.6cm, 6cm) {\setulcolor{c2} {\LARGE{\ul{\bf 2. Design Effort}}} \\ 
+\Large
+\begin{itemize}
+\item Machine learning
+\item Engineering
+\end{itemize}
+};
+
+\node[nstyle, fill=c3!80] at (0:\radius) {\includegraphics[width=2.\nsize]{figures/introduction/tree}};
+
+\node[text width=8cm] at (6:\radius + 6cm) {\setulcolor{c3} {\LARGE{\ul{\bf 3. Generate  Testcases}}} \\ 
+\Large
+\begin{itemize}
+\item Unit tests
+\item Automated testing
+\end{itemize}
+};
+
+\node[nstyle, fill=c4!80] at (-72:\radius) {\includegraphics[height=2.\nsize]{figures/introduction/graph}};
+
+\node[text width=10cm] at (-36:\radius + 6.2cm) {\setulcolor{c4} {\LARGE{\ul{\bf 4. Evaluate  Performance}}} \\ 
+\Large
+\begin{itemize}
+\item Failure probability
+\item Failure severity
+\end{itemize}
+};
+
+
+\node[nstyle, fill=c5!80] at (-144:\radius) {\includegraphics[height=2.\nsize]{figures/introduction/head}};
+
+\node[text width=8cm,anchor=west] at (-13.5cm, -3.5cm) {\setulcolor{c5} {\LARGE{\ul{\bf 5. Interpret Failures}}} \\ 
+\Large
+\begin{itemize}
+\item Failure classification
+\item Root cause analysis
+\end{itemize}
+};
+\end{tikzpicture}
+}

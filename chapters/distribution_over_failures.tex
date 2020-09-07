@@ -1,0 +1,81 @@
+\section{Background}
+% The space of all trajectories is exponential in the length of the trajectory, so it will be challenging to represent the distribution $f(\tau)$ directly. To reduce the dimensionality of the distribution we assume that the SUT and environment are Markov. The current disturbance $x$ and next state $s^\prime$ will only depend on the current state $s$ such that
+% \begin{equation}
+%     p(x, s^\prime \mid s) = \underbrace{p(x \mid s)}_{\rm disturbance \ model}\overbrace{p(s^\prime \mid s, x)}^{\rm dynamics}.
+% \end{equation}
+% If we also assume that the dynamics of the SUT and the environment are deterministic (i.e. all stochasticity is controlled through disturbances), then
+% \begin{equation}
+%     p(x, s^\prime \mid s) = p(x \mid s).
+% \end{equation}
+% With these assumptions, the distribution over failures only depends on $p(x \mid s)$ and is given by 
+% \begin{equation}
+%     f(\tau) = \frac{\mathds{1}\{s_N \in E\}}{\mathbb{E}_p\left[ \mathds{1}\{ s_N \in E \} \right]} \prod_{t=1}^N p(x_t \mid s_{t-1}).
+% \end{equation}
+
+
+\section{Approach}
+
+\subsection{Constructing the Optimal Sampling Distribution}
+% \paragraph{Deterministic Case}
+
+% If we also assume that the dynamics of the SUT and the environment are deterministic (i.e. all stochasticity is controlled through disturbances), then
+% \begin{equation}
+%     p(x, s^\prime \mid s) = p(x \mid s).
+% \end{equation}
+% and the distribution over failures is given by 
+% \begin{equation}
+%     \tau(\vec{x}) = \frac{\mathds{1}\{s_N \in E\}}{\mathbb{E}_p\left[ \mathds{1}\{ s_N \in E \} \right]} \prod_{t=1}^N p(x_t \mid s_{t-1}).
+% \end{equation}
+
+% Since we have full control over the outcome of the simulator, we can construct a stochastic policy, $\pi$ that generates sample trajectories distributed according to $\tau$. Let
+% \begin{equation}
+%     \pi(x \mid s) = \frac{p(x \mid s) P_{\rm fail}(s^\prime)}{\sum_{a'}  p(x' \mid s) P_{\rm fail}(s'')} = \frac{p(x \mid s) P_{\rm fail}(s^\prime)}{P_{\rm fail}(s)} \label{eq:opt_pol}
+% \end{equation}
+% where $P_{\rm fail}(s)$ is the probability of failure from state $s$ and $s''$ is the state reached from $s$ after applying disturbance $x'$. The second equality in \cref{eq:opt_pol} comes from the observation that the probability of failure in the current state is a sum of the probability of failure over possible next states, weighted by the likelihood of reaching that state. 
+
+% \begin{proposition}
+% Trajectories generated from rollouts of the policy $\pi$ will be distributed according to $f$.
+% \end{proposition}
+
+% \proof
+% Let $\tau_\pi(\vec)$ be the distribution induced by rollouts of the policy $\pi$. We will show that for any $\vec{x}$, $\tau(\vec{x}) = \tau^*(\vec{x})$. First, we define the Bellman equation that describes the probability of failure of a Markov system as
+% \begin{equation} P_{\rm fail}(s) = \left\{ \begin{array}{ll}
+% 1 &  \text{if} \ s \in E \\
+% 0 &  \text{if} \  s \notin E, \ s \in T \\
+% \sum_a p(x \mid s) P_{\rm fail}(s^\prime) &  \text{otherwise}
+% \end{array} \right. \label{eq:belman}\end{equation}
+% Then consider an arbitrary trajectory $\vec{x}$ that has probability according to $\tau_\pi$ given by
+% \begin{equation}
+%     \tau_\pi(\vec{x}) = \prod_{t=1}^{N} \pi(x_t \mid s_{t-1}) = \prod_{t=1}^{N} \frac{p(x_t \mid s_{t-1}) P_{\rm fail}(s_t)}{P_{\rm fail}(s_{t-1})} \label{eq:fstar}
+% \end{equation}
+% and probability according to $f$ given by \cref{eq:ftau}. There are two cases to consider.\\
+% \textbf{Case 1: } $\mathds{1}\{s_N \notin E\}$
+
+% Due to the indicator function in \cref{eq:ftau}, $f(\tau)=0$. With final state $s_N \in T$ and $s_N \notin E$, we have $v(s_N) = 0$. The last term in the product in \cref{eq:fstar} contains $v(s_N)$, making $f^*(\tau) = 0$.\\
+% \textbf{Case 2: } $\mathds{1}\{s_N \in E\}$ 
+
+% Considering the definition of $f^*(\tau)$, we have
+% \begin{align}
+%     f^*(\tau) &= \prod_{t=1}^{N} \frac{p(x_t \mid s_{t-1}) v(s_t)}{v(s_{t-1})} \\
+%     &= \frac{\cancelto{1}{v(s_N)}}{v(s_0)} \prod_{t=1}^{N} p(x_t \mid s_{t-1}) \\
+%     &= \frac{1}{\mathbb{E}_p\left[ \mathds{1}\{ s_N \in E \} \right]} \prod_{t=1}^{N} p(x_t \mid s_{t-1}) \\
+%     &= f(\tau)
+% \end{align}
+% where, in the second line, all of the $v(s_t)$ terms were canceled except $v(s_0)$ and $v(s_N)$, and \cref{eq:belman} was used to let $v(s_N) = 1$. In the third line, we observe that the probability of failure at the initial state $v(s_0)$ is equivalent to the expectation of failures $\mathbb{E}_p\left[ \mathds{1}\{ s_N \in E \} \right]$. Thus, in all cases, $f(\tau) = f^*(\tau)$.
+% \endproof
+
+% \paragraph{Stochastic Setting}
+% \todo{This}
+
+
+\subsection{Computing the Probability of Failure}
+
+% In both the deterministic and stochastic settings, the problem of generating the distribution over failures or the optimal importance sampling distribution involves estimating the probability of failure $P_{\rm fail}(s)$.
+
+
+
+
+
+\section{Experiments}
+
+\section{Discussion}

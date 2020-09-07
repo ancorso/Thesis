@@ -1,0 +1,142 @@
+\todo{Look of some quotes of people describing failures}
+
+Our approach seeks to find a description $\varphi$ such that any disturbance trajectory that satisfies the description will cause the SUT to fail. 
+\begin{equation}
+    \vec{x} \in \varphi \implies f(\vec{x}) \not \in \psi
+\end{equation}
+Additionally, we want to search for the most likely failure example by maximizing the probability of the failure trajectories. These goals can be combined into the optimization problem 
+\begin{equation}
+\max_\varphi \quad \mathbb{E}_{\vec{x} \sim p(\vec{x} \mid \vec{x} \in \varphi)}[p(\vec{x})] \quad\textrm{s.t.}\quad \vec{x} \in E\\
+\end{equation}
+where $p(\vec{x} \mid \vec{x} \in \varphi)$ is the probability density of disturbance trajectories that satisfy the description. Taking inspiration from related work, we will represent $\varphi$ using STL and perform the optimization using genetic programming. 
+
+To design an algorithm for generating a failure description, we have to make the following design choices. Decide which language to use to represent the description, determine an approach for sampling trajectories that satisfy a given description, choose an optimization approach for generating descriptions, and 
+
+
+\section{Preliminaries}
+This section provides the necessary technical background for our interpretable safety validation algorithm. We first describe signal temporal logic (STL), our chosen language for failure description. We then present context-free grammars as a way of compactly representing STL and a simple algorithm for sampling expressions from the grammar. An expression optimization procedure known as genetic programming is then described since we can use it to optimize STL expressions. Lastly, we discuss techniques for modeling timeseries data that satisfies linear constraints including independent samples and series distributed according to a Gaussian process. 
+
+\subsection{Signal Temporal Logic}
+\label{subsec:stl}
+Signal temporal logic (STL) is a logical formalism that is used to describe the behavior of time-varying systems~\cite{maler2004monitoring,baier2008principles}. STL uses the basic logical propositions \emph{and} ($\land$), \emph{or} ($\lor$), and \emph{not} ($\neg$), as well as temporal propositions such as \emph{eventually} ($\lozenge$) and \emph{always} ($\square$). 
+% The latter two are defined for sequences of propositions as shown in \cref{fig:stl}.
+% \begin{figure}[ht]
+%     \centering
+%     \input{images/stl_definitions.tex}
+%     \caption{Definition of eventually and always.}
+%     \label{fig:stl}
+% \end{figure}
+Temporal logic operators are evaluated on series of Booleans. Continuous and discrete time series data are converted to Boolean statements using the comparison operators $\leq$, $\geq$, and $=$. A time series $\vec{x}$ satisfies an STL expression $\psi$ if $\psi(\vec{x})$ evaluates to \True{}.
+
+STL expressions can also include an explicit dependence on time. The proposition $\square_{[t_1, t_2]} (x < 10)$ means \emph{always $x < 10$ for $t\in [t_1, t_2]$} and $\lozenge_{[t_1, t_2]}(x = 13)$ means \emph{eventually $x = 13$ for $t\in [t_1, t_2]$}. The flexibility of STL and the ease with which STL expressions can be converted into natural language can make it a suitable choice for interpretable modeling of heterogeneous time series~\cite{lee2018interpretable,vazquez2017logical}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Context-Free Grammar}
+\label{subsec:cfg}
+
+A context-free grammar is a set of rules that define a formal language such as STL.  Each rule in the grammar is composed of an output type and a set of inputs consisting of types and symbols. To generate an expression, a starting type is chosen and types are recursively expanded until only symbols remain. 
+
+The grammar for the STL language described in \cref{subsec:stl} is given in \cref{eq:stl_grammar} for a single time series variable $x$. The type $\mathbb{B}$ is used for Boolean scalars, $\mathbb{S}$ is for Boolean series, $\mathbb{T}$ is for time, and $\mathbb{X}$ is for values of $x$. The logical operators apply element-wise on series. The symbol $\mid$ separates rules on the same line and $:$ indicates a range of symbols. In this work, time is discrete and the variable $x$ may be discrete or continuous. When $x$ is continuous, $\mathbb{X}$ is sampled uniformly at random in the range $[x_{\min}, x_{\max}]$.
+\begin{equation}
+\label{eq:stl_grammar}
+\begin{split}
+    \mathbb{B} &\mapsto \mathbb{B} \land \mathbb{B} \mid \mathbb{B} \lor \mathbb{B} \mid \neg \mathbb{B} \mid \square_{[\mathbb{T},\mathbb{T}]}(\mathbb{S}) \mid \lozenge_{[\mathbb{T},\mathbb{T}]}(\mathbb{S}) \\
+    \mathbb{T} &\mapsto 0:T_{\max} \\
+    \mathbb{S} &\mapsto \mathbb{S} \land \mathbb{S} \mid \mathbb{S} \lor \mathbb{S} \mid \neg \mathbb{S} \mid x \leq \mathbb{X} \mid x \geq \mathbb{X} \mid x = \mathbb{X} \\
+    \mathbb{X} &\mapsto [x_{\min},x_{\max}]
+\end{split}
+\end{equation}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Genetic Programming}
+\label{subsec:gp}
+Genetic programming is a population-based optimization technique for trees such as expressions generated from a grammar~\cite{kochenderfer2019algorithms, koza1992genetic}. Trees are evaluated according to a fitness function to determine the quality of an individual. To start the optimization, a population of $N_{\rm pop}$ trees is randomly sampled. Then, the following operations are performed randomly at each iteration (or generation) until convergence:
+\begin{itemize}
+    \item \textbf{Reproduction:} The fittest tree is selected from a subset of the population and progresses to the next iteration.
+    \item \textbf{Mutation:} A random node in the tree is replaced with a random tree of the same type from the grammar.
+    \item \textbf{Crossover:} Two individuals are selected at random and mixed to create a child. A random subtree from the first individual replaces a random node of the same type in the second individual.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Gaussian Processes}
+\label{subsec:gp2}
+
+A Gaussian process~\cite{williams2006gaussian} is a stochastic process where any finite set of sample points $\vec{t} = \left[ t_1, \ldots, t_m \right]$ have values $\vec{x} = \left[ x_1, \ldots, x_m \right]$ that are distributed according to a multivariate normal distribution $
+    \vec{x} \sim \mathcal{N}\big( \vec{\mu}(\vec{t}), \vec{K}(\vec{t}, \vec{t}) \big)$
+where $\mu_i(\vec{t}) = \mu(t_i)$ for mean function $\mu$ and $K_{ij}(\vec{t}, \vec{t}') = k(t_i, t'_j)$ for kernel function $k$. A common choice for $k$ is the squared exponential kernel with variance $\sigma^2$ and characteristic length $\ell$ given by $
+    k(t_1, t_2) = \sigma^2 {\rm exp}\left( - (t_1 - t_2)^2 / 2 \ell^2\right)$.
+One strength of Gaussian processes is the ability to easily compute a posterior distribution after observing some values $\vec{x}^o$ at observation points $\vec{t}^o$.
+
+To apply linear constraints on a Gaussian process, we use the procedure of \citeauthor{jidling2017linearly}~\cite{jidling2017linearly} where they apply a transformation to sample points from a truncated multivariate normal distribution. Sampling from a truncated multivariate distribution can be done efficiently with the minimax tilting approach~\cite{botev2017normal}. For notational convenience, we write a Gaussian process with mean $\mu$, kernel $k$, observed points $\vec{x}^o$, lower bound linear constraints $\vec{l}$ and upper bound linear constraints $\vec{u}$ as $
+    \mathcal{GP}\big(\mu, k, \vec{x}^o, \vec{l}, \vec{u}\Big)$.
+
+
+
+
+
+\section{Approach}
+
+\begin{algorithm}
+\caption{Interpretable Validation} \label{alg:interpretable}
+\begin{algorithmic}[1]
+    \Function{InterpretableValidation}{$\mathcal{G}_{\rm STL}$, $c$}
+    \State Sample $\{ \varphi_1, \ldots, \varphi_M \}$ from $\mathcal{G}_{\rm STL}$ \label{line:if_sample_grammar}
+    \Loop
+        \For{each expression $\varphi_j$} 
+            \State Sample $\{\vec{x}_1, \ldots, \vec{x}_N \}$ from $p(\vec{x})$ s.t. $\vec{x}_i \in \varphi_j$\label{line:if_sample_spec}
+            \State $c_{\varphi_j} \gets \frac{1}{N} \sum_{i=1}^N  c(\vec{x}_i)$ \label{line:if_compute_avg}
+        \EndFor
+        \State Select expressions $\{ \varphi_1, \ldots, \varphi_M \}$ based on $c_{\varphi_j}$\label{line:if_selection}
+        \State Crossover expressions
+        \State Mutate expressions \label{line:if_mutation}
+    \EndLoop
+    \State \textbf{return} best $\varphi_j$ \label{line:if_return}
+    \EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+\begin{table}
+    \centering
+    \caption{The minimally-restrictive set of subexpression outputs for the desired output of a parent expression. \T, \F, and \A \ are \True{}, \False{}, and \Arbitrary{}. To place the minimal amount of restriction on the time series, an output of \Arbitrary{} is used whenever possible.}
+    \label{tab:inverse_propositions}
+    \begin{tabular}{lll} 
+        \toprule
+        \textbf{Expression} & \textbf{Output} & \textbf{Subexpression Output}  \\
+        \midrule
+        \multirow{2}{*}{$\land$} & \True{} & (\T, \T) \\ & \False{} & (\F, \A) or (\A, \F) \\
+        \midrule
+        \multirow{2}{*}{$\lor$} & \True{} & (\T, \A) or (\A, \T) \\ & \False{} & (\F, \F) \\
+        \midrule
+        \multirow{2}{*}{$\neg$} & \True{} & \F \\ & \False{}  &  \T   \\
+        \midrule
+        \multirow{2}{*}{$\square_{[t_1, t_2]}$} & \True{} & \begin{tabular}{l} {[} \A, \ $\ldots$, \ $\underbrace{\T, \ \ldots, \ \T}_{[t_1,t_2]}$, \ \A, \  $\ldots$  {]} \end{tabular} \\ & \False{}  &  \begin{tabular}{l} {[} \A, \ $\ldots$, \ $\underset{\substack{\uparrow\\\mathclap{t \in [t_1,t_2]}}}{\F}$, \ \A, \  $\ldots$ {]} \end{tabular}   \\
+        \midrule
+        \multirow{2}{*}{$\lozenge_{[t_1, t_2]}$} & \True{} & \begin{tabular}{l} {[} \A, \ $\ldots$, \ $\underset{\substack{\uparrow\\\mathclap{t_1}}}{\F}$, \ \ldots, \ $\underset{\substack{\uparrow\\\mathclap{t \in [t_1,t_2]}}}{\T}$, \ \A, \  $\ldots$ {]} \end{tabular} \\  & \False{}  &  \begin{tabular}{c} {[} \A, \ $\ldots$, \ $\underbrace{\F, \ \ldots, \ \F}_{[t_1,t_2]}$, \ \A, \  $\ldots$ {]} \end{tabular} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+
+\begin{algorithm}
+\caption{Sampling constraints for STL satisfaction}
+    \label{alg:sampling_constraints}
+\begin{algorithmic}[1]
+    \Function{SampleConstraints}{$ex$, $out$, $V$}
+    \If{ $ex$ is a leaf}
+        \State push($V$, ($ex$, $out$)) \label{line:sc_push}
+    \Else
+        \State $E \gets$ SubExpressions($ex$) \label{line:sc_subexpr}
+        \State $O \gets$ SubExpressionOutputs($ex$, $out$) \label{line:sc_subexpr_out}
+        \For{$i$ in 1:length($E$)}
+            \State SampleConstraints($E[i]$, $O[i]$, $V$) \label{line:sc_recurse}    
+        \EndFor
+    \EndIf
+    \EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+\section{Experiments}
+
+\section{Discussion}

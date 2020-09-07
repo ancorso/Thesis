@@ -1,0 +1,29 @@
+% TikZ diagram for black-box safety validation problem formulation.
+
+\tikzset{
+    >={Latex[width=2mm,length=2mm]},
+        base/.style = {rectangle, rounded corners, draw=black,
+        minimum width=1cm, minimum height=1cm,
+        text centered},
+    block/.style = {base, minimum width=2.5cm, minimum height=1.5cm},
+    sutstyle/.style = {block, fill=gray!50},
+    envstyle/.style = {block, fill=white}, % green!15
+    advstyle/.style = {block, fill=red!15},
+}
+
+\begin{tikzpicture}
+    [
+        node distance=5.5cm,
+        every node/.style={font=\large},
+        align=center
+    ]
+
+    \node (system) [sutstyle] {System\\ $\mathcal{M}$}; % System
+    \node (environment) [envstyle, right of=system] {Environment\\ $\mathcal{E}$}; % Environment
+    \node (adversary) [advstyle, right of=environment] {Adversary\\ $\mathcal{A}$}; % Adversary
+
+    \draw[->] (system) -- (environment) node [pos=0.45,above] {{\small action $a$}};
+    \draw[->] (adversary) -- (environment) node [pos=0.45,above] {{\small disturbance $x$}};
+    \draw[->] (environment.south) ++(-0.5,0) -- +(0,-1) -| node[pos=0.25,below] {{\small observation $o$}} (system);
+    \draw[->] (environment.south) ++(0.5,0) -- +(0,-1) -| node[pos=0.25,below] {{\small state $s$}} (adversary);
+\end{tikzpicture}

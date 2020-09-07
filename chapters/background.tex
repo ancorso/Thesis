@@ -1,0 +1,170 @@
+In order to develop algorithms for safety validation of black-box systems, we need to mathematically formalize the problem. This this chapter we formulate safety-validation as the interaction between two decision-making agents: the system and the adversary. We define notation and formalize the underlying goals of different safety validation algorithms. With the goals defined, we survey the existing literature on black-box safety validation and categorize different algorithms into four categories: optimization, path planning, reinforcement learning and importance sampling. 
+
+\section{Problem Formulation}
+
+Suppose we have a system under test (referred to as the \emph{system}) that takes actions $a \in A$ in an \emph{environment} with state $s \in S$. Actions are selected based on observations $o \in O$ of the environment. The system interacts with the environment over discrete time $t \in \{1, \ldots, t_{\rm max}\}$. We denote a state trajectory up to time $t$ as $\vec{s}_{1:t} = [s_1, \ldots, s_t]$, an observation trajectory $\vec{o}_{1:t} = [o_1, \ldots, o_t]$, and an action trajectory $\vec{a}_{1:t} = [a_1, \ldots, a_t]$. The system may be modeled by a function $\mathcal{M}$ that maps an observation trajectory to an action
+\begin{equation}
+    a_t = \mathcal{M}(\vec{o}_{1:t}) \text{.} \label{eq:system} 
+\end{equation}
+
+An \emph{adversary} $\mathcal{A}$ produces disturbances $x \in X\subseteq \mathbb{R}^n$ in the environment with the goal of causing the system to fail. A disturbance trajectory is denoted $\vec{x}_{1:t}$ or just $\vec{x}$. Although we present the most general case of disturbances as a trajectory of inputs to the environment, $\vec{x}$ may also represent static environment parameters or initial conditions. 
+
+The adversary can use full or partial knowledge of the environment state to determine the next disturbance such that
+\begin{equation}
+    x_t = \mathcal{A}(\vec{s}_{1:t}) \text{.} \label{eq:adversary}
+\end{equation}
+Adversaries that use the system state require an environment that is constructed to provide that information. In cases where the state information is unavailable (possibly due to the simulator implementation or privacy concerns), the adversary must produce disturbance trajectories based solely on the outcomes of past trajectories. 
+
+The environment state evolves over time and is influenced by the actions of the system and the disturbances from the adversary. The environment is modeled by $\mathcal{E}$, where
+\begin{equation}
+    s_{t+1}, o_{t+1} = \mathcal{E}(\vec{a}_{1:t}, \vec{x}_{1:t}) \text{.} \label{eq:environment}
+\end{equation} 
+The interaction between the system, the environment, and the adversary is depicted in \cref{fig:problem}.
+
+\begin{figure}[!t]
+\centering
+\resizebox{\columnwidth}{!}{\input{figures/background/problem-diagram.tex}}
+\caption{Model of the safety validation problem.}
+\label{fig:problem}
+\end{figure}
+
+Some safety validation tasks require that the environment has a model of the disturbances. Let $p(\vec{x})$ be the probability density of the disturbance trajectory $\vec{x}$. If the disturbances are independent across time, then it is sufficient to define the density over a single disturbance $p(x)$, or if the disturbances depend only on the state it is sufficient to define $p(x \mid s)$. The disturbance model can be constructed through expert knowledge or learned from data.
+
+In this work, we assume that the environment and the system are fixed, making disturbances the only way to affect the system. Therefore, from the point of view of the adversary, the system and environment can be combined into a single function $f$ that maps disturbance trajectories into state trajectories
+\begin{equation}
+\vec{s} = f(\vec{x}) \text{.}
+\end{equation}
+Some algorithms require the ability to simulate a disturbance $x_t$ for a single timestep from a state $s_t$. We denote the simulation step
+\begin{equation}
+    s_{t+1} = f(s_t, x_t) \text{.}
+\end{equation}
+
+The desired operation of the system is described by one or more specifications $\psi$ which are  written in a formal specification language such as temporal logic~\cite{baier2008principles} or designed ad hoc. We overload the notation $\psi$ to be the set of state trajectories that satisfy the specification and write $\vec{s} \in \psi$ when the state trajectory satisfies the specification and $\vec{s} \not \in \psi$ when $\vec{s}$ violates the specification.
+
+\section{Safety Validation Tasks}
+
+Safety validation is concerned with finding disturbance trajectories that cause a system to failure and reasoning about the probability of those failures. We have identified four common safety validation tasks which are formally defined below.
+
+\paragraph{Falsification:} Find a counterexample to the specification. 
+\begin{equation} 
+\vec{x} \quad \text{s.t.} \quad f(\vec{x}) \not \in \psi
+\end{equation}
+
+\paragraph{Most likely failure analysis:} Find the most likely counterexample.
+\begin{equation}
+\underset{\vec{x}}{\argmax} \quad p(\vec{x}) \quad \text{s.t.} \quad f(\vec{x}) \not \in \psi
+\end{equation}
+
+\paragraph{Probability of failure estimation:} Compute the probability that the system fails.
+\begin{equation}
+P_{\rm fail} = \mathbb{E}_{p(\vec{x})}\left[ \mathds{1}{\{ f(\vec{x}) \not \in \psi \}} \right]
+\end{equation}
+
+\paragraph{Approximating the optimal sampling distribution:} Create a distribution that efficiently computes the probability of failure. 
+\begin{equation}
+\min_{q} \text{Var}\left[ \frac{1}{N} \sum_{i=1}^N \frac{p(\vec{x}_i) \mathds{1}{\{ f(\vec{x}_i) \not \in \psi \}}}{q(\vec{x}_i)} \right], \quad \vec{x}_i \sim q
+\end{equation}
+
+Note that the tasks are specified in order of increasing difficulty and increasing utility. The first two tasks involve finding individual failure examples, with most-likely failure analysis being more challenging due to the need for maximizing the probability of the failure trajectory. To estimate the probability of failure, we need to discover many failure examples, each with relatively high likelihood. Lastly, if we can generate the optimal sampling distribution, then it will necessarily produce many high likelihood failure examples and be an efficient sampling distribution to estimate the probability of failure, effectively solving the previous three tasks.
+
+\section{Optimization}
+A naive approach to falsification is to search randomly over disturbance trajectories until a counterexample is discovered. If counterexamples are rare, this process can be inefficient. To help guide the search for counterexamples, we can define a cost function $c_{\text{state}}(\vec{s})$ that measures the level of safety of the system over the state trajectory $\vec{s}$. A well-designed cost function will help bias the search over disturbance trajectories toward those that are less safe. Additionally, if the goal is to find the most-likely failure, then the cost function can incorporate the likelihood of the disturbance trajectory. 
+
+Once a cost function is defined, falsification and most-likely failure analysis become optimization problems where we seek to minimize the cost with respect to the disturbance trajectory $\vec{x}$. We define the optimization problem as
+\begin{equation}
+    \vec{x}^* = \argmin_{\vec{x}} c(\vec{x}) \text{,}
+\end{equation}
+where $c(\vec{x}) = c_{\text{state}}(f(\vec{x}))$. The cost function is designed such that $c(\vec{x}) \geq \epsilon \iff f(\vec{x}) \in \psi$, where $\epsilon$ is a safety threshold. Therefore, if a disturbance $\vec{x}$ causes $c(\vec{x}) < \epsilon$, then $\vec{x}$ is a counterexample. 
+
+The design of the cost function $c$ is specific to the application. Consider the safety validation of an autonomous vehicle that has a specification to not collide with other vehicles. The cost function could be the distance at the point of closest approach (i.e. miss distance) between the system and any other vehicle. The smaller the value, the closer the system is to a collision. If the distance is less than a safety threshold, then a collision has occurred~\cite{koren2018adaptive}.
+
+When the specification is represented by a temporal logic expression, a common choice for $c$ is the temporal logic robustness $\rho(\vec{s}, \psi)$. The robustness is a measure of the degree to which the trajectory $\vec{s}$ satisfies the specification $\psi$. Large values of robustness mean that at no point does the trajectory come close to violating the specification, while low but positive values of robustness mean that the trajectory is close to violating the specification. A robustness value less than \num{0} means that the specification has been violated and gives an indication of by how much. The robustness for space-time signals can be computed from a recursive definition~\cite{fainekos2009robustness, Donze2010robust,fainekos2009robustness,yang2013dynamic}. Upper and lower bounds on robustness can be computed for incomplete signals~\cite{dreossi2015efficient}, which is useful when constructing a trajectory sequentially~\cite{dreossi2015efficient,ernst2019fast}. The derivative of the robustness with respect to the state trajectory can be approximated, which may help derive gradient-driven optimization algorithms~\cite{pant2017smooth}. Causal information in the form of a Bayesian network can be incorporated into the robustness for improved falsification~\cite{akazaki2017causality}. 
+Connections have also been made between robustness and delta-reachability to relate falsification and exhaustive search through approximations~\cite{abbas2017relaxed}.
+
+One drawback to using robustness as a cost is that it depends on the scale of the state values. If the units of one state variable cause it to be much larger than another (i.e. engine RPMs versus angular rotation in radians), then the contribution to the robustness will favor the larger variable. The state variables may be normalized, but this requires the range of the state variables which may not be known. To mitigate this problem, \textcite{zhang2019multi} proposed measuring the robustness of each state variable independently and using a multi-armed bandit algorithm to decide which robustness value to optimize on each iteration.
+
+More generally, other functions that map a trace to a satisfaction metric can also be used as the cost function.  \textcite{balkan2017underminer} propose several alternative functions for finding non-convergence behaviors in control systems, including Lyapunov-like functions, M-step Lyapunov-like functions, neural networks, and support vector machines~\cite{balkan2017underminer}. 
+
+When the safety validation task is to find the most-likely failure, we can modify the cost function to include the likelihood of the disturbance trajectory $p(\vec{x})$. One option is to define a multiobjective cost function $c^\prime(\vec{x})$ defined as
+\begin{equation}
+    c^\prime(\vec{x}) = c(\vec{x}) - \lambda p(\vec{x}) \text{,}
+\end{equation}
+where $\lambda > 0$ is user-defined. Alternatively, we can consider a piecewise objective that only considers the likelihood when the disturbance trajectory leads to a failure:
+\begin{equation}
+    c^\prime(\vec{x}) = \begin{cases}
+        c(\vec{x})  & {\rm if} \ c(\vec{x}) \geq \epsilon \\
+        -p(\vec{x}) & {\rm if} \ c(\vec{x}) < \epsilon \text{.}
+    \end{cases}
+\end{equation}
+
+Formulating safety validation as an optimization problem allows for the use of many existing optimization algorithms (see \textcite{kochenderfer2019algorithms} for an overview).  Due to the complexity of many autonomous systems and environments, the optimization problem is generally non-convex and can have many local minima. Therefore, algorithms that can escape local minima and have adequate exploration over the space of disturbance trajectories are preferred. Two algorithms that have been used in falsification software~\cite{annapureddy2011staliro,donze2010breach} are covariance matrix adaptation evolution strategy (CMA-ES)~\cite{hansen1996adapting} and globalized Nelder-Mead (GNM)~\cite{luersen2004globalized}, both of which are effective for global optimization. Another way to escape local minima is to combine global and local search~\cite{deshmukh2015stochastic,adimoolam2017classification, yaghoubi2019gray,Mathesen2019falsification}, where one optimization routine is used to explore the space of disturbances trajectories to find regions of interest, and another algorithm does local optimization to find the best disturbance trajectory in a region. Cost functions may also include coverage metrics~\cite{esposito2004adaptive,Nahhal2007Test,dokhanchi2015requirements} that encourage exploration of the state space or different operating modes of the system. 
+
+\section{Path-Planning}
+Falsification may be framed as a path planning problem through the state space of the environment using the disturbances as control inputs. In path planning, there is an initial state $s_0$ and a set of failure states $S_{\rm fail}$ that we seek to reach by sequentially constructing a disturbance trajectory $\vec{x}$. The benefits to a path planning approach are the use of state information to guide the choice of disturbance and the ability to reuse partial trajectory segments. For a discussion of general path planning algorithms see the overview by \textcite{lavalle2006planning}.
+
+The first path planning algorithm covered is rapidly exploring random tree (RRT) which has many variants that have been used for falsification. The RRT algorithm attempts to cover the state space by building a space-filling tree, making it a natural approach for finding counterexamples. The next algorithm discussed is a multiple shooting method that frames falsification as a graph traversal problem over a discretized state space. The discretization is iteratively refined so computation is only spent in promising regions. Lastly, we present Las Vegas tree search which constructs a tree of disturbances from a predefined set of trajectory segments.
+
+\section{Reinforcement Learning}
+ne of the drawbacks to casting falsification as an optimization problem is the need to search over the entire space of disturbance trajectories, which scales exponentially with the number of simulation timesteps. This scalability problem may be alleviated if the environment and the system are modeled as a Markov decision process (MDP)~\cite{dmubook}. In an MDP, the next state only depends on the previous state and the choice of disturbance. We can therefore find a policy (a function that maps states to disturbances) that can generate counterexamples when simulated. The policy generates a disturbance based on the state so we do not need to explicitly represent the entire disturbance trajectory, allowing for the solution of long time horizon falsification problems~\cite{koren2018adaptive}. For an overview of MDPs and their solvers see the texts by \textcite{dmubook} or \textcite{sutton2018reinforcement}. 
+
+An MDP is defined by a transition model $P(s^\prime \mid s, x)$ that gives the probability of arriving in state $s^\prime$ given the current state $s$, a disturbance (or action) $x$, a reward $R(s, x)$, and a discount factor $\gamma$ that decreases the value of future rewards. In keeping with the notation of MDP literature, the reward serves the same purpose as the cost function, but is maximized rather than minimized, and can therefore be thought of as a measure of risk rather than safety. The goal of an MDP solver is to determine a mapping from states to disturbances $x = \pi(s)$, called a policy, that maximizes the expected discounted sum of rewards
+\begin{equation}
+    \mathbb{E}\left[ \sum_t \gamma^t R(s_t, x_t) \right] \text{.}
+\end{equation}
+
+There are several concepts from the MDP literature that are useful for understanding the algorithms in this section. The first is the notion of the value function $V^\pi(s)$, which is the expected discounted sum of future rewards when in the state $s$ and following the policy $\pi$. The value function can be computed as the solution to the Bellman equation
+\begin{equation}
+    V^\pi(s) = \mathbb{E}\left[ R\left(s, \pi(s)\right) + \gamma V^\pi(s^\prime) \right] \text{.}
+\end{equation}
+The optimal policy $\pi^*$ is defined as 
+\begin{equation}
+    \pi^*(s) = \argmax_{\pi} V^\pi(s) \text{.}
+\end{equation}
+The state-action value function for a policy is $Q^\pi(s, x)$ which is the value of being in state $s$, applying disturbance $x$, and then following the policy $\pi$. It is defined by the Bellman equation
+\begin{equation}
+    Q^\pi(s,x) = \mathbb{E}\left[ R(s, x) + \gamma Q^\pi\left(s^\prime, \pi(s^\prime)\right) \right]\text{.}
+\end{equation}
+If the size of the state space and disturbance space is discrete then $Q^\pi$ can be computed exactly with matrix inversion or dynamic programming~\cite{dmubook}. If the state or action space is large or continuous (as is often the case for cyber-physical systems), $Q^\pi$ can be estimated through random sampling and bootstrapping~\cite{sutton2018reinforcement}. 
+
+A major challenge in formulating an MDP is designing the reward function. \textcite{Akazaki2018falsification} use a reward that is a convex function of the temporal logic robustness
+\begin{equation}
+R(\vec{x}) = \textrm{exp}\left(-\rho(\vec{x})\right) - 1\text{,}
+\end{equation}
+which bounds the negative reward to \num{-1}. An approach known as adaptive stress testing (AST)~\cite{lee2015adaptive,koren2019adaptive} defines an MDP reward that leads to the discovery of the most-likely counterexample. If the specification $\psi$ is for the system to avoid reaching a set of failure states $S_{\rm fail}$, then the reward is defined as:
+\begin{equation}
+    R(s_t, x_{t}) = \begin{cases}
+        0  & {\rm if} \ s_t \in S_{\rm fail} \\
+        -\lambda & {\rm if} \ s_t \not \in S_{\rm fail}, \ t \geq t_{\rm max} \\
+        \log p(x_t \mid s_t) & {\rm if} \ s_t \not \in S_{\rm fail}, \ t < t_{\rm max} \text{.}
+    \end{cases}
+\end{equation}
+A large positive number $\lambda$ is chosen to penalize disturbances that do not end in a failure state. The log probability of the disturbance is rewarded at each time step to encourage the discovery of likely failures.
+
+Often, the reward requires some amount of domain knowlege. For example, \textcite{qin2019automatic} penalize disturbances that do not follow a domain-specific set of constraints, which is useful for getting adversarial agents in a driving scenario to follow traffic laws. 
+
+We consider two types of reinforcement learning algorithms. First, we discuss Monte Carlo tree search algorithms which use online planning to maximize reward. Then, we present deep reinforcement learning algorithms which use offline learning and neural networks to estimate the optimal policy or value function.
+
+\section{Importance Sampling}
+For many cyber-physical applications, it is impossible to design an autonomous system that never violates a specification. In that case, we may wish to know how likely it is for a system to fail. To estimate the probability of failure, we can sample disturbance trajectories from the distribution with density $p(\vec{x})$ and compute the empirical probability of failure. A hypothesis test can be used to check if the probability failure is less than a desired threshold. Hypothesis testing for cyber-physical systems is the domain of statistical model checking~\cite{legay2010statistical,agha2018survey} and is not covered in this survey. 
+
+If the probability of failure is very small, i.e. a failure event is rare, then the Monte Carlo approach will require a large number of samples before converging to the true probability of failure \cite{hahn1972sample}. To address this problem, we would like to artificially make failures more likely, and then weight them accordingly, to get an unbiased estimate of the probability of failure with fewer samples. This is the idea behind importance sampling.
+
+Suppose we wish to estimate the probability that a system violates a specification. A failure occurs when the safety evaluation metric $c(\vec{x})$ is less than a safety threshold $\epsilon$, represented here as the indicator function $\mathds{1}{\{ c(\vec{x}) < \epsilon \}}$. Similar to the optimization formulation, $c(\vec{x})$ is defined such that $c(\vec{x}) < \epsilon$ implies $f(\vec{x}) \not \in \psi$. The probability of failure $P_{\rm fail}$ is the expectation over the probability density $p_{\vec{x}}$, i.e.
+\begin{equation}
+    P_{\rm fail} = \mathbb{E}_{p}\left[ \mathds{1}{\{ c(\vec{x}) < \epsilon \}} \right] \text{.}
+\end{equation} 
+In importance sampling, we choose a proposal distribution $q(\vec{x})$ that makes failures more likely but has the property that $q(\vec{x}) > 0$ everywhere $p(\vec{x})\mathds{1}\{ c(\vec{x}_i) < \epsilon \} > 0$ (so all disturbances that lead to failure can be sampled from $q$). The proposal distribution is sometimes referred to as the biased, sampled, or importance distribution. The importance sampling estimate of the probability of failure is done by taking $N$ samples drawn from $q$ and computing the weighted average
+\begin{equation}
+    \hat{P}_{\rm fail} = \frac{1}{N} \sum_{i=1}^N \frac{p(\vec{x}_i)}{q(\vec{x}_i)} \mathds{1}{\{ c(\vec{x}_i) < \epsilon \}} \text{.} \label{eq:is_est}
+\end{equation}
+The variance of the importance sampling estimate is given by 
+\begin{equation}
+    {\rm Var}(\hat{P}_{\rm fail}  ) = \frac{1}{N} \mathbb{E}_q \left[ \frac{(p(\vec{x})\mathds{1}{\{ c(\vec{x}_i) < \epsilon \}}  - q(\vec{x})P_{\rm fail})^2}{q(\vec{x})} \right] \text{.} \label{eq:is_var}
+\end{equation}
+The goal of a good importance sampling distribution is to minimize the variance of the estimator $\hat{P}_{\rm fail} $ so that fewer samples are needed for a good estimate. From \cref{eq:is_var}, we can see that a zero variance estimate can be obtained if we use the optimal importance sampling distribution
+\begin{equation}
+    q^*(\vec{x}) = \frac{p(\vec{x}) \mathds{1}{\{ c(\vec{x}) < \epsilon \}}} {P_{\rm fail}} \text{.}
+\end{equation}
+Generating this distribution is not possible in practice because $c(\vec{x})$ is a black box and the normalization constant $P_{\rm fail}$ is the very quantity we would like to estimate. The algorithms in this section seek to estimate the optimal importance sampling distribution $q^*(\vec{x})$.
+
+The choice of a proposal distribution can significantly affect the performance of importance sampling algorithms and a bad choice can lead to estimates with larger variance than the basic Monte Carlo approach. For example, if $q(x)$ is very small, where $p(\vec{x})$ is relatively large, then the weight $p(\vec{x})/q(\vec{x}) \gg 1$ and some samples will dominate the probability estimate (\cref{eq:is_est}). To identify if a bad proposal distribution is chosen consider the size of the weights or compute the effective sample size. When samples with large weights are being drawn, \textcite{kim2016improving} suggest limiting the maximum weight by clipping the proposal distribution in regions with large weights. \textcite{uesato2018rigorous} suggest combining the importance sampling estimator with a basic Monte Carlo estimator to minimize the downside of a bad proposal distribution and \textcite{neufeld2014adaptive} provide a principled way of choosing the best estimator from several possibilities. 
