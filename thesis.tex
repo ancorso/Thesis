@@ -57,6 +57,12 @@
 
 \tikzset{nstyle/.style={draw, circle, minimum size=\nsize}}
 
+% tall double line
+\usepackage{mathtools}
+\DeclarePairedDelimiterX{\infdivx}[2]{(}{)}{%
+  #1\;\delimsize\|\;#2%
+}
+\newcommand{\infdiv}{D\infdivx}
 
 % For interpretable Validation chapter:
 \newcommand{\T}{\textsc{T}}

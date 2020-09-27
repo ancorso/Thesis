@@ -1,8 +1,8 @@
-In order to develop algorithms for safety validation of black-box systems, we need to mathematically formalize the problem. This this chapter we formulate safety-validation as the interaction between two decision-making agents: the system and the adversary. We define notation and formalize the underlying goals of different safety validation algorithms. With the goals defined, we survey the existing literature on black-box safety validation and categorize different algorithms into four categories: optimization, path planning, reinforcement learning and importance sampling. 
+In order to develop algorithms for safety validation of black-box systems, we need to mathematically formalize the problem. In this chapter we formulate safety-validation as the interaction between two decision-making agents: the system and the adversary. We define notation and formalize the underlying goals of different safety validation algorithms. With the goals defined, we survey the existing literature on black-box safety validation and categorize different algorithms into four types: optimization, path planning, reinforcement learning and importance sampling. 
 
 \section{Problem Formulation}
 
-Suppose we have a system under test (referred to as the \emph{system}) that takes actions $a \in A$ in an \emph{environment} with state $s \in S$. Actions are selected based on observations $o \in O$ of the environment. The system interacts with the environment over discrete time $t \in \{1, \ldots, t_{\rm max}\}$. We denote a state trajectory up to time $t$ as $\vec{s}_{1:t} = [s_1, \ldots, s_t]$, an observation trajectory $\vec{o}_{1:t} = [o_1, \ldots, o_t]$, and an action trajectory $\vec{a}_{1:t} = [a_1, \ldots, a_t]$. The system may be modeled by a function $\mathcal{M}$ that maps an observation trajectory to an action
+Suppose we have an autonomous system under test (referred to as the \emph{system}) that takes actions $a \in A$ in an \emph{environment} with state $s \in S$. Actions are selected based on observations $o \in O$ of the environment. The system interacts with the environment over discrete time $t \in \{1, \ldots, t_{\rm max}\}$. We denote a state trajectory up to time $t$ as $\vec{s}_{1:t} = [s_1, \ldots, s_t]$, an observation trajectory $\vec{o}_{1:t} = [o_1, \ldots, o_t]$, and an action trajectory $\vec{a}_{1:t} = [a_1, \ldots, a_t]$. The system may be modeled by a function $\mathcal{M}$ that maps an observation trajectory to an action
 \begin{equation}
     a_t = \mathcal{M}(\vec{o}_{1:t}) \text{.} \label{eq:system} 
 \end{equation}
@@ -39,7 +39,17 @@ Some algorithms require the ability to simulate a disturbance $x_t$ for a single
     s_{t+1} = f(s_t, x_t) \text{.}
 \end{equation}
 
-The desired operation of the system is described by one or more specifications $\psi$ which are  written in a formal specification language such as temporal logic~\cite{baier2008principles} or designed ad hoc. We overload the notation $\psi$ to be the set of state trajectories that satisfy the specification and write $\vec{s} \in \psi$ when the state trajectory satisfies the specification and $\vec{s} \not \in \psi$ when $\vec{s}$ violates the specification.
+The desired operation of the system is described by one or more specifications $\psi$ which are either written in a formal specification language or designed ad hoc. We overload the notation $\psi$ to be the set of state trajectories that satisfy the specification and write $\vec{s} \in \psi$ when the state trajectory satisfies the specification and $\vec{s} \not \in \psi$ when $\vec{s}$ violates the specification.
+
+\paragraph{Temporal Logic.} Safety specifications are often defined as statements in temporal logic, a category of languages used to reason about the temporal behavior of dynamic systems. Temporal logic statements evaluate to a Boolean for a (potentially infinite) sequence of states, or \emph{path}. Temporal logic statements are generated from a set of propositional variables, logical operators and temporal modal operators. The logical operators include \emph{conjunction} ($\land$), \emph{disjunction} ($\lor$), and \emph{negation} (\lnot), while the temporal modal operators depend on the type of temporal logic. 
+
+% Different types of temporal logic
+Linear temporal logic (LTL)~\cite{pnueli1977temporal} includes the temporal modal operators \emph{always} $\square \psi$ ($\psi$ is true on the entire path), \emph{eventually} $\lozenge \psi$ ($\psi$ is true anywhere on the path), and \emph{until} $\psi_1 \mathcal{U} \psi_2$ ($\psi_1$ holds at least until $\psi_2$ becomes true on the path). Computational tree logic (CTL)~\cite{clarke1981design} and its more expressive counterpart CTL$^*$~\cite{emerson1986sometimes} reason about futures with branching paths and therefore include the temporal modal operators of \emph{all} $A \psi$ ($\psi$ is true on all possible paths originating from the current state) and \emph{exists} $E \psi$ ($\psi$ is true on at least one path originating from the current state). Metric temporal logic (MTL)~\cite{koymans1990specifying} allows for the temporal modal operators to be applied to a finite time interval $I$, denoted with a subscript ($\square_I \psi$ means $\psi$ always holds in the interval $I$). Signal temporal logic (STL)~\cite{maler2004monitoring} extends the set of propositional variables to allow for real-valued signals, which are converted to Boolean statements using the comparison operators ($<$, $\leq$, $=$, $\geq$, $>$). For a concrete example, consider a real-valued variable $d$ that represents the absolute distance between two vehicles. If we want to encode the safety specifications ``the vehicles will not collide in the next 30 seconds" we can write
+\begin{equation}
+    \psi := \square_{[0,30} (d > 0) \text{.}
+\end{equation}
+
+
 
 \section{Safety Validation Tasks}
 
@@ -60,59 +70,141 @@ Safety validation is concerned with finding disturbance trajectories that cause 
 P_{\rm fail} = \mathbb{E}_{p(\vec{x})}\left[ \mathds{1}{\{ f(\vec{x}) \not \in \psi \}} \right]
 \end{equation}
 
-\paragraph{Approximating the optimal sampling distribution:} Create a distribution that efficiently computes the probability of failure. 
+% \paragraph{Approximating the optimal sampling distribution:} Create a distribution that efficiently computes the probability of failure. 
+% \begin{equation}
+% \min_{q} \text{Var}\left[ \frac{1}{N} \sum_{i=1}^N \frac{p(\vec{x}_i) \mathds{1}{\{ f(\vec{x}_i) \not \in \psi \}}}{q(\vec{x}_i)} \mid  \vec{x}_i \sim q \right]
+% \end{equation}
+
+Note that the tasks are specified in order of increasing difficulty and utility. The first two tasks involve finding individual failure examples, with most-likely failure analysis being more challenging due to the need for maximizing the probability of the failure trajectory. To estimate the probability of failure, we need to discover many failure examples, each with relatively high likelihood. Thus, if we can generate a sampling distribution that produces many high-likelihood failure examples (solving the failure probability task), then we have effectively solved the task of falsification and most likely failure analysis.  
+
+\section{Existing Approaches}
+
+% Naive approaches
+The naive approach to finding failures of an autonomous system assumes that each disturbance trajectory leads to a binary outcome: failure or not failure. If that is the case, then the best we can do is search randomly over the space of disturbance trajectory until a failure is discovered. The space of disturbance trajectories scales exponentially with the dimension of the disturbance space and the length of the trajectories, so exhaustive search quickly becomes intractable. Fortunately, we can often gather more information about how close the system was to failure and use that information to guide the search toward failure trajectories. We encode the information as a safety metric $c_{\text{safe}}(\vec{s})$ over a state trajectory $\vec{s}$, with lower values indicating less safety. 
+
+% Measuring levels of safety
+The design of a safety metric is specific to the application and the type of failure. For collision avoidance applications in autonomous driving or aviation, a common choice is the \emph{miss distance} (the closest physical distance between two agents)~\cite{lee2015adaptive,koren2018adaptive} or the \emph{time to collision} (the time until a collision if no intervention occurs)~\cite{leung2019backpropagation}. In aviation, a safety metric could include the deviation from a desired altitude~\cite{delmas2019evaluation,ernst2019arch}, or the off-center distance when taxiing down a runway~\cite{julian2020validation}. 
+ 
+% Robustness
+More complex safety specifications such as abiding by traffic laws~\cite{kress2008automatically, qin2019automatic} or other driving rules to avoid at-fault collisions~\cite{shalev2017formal,hekmatnejad2019encoding,hekmatnejad2020search} may require temporal logic specifications, in which case the temporal logic \emph{robustness} $\rho(\vec{s}, \psi)$ can be used as a safety metric. The robustness is a measure of the degree to which the trajectory $\vec{s}$ satisfies the specification $\psi$. Large values of robustness mean that at no point does the trajectory come close to violating the specification, while low but positive values of robustness mean that the trajectory is close to violating the specification. A robustness value less than \num{0} means that the specification has been violated and gives an indication of by how much. The robustness for space-time signals can be computed recursively~\cite{fainekos2009robustness, Donze2010robust,fainekos2009robustness,yang2013dynamic}. Upper and lower bounds on robustness can be computed for incomplete signals~\cite{dreossi2015efficient}, which is useful when constructing a trajectory sequentially~\cite{dreossi2015efficient,ernst2019fast}. The derivative of the robustness with respect to the state trajectory can be computed, which may help derive gradient-driven optimization algorithms~\cite{pant2017smooth, leung2019backpropagation}. If the state variables that define robustness have large differences in scale then \textcite{zhang2019multi} proposed measuring the robustness of each state variable independently and using a multi-armed bandit algorithm to decide which robustness value to optimize on each iteration.
+
+% Outline of the next few subsections
+Once a safety metric is defined, we need to choose how to use it to guide the search for failures. The following sections describe safety validation algorithms that are based on optimization, path-planning, reinforcement learning and importance sampling. Optimization approaches search directly over the space of disturbance trajectories and is the technique of choice if no state information is available. Path-planning approaches maximize exploration in the environment state space to discover disturbance trajectories that lead to unsafe states, but do not naturally handle stochasticity in the simulator. Reinforcement learning approaches learn a policy (mapping states to disturbances) that leads to failures of the system but typically require the system and the environment to be Markov. Importance sampling approaches construct a distribution that makes failures more likely and can be used to estimate the probability of failure. For each category of approach, we provide a summary of algorithms and present one representative algorithm in detail. Lastly, we discuss the pros and cons of each category and summarize under which conditions each approach should be used. For a more detailed discussion of existing safety validation algorithms, refer to our survey paper~\cite{corso2020survey}.
+
+\subsection{Optimization}
+
+Optimization problems involve minimizing a cost function with respect to a design variable. For safety validation, the design variable is a disturbance trajectory $\vec{x}$ and the cost function $c(\vec{x})$ is a function of the safety metric. The optimal disturbance trajectory $\vec{x}^*$ is defined as
 \begin{equation}
-\min_{q} \text{Var}\left[ \frac{1}{N} \sum_{i=1}^N \frac{p(\vec{x}_i) \mathds{1}{\{ f(\vec{x}_i) \not \in \psi \}}}{q(\vec{x}_i)} \right], \quad \vec{x}_i \sim q
+    \vec{x}^* = \argmin_{\vec{x}} c(\vec{x}) \text{.}
 \end{equation}
-
-Note that the tasks are specified in order of increasing difficulty and increasing utility. The first two tasks involve finding individual failure examples, with most-likely failure analysis being more challenging due to the need for maximizing the probability of the failure trajectory. To estimate the probability of failure, we need to discover many failure examples, each with relatively high likelihood. Lastly, if we can generate the optimal sampling distribution, then it will necessarily produce many high likelihood failure examples and be an efficient sampling distribution to estimate the probability of failure, effectively solving the previous three tasks.
-
-\section{Optimization}
-A naive approach to falsification is to search randomly over disturbance trajectories until a counterexample is discovered. If counterexamples are rare, this process can be inefficient. To help guide the search for counterexamples, we can define a cost function $c_{\text{state}}(\vec{s})$ that measures the level of safety of the system over the state trajectory $\vec{s}$. A well-designed cost function will help bias the search over disturbance trajectories toward those that are less safe. Additionally, if the goal is to find the most-likely failure, then the cost function can incorporate the likelihood of the disturbance trajectory. 
-
-Once a cost function is defined, falsification and most-likely failure analysis become optimization problems where we seek to minimize the cost with respect to the disturbance trajectory $\vec{x}$. We define the optimization problem as
+The cost function is designed such that 
 \begin{equation}
-    \vec{x}^* = \argmin_{\vec{x}} c(\vec{x}) \text{,}
+    c(\vec{x}) \geq \epsilon \iff f(\vec{x}) \in \psi \text{,}
+\end{equation} 
+where $\epsilon$ is a safety threshold. Therefore, if any $\vec{x}$ causes $c(\vec{x}) < \epsilon$, then it is a counterexample. If the global minimum $c(\vec{x}^*) \geq \epsilon$, then no failures exist, but in practice, we can rarely be certain that we have found the true global minimum. 
+
+When the safety validation task is falsification, the cost function can simply be the safety metric induced by the disturbance trajectory
+\begin{equation}
+    c(\vec{x}) = c_{\text{safe}}(f(\vec{x})) \text{.}
 \end{equation}
-where $c(\vec{x}) = c_{\text{state}}(f(\vec{x}))$. The cost function is designed such that $c(\vec{x}) \geq \epsilon \iff f(\vec{x}) \in \psi$, where $\epsilon$ is a safety threshold. Therefore, if a disturbance $\vec{x}$ causes $c(\vec{x}) < \epsilon$, then $\vec{x}$ is a counterexample. 
-
-The design of the cost function $c$ is specific to the application. Consider the safety validation of an autonomous vehicle that has a specification to not collide with other vehicles. The cost function could be the distance at the point of closest approach (i.e. miss distance) between the system and any other vehicle. The smaller the value, the closer the system is to a collision. If the distance is less than a safety threshold, then a collision has occurred~\cite{koren2018adaptive}.
-
-When the specification is represented by a temporal logic expression, a common choice for $c$ is the temporal logic robustness $\rho(\vec{s}, \psi)$. The robustness is a measure of the degree to which the trajectory $\vec{s}$ satisfies the specification $\psi$. Large values of robustness mean that at no point does the trajectory come close to violating the specification, while low but positive values of robustness mean that the trajectory is close to violating the specification. A robustness value less than \num{0} means that the specification has been violated and gives an indication of by how much. The robustness for space-time signals can be computed from a recursive definition~\cite{fainekos2009robustness, Donze2010robust,fainekos2009robustness,yang2013dynamic}. Upper and lower bounds on robustness can be computed for incomplete signals~\cite{dreossi2015efficient}, which is useful when constructing a trajectory sequentially~\cite{dreossi2015efficient,ernst2019fast}. The derivative of the robustness with respect to the state trajectory can be approximated, which may help derive gradient-driven optimization algorithms~\cite{pant2017smooth}. Causal information in the form of a Bayesian network can be incorporated into the robustness for improved falsification~\cite{akazaki2017causality}. 
-Connections have also been made between robustness and delta-reachability to relate falsification and exhaustive search through approximations~\cite{abbas2017relaxed}.
-
-One drawback to using robustness as a cost is that it depends on the scale of the state values. If the units of one state variable cause it to be much larger than another (i.e. engine RPMs versus angular rotation in radians), then the contribution to the robustness will favor the larger variable. The state variables may be normalized, but this requires the range of the state variables which may not be known. To mitigate this problem, \textcite{zhang2019multi} proposed measuring the robustness of each state variable independently and using a multi-armed bandit algorithm to decide which robustness value to optimize on each iteration.
-
-More generally, other functions that map a trace to a satisfaction metric can also be used as the cost function.  \textcite{balkan2017underminer} propose several alternative functions for finding non-convergence behaviors in control systems, including Lyapunov-like functions, M-step Lyapunov-like functions, neural networks, and support vector machines~\cite{balkan2017underminer}. 
-
-When the safety validation task is to find the most-likely failure, we can modify the cost function to include the likelihood of the disturbance trajectory $p(\vec{x})$. One option is to define a multiobjective cost function $c^\prime(\vec{x})$ defined as
+To find the most-likely failure, we can modify the safety metric to include the likelihood of the disturbance trajectory $p(\vec{x})$. We can consider a piecewise objective that only considers the likelihood when the disturbance trajectory leads to a failure
 \begin{equation}
-    c^\prime(\vec{x}) = c(\vec{x}) - \lambda p(\vec{x}) \text{,}
-\end{equation}
-where $\lambda > 0$ is user-defined. Alternatively, we can consider a piecewise objective that only considers the likelihood when the disturbance trajectory leads to a failure:
-\begin{equation}
-    c^\prime(\vec{x}) = \begin{cases}
-        c(\vec{x})  & {\rm if} \ c(\vec{x}) \geq \epsilon \\
-        -p(\vec{x}) & {\rm if} \ c(\vec{x}) < \epsilon \text{.}
+    c(\vec{x}) = \begin{cases}
+        c_{\text{safe}}(f(\vec{x}))  & {\rm if} \ c_{\text{safe}}(f(\vec{x})) \geq \epsilon \\
+        -p(\vec{x}) & {\rm if} \ c_{\text{safe}}(f(\vec{x})) < \epsilon \text{.}
     \end{cases}
 \end{equation}
+Piecewise objectives may be more difficult to optimize so another option is to define a multiobjective cost function defined as
+\begin{equation}
+    c(\vec{x}) = c_{\text{safe}}(f(\vec{x})) - \lambda p(\vec{x}) \text{,}
+\end{equation}
+where $\lambda > 0$ is user-specified. For the appropriate choice of lambda, both objectives should yield the same optimum. 
 
-Formulating safety validation as an optimization problem allows for the use of many existing optimization algorithms (see \textcite{kochenderfer2019algorithms} for an overview).  Due to the complexity of many autonomous systems and environments, the optimization problem is generally non-convex and can have many local minima. Therefore, algorithms that can escape local minima and have adequate exploration over the space of disturbance trajectories are preferred. Two algorithms that have been used in falsification software~\cite{annapureddy2011staliro,donze2010breach} are covariance matrix adaptation evolution strategy (CMA-ES)~\cite{hansen1996adapting} and globalized Nelder-Mead (GNM)~\cite{luersen2004globalized}, both of which are effective for global optimization. Another way to escape local minima is to combine global and local search~\cite{deshmukh2015stochastic,adimoolam2017classification, yaghoubi2019gray,Mathesen2019falsification}, where one optimization routine is used to explore the space of disturbances trajectories to find regions of interest, and another algorithm does local optimization to find the best disturbance trajectory in a region. Cost functions may also include coverage metrics~\cite{esposito2004adaptive,Nahhal2007Test,dokhanchi2015requirements} that encourage exploration of the state space or different operating modes of the system. 
+formulating safety validation as an optimization problem is that it allows for the use of many existing optimization algorithms (see \textcite{kochenderfer2019algorithms} for an overview). Due to the complexity of many autonomous systems and environments, the optimization problem is generally non-convex and can have many local minima. Therefore it is common to use global optimization algorithms that can avoid local minima or include a coverage metric in the cost function that encourages exploration~\cite{esposito2004adaptive,Nahhal2007Test,dokhanchi2015requirements}. Global and local approaches can be combined so that the global optimization algorithm identifies regions of interest in the space of disturbance trajectories and the local algorithm finds the best disturbance trajectory in a region~\cite{deshmukh2015stochastic,adimoolam2017classification, yaghoubi2019gray,Mathesen2019falsification}.
 
-\section{Path-Planning}
-Falsification may be framed as a path planning problem through the state space of the environment using the disturbances as control inputs. In path planning, there is an initial state $s_0$ and a set of failure states $S_{\rm fail}$ that we seek to reach by sequentially constructing a disturbance trajectory $\vec{x}$. The benefits to a path planning approach are the use of state information to guide the choice of disturbance and the ability to reuse partial trajectory segments. For a discussion of general path planning algorithms see the overview by \textcite{lavalle2006planning}.
+There are many optimization algorithms that have been used for safety validation. Genetic algorithms~\cite{zhao2003generating,zou2014safety} maintain a population of disturbance trajectories that evolves over time due to trajectory mutations and crossover. Bayesian optimization~\cite{akazaki2017causality, silvetti2017active, Deshmukh2017testing, mullins2018adaptive, abeysirigoonawardena2019generating,yang2020stress} maintains a probabilistic surrogate model of the cost function and can therefore handle stochastic cost functions. If safety validation is formulated as a graph-traversal problem by discretizing the disturbance space, then ant-colony optimization can be used to find the optimal path~\cite{annapureddy2010ant}. Covariance matrix adaptation evolution strategy~\cite{hansen1996adapting}, simulated annealing~\cite{abbas2013probabilistic} and globalized Nelder-Mead~\cite{luersen2004globalized} are successful global optimization techniques that are commonly used in falsification software~\cite{annapureddy2011staliro,donze2010breach}. We now give a more detailed description of simulated annealing to demonstrate how optimization is used for safety validation.
 
-The first path planning algorithm covered is rapidly exploring random tree (RRT) which has many variants that have been used for falsification. The RRT algorithm attempts to cover the state space by building a space-filling tree, making it a natural approach for finding counterexamples. The next algorithm discussed is a multiple shooting method that frames falsification as a graph traversal problem over a discretized state space. The discretization is iteratively refined so computation is only spent in promising regions. Lastly, we present Las Vegas tree search which constructs a tree of disturbances from a predefined set of trajectory segments.
+\paragraph{Simulated Annealing.} An approach to stochastic global optimization known as simulated annealing (SA) uses a random walk around the disturbance space to minimize the cost function $c$. A temperature parameter $\beta$ is used to control the amount of stochasticity in the method over time and a transition function $T(\vec{x}^\prime \mid \vec{x})$ describes the probability distribution over the next disturbance trajectory $\vec{x}^\prime$. SA has been an effective optimiation algorithm for falsification~\cite{abbas2013probabilistic,aerts2018temporal}.
 
-\section{Reinforcement Learning}
-ne of the drawbacks to casting falsification as an optimization problem is the need to search over the entire space of disturbance trajectories, which scales exponentially with the number of simulation timesteps. This scalability problem may be alleviated if the environment and the system are modeled as a Markov decision process (MDP)~\cite{dmubook}. In an MDP, the next state only depends on the previous state and the choice of disturbance. We can therefore find a policy (a function that maps states to disturbances) that can generate counterexamples when simulated. The policy generates a disturbance based on the state so we do not need to explicitly represent the entire disturbance trajectory, allowing for the solution of long time horizon falsification problems~\cite{koren2018adaptive}. For an overview of MDPs and their solvers see the texts by \textcite{dmubook} or \textcite{sutton2018reinforcement}. 
+The basic approach is presented in \cref{alg:SA}. It begins by selecting a random starting disturbance trajectory $\vec{x}$ (line \ref{line:sa_init}). At each iteration, a new disturbance trajectory $\vec{x}^\prime$ is sampled from $T(\vec{x}^\prime \mid \vec{x})$ (line \ref{line:sa_sample}). If the new trajectory is a counterexample, then it is returned (line \ref{line:sa_counterexample_check}), otherwise it is subjected to an acceptance test with probability ${\rm exp}(-\beta(c(\vec{x}^\prime) - c(\vec{x})))$ (line \ref{line:sa_accept_reject}). If $\vec{x}^\prime$ is accepted, then it replaces $\vec{x}$, otherwise $\vec{x}$ is left unchanged. The procedure repeats until the computational budget is exhausted.
 
-An MDP is defined by a transition model $P(s^\prime \mid s, x)$ that gives the probability of arriving in state $s^\prime$ given the current state $s$, a disturbance (or action) $x$, a reward $R(s, x)$, and a discount factor $\gamma$ that decreases the value of future rewards. In keeping with the notation of MDP literature, the reward serves the same purpose as the cost function, but is maximized rather than minimized, and can therefore be thought of as a measure of risk rather than safety. The goal of an MDP solver is to determine a mapping from states to disturbances $x = \pi(s)$, called a policy, that maximizes the expected discounted sum of rewards
+\begin{algorithm}
+\caption{Simulated Annealing} \label{alg:SA}
+\begin{algorithmic}[1]
+    \Function{SimulatedAnnealing}{$\beta$, $T$, $c$, $\epsilon$}
+    \State Sample initial $\vec{x}$ \label{line:sa_init}
+    \Loop
+        \State $\vec{x}^\prime \sim T(\vec{x}^\prime \mid \vec{x})$ \label{line:sa_sample}
+        \If {$c(\vec{x}^\prime) < \epsilon$}  
+            \State \textbf{return} $\vec{x}^\prime$ \label{line:sa_counterexample_check}
+        \EndIf
+        \If {\textproc{UniformRand()} $< {\rm exp}(-\beta(c(\vec{x}^\prime) - c(\vec{x})))$} \label{line:sa_accept_reject}
+            \State $\vec{x} \gets \vec{x}^\prime$
+        \EndIf
+    \EndLoop
+    \EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+
+The main design choices of the algorithm are the annealing temperature $\beta$ and the choice of the transition function $T$. The annealing temperature can be adjusted based on the number of accepted and rejected disturbance trajectories. A typical choice is to adjust $\beta$ so that the next point is accepted approximately half of the time~\cite{abbas2013probabilistic}. 
+
+A common choice for transition function is to use a Gaussian distribution around the current point $\vec{x}$ with a standard deviation that is adjusted based on the ratio of accepted points~\cite{kochenderfer2019algorithms}. This approach may not work well when the disturbance space has constraints that must be satisfied, such as lower and upper bounds on the possible disturbances~\cite{abbas2013probabilistic}. \textcite{abbas2013probabilistic} proposes the use of a \emph{hit and run} approach to transitioning that respects constraints~\cite{abbas2013probabilistic}. It follows three steps:
+\begin{enumerate}
+    \item Sample a random direction $\vec{d}$ in the disturbance trajectory space.
+    \item Perform a line search in the direction of $\vec{d}$ to determine the range of $\alpha$ such that $\vec{x} + \alpha \vec{d}$ does not violate any constraints.
+    \item Sample $\alpha$ from this range according to a chosen distribution. The standard deviation of this distribution can be adjusted using the acceptance ratio to improve convergence. 
+\end{enumerate}
+\textcite{aerts2018temporal} improved the hit and run scheme by suggesting that $\alpha$ be chosen for each disturbance dimension separately so that highly constrained dimensions do not restrict the step size of less constrained dimensions~\cite{aerts2018temporal}.
+
+\subsection{Path-Planning}
+Discovering failures can be framed as a path planning problem through the state space of the environment using the disturbances as control inputs. In path planning, there is an initial state $s_0$ and a set of failure states $S_{\rm fail}$ that we seek to reach by sequentially constructing a disturbance trajectory $\vec{x}$. The benefits to a path planning approach are the use of state information to guide the choice of disturbance and the ability to reuse partial trajectory segments. For a discussion of general path planning algorithms see the overview by \textcite{lavalle2006planning}.
+
+Path planning algorithms were designed for robotic applications so they often assume that the system is \emph{controllable}, where all states in the state space are reachable using some sequence of control inputs, and the dynamics are \emph{differentiable}. In the safety validation setting, the control inputs are environmental disturbances which may have limited control over the system, especially if the system is robust to disturbances. In this case the reachable set of states may be a small subset of the state space. Additionally, since we assume the system is a black box, we cannot differentiate through the actions of the system or the dynamics of the environment. Therefore, most path-planning algorithms need to be modified to function for black-box safety validation. For example, the multiple shooting method of \textcite{zutshi2014multiple} frames falsification as a graph traversal problem over a discretized state space, where edges connect cells in the state space. Paths through the graph are initially constructed from disconnected segments, but the discretization is refined until the segments can be connected into a concrete trajectory. Las Vegas tree search~\cite{ernst2019fast} constructs a tree of disturbances from a predefined set of trajectory segments, and biases the search toward segments with extreme disturbance values. Below, we expand on one of the most common path-planning algorithms: rapidly-exploring random tree, and describe modifications that make it applicable to safety validation. 
+
+\paragraph{Rapidly Exploring Random Tree} Rapidly-exploring random tree (RRT) is a path planning technique for efficiently finding failure trajectories~\cite{lavalle1998rapidly}. A space-filling tree is iteratively constructed by sampling the state space and growing in the direction of unexplored regions. RRT has been applied to the falsification of black-box systems \cite{esposito2004adaptive,kim2005rrt,branicky2006sampling,dang2008sensitive,Nahhal2007Test,plaku2009hybrid,dreossi2015efficient,tuncali2019rapidly,koschi2019computationally}.
+
+\begin{algorithm}
+\caption{Rapidly-exploring random tree} \label{alg:rrt}
+\begin{algorithmic}[1]
+    \Function{RRT}{$s_0$, $S_{\rm fail}$}
+    \State $T \gets$ \textproc{InitializeTree}($s_0$)
+    \Loop
+        \State $s_{\rm goal} \gets$ \textproc{SampleState}() \label{line:rrt_sample_state}
+        \State $s_{\rm near} \gets$ \textproc{NearestNeighbor}($T$, $s_{\rm goal}$) \label{line:rrt_nearest_neighbor}
+        \State $x_{\rm new} \gets $ \textproc{GetDisturbance}($s_{\rm near}$, $s_{\rm goal}$) \label{line:rrt_optimal_input}
+        \State $s_{\rm new}$ $\gets$ $f(s_{\rm near}, x_{\rm new})$ \label{line:rrt_simulate}
+        \State \textproc{AddNode}($T$, $s_{\rm near} $, $s_{\rm new}$) \label{line:rrt_add_new}
+    \EndLoop
+    \State \Return{\textproc{CounterExamples}($T$, $S_{\rm fail}$)}
+    \EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+% What is the basic idea of Rapidly Exploring Random Trees
+The basic approach is presented in \cref{alg:rrt}. On each iteration, a random point in the state space $s_{\rm goal}$ is generated, which acts as the goal state for the next node to be added (line~\ref{line:rrt_sample_state}). The tree is searched for the node that is closest to the goal state $s_{\rm near}$ (line~\ref{line:rrt_nearest_neighbor}) based on some distance metric $d$.  This node will act as the starting point when attempting to reach the goal. A disturbance $x_{\rm new}$ is generated that drives $s_{\rm near}$ toward $s_{\rm goal}$ (line~\ref{line:rrt_optimal_input}). Since the system is a black-box, we cannot generally determine an $x_{\rm new}$ that causes $s_{\rm near} = s_{\rm goal}$ exactly. Instead we can use random sampling of $x_{\rm new}$ or a more advanced optimization procedure to get as close as possible. Lastly, the disturbance $x_{\rm new}$ is simulated, starting from $s_{\rm near}$, resulting in a new state $s_{\rm new}$ (line~\ref{line:rrt_simulate}) which is then added to the tree as a child of $s_{\rm near}$ (line~\ref{line:rrt_add_new}). Note that if the simulator cannot be initialized to any state, then the trace can be simulated by starting at the root and simulating the disturbances through the branch containing $s_{\rm near}$. The algorithm stops when the maximum number of iterations is reached, a suitable falsifying trajectory is found, or tree coverage reaches a specified threshold. Variants of RRT~\cite{esposito2004adaptive,kim2005rrt,branicky2006sampling,dang2008sensitive,Nahhal2007Test,dreossi2015efficient,tuncali2019rapidly,koschi2019computationally} typically differ in their approach to state space sampling, choice of distance metric for nearest neighbor selection, or by adding additional steps that reconfigure the tree for improved performance.
+
+% Coverage metrics and stopping criteria
+In contrast to optimization approaches, RRT does not include a safety metric to guide the search. Instead, coverage metrics are often used to determine a stopping condition. Common metrics include dispersion of the tree nodes~\cite{esposito2004adaptive} and star discrepency~\cite{Nahhal2007Test,dang2008sensitive,dreossi2015efficient}, which measures how evenly the nodes are distributed. In cases where the reachable set of states is small compared to the state space, coverage metrics may always have a low value. \textcite{esposito2004adaptive} suggest using the change in the coverage between iterations to determine when the reachable set has been sufficiently explored. To include a safety metric, \textcite{karaman2011sampling} developed RRT$^*$, which uses a cost function to select the next state $s_{\rm goal}$ from a randomly chosen set of possibilities. Similarly, \textcite{kim2005rrt} maintains a distribution over $s_{\rm goal}$ that is biased toward regions of low cost. 
+
+% Addressing reachbility thorugh the goal selection
+To address the problem of reachability \textcite{kim2005rrt} suggest using a dynamics-informed distance metric to determine $s_{\rm near}$, so that $s_{\rm goal}$ is reachable from $s_{\rm near}$. They include an additional term to discount states that are repeatedly chosen as $s_{\rm near}$ but fail to get near $s_{\rm goal}$. Such states are hypothesized to appear on the boundary of the reachable set and may hinder exploration inside the set. \textcite{koschi2019computationally} handles reachbility by proposing a backwards RRT algorithm that starts at failure states and builds a tree backward towards a set of initial condition. On each iteration, the tree is reconstructed to ensure paths exist between the leaves of the tree and the root. 
+
+
+\subsection{Reinforcement Learning}
+\label{ch2:rl}
+% MDP description
+Safety validation can often be formulated as a Markov decision process (MDP) and solved with reinforcement learning algorithms. In the context of safety validation, an MDP~\cite{dmubook} is a model for sequential decision making problems defined by a state space $S$, disturbance space $X$, a transition function $P$, a reward function $R$, and a discount factor $\gamma$. The state space $S$ contains all possible states of the environment and system, and the disturbance space $X$ contains the possible disturbances available to the adversary. The transition function is said to be \emph{Markov} if the next state only depends on the current state and disturbance. The agent interacts with the environment over a series of \emph{episodes}. Each episode starts with a random initial condition $s \sim S_0$ and then, at each step the adversary chooses a disturbance $x$, the MDP transitions to a new state $s^\prime$ with probability $P(s^\prime \mid s, x)$, and receives a reward $R(s, x)$ discounted by a factor $\gamma \in (0,1]$ for each step. The episode proceeds until a \emph{terminal} state $s \in S_{\rm terminal}$ is reached or a maximum number of timesteps is exceeded.
+
+%Policies and goals
+The adversary's behavior is controlled by a policy $\pi$ that maps states to disturbances $x = \pi(s)$, with the goal of trying to maximize the expected sum of discounted rewards 
 \begin{equation}
     \mathbb{E}\left[ \sum_t \gamma^t R(s_t, x_t) \right] \text{.}
 \end{equation}
+Since the reward is maximized (which is opposite of a cost function), the reward function is a measure of risk rather than of safety. The use of a policy removes the need to represent full disturbance trajectories and allows for the solution of long time horizon problems~\cite{koren2018adaptive}. Since the policy is defined for all states, stochasticity in the transition function is handled naturally so the adversary does not need to re-plan at each step. For an overview of MDPs and their solvers see the texts by \textcite{dmubook} or \textcite{sutton2018reinforcement}. 
 
-There are several concepts from the MDP literature that are useful for understanding the algorithms in this section. The first is the notion of the value function $V^\pi(s)$, which is the expected discounted sum of future rewards when in the state $s$ and following the policy $\pi$. The value function can be computed as the solution to the Bellman equation
+% Value functions and bellman optimality
+There are several concepts from the MDP literature that are useful for understanding the algorithms in this section. The first is the notion of the value function $V^\pi(s)$, which is the expected discounted sum of future rewards when in the state $s$ and then following the policy $\pi$. The value function can be computed as the solution to the Bellman equation
 \begin{equation}
     V^\pi(s) = \mathbb{E}\left[ R\left(s, \pi(s)\right) + \gamma V^\pi(s^\prime) \right] \text{.}
 \end{equation}
@@ -120,36 +212,87 @@ The optimal policy $\pi^*$ is defined as
 \begin{equation}
     \pi^*(s) = \argmax_{\pi} V^\pi(s) \text{.}
 \end{equation}
-The state-action value function for a policy is $Q^\pi(s, x)$ which is the value of being in state $s$, applying disturbance $x$, and then following the policy $\pi$. It is defined by the Bellman equation
+The action value function $Q^\pi(s, x)$ for a policy is the value of being in state $s$, applying disturbance $x$, and then following the policy $\pi$. It is defined by the Bellman equation
 \begin{equation}
     Q^\pi(s,x) = \mathbb{E}\left[ R(s, x) + \gamma Q^\pi\left(s^\prime, \pi(s^\prime)\right) \right]\text{.}
 \end{equation}
-If the size of the state space and disturbance space is discrete then $Q^\pi$ can be computed exactly with matrix inversion or dynamic programming~\cite{dmubook}. If the state or action space is large or continuous (as is often the case for cyber-physical systems), $Q^\pi$ can be estimated through random sampling and bootstrapping~\cite{sutton2018reinforcement}. 
+If the size of the state space and disturbance space is discrete then $V^\pi$ or $Q^\pi$ can be computed exactly with matrix inversion or dynamic programming~\cite{dmubook}. If the state or action space is large or continuous (as is often the case for cyber-physical systems), $V^\pi$ and $Q^\pi$ can be estimated through policy \emph{rollouts} (where the policy is used to get a random trajectory of states) and \emph{bootstrapping} (where the value of states in a rollout are estimated with a learned model)~\cite{sutton2018reinforcement}. 
 
-A major challenge in formulating an MDP is designing the reward function. \textcite{Akazaki2018falsification} use a reward that is a convex function of the temporal logic robustness
+% Choice of reward function
+A major challenge in formulating an MDP is designing the reward function. A reward is given at each time step and added up over a trajectory, so for a safety metric to be used to guide the search, it must be computed at each state as $c_{\rm safe}(s)$, and a failure must be defined by a set of failure states $S_{\rm fail}$. A reward function that can be used for falsification is 
 \begin{equation}
-R(\vec{x}) = \textrm{exp}\left(-\rho(\vec{x})\right) - 1\text{,}
-\end{equation}
-which bounds the negative reward to \num{-1}. An approach known as adaptive stress testing (AST)~\cite{lee2015adaptive,koren2019adaptive} defines an MDP reward that leads to the discovery of the most-likely counterexample. If the specification $\psi$ is for the system to avoid reaching a set of failure states $S_{\rm fail}$, then the reward is defined as:
-\begin{equation}
-    R(s_t, x_{t}) = \begin{cases}
-        0  & {\rm if} \ s_t \in S_{\rm fail} \\
-        -\lambda & {\rm if} \ s_t \not \in S_{\rm fail}, \ t \geq t_{\rm max} \\
-        \log p(x_t \mid s_t) & {\rm if} \ s_t \not \in S_{\rm fail}, \ t < t_{\rm max} \text{.}
+    R_{\rm Falsification}(s, x) = \begin{cases}
+        \lambda  & {\rm if} \ s \in S_{\rm fail} \\
+        -c_{\rm safe}(s) & {\rm otherwise} \text{,}
     \end{cases}
 \end{equation}
-A large positive number $\lambda$ is chosen to penalize disturbances that do not end in a failure state. The log probability of the disturbance is rewarded at each time step to encourage the discovery of likely failures.
+where $\lambda$ is a large positive constant. An approach known as adaptive stress testing (AST)~\cite{lee2015adaptive,koren2019adaptive} defines a reward function that leads to the discovery of the most-likely failure as
+\begin{equation}
+    R_{\rm AST}(s, x) = \begin{cases}
+        \lambda  & {\rm if} \ s \in S_{\rm fail} \\
+        \log p(x \mid s) - \beta c_{\rm safe}(s) & {\rm otherwise} \text{,}
+    \end{cases}
+\end{equation}
+where $\beta$ appropriately weights the safety metric so that it does not dominate the log-probability of the disturbance.
 
-Often, the reward requires some amount of domain knowlege. For example, \textcite{qin2019automatic} penalize disturbances that do not follow a domain-specific set of constraints, which is useful for getting adversarial agents in a driving scenario to follow traffic laws. 
+% MCTS description
+The first reinforcement learning algorithm we consider for safety validation is Monte Carlo tree search (MCTS). MCTS is an online planning algorithm that iteratively constructs a tree of possible disturbances to determine the best disturbance at each step. On each iteration, the algorithm recursively selects a branch to go down until it hits a leaf, then it chooses a new disturbance to add to the tree and estimates its value with a random rollout from that node. Branch selection can be done with the Upper Confidence Tree (UCT)~\cite{kocsis2006bandit} algorithm which optimally trades off between exploiting actions with high value and exploring new paths. For continuous disturbance spaces, progressive widening~\cite{coulom2007computing,chaslot2008progressive} is used to continually sample new disturbances at all depths in the tree. \textcite{lee2015adaptive} uses MCTS to find failures in a collision avoidance system where the disturbances are the seeds of a the random number generator of the simulator. MCTS has also been used for falsification of a vision-based controller for aircraft taxiing~\cite{julian2020validation}, hybrid flight control laws~\cite{delmas2019evaluation}, and deep neural networks~\cite{wicker2018feature}. \textcite{zhang2018two} combined MCTS with global optimization, using MCTS for exploration of the disturbance trajectory space and global optimization for refinement of the disturbance trajectories.
 
-We consider two types of reinforcement learning algorithms. First, we discuss Monte Carlo tree search algorithms which use online planning to maximize reward. Then, we present deep reinforcement learning algorithms which use offline learning and neural networks to estimate the optimal policy or value function.
+% Deep RL
+The second category of reinforcement learning algorithms that have been used for safety validation is
+deep reinforcement learning (DRL), which uses deep neural networks to represent the value functions, policies or both. If the disturbance space $X$ is discrete (or can easily be discretized), then deep $Q$-learning (DQN)~\cite{mnih2015human} can be used for falsification~\cite{Akazaki2018falsification,qin2019automatic} (discussed in detail below). For large or continuous disturbance spaces, the policy itself is represented by a neural network (with parameters $\theta$) that takes the state as input and either outputs a disturbance directly (e.g. $x = \pi_\theta(s)$) or outputs parameters of a distribution from which a disturbance can be sampled (e.g. for a normal distribution $[\mu, \sigma^2] = \pi_\theta(s)$ and $x \sim \mathcal{N}(\mu, \sigma^2)$). The policy is optimized to produce higher rewards using the policy gradient method~\cite{sutton2000policy}. Policy gradient methods can suffer from high variance and can be unstable during optimization. To improve optimization stability, an approach known as trust region policy optimization (TRPO)~\cite{schulman2015trust} restricts the amount a policy can change at each step. TRPO has previously been used for falsification of autonomous vehicles~\cite{koren2018adaptive,koren2019efficient,corso2019adaptive}. When a simulator does not provide access to the state on each timestep, policy gradient approaches can use recurrent neural network (RNN) with long-short term memory (LSTM) layers as the policy~\cite{hochreiter1997long}, and update at the end of each episode~\cite{koren2019efficient}.
 
-\section{Importance Sampling}
-For many cyber-physical applications, it is impossible to design an autonomous system that never violates a specification. In that case, we may wish to know how likely it is for a system to fail. To estimate the probability of failure, we can sample disturbance trajectories from the distribution with density $p(\vec{x})$ and compute the empirical probability of failure. A hypothesis test can be used to check if the probability failure is less than a desired threshold. Hypothesis testing for cyber-physical systems is the domain of statistical model checking~\cite{legay2010statistical,agha2018survey} and is not covered in this survey. 
+Another drawback of policy gradient methods is their inability to learn from off-policy data. Without data reuse, these methods can require a large number of simulations to converge. Newer approaches combine policy gradient methods with value function methods to create the actor-critic paradigm, which can perform well on problems with continuous disturbance spaces while also using previous simulation data to improve sample efficiency. Actor-critic methods~\cite{mnih2016asynchronous} use two neural networks, one for the policy (the actor network) and one for the value function (the critic network) and come in several varieties. Advantage actor critic (A2C) was used for falsification by \textcite{kuutti2020training}. Its more scalable counterpart, asynchronous advantage actor critic (A3C), was used by \textcite{Akazaki2018falsification}. \textcite{behzadan2019adversarial} use another actor-critic method known as deep deterministic policy gradient (DDPG) combined with Ornstein-Uhlenbeck exploration~\cite{lillicrap2015continuous}. 
+
+
+
+\paragraph{Deep Q-Learning}
+In DQN~\cite{mnih2015human}, the optimal action value function is approximated by a deep neural network with parameters $\theta$, $Q(s,a; \theta) \approx Q^*(s,a)$. The $Q$-network tries to minimize the loss with respect to a target network, and is able to learn from off-policy data by always estimating the value of the next state using its model. To minimize variance from off-policy updates, DQN uses an experience buffer that stores and randomizes previous state transitions before selecting them to train on. DQN has been successful for reinforcement learning problems with large state spaces such as atari games~\cite{mnih2015human} and is sample efficient compared to many other DRL algorithms. 
+
+The algorithm is shown in \cref{alg:dqn}. It starts by initializing the experience buffer $B$ to the empty set (line \ref{line:dqn_initialize_buffer} and the set of model weights $\theta$ using Xavier initialization~\cite{glorot2010understanding} (line \ref{line:dqn_initialize_weights}). Then, until the computational budget is exhausted, sample a random initial state (line \ref{line:dqn_sample_ic}) and iterate through an episode. At each step, a disturbance is selected using an $\epsilon$-greedy policy, which means that with probability $\epsilon$, a random disturbance is selected (line \ref{line:dqn_rand_action}) and with probability $1-\epsilon$ the greed action is selected (line \ref{line:dqn_greedy_action}. The reward and next state are generated by the MDP (lines \ref{line:dqn_reward} and \ref{line:dqn_next_state}), and the experience tuple is stored in the experience buffer (line \ref{line:dqn_save_in_replay_buffer}). The experience buffer is usually randomized to break correlations between experience samples, kept to fixed size, and prioritized by the temporal difference error of each sample~\cite{schaul2016prioritized}. To update the $Q$-network, a minibatch of experience tuples is sampled from the experience buffer (line \ref{line:dqn_minibatch}) and used to perform an update step (line \ref{line:dqn_update}) using stochastic gradient descent
+\begin{equation}
+    \theta \gets \theta - \alpha \nabla_{\theta} \mathbb{E}[L(y(s, x, s^\prime; \theta^-), Q(s,x; \theta)]
+\end{equation}
+where $\alpha$ is the learning rate and loss function $L$ can be the mean squared error or the Huber loss~\cite{huber1992robust}. The target is 
+\begin{equation}
+    y(s, x, s^\prime; \theta^-) = \begin{cases}
+    R(s,x) + \gamma \underset{x^\prime}{\max} \  Q(s^\prime, x^\prime;  \theta^-) & \text{if } s^\prime \not \in S_{\rm terminal} \\ 
+    y(s^\prime; \theta^-) = R(s,x) & \text{if } s^\prime \in S_{\rm terminal} \\ 
+    \end{cases}
+\end{equation}
+The target network parameters $\theta^-$ are periodically updated to $\theta$ after a specified number of training steps (line \ref{line:dqn_target_update}. After training has finished, the algorithm returns the model parameters that represent the optimal action value function. This function can be used as a disturbance policy to produces failure examples.
+
+\begin{algorithm}
+\caption{Deep $Q$-Learning} \label{alg:dqn}
+\begin{algorithmic}[1]
+    \Function{DQN}{$s_0$, $S_{\rm fail}$}
+    \State $B \gets \emptyset$ \label{line:dqn_initialize_buffer}
+    \State $\theta \gets$ \textproc{InitializeWeights()} \label{line:dqn_initialize_weights}
+    \State $\theta^- \gets \theta$
+    \Loop
+        \State $s \sim S_0$ \label{line:dqn_sample_ic}
+        \While{$s \not \in S_{\rm terminal}$} \label{line:dqn_loop_episode}
+            \State With probability $\epsilon$ choose $x_t$ at random \label{line:dqn_rand_action}
+            \State Otherwise, $x_t \gets \max_{x_t} Q(s_t, x_t; \theta)$ \label{line:dqn_greedy_action}
+            \State $r_t \gets R(s_t, x_t)$ \label{line:dqn_reward}
+            \State $s_{t+1} \sim P(s^\prime \mid s, x)$ \label{line:dqn_next_state}
+            \State $B \gets B \cup (s_t, x_t, r_t, s_{t+1})$ \label{line:dqn_save_in_replay_buffer}
+            \State Sample minibatch $(s_t, x_t, r_t, s_{t+1}) \sim B$ \label{line:dqn_minibatch}
+            \State $\theta \gets \theta - \alpha \nabla_{\theta} \mathbb{E}[L(y(s, x, s^\prime; \theta^-), Q(s,x; \theta)]$ \label{line:dqn_update}
+            \State If a fixed number of steps has passed, $\theta^- \gets \theta$ \label{line:dqn_target_update}
+        \EndWhile
+    \EndLoop
+    \State \Return{\theta} \label{line:dqn_return}
+    \EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Importance Sampling}
+For many safety-critical applications, it is impossible to design a system that is robust to all possible disturbances. In that case, we may wish to know how likely it is for a system to fail. To estimate the probability of failure, we can sample disturbance trajectories from the distribution with density $p(\vec{x})$ and compute the empirical probability of failure. A hypothesis test can be used to check if the probability failure is less than a desired threshold. Hypothesis testing for cyber-physical systems is the domain of statistical model checking~\cite{legay2010statistical,agha2018survey} and is not covered in this survey. 
 
 If the probability of failure is very small, i.e. a failure event is rare, then the Monte Carlo approach will require a large number of samples before converging to the true probability of failure \cite{hahn1972sample}. To address this problem, we would like to artificially make failures more likely, and then weight them accordingly, to get an unbiased estimate of the probability of failure with fewer samples. This is the idea behind importance sampling.
 
-Suppose we wish to estimate the probability that a system violates a specification. A failure occurs when the safety evaluation metric $c(\vec{x})$ is less than a safety threshold $\epsilon$, represented here as the indicator function $\mathds{1}{\{ c(\vec{x}) < \epsilon \}}$. Similar to the optimization formulation, $c(\vec{x})$ is defined such that $c(\vec{x}) < \epsilon$ implies $f(\vec{x}) \not \in \psi$. The probability of failure $P_{\rm fail}$ is the expectation over the probability density $p_{\vec{x}}$, i.e.
+Suppose we wish to estimate the probability that a system violates a specification. A failure occurs when the safety evaluation metric $c(\vec{x}) = c_{\rm safe}(f(\vec{x}))$ is less than a safety threshold $\epsilon$, represented here as the indicator function $\mathds{1}{\{ c(\vec{x}) < \epsilon \}}$. Similar to the optimization formulation, $c(\vec{x})$ is defined such that $c(\vec{x}) < \epsilon$ implies $f(\vec{x}) \not \in \psi$. The probability of failure $P_{\rm fail}$ is the expectation over the probability density $p_{\vec{x}}$, i.e.
 \begin{equation}
     P_{\rm fail} = \mathbb{E}_{p}\left[ \mathds{1}{\{ c(\vec{x}) < \epsilon \}} \right] \text{.}
 \end{equation} 
@@ -167,4 +310,83 @@ The goal of a good importance sampling distribution is to minimize the variance 
 \end{equation}
 Generating this distribution is not possible in practice because $c(\vec{x})$ is a black box and the normalization constant $P_{\rm fail}$ is the very quantity we would like to estimate. The algorithms in this section seek to estimate the optimal importance sampling distribution $q^*(\vec{x})$.
 
-The choice of a proposal distribution can significantly affect the performance of importance sampling algorithms and a bad choice can lead to estimates with larger variance than the basic Monte Carlo approach. For example, if $q(x)$ is very small, where $p(\vec{x})$ is relatively large, then the weight $p(\vec{x})/q(\vec{x}) \gg 1$ and some samples will dominate the probability estimate (\cref{eq:is_est}). To identify if a bad proposal distribution is chosen consider the size of the weights or compute the effective sample size. When samples with large weights are being drawn, \textcite{kim2016improving} suggest limiting the maximum weight by clipping the proposal distribution in regions with large weights. \textcite{uesato2018rigorous} suggest combining the importance sampling estimator with a basic Monte Carlo estimator to minimize the downside of a bad proposal distribution and \textcite{neufeld2014adaptive} provide a principled way of choosing the best estimator from several possibilities. 
+The choice of a proposal distribution can significantly affect the performance of importance sampling algorithms and a bad choice can lead to estimates with larger variance than the basic Monte Carlo approach. For example, if $q(x)$ is very small, where $p(\vec{x})$ is relatively large, then the weight $p(\vec{x})/q(\vec{x}) \gg 1$ and some samples will dominate the probability estimate (\cref{eq:is_est}). To identify if a bad proposal distribution is chosen consider the size of the weights or compute the effective sample size. When samples with large weights are being drawn, \textcite{kim2016improving} suggest limiting the maximum weight by clipping the proposal distribution in regions with large weights. \textcite{uesato2019rigorous} suggest combining the importance sampling estimator with a basic Monte Carlo estimator to minimize the downside of a bad proposal distribution and \textcite{neufeld2014adaptive} provide a principled way of choosing the best estimator from several possibilities. 
+
+
+% Summary of other approaches
+Multilevel splitting~\cite{kahn1951estimation} is a non-parametric approach to estimating the optimal importance sampling distribution based on Markov chain Monte Carlo sampling and has been applied to the safety validation of autonomous driving policies~\cite{norden2019efficient}. Other approaches try to classify the safety of each disturbance trajectory and use that classification to generate an efficient proposal distribution. \textcite{huang2018versatile} builds a proposal distribution centered on the boundary between safe and unsafe failure trajectories. \textcite{uesato2019rigorous} uses an estimate of the probability of failure with a rejection-sampling scheme to create an efficient proposal distribution. We now introduce the cross-entropy method which is the most commonly used importance sampling approach for safety validation. 
+
+\paragraph{cross-entropy method}
+The cross-entropy method~\cite{rubinstein2013cross,de2005tutorial} iteratively learns the optimal importance sampling distribution from a family of distributions $q(\vec{x}; \theta)$ parameterized by $\theta$. The optimal distribution parameters $\theta^*$ are found by minimizing the KL-divergence between a proposal distribution $q(\vec{x}; \theta)$ and the optimal distribution $q^*(\vec{x})$, i.e.
+\begin{equation}
+    \theta^* = \argmin\limits_\theta D_{\rm KL}\infdivx{q^*(\vec{x})}{ q(\vec{x}; \theta)} \text{,}
+\end{equation}
+where $D_{\rm KL}$ calculates the KL-divergence. Substituting the definitions, we can arrive at a stochastic optimization program
+\begin{equation}
+\begin{split}
+    \theta^* &= \argmin\limits_\theta {- \int_{\vec{x}}} q^*(\vec{x}) \log q(\vec{x}; \theta) d\vec{x} \\
+    &= \argmax\limits_\theta \  \int_{\vec{x}} \frac{\mathds{1}{\{ c(\vec{x}) < \epsilon \}}p(\vec{x})}{P_{\rm fail}} \log q(\vec{x}; \theta) d\vec{x} \\
+     &= \argmax\limits_\theta \ \mathbb{E}_{\varphi} \left[ \mathds{1}{\{ c(\vec{x}) < \epsilon \}} \frac{p(\vec{x})}{q(\vec{x}; \varphi)}\log q(\vec{x}; \theta) \right]  \\
+     &\approx \argmax\limits_\theta \frac{1}{N} \sum_{i=1}^N \left[ \mathds{1}{\{ c(\vec{x}_i) < \epsilon \}} \frac{p(\vec{x}_i)}{q(\vec{x}_i; \varphi)}\log q(\vec{x}_i; \theta) \right] \label{eq:ce_max} \text{,}
+\end{split}
+\end{equation}
+where $\varphi$ is any set of parameters and $\vec{x}_i$ are sampled from $q(\vec{x}; \varphi)$. \cref{eq:ce_max} can be solved analytically when the family of algorithms is in the natural exponential family (i.e. normal, exponential, Poisson, gamma, binomial, and others), and the solution corresponds to the maximum likelihood estimate of the parameters~\cite{de2005tutorial}.
+
+For an iterative solution to finding $\theta^*$, we start by choosing a set of starting parameters $\theta_0$ so that $q(\vec{x}; \theta_0)$ is close to $p(\vec{x})$. Then, we iterate $k=0,1,\ldots$
+\begin{enumerate}
+    \item Set $\varphi = \theta_k$.
+    \item Draw samples $\{ \vec{x}_1, \ldots, \vec{x}_N \}$ from $q(\vec{x};\varphi)$.
+    \item Solve \cref{eq:ce_max} for $\theta_{k+1}$.
+\end{enumerate}
+
+One major challenge to this approach is the rarity of failure events. If all samples have $c(\vec{x}) > \epsilon$, then $\hat{P}_{\rm fail} =0$ and the algorithm may not converge to the optimal proposal distribution. One solution is to adaptively update the safety threshold $\epsilon$ at each iteration. At iteration $k$, a safety threshold $\epsilon_k$ and a rarity parameter $\rho$ is chosen so that the fraction of samples that have $c(\vec{x}) < \epsilon_k$ is $\rho$. The parameter $\rho$ is also known as the quantile level and is often set in the range $\rho = [0.01, 0.2]$~\cite{kim2016improving,okelly2018scalable}. The entire algorithm is shown in \cref{alg:crossentropy}. Note that we assume $\rho N$ is an integer used for indexing on line \ref{line:ce_max}. 
+
+\begin{algorithm}
+\caption{Cross-Entropy Method} \label{alg:crossentropy}
+\begin{algorithmic}[1]
+    \Function{CrossEntropy}{$p$, $q$, $\theta_0$, $\rho$, $c$, $\epsilon$}
+    \State $\theta \gets \theta_0$
+    \State $k \gets 0$
+    \Loop
+        \State Sample $\{\vec{x}_1, \ldots, \vec{x}_N \}$ from $q(\vec{x}; \theta_k)$
+        \State Sort $\{ \vec{x}_1, \ldots, \vec{x}_N \}$ by $c(\vec{x}_i)$ 
+        \State $\epsilon_k \gets \max(c(\vec{x}_{\rho N}), \epsilon)$ \label{line:ce_max}
+        \State $\theta_{k+1} \gets \argmax\limits_\theta \frac{1}{N} \sum_{i=1}^N \left[ \mathds{1}{\{c(\vec{x}_i) < \epsilon \}} \frac{p(\vec{x}_i)}{q(\vec{x}_i; \theta_{k})}\log q(\vec{x}_i; \theta) \right]$
+        
+        \If {$\epsilon_k < \epsilon$}
+            \State \textbf{break}
+        \EndIf
+        \State $k \gets k+1$
+    \EndLoop
+    \State \Return{\textproc{EstimateProbability}($p$, $q_{\theta_k}$)}
+    \EndFunction
+    \end{algorithmic}
+\end{algorithm}
+
+
+The cross-entropy method has been used to estimate the probability of failure for aircraft collision avoidance systems~\cite{kim2016improving} and autonomous vehicles~\cite{okelly2018scalable,zhao2016accelerated,huang2017accelerated}. Typically, probability distributions in the natural exponential family are used~\cite{kim2016improving,okelly2018scalable,zhao2016accelerated} so that cross-entropy updates can be performed analytically. \textcite{huang2017accelerated} propose a method for using piecewise exponential distributions for more flexibility while retaining the ability to compute updates analytically. \textcite{sankaranarayanan2012falsification}  discuss piecewise uniform distributions over the disturbance space, and techniques for factoring the space to reduce the number of parameters needed.
+
+\subsection{Strengths and limitations}
+
+Each category of safety validation algorithm has benefits and drawbacks that depend on safety validation task and the details of the system and environment. We allude to some of these strengths and weaknesses in the preceding sections but here we try to spell them out with clarity
+
+\paragraph{Optimization} The primary benefit of optimization-based safety validation is the minimal set of restrictions placed on the simulation of the system and the environment. The formulation we provide does not need access to the state of the environment and only needs to return the value of a safety metric of a given disturbance trajectory. The simulation state may be unavailable for logistical or privacy reasons so optimization-based approaches would be a good choice in those cases. If, however, the state is available and would be useful for finding failures then optimization approaches may not function as well as path planning or reinforcement learning approaches. If an environment has stochasticity beyond the disturbances, then optimization techniques such as Bayesian optimization can be used to account for it. The biggest drawback to optimization strategies is the need to optimize over the entire disturbance trajectory. When solving long time horizon problems, the disturbance trajectory can be high dimensional and consequently difficult to optimize over. 
+
+
+\paragraph{Path Planning} Path planning algorithms rely heavily on the environment state to discover failures. A strength of path planning approaches is their ability to efficiently search over large state spaces by reusing trajectory segments. Path planning algorithms often provide a natural way to compute state space coverage which can be used to determine when sufficient testing has been done. A drawback to path planning algorithms is their inability to naturally handle stochasticity. Most path-planning algorithms rely on the ability to deterministically replay trajectory segments or initialize a simulator into a predefined state, which may be challenging for some simulators.  Additionally if the problem has a long time horizon then prohibitively large trees may be required to find failure trajectories. 
+
+
+\paragraph{Reinforcement Learning} Reinforcement learning algorithms are similar to path-planning approaches because they also rely on the environment state to function (unless specifically formulated otherwise as in \textcite{koren2019adaptive}). Monte Carlo tree search has a similar pros and cons to the path planning algorithms because it is similar in structure. Deep reinforcement learning algorithms, however, learn a policy that maps states to disturbances. The space of possible policies may be easier to optimize than the space of disturbance trajectories and policies can be applied to long time horizon problems. Uncontrolled stochasticity in the environment is naturally handled by DRL algorithms, which are designed to function in stochastic environments. The downside to DRL algorithms is that they may be sample inefficient and require complex training procedures compared to optimization and path planning approaches. 
+
+
+\paragraph{Importance Sampling}
+Importance sampling approaches require finding many failure examples to learn a distribution over failures. Therefore, failure examples can, in principle, be found using any of the three previous approaches. The most common importance sampling approaches such as multilevel splitting and the cross entropy method function most similarly to optimziation-based techniques because they search directly over the space of disturbance trajectories and do not require state information. These techniques therefore carry the same pros and cons as optimization techqniques. As we will see in Chapter 5, however, we can construct importance sampling techniques that follow the framework of reinforcement learning instead. 
+
+\section{Discussion}
+This chapter introduced our model for safety validation of black-box autonomous sytems. We assume that a black-box system takes actions in an environment that can be influenced by an adversary through stochastic disturbances. The system and environment evolve over time, and the goal of the adversary is to find sequences of disturbances that cause the system to violate a safety specification, which is often defined using temporal logic.
+
+We identified three common safety validation tasks. In falsification, we try to find \emph{any} sequence of disturbances that lead to failure. In most likely failure analysis we try to find the failure example that has the largest probability according to our disturbance model. In probability of failure estimation, we compute the probability that the system fails under the disturbance model. 
+
+With the safety validation tasks defined, we survey the existing literature on black-box safety validation and identify approaches based on optimization, path planning, reinforcement learning and importance sampling. The techniques differ in how they use safety metrics to guide the search, how they deal with stochasticity in the simulator, whether or not they require the use of the environment state, and if they search for full trajectories, construct them iteratively, or solve for a disturbance policy. 
+
+In the following chapter we discuss some of the practical considerations for constructing a safety validation problem from a system and environment. We introduce four sample systems that will be used to test various safety validation algorithms in later chapters. 

@@ -1113,24 +1113,62 @@ archivePrefix = {arXiv},
       adsnote = {Provided by the SAO/NASA Astrophysics Data System}
 }
 
-@ARTICLE{uesato2018rigorous,
-       author = {{Uesato}, Jonathan and {Kumar}, Ananya and {Szepesvari}, Csaba and
-         {Erez}, Tom and {Ruderman}, Avraham and {Anderson}, Keith and
-         {Krishmamurthy} and {Dvijotham} and {Heess}, Nicolas and
-         {Kohli}, Pushmeet},
-        title = "{Rigorous Agent Evaluation: An Adversarial Approach to Uncover Catastrophic Failures}",
-      journal = {arXiv e-prints},
-     keywords = {Computer Science - Machine Learning, Computer Science - Cryptography and Security, Statistics - Machine Learning},
-         year = 2018,
-        month = dec,
-          eid = {arXiv:1812.01647},
-        pages = {arXiv:1812.01647},
-archivePrefix = {arXiv},
-       eprint = {1812.01647},
- primaryClass = {cs.LG},
-       adsurl = {https://ui.adsabs.harvard.edu/abs/2018arXiv181201647U},
-      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+@inproceedings{uesato2019rigorous,
+  author    = {Jonathan Uesato and
+               Ananya Kumar and
+               Csaba Szepesv{\'{a}}ri and
+               Tom Erez and
+               Avraham Ruderman and
+               Keith Anderson and
+               Krishnamurthy (Dj) Dvijotham and
+               Nicolas Heess and
+               Pushmeet Kohli},
+  title     = {Rigorous Agent Evaluation: An Adversarial Approach to Uncover Catastrophic
+               Failures},
+  booktitle = iclr,
+  year      = {2019},
 }
+
+@Inbook{lazaric2012transfer,
+author="Lazaric, Alessandro",
+title="Transfer in Reinforcement Learning: A Framework and a Survey",
+bookTitle="Reinforcement Learning: State-of-the-Art",
+year="2012",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="143--173",
+isbn="978-3-642-27645-3",
+doi="10.1007/978-3-642-27645-3_5",
+}
+
+@article{taylor2007transfer,
+  title={Transfer learning via inter-task mappings for temporal difference learning},
+  author={Taylor, Matthew E and Stone, Peter and Liu, Yaxin},
+  journal=jmlr,
+  volume={8},
+  number={9},
+  pages={2125--2167},
+  year={2007}
+}
+
+@article{taylor2009transfer,
+  title={Transfer learning for reinforcement learning domains: A survey.},
+  author={Taylor, Matthew E and Stone, Peter},
+  journal=jmlr,
+  volume={10},
+  number={7},
+  year={2009},
+  pages={1633--1685}
+}
+
+@inproceedings{taylor2008autonomous,
+  title={Autonomous transfer for reinforcement learning.},
+  author={Taylor, Matthew E and Kuhlmann, Gregory and Stone, Peter},
+  booktitle=aamas,
+  pages={283--290},
+  year={2008}
+}
+
 
 
 
@@ -1784,14 +1822,6 @@ organization={Springer}
   year={2019}
 }
 
-@inproceedings{corso2019adaptive,
-  title={Adaptive Stress Testing with Reward Augmentation for Autonomous Vehicle Validatio},
-  author={Corso, Anthony and Du, Peter and Driggs-Campbell, Katherine and Kochenderfer, Mykel J},
-  booktitle=itsc,
-  pages={163--168},
-  year={2019},
-  organization={IEEE}
-}
 
 @inproceedings{huang2019evaluation,
   title={Evaluation Uncertainty in Data-Driven Self-Driving Testing},
@@ -1802,57 +1832,7 @@ organization={Springer}
   organization={IEEE}
 }
 
-@article{zhao2016accelerated,
-  title={Accelerated evaluation of automated vehicles safety in lane-change scenarios based on importance sampling techniques},
-  author={Zhao, Ding and Lam, Henry and Peng, Huei and Bao, Shan and LeBlanc, David J and Nobukawa, Kazutoshi and Pan, Christopher S},
-  journal={IEEE transactions on intelligent transportation systems},
-  volume={18},
-  number={3},
-  pages={595--607},
-  year={2016},
-  publisher={IEEE}
-}
 
-
-@article{zhao2003generating,
-  title={Generating test inputs for embedded control systems},
-  author={Zhao, Qianchuan and Krogh, Bruce H and Hubbard, Paul},
-  journal={IEEE Control Systems Magazine},
-  volume={23},
-  number={4},
-  pages={49--57},
-  year={2003},
-  publisher={IEEE}
-}
-
-
-@article{mullins2018adaptive,
-  title={Adaptive Generation of Challenging Scenarios for Testing and Evaluation of Autonomous Vehicles},
-  author={Mullins, Galen E and Stankiewicz, Paul G and Hawthorne, R Chad and Gupta, Satyandra K},
-  journal={Journal of Systems and Software},
-  volume={137},
-  pages={197--215},
-  year={2018},
-  publisher={Elsevier}
-}
-
-
-@article{norden2019efficient,
-  title={Efficient Black-box Assessment of Autonomous Vehicle Safety},
-  author={Norden, Justin and O'Kelly, Matthew and Sinha, Aman},
-  journal=arxiv,
-  numer = {1912.03618},
-  year={2019}
-}
-
-
-@inproceedings{okelly2018scalable,
-  title={Scalable end-to-end autonomous vehicle testing via rare-event simulation},
-  author={O'Kelly, Matthew and Sinha, Aman and Namkoong, Hongseok and Tedrake, Russ and Duchi, John C},
-  booktitle=nips,
-  pages={9827--9838},
-  year={2018}
-}
 
 @inproceedings{althoff2018automatic,
   title={Automatic generation of safety-critical test scenarios for collision avoidance of road vehicles},
@@ -1875,15 +1855,6 @@ pages = "1433--1438",
 booktitle = "Design, Automation and Test in Europe (DATE)",
 }
 
-@inproceedings{koren2019Efficient,
-author = {Koren, Mark and Kochenderfer, Mykel},
-year = {2019},
-month = {10},
-pages = {4178-4183},
-booktitle = itsc,
-title = {Efficient Autonomy Validation in Simulation with Adaptive Stress Testing},
-doi = {10.1109/ITSC.2019.8917403}
-}
 
 @inproceedings{Goodfellow2014GANS,
  author = {Goodfellow, Ian J. and Pouget-Abadie, Jean and Mirza, Mehdi and Xu, Bing and Warde-Farley, David and Ozair, Sherjil and Courville, Aaron and Bengio, Yoshua},
@@ -1892,11 +1863,12 @@ doi = {10.1109/ITSC.2019.8917403}
  year = {2014},
  pages = {2672--2680},
 } 
-@inproceedings{koschi2019computationally,
-  title={Computationally Efficient Safety Falsification of Adaptive Cruise Control Systems},
-  author={Koschi, Markus and Pek, Christian and Maierhofer, Sebastian and Althoff, Matthias},
-  booktitle=itsc,
-  pages={2879--2886},
+
+@inproceedings{leung2019backpropagation,
+  title={Backpropagation for parametric STL},
+  author={Leung, Karen and Ar{\'e}chiga, Nikos and Pavone, Marco},
+  booktitle={2019 IEEE Intelligent Vehicles Symposium (IV)},
+  pages={185--192},
   year={2019},
   organization={IEEE}
 }
@@ -1907,25 +1879,6 @@ doi = {10.1109/ITSC.2019.8917403}
   booktitle={ACM SIGSAC Conference on Computer and Communications Security},
   pages={2267--2281},
   year={2019}
-}
-
-@article{zhang2018two,
-  title={Two-layered falsification of hybrid systems guided by monte carlo tree search},
-  author={Zhang, Zhenya and Ernst, Gidon and Sedwards, Sean and Arcaini, Paolo and Hasuo, Ichiro},
-  journal={IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (TCAD)},
-  volume={37},
-  number={11},
-  pages={2894--2905},
-  year={2018},
-  publisher={IEEE}
-}
-
-@inproceedings{sankaranarayanan2012falsification,
-  title={Falsification of temporal properties of hybrid systems using the cross-entropy method},
-  author={Sankaranarayanan, Sriram and Fainekos, Georgios},
-  booktitle={ACM international conference on Hybrid Systems: Computation and Control (HSCC)},
-  pages={125--134},
-  year={2012}
 }
 
 
@@ -2125,15 +2078,6 @@ institution = "University of California, Irvine, School of Information and Compu
   year={2018}
 }
 
-@inproceedings{abeysirigoonawardena2019generating,
-  title={Generating adversarial driving scenarios in high-fidelity simulators},
-  author={Abeysirigoonawardena, Yasasa and Shkurti, Florian and Dudek, Gregory},
-  booktitle={International Conference on Robotics and Automation (ICRA)},
-  pages={8271--8277},
-  year={2019},
-  organization={IEEE}
-}
-
 @article{hein2017particle,
   title={Particle Swarm Optimization for Generating Interpretable Fuzzy Reinforcement Learning Policies},
   author={Hein, Daniel and Hentschel, Alexander and Runkler, Thomas and Udluft, Steffen},
@@ -2187,51 +2131,8 @@ year = {2000}
   year = 1936
 }
 
-@inproceedings{schulman2015trust,
-  title={{Trust Region Policy Optimization}},
-  author={Schulman, John and Levine, Sergey and Abbeel, Pieter and Jordan, Michael I and Moritz, Philipp},
-  booktitle=icml,
-  year={2015}
-}
-
 
 % Transfer learning works
-@article{taylor2009transfer,
-  title={Transfer learning for reinforcement learning domains: A survey.},
-  author={Taylor, Matthew E and Stone, Peter},
-  journal={Journal of Machine Learning Research},
-  volume={10},
-  number={7},
-  year={2009}
-}
-
-@incollection{lazaric2012transfer,
-  title={Transfer in reinforcement learning: a framework and a survey},
-  author={Lazaric, Alessandro},
-  booktitle={Reinforcement Learning},
-  pages={143--173},
-  year={2012},
-  publisher={Springer}
-}
-
-@article{taylor2007transfer,
-  title={Transfer learning via inter-task mappings for temporal difference learning},
-  author={Taylor, Matthew E and Stone, Peter and Liu, Yaxin},
-  journal={Journal of Machine Learning Research},
-  volume={8},
-  number={Sep},
-  pages={2125--2167},
-  year={2007}
-}
-
-@inproceedings{taylor2008autonomous,
-  title={Autonomous transfer for reinforcement learning.},
-  author={Taylor, Matthew E and Kuhlmann, Gregory and Stone, Peter},
-  booktitle={AAMAS (1)},
-  pages={283--290},
-  year={2008},
-  organization={Citeseer}
-}
 
 @inproceedings{rajendran2017attend,
   author    = {Janarthanan Rajendran and
@@ -2242,4 +2143,116 @@ year = {2000}
   title     = {Attend, Adapt and Transfer: Attentive Deep Architecture for Adaptive Transfer from multiple sources in the same domain},
   booktitle = {International Conference on Learning Representations (ICLR)},
   year      = {2017},
+}
+
+
+@article{julian2019deep,
+  title={Deep neural network compression for aircraft collision avoidance systems},
+  author={Julian, Kyle D and Kochenderfer, Mykel J and Owen, Michael P},
+  journal={Journal of Guidance, Control, and Dynamics},
+  volume={42},
+  number={3},
+  pages={598--608},
+  year={2019},
+  publisher={American Institute of Aeronautics and Astronautics}
+}
+
+@inproceedings{glorot2010understanding,
+  title={Understanding the difficulty of training deep feedforward neural networks},
+  author={Glorot, Xavier and Bengio, Yoshua},
+  booktitle={International Conference on Artificial Intelligence and Statistics (AISTATS)},
+  pages={249--256},
+  year={2010}
+}
+
+@ARTICLE{wang2020falsification,
+       author = {Wang, Xiao and Nair, Saasha and Althoff, Matthias},
+        title = "{Falsification-Based Robust Adversarial Reinforcement Learning}",
+      journal = {arXiv e-prints},
+     keywords = {Computer Science - Robotics, Computer Science - Formal Languages and Automata Theory, Computer Science - Machine Learning},
+         year = 2020,
+        month = jul,
+          eid = {arXiv:2007.00691},
+        pages = {arXiv:2007.00691},
+archivePrefix = {arXiv},
+       eprint = {2007.00691},
+ primaryClass = {cs.RO},
+       adsurl = {https://ui.adsabs.harvard.edu/abs/2020arXiv200700691W},
+      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
+
+@article{kesting2010enhanced,
+  title={Enhanced intelligent driver model to access the impact of driving strategies on traffic capacity},
+  author={Kesting, Arne and Treiber, Martin and Helbing, Dirk},
+  journal={Philosophical Transactions of the Royal Society A: Mathematical, Physical and Engineering Sciences},
+  volume={368},
+  number={1928},
+  pages={4585--4605},
+  year={2010},
+  publisher={The Royal Society Publishing}
+}
+
+@incollection{huber1992robust,
+  title={Robust estimation of a location parameter},
+  author={Huber, Peter J},
+  booktitle={Breakthroughs in Statistics},
+  pages={492--518},
+  year={1992},
+  publisher={Springer}
+}
+
+@inproceedings{schaul2016prioritized,
+author = {Schaul, Tom and Quan, John and Antonoglou, Ioannis and Silver, David},
+booktitle = iclr,
+title = {Prioritized Experience Replay},
+year = {2016}
+}
+
+@inproceedings{Hasselt2016deep,
+author = {Hasselt, Hado van and Guez, Arthur and Silver, David},
+title = {Deep Reinforcement Learning with Double Q-Learning},
+year = {2016},
+booktitle = aaai,
+pages = {2094–2100},
+numpages = {7},
+location = {Phoenix, Arizona},
+}
+
+@article{koopman2016challenges,
+  title={Challenges in autonomous vehicle testing and validation},
+  author={Koopman, Philip and Wagner, Michael},
+  journal={SAE International Journal of Transportation Safety},
+  volume={4},
+  number={1},
+  pages={15--24},
+  year={2016},
+  publisher={JSTOR}
+}
+
+@article{emerson1986sometimes,
+  title={“Sometimes” and “not never” revisited: on branching versus linear time temporal logic},
+  author={Emerson, E Allen and Halpern, Joseph Y},
+  journal={Journal of the ACM (JACM)},
+  volume={33},
+  number={1},
+  pages={151--178},
+  year={1986},
+  publisher={ACM New York, NY, USA}
+}
+
+@ARTICLE{corso2020survey,
+       author = {{Corso}, Anthony and {Moss}, Robert J. and {Koren}, Mark and
+         {Lee}, Ritchie and {Kochenderfer}, Mykel J.},
+        title = "{A Survey of Algorithms for Black-Box Safety Validation}",
+      journal = {arXiv e-prints},
+     keywords = {Computer Science - Machine Learning, Computer Science - Artificial Intelligence, Electrical Engineering and Systems Science - Systems and Control, Statistics - Machine Learning},
+         year = 2020,
+        month = may,
+          eid = {arXiv:2005.02979},
+        pages = {arXiv:2005.02979},
+archivePrefix = {arXiv},
+       eprint = {2005.02979},
+ primaryClass = {cs.LG},
+       adsurl = {https://ui.adsabs.harvard.edu/abs/2020arXiv200502979C},
+      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
 }
