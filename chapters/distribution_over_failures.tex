@@ -1,81 +1,145 @@
+In this chapter we develop a technique for estimating the distribution over failure trajectories for state-dependent sampling techniques. Having a distribution that approximates the distribution over failures allows us to sample a diverse set of likely failures as well as efficiently compute the probability of failure. We start by showing that a sampling distribution that is proportional to the probability of failure is an efficient proposal distribution, and is exactly the distribution over failures when the environment is deterministic. We then describe how to compute an estimate of the probability of failure using a Bellman equation. Through experiments in the gridworld and T-intersection environments, we show that even when the estimate of the probability of failure has a large amount of error, we still obtain an efficient proposal distribution compared to baseline techniques.
+
 \section{Background}
-% The space of all trajectories is exponential in the length of the trajectory, so it will be challenging to represent the distribution $f(\tau)$ directly. To reduce the dimensionality of the distribution we assume that the SUT and environment are Markov. The current disturbance $x$ and next state $s^\prime$ will only depend on the current state $s$ such that
-% \begin{equation}
-%     p(x, s^\prime \mid s) = \underbrace{p(x \mid s)}_{\rm disturbance \ model}\overbrace{p(s^\prime \mid s, x)}^{\rm dynamics}.
-% \end{equation}
-% If we also assume that the dynamics of the SUT and the environment are deterministic (i.e. all stochasticity is controlled through disturbances), then
-% \begin{equation}
-%     p(x, s^\prime \mid s) = p(x \mid s).
-% \end{equation}
-% With these assumptions, the distribution over failures only depends on $p(x \mid s)$ and is given by 
-% \begin{equation}
-%     f(\tau) = \frac{\mathds{1}\{s_N \in E\}}{\mathbb{E}_p\left[ \mathds{1}\{ s_N \in E \} \right]} \prod_{t=1}^N p(x_t \mid s_{t-1}).
-% \end{equation}
+
+% Why we care about a good failure distribution
+- Falsification and most-likely failure analysis simply give examples but would not be able to certify the safety of a system because if they fail to produce examples we cannot say anything about why (since we are not search exhaustively)
+-reference the figure
+- talk about how if we ever wanted to improve our system we would train it on a diverse set of failures
+
+
+%What. is wrong with existing approaches
+
+
+- Importance sampling
+- They don't use the state
+- The state may be useful and it is especially important when the environment is stochastic or (just the initial conditions are)
+
+
+% Outline our approach
+
+
+\begin{figure*}
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/distribution_over_failures/policy.pdf}
+        \caption{Expert policy.}
+        \label{fig:dof_policy}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/distribution_over_failures/falsification_failure.pdf}
+        \caption{Failure from falsification.}
+        \label{fig:dof_falsification}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/distribution_over_failures/most_likely_failure.pdf}
+        \caption{Most-likely failure.}
+        \label{fig:dof_mostlikely_failure}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/distribution_over_failures/distribution_over_failures.pdf}
+        \caption{Samples from failure distribution.}
+        \label{fig:dof_dof}
+    \end{subfigure}
+    \caption{Comparison of safety validation tasks.}
+    \label{fig:dof_comparison_safetytasks}
+\end{figure*}
+
+
+
 
 
 \section{Approach}
 
-\subsection{Constructing the Optimal Sampling Distribution}
-% \paragraph{Deterministic Case}
+\todo{Discuss the challenge of designing a distribution where we can only control the disturbances $x$}
 
-% If we also assume that the dynamics of the SUT and the environment are deterministic (i.e. all stochasticity is controlled through disturbances), then
-% \begin{equation}
-%     p(x, s^\prime \mid s) = p(x \mid s).
-% \end{equation}
-% and the distribution over failures is given by 
-% \begin{equation}
-%     \tau(\vec{x}) = \frac{\mathds{1}\{s_N \in E\}}{\mathbb{E}_p\left[ \mathds{1}\{ s_N \in E \} \right]} \prod_{t=1}^N p(x_t \mid s_{t-1}).
-% \end{equation}
+- Monte Carlo estimation
 
-% Since we have full control over the outcome of the simulator, we can construct a stochastic policy, $\pi$ that generates sample trajectories distributed according to $\tau$. Let
-% \begin{equation}
-%     \pi(x \mid s) = \frac{p(x \mid s) P_{\rm fail}(s^\prime)}{\sum_{a'}  p(x' \mid s) P_{\rm fail}(s'')} = \frac{p(x \mid s) P_{\rm fail}(s^\prime)}{P_{\rm fail}(s)} \label{eq:opt_pol}
-% \end{equation}
-% where $P_{\rm fail}(s)$ is the probability of failure from state $s$ and $s''$ is the state reached from $s$ after applying disturbance $x'$. The second equality in \cref{eq:opt_pol} comes from the observation that the probability of failure in the current state is a sum of the probability of failure over possible next states, weighted by the likelihood of reaching that state. 
+\subsection{State-dependent importance sampling}
 
-% \begin{proposition}
-% Trajectories generated from rollouts of the policy $\pi$ will be distributed according to $f$.
-% \end{proposition}
-
-% \proof
-% Let $\tau_\pi(\vec)$ be the distribution induced by rollouts of the policy $\pi$. We will show that for any $\vec{x}$, $\tau(\vec{x}) = \tau^*(\vec{x})$. First, we define the Bellman equation that describes the probability of failure of a Markov system as
-% \begin{equation} P_{\rm fail}(s) = \left\{ \begin{array}{ll}
-% 1 &  \text{if} \ s \in E \\
-% 0 &  \text{if} \  s \notin E, \ s \in T \\
-% \sum_a p(x \mid s) P_{\rm fail}(s^\prime) &  \text{otherwise}
-% \end{array} \right. \label{eq:belman}\end{equation}
-% Then consider an arbitrary trajectory $\vec{x}$ that has probability according to $\tau_\pi$ given by
-% \begin{equation}
-%     \tau_\pi(\vec{x}) = \prod_{t=1}^{N} \pi(x_t \mid s_{t-1}) = \prod_{t=1}^{N} \frac{p(x_t \mid s_{t-1}) P_{\rm fail}(s_t)}{P_{\rm fail}(s_{t-1})} \label{eq:fstar}
-% \end{equation}
-% and probability according to $f$ given by \cref{eq:ftau}. There are two cases to consider.\\
-% \textbf{Case 1: } $\mathds{1}\{s_N \notin E\}$
-
-% Due to the indicator function in \cref{eq:ftau}, $f(\tau)=0$. With final state $s_N \in T$ and $s_N \notin E$, we have $v(s_N) = 0$. The last term in the product in \cref{eq:fstar} contains $v(s_N)$, making $f^*(\tau) = 0$.\\
-% \textbf{Case 2: } $\mathds{1}\{s_N \in E\}$ 
-
-% Considering the definition of $f^*(\tau)$, we have
-% \begin{align}
-%     f^*(\tau) &= \prod_{t=1}^{N} \frac{p(x_t \mid s_{t-1}) v(s_t)}{v(s_{t-1})} \\
-%     &= \frac{\cancelto{1}{v(s_N)}}{v(s_0)} \prod_{t=1}^{N} p(x_t \mid s_{t-1}) \\
-%     &= \frac{1}{\mathbb{E}_p\left[ \mathds{1}\{ s_N \in E \} \right]} \prod_{t=1}^{N} p(x_t \mid s_{t-1}) \\
-%     &= f(\tau)
-% \end{align}
-% where, in the second line, all of the $v(s_t)$ terms were canceled except $v(s_0)$ and $v(s_N)$, and \cref{eq:belman} was used to let $v(s_N) = 1$. In the third line, we observe that the probability of failure at the initial state $v(s_0)$ is equivalent to the expectation of failures $\mathbb{E}_p\left[ \mathds{1}\{ s_N \in E \} \right]$. Thus, in all cases, $f(\tau) = f^*(\tau)$.
-% \endproof
-
-% \paragraph{Stochastic Setting}
-% \todo{This}
+% What are we trying to do:
+The importance sampling approaches that were discussed in \cref{sec:is} construct a proposal distribution $q(\vec{x})$ to efficiently compute the probability of failure of a system. The downside to these approaches is that they do not consider the state of the environment when choosing each disturbance and therefore may not be using all of the available information. We wish to develop an importance sampling approach that can use the state of the environment to produce a more efficient proposal distribution. 
 
 
-\subsection{Computing the Probability of Failure}
+Let $\vec{\tau} = [s_0, x_1, s_1, \ldots x_{t_{\rm max}}, s_{t_{\rm max}}]$ be a trajectory of states and disturbances with probability $p(\vec{\tau})$. Without loss of generality we will assume a deterministic initial state $s_0$.  We wish to develop a proposal distribution $q(\tau)$ that can provide a good estimate of the probability of failure with the minimal number of samples. An unbiased estimator of the probability of failure from the initial state $s_0$ can be computed from $N$ independent sample trajectories $\vec{\tau}_i \sim q(\vec{\tau})$ as
+\begin{equation}
+\hat{P}_{\rm fail} = \frac{1}{N} \sum_{i=1}^N \frac{p(\vec{\tau}_i) \mathds{1}{\{ \vec{\tau}_i \not \in \psi \}}}{q(\vec{\tau}_i)} \text{,} \label{eq:pfail_estimator}
+\end{equation}
+where $\vec{\tau} \not \in \psi$ is equivalent to $\vec{s} \not \in \psi$ and represents a system failure. The number of samples we require depends upon the variance of this estimator which is given by
+\begin{align}
+\text{Var}_q\left[ \hat{P}_{\rm fail} \right] &= \frac{1}{N} \left( \mathbb{E}_q \left[\left(\frac{p(\vec{\tau}) \mathds{1}{\{ \vec{\tau} \not \in \psi \}}}{q(\vec{\tau})} \right)^2 \right] - \mathbb{E}_q\left[ \frac{p(\vec{\tau}) \mathds{1}{\{ \vec{\tau} \not \in \psi \}}}{q(\vec{\tau})}  \right]^2 \right) \\
+&= \frac{1}{N} \left(\mathbb{E}_p \left[\frac{p(\vec{\tau}) \mathds{1}{\{ \vec{\tau} \not \in \psi \}}}{q(\vec{\tau})} \right] - P_{\rm fail}^2 \right)\label{eq:pfail_variance}
+\end{align}
+where have used the fact that $\mathbb{E}_q\left[ \hat{P}_{\rm fail}  \right] = P_{\rm fail}$. 
+
+\subsection{Proposal distribution}
+
+% Defining the proposal distribution
+We now present a proposal distribution that it reduces the variance of $\hat{P}_{\rm fail}(s_0)$ compared to Monte Carlo sampling and is optimal in some situations. Define the disturbance policy
+\begin{equation}
+    q(x_t, \mid \vec{\tau}_{0:t-1}) = \frac{p(x_t \mid \vec{\tau}_{0:t-1}) P_{\rm fail}(\vec{\tau}_{0:t-1}, x_t)}{P_{\rm fail}(\vec{\tau}_{0:t-1})} \label{eq:disturbance_policy}
+\end{equation}
+where $\vec{\tau}_{0:t} = [s_0, x_1, s_1, \ldots, x_t, s_t]$ and $P_{\rm fail}(\vec{\tau}_{0:t})$ is the probability that the system fails under the distribution $p(\vec{\tau})$ after the sequence $\vec{\tau}_{0:t}$. To see that \cref{eq:disturbance_policy} is properly normalized we apply the recursive relationship between the probability of failure
+\begin{equation}
+    P_{\rm fail}(\vec{\tau}_{0:t-1}) = \sum_{x_t} p(x_t \mid \vec{\tau}_{0:t-1}) P_{\rm fail}(\vec{\tau}_{0:t-1}, x_t) \text{.}
+\end{equation}
+If we assume that states are sampled from the transition model $p(s_t \mid \vec{\tau}_{0:t-1}, x_t)$, then the resulting proposal distribution is
+\begin{align}
+    q(\vec{\tau}) &= \prod_{t=1}^{t_{\rm max}} \frac{p(x_t, s_t \mid \vec{\tau}_{0:t-1}) P_{\rm fail}(\vec{\tau}_{0:t-1}, x_t)}{P_{\rm fail}(\vec{\tau}_{0:t-1})} \\
+    &= p(\vec{\tau}) \prod_{t=1}^{t_{\rm max}} \frac{P_{\rm fail}(\vec{\tau}_{0:t-1}, x_t)}{P_{\rm fail}(\vec{\tau}_{0:t-1})} \text{.} \label{eq:full_proposal}
+\end{align}
+
+
+%The following analysis assumes that the state and action spaces are discrete, but a similar results may be obtained by appropriately switching summations over states and actions to integrals.
+
+
+
+Proposition 2 - The variance of failure probability estimate (\cref{eq:pfail_estimator}) under the proposal distribution defined in \cref{eq:full_proposal} is 
+\begin{align}
+    \text{Var}_q\left[ \hat{P}_{\rm fail} \right] &= \frac{P_{\rm fail}^2}{N} \left( \mathbb{E}_{p_{\tau \mid \mathds{1} \{\vec{\tau} \not \in \psi\}}}  \left[ \prod_{t=1}^{t_{\rm max}} \frac{p(s_t \mid \vec{\tau}_{0:t-1}, x_t, \mathds{1} \left\{ \vec{\tau} \not \in \psi \right\})}{p(s_t \mid \vec{\tau}_{0:t-1}, x_t)} \right] - 1 \right) \\
+    &= \frac{P_{\rm fail}^2}{N} \left( \mathbb{E}_{p_{\tau \mid \mathds{1} \{\vec{\tau} \not \in \psi\}}}  \left[ \prod_{t=1}^{t_{\rm max}} \frac{P_{\rm fail}(\vec{\tau}_{0:t})}{P_{\rm fail}(\vec{\tau}_{0:t-1}, x_t)} \right] - 1 \right) \\
+\end{align}
+
+proof:
+To show this, we can start by substituting \cref{eq:full_proposal} into \cref{eq:pfail_variance} to get
+\begin{equation}
+    \text{Var}_q\left[ \hat{P}_{\rm fail} \right] = \frac{1}{N} \left(\mathbb{E}_p \left[\mathds{1}\{ \vec{\tau} \not \in \psi \} \prod_{t=1}^{t_{\rm max}} \frac{P_{\rm fail}(\vec{\tau}_{0:t-1})}{P_{\rm fail}(\vec{\tau}_{0:t-1}, x_t)} \right] - P_{\rm fail}^2 \right) \label{eq:starting_variance_expression}
+\end{equation}
+Then, applying Bayes' rule we have 
+\begin{equation}
+    P_{\rm fail}(\vec{\tau}_{0:t}) = \frac{p(\vec{\tau}_{0:t} \mid \mathds{1} \left\{ \vec{\tau} \not \in \psi \right\}) P_{\rm fail}}{p(\vec{\tau}_{0:t})} \text{.}
+\end{equation}
+When substituted into the ratio term in \cref{eq:starting_variance_expression} we get
+\begin{align}
+    \prod_{t=1}^{t_{\rm max}} \frac{P_{\rm fail}(\vec{\tau}_{0:t-1})}{P_{\rm fail}(\vec{\tau}_{0:t-1}, x_t)} &= \prod_{t=1}^{t_{\rm max}} \frac{p(\vec{\tau}_{0:t-1} \mid \mathds{1} \left\{ \vec{\tau} \not \in \psi \right\}) p(\vec{\tau}_{0:t-1}, x_t)}{p(\vec{\tau}_{0:t-1}, x_t \mid \mathds{1} \left\{ \vec{\tau} \not \in \psi \right\}) p(\vec{\tau}_{0:t-1})} \\
+    &= \prod_{t=1}^{t_{\rm max}} \frac{p(x_t \mid \vec{\tau}_{0:t-1})}{p(x_t \mid \vec{\tau}_{0:t-1}, \mathds{1} \left\{ \vec{\tau} \not \in \psi \right\})} \\
+    &= \prod_{t=1}^{t_{\rm max}} \frac{p(x_t, s_t \mid \vec{\tau}_{0:t-1})p(s_t \mid \vec{\tau}_{0:t-1}, x_t, \mathds{1} \left\{ \vec{\tau} \not \in \psi \right\})}{p(x_t, s_t \mid \vec{\tau}_{0:t-1}, \mathds{1} \left\{ \vec{\tau} \not \in \psi \right\})p(s_t \mid \vec{\tau}_{0:t-1}, x_t)} \\
+    &= \frac{p(\vec{\tau})}{p(\vec{\tau} \mid \mathds{1} \left\{ \vec{\tau} \not \in \psi \right\})} \prod_{t=1}^{t_{\rm max}} \frac{p(s_t \mid \vec{\tau}_{0:t-1}, x_t, \mathds{1} \left\{ \vec{\tau} \not \in \psi \right\})}{p(s_t \mid \vec{\tau}_{0:t-1}, x_t)} \\
+    &= P_{\rm fail}\prod_{t=1}^{t_{\rm max}} \frac{p(s_t \mid \vec{\tau}_{0:t-1}, x_t, \mathds{1} \left\{ \vec{\tau} \not \in \psi \right\})}{p(s_t \mid \vec{\tau}_{0:t-1}, x_t)} \label{eq:simplified_ratio}
+\end{align}
+where we have used the fact $p(\vec{\tau} \mid \mathds{1} \left\{ \vec{\tau} \not \in \psi \right\}) =  p (\vec{\tau})/P_{\rm fail}$ to get \cref{eq:simplified_ratio}. Finally, we get the desired result by plugging \cref{eq:simplified_ratio} into \cref{eq:starting_variance_expression} and applying the identity
+
+\begin{equation}
+    \mathbb{E}_p \left[ \mathds{1} \{\vec{\tau} \not \in \psi\} f(\vec{\tau}) \right] = \mathbb{E}_p \left[ \mathds{1} \{\vec{\tau} \not \in \psi\} \right] \mathbb{E}_{p_{\vec{\tau} \mid \mathds{1} \{\vec{\tau} \not \in \psi\}}}  \left[ f(\vec{\tau}) \right] \text{.}
+\end{equation}
+
+
+
+\section{Estimating the Probability of Failure}
 
 % In both the deterministic and stochastic settings, the problem of generating the distribution over failures or the optimal importance sampling distribution involves estimating the probability of failure $P_{\rm fail}(s)$.
 
 
-
-
-
 \section{Experiments}
+
+\section{Robustness to errors}
+
+\section{Comparison of sampling techniques}
 
 \section{Discussion}

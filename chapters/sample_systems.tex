@@ -104,7 +104,7 @@ The driving policy that we use for vehicles is based on the intelligent driver m
         Acceleration exponent & $\delta$ & \num{4.0} \\
         Desired time headway & $T_{\rm des}$ & \SI{1.5}{s}\\
         Minimum allowed gap & $r_{\rm min}$ & \SI{5.0}{m} \\
-        Desired velocity & $v_{\rm des}$ & \SI{29.0}{m/s} \\
+        Desired velocity & $v_{\rm des}$ & \SI{15.0}{m/s} \\
         Maximum acceleration & $a_{\rm max}$ & \SI{3.0}{m/s^2} \\
         Comfortable deceleration & $d_{\rm comf}$ & \SI{2.0}{m/s^2} \\
         Maximum deceleration & $d_{\rm max}$ & \SI{9.0}{m/s^2} \\
@@ -187,7 +187,7 @@ In the pedestrian crosswalk MDP shown in \cref{fig:pedestrian_crosswalk}, an aut
 
 
 % Description of the adversarial MDP
-Failures of this scenario are defined by any collision between the pedestrian and vehicle. The disturbances are the longitudinal and lateral accelerations of the pedestrian ($\delta a_x$ $\delta a_y$), and the longitudinal and lateral noise in the measurement of the pedestrian's position and velocity ($\delta n_x$, $\delta n_y$, $\delta n_{v_x}$, $\delta n_{v_y}$). All six disturbances are continuous but if we are using a safety validation solver that requires a discrete disturbance space, then we can discretize them. If we assume that the disturbances are independent then we can model each with a zero-mean Gaussian distribution. If we want to model correlated disturbances to better caption human-like behavior, we can model them as Gaussian processes with kernel function $\vec{k}$ and mean function $\vec{\mu}$. These options are shown in \cref{tab:adversarial_ped_disturbance_space}.
+Failures of this scenario are defined by any collision between the pedestrian and vehicle. The disturbances are the lateral and longitudinal accelerations of the pedestrian ($\delta a_x$ $\delta a_y$), and the lateral and longitudinal noise in the measurement of the pedestrian's position and velocity ($\delta n_x$, $\delta n_y$, $\delta n_v$). All five disturbances are continuous but if we are using a safety validation solver that requires a discrete disturbance space, then we can discretize them. If we assume that the disturbances are independent then we can model each with a zero-mean Gaussian distribution. If we want to model correlated disturbances to better caption human-like behavior, we can model them as Gaussian processes with kernel function $\vec{k}$ and mean function $\vec{\mu}$. These options are shown in \cref{tab:adversarial_ped_disturbance_space}.
 
 
 \begin{table}
@@ -198,12 +198,11 @@ Failures of this scenario are defined by any collision between the pedestrian an
         \toprule
         \textbf{Disturbance} & \textbf{Independent} & \textbf{Correlated} \\
         \midrule
-        Longitudinal Acceleration &  $\delta a_x \sim \mathcal{N}(0, \sigma_{a_x}^2)$ &  $\vec{\delta a}_x \sim \mathcal{N}(\vec{\mu}_{a_x}(\vec{t}), \vec{k}_{a_x}(\vec{t}, \vec{t}))$ \\
-        Lateral Acceleration &  $ \delta a_y \sim \mathcal{N}(0, \sigma_{a_y}^2)$ &  $\vec{\delta a}_y \sim \mathcal{N}(\vec{\mu}_{a_y}(\vec{t}), \vec{k}_{a_y}(\vec{t}, \vec{t}))$ \\
-        Longitudinal Acceleration &  $\delta n_x \sim \mathcal{N}(0, \sigma_{r_x}^2)$ &  $\vec{\delta n}_x \sim \mathcal{N}(\vec{\mu}_{r_x}(\vec{t}), \vec{k}_{r_x}(\vec{t}, \vec{t}))$ \\
-        Lateral Position Noise &  $\delta n_y \sim \mathcal{N}(0, \sigma_{r_y}^2)$ &  $\vec{\delta n}_y \sim \mathcal{N}(\vec{\mu}_{r_y}(\vec{t}), \vec{k}_{r_y}(\vec{t}, \vec{t}))$ \\
-        Longitudinal Velocity Noise &  $\delta n_{v_x} \sim \mathcal{N}(0, \sigma_{v_x}^2)$ &  $\vec{\delta n}_{v_x} \sim \mathcal{N}(\vec{\mu}_{v_x}(\vec{t}), \vec{k}_{v_x}(\vec{t}, \vec{t}))$ \\
-        Lateral Velocity Noise &  $\delta n_{v_y} \sim \mathcal{N}(0, \sigma_{v_y}^2)$ &  $\vec{\delta n}_{v_x} \sim \mathcal{N}(\vec{\mu}_{v_y}(\vec{t}), \vec{k}_{v_y}(\vec{t}, \vec{t}))$ \\
+        Lateral Acceleration &  $\delta a_x \sim \mathcal{N}(0, \sigma_{a_x}^2)$ &  $\vec{\delta a}_x \sim \mathcal{N}(\vec{\mu}_{a_x}(\vec{t}), \vec{k}_{a_x}(\vec{t}, \vec{t}))$ \\
+        Longitudinal Acceleration &  $ \delta a_y \sim \mathcal{N}(0, \sigma_{a_y}^2)$ &  $\vec{\delta a}_y \sim \mathcal{N}(\vec{\mu}_{a_y}(\vec{t}), \vec{k}_{a_y}(\vec{t}, \vec{t}))$ \\
+        Lateral Position Noise &  $\delta n_x \sim \mathcal{N}(0, \sigma_{r_x}^2)$ &  $\vec{\delta n}_x \sim \mathcal{N}(\vec{\mu}_{r_x}(\vec{t}), \vec{k}_{r_x}(\vec{t}, \vec{t}))$ \\
+        Longitudinal Position Noise &  $\delta n_y \sim \mathcal{N}(0, \sigma_{r_y}^2)$ &  $\vec{\delta n}_y \sim \mathcal{N}(\vec{\mu}_{r_y}(\vec{t}), \vec{k}_{r_y}(\vec{t}, \vec{t}))$ \\
+        Velocity Noise &  $\delta n_v \sim \mathcal{N}(0, \sigma_{v}^2)$ &  $\vec{\delta n}_{v} \sim \mathcal{N}(\vec{\mu}_{v}(\vec{t}), \vec{k}_{v}(\vec{t}, \vec{t}))$ \\
         \bottomrule
     \end{tabular}
 \end{table}
@@ -260,7 +259,6 @@ In the adversarial MDP, a failure is any collision between the ego vehicle and a
         Toggle turn intent & N/A & \num{1e-3} \\
         \bottomrule
     \end{tabular}
-    \vskip -0.2in
 \end{table}
 
 \section{Discussion}

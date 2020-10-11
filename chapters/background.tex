@@ -1,7 +1,7 @@
 In order to develop algorithms for safety validation of black-box systems, we need to mathematically formalize the problem. In this chapter we formulate safety-validation as the interaction between two decision-making agents: the system and the adversary. We define notation and formalize the underlying goals of different safety validation algorithms. With the goals defined, we survey the existing literature on black-box safety validation and categorize different algorithms into four types: optimization, path planning, reinforcement learning and importance sampling. 
 
 \section{Problem Formulation}
-
+\label{sec:problem_formulation}
 Suppose we have an autonomous system under test (referred to as the \emph{system}) that takes actions $a \in A$ in an \emph{environment} with state $s \in S$. Actions are selected based on observations $o \in O$ of the environment. The system interacts with the environment over discrete time $t \in \{1, \ldots, t_{\rm max}\}$. We denote a state trajectory up to time $t$ as $\vec{s}_{1:t} = [s_1, \ldots, s_t]$, an observation trajectory $\vec{o}_{1:t} = [o_1, \ldots, o_t]$, and an action trajectory $\vec{a}_{1:t} = [a_1, \ldots, a_t]$. The system may be modeled by a function $\mathcal{M}$ that maps an observation trajectory to an action
 \begin{equation}
     a_t = \mathcal{M}(\vec{o}_{1:t}) \text{.} \label{eq:system} 
@@ -111,7 +111,7 @@ To find the most-likely failure, we can modify the safety metric to include the 
 \begin{equation}
     c(\vec{x}) = \begin{cases}
         c_{\text{safe}}(f(\vec{x}))  & {\rm if} \ c_{\text{safe}}(f(\vec{x})) \geq \epsilon \\
-        -p(\vec{x}) & {\rm if} \ c_{\text{safe}}(f(\vec{x})) < \epsilon \text{.}
+        -p(\vec{x}) & {\rm if} \ c_{\text{safe}}(f(\vec{x})) < \epsilon \text{.} \label{eq:piecewise_cost}
     \end{cases}
 \end{equation}
 Piecewise objectives may be more difficult to optimize so another option is to define a multiobjective cost function defined as
@@ -288,6 +288,7 @@ The target network parameters $\theta^-$ are periodically updated to $\theta$ af
 \end{algorithm}
 
 \subsection{Importance Sampling}
+\label{sec:is}
 For many safety-critical applications, it is impossible to design a system that is robust to all possible disturbances. In that case, we may wish to know how likely it is for a system to fail. To estimate the probability of failure, we can sample disturbance trajectories from the distribution with density $p(\vec{x})$ and compute the empirical probability of failure. A hypothesis test can be used to check if the probability failure is less than a desired threshold. Hypothesis testing for cyber-physical systems is the domain of statistical model checking~\cite{legay2010statistical,agha2018survey} and is not covered in this survey. 
 
 If the probability of failure is very small, i.e. a failure event is rare, then the Monte Carlo approach will require a large number of samples before converging to the true probability of failure \cite{hahn1972sample}. To address this problem, we would like to artificially make failures more likely, and then weight them accordingly, to get an unbiased estimate of the probability of failure with fewer samples. This is the idea behind importance sampling.

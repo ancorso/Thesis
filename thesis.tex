@@ -18,6 +18,16 @@
 
 % Figures
 \usepackage{subcaption}
+\usepackage{forest}
+\forestset{
+  default preamble={
+    for tree={%
+        circle,
+        draw,
+        edge={-latex},
+    }
+ }
+}
 
 % Algorithms
 \usepackage{algorithm}
@@ -114,6 +124,7 @@
 \input{chapters/background}
 
 \chapter{Sample Systems}
+\label{ch3}
 \input{chapters/sample_systems}
 
 \chapter{Interpretable Safety Validation}
