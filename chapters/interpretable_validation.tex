@@ -3,7 +3,7 @@ In the rest of the chapter we develop an algorithm for generating failure descri
 
 Lastly, we discuss techniques for modeling timeseries data that satisfy linear constraints including independent samples and series distributed according to a Gaussian process. 
 
-\section{Background}
+\section{Motivation}
 
 \todo{
 2 - 30 min \\
@@ -436,7 +436,7 @@ To compute the cost of each specification, we use a function similar to \cref{eq
 \begin{equation}
     c(\vec{x}) = \begin{cases}
         d(\vec{x}) + \beta  & \text{no failure} \\
-        -\log p(\vec{x}) / \textproc{length}(\vec{x}) & \text{failure} \text{.} \label{eq:piecewise_cost}
+        -\log p(\vec{x}) / \textproc{length}(\vec{x}) & \text{failure} \text{.} 
     \end{cases}
 \end{equation}
 where $d(\vec{x})$ is the point of closest approach between the ego vehicle and any adversarial agent in the scene with disturbance trajectory $\vec{x}$ and $\beta = \num{e7}$ is a large penalty for not finding a failure. The probability is divided by the length of the trajectory to better compare the likelihood of disturbances in trajectories of different lengths. The cost of each specification was computed using the average of $N=10$ trajectories. Specifications that failed to produce satisfying trajectories (i.e. were not satisfiable), had a cost of $c_{\rm max} = \num{e9}$ and we use a node count penalty of $\lambda = 0.01$. 
@@ -446,7 +446,7 @@ We sample expressions from the STL grammar (\cref{eq:stl_grammar}) for both the 
 % Evaluation metric and baseline
 The performance of our algorithm is evaluated on three metrics: 1) The rate of failures generated (evaluated from \num{1000} trials), 2) the likelihood of the failure trajectories (evaluated from \num{10} failure trajectories), and 3) the interpretability of the STL expression. Additionally, we show that failure descriptions can be used to generate similar failure examples and used in a low-dimensional sensitivity analysis of the system. We compare our approach to Monte Carlo (MC) sampling and two versions of the cross entropy method (CEM) (\cref{alg:crossentropy}):
 \begin{itemize}
-    \item Monte Carlo Sampling: Disturbance trajectories are sampled from the true distribution $p(\vec{x})$.
+    \item Monte Carlo sampling: Disturbance trajectories are sampled from the true distribution $p(\vec{x})$.
     \item Cross entropy method (iid): We apply the cross entropy method and assume that the disturbances are independent and identically distributed (iid) at each time. We therefore optimize the parameters of a single distribution per disturbance component. 
     \item Cross entropy method (trajectory): We apply the cross entropy method (still assuming independence at each timestep) but use a different distribution for each time, allowing the CEM to produce correlated trajectories. 
 \end{itemize}

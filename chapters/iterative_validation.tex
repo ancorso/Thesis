@@ -4,6 +4,7 @@ Introducing autonomy into safety-critical domains, such as autonomous driving, a
 % Paragraph on the types of problems that could benefit from iterative efficiency
 % The design cycle of safety critical systems is iterative. On each iteration, a new prototype of the system is developed and must be validated before deploying or iterating further. This process implies that safety validation algorithms will be used periodically during the design process, and will repeatedly be applied to closely-related systems. Another context in which safety validation may be applied sequentially, is that of a third-party regulatory body that certifies autonomous systems. Such an organization will perform safety validation on systems with similar goals but subtle behavioral differences. Safety validation of complex systems often requires significant computational effort, and most of the existing approaches start from scratch each time the system under test is changed. The need to frequently perform safety validation on related systems therefore imposes a large computational burden, but also an opportunity to improve safety validation efficiency. 
 
+\section{Motivation}
 Designing and certifying safety-critical systems generally involves assessing a sequence of closely related systems. Safety validation of complex systems often requires significant computational effort and existing approaches generally start from scratch each time the system under test is changed. The need to frequently perform safety validation on related systems therefore imposes a large computational burden, but also an opportunity to improve safety validation efficiency. 
 
 % What we did
@@ -174,7 +175,6 @@ The networks are initialized with Xavier initialization~\cite{glorot2010understa
 
 
 \begin{table}
-\small
     \centering
     \caption{Network architectures and hyperparameters. }
     \label{tab:hyperparameters}

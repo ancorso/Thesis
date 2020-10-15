@@ -2,30 +2,30 @@
 \begin{tikzpicture}
     \tikzstyle{every node}=[font=\small, align=center]
     \tikzset{
-        n/.style={draw, rounded corners, minimum height=0.5cm, minimum width = 1.5cm},
-        n2/.style={n, minimum width=2.5cm}
+        n/.style={draw, rounded corners, minimum height=0.6cm, minimum width = 2cm},
+        n2/.style={n, minimum width=3.5cm}
         }
     
     %state 
     \node (state) [n, rotate=90] {\small State $s$};
     
     %base network
-    \node (base) [n2, above right of=state, xshift=1.5cm] {Base network};
+    \node (base) [n2, above right of=state, xshift=2.5cm, yshift = 0.2cm] {Base network};
     
     %Solutions
-    \node (solutionsback1) [n2, right of=state, xshift=1.3cm, yshift=-0.1cm] {};
-    \node (solutionsback2) [n2, fill=white, right of=state, xshift=1.25cm, yshift=-0.05cm] {};
-    \node (solutions) [n2, fill=white, right of=state, xshift=1.2cm] {Solutions};
+    \node (solutionsback1) [n2, right of=state, xshift=2.3cm, yshift=-0.1cm] {};
+    \node (solutionsback2) [n2, fill=white, right of=state, xshift=2.25cm, yshift=-0.05cm] {};
+    \node (solutions) [n2, fill=white, right of=state, xshift=2.2cm] {Solutions};
     
     %weights
-    \node (attn) [n2, below right of=state, xshift=1.5cm] {Attention network};
+    \node (attn) [n2, below right of=state, xshift=2.5cm, yshift=-0.2cm] {Attention network};
     
 
-    \node (values) [n, below right of=base, xshift=1.8cm, yshift = 0.4cm] {values};
+    \node (values) [n, below right of=base, xshift=2.8cm, yshift = 0.25cm] {values};
     
-     \node (weights) [n, above right of=attn, xshift=1.8cm, yshift = -0.4cm] {weights};
+     \node (weights) [n, above right of=attn, xshift=2.8cm, yshift = -0.25cm] {weights};
      
-     \node (pfail) [n, minimum width = 0.5cm, right of=state, xshift=5.5cm] {$v(s)$};
+     \node (pfail) [n, minimum width = 0.5cm, right of=state, xshift=7.5cm] {$v(s)$};
     
 
     \draw[-latex] (state.south) -- (base.west);
@@ -42,7 +42,7 @@
     
     % backprop
     
-    \draw [dashed, -latex] (weights.south) to [out=-1500,in=-60] (attn.south);
+    \draw [dashed, -latex] (weights.south) to [out=-150,in=-60] (attn.south);
     \draw [dashed, -latex] (pfail.south) to [out=-150,in=-60] (weights.south);
     \draw [dashed, -latex] (values.north) to [out=150,in=60] (base.north);
     \draw [dashed, -latex] (pfail.north) to [out=150,in=60] (values.north);
