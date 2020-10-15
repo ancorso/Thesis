@@ -243,6 +243,7 @@ In traditional DQN with prioritized experience replay, the experience samples ar
 DQN has no explicit dependence on the size of the state space because it gathers data by sampling episodes from a simulator. It can therefore scale to problems with large state spaces and never requires the simulator to be initialized into a particular state, making it more easily applied to large and inflexible simulators or non-Markovian systems. Some drawbacks to DQN are the lack of formal convergence guarantees and the requirement of a discrete disturbance space.
 
 \section{Experiments}
+\label{sec:ch5_expr}
 This section demonstrates our technique for approximating the distribution over failures of a Markovian system using the state-dependent proposal distribution
 \begin{equation}
     q^*(x_t, \mid s_{t-1}) = \frac{p(x_t \mid s_{t-1}) P_{\rm fail}(s_{t-1}, x_t)}{P_{\rm fail}(s_{t-1})} \text{.} \label{eq:markov_disturbance_policy}
@@ -373,7 +374,8 @@ We now compare the proposal distribution $q^*(x \mid s)$ (with $P_{\rm fail}(s)$
 
 
 \subsection{T-intersection Scenario}
-We now turn to the more complex problem of discovering failures in the autonomous driving policy of the ego vehicle in the T-intersection scenario. The problem is more challenging due to the longer time horizon  and the continuous state space. In each episode, the agents are initialized with random positions in the range [\SI{5}{m}, \SI{35}{m}] (with respect to the start of their lane) and random velocities in the range [\SI{10}{m/s}, \SI{20}{m/s}]. The adversarial agent is initialized on the left with a random turn intention and match turn signal.
+\label{sec:ch5_Tint}
+We now turn to the more complex problem of discovering failures in the autonomous driving policy of the ego vehicle in the T-intersection scenario. The problem is more challenging due to the longer time horizon  and the continuous state space. In each episode, the agents are initialized with random positions in the range [\SI{5}{m}, \SI{35}{m}] (with respect to the start of their lane) and random velocities in the range [\SI{10}{m/s}, \SI{20}{m/s}]. The adversarial agent is initialized on the left with a random turn intention and match turn signal. Any initial condition that had a collision without any disturbance was not used in the analysis. 
 
 In addition to all the baselines and DQN, we use local approximation value iteration to estimate the probability of failure. We discretize the state space into \num{30} position points and \num{10} velocity points for each vehicle, resulting in a total of \num{360000} states. To focus the sample points on the most interesting regions of the state space (i.e. the positions before and immediately after the intersection and the reachable range of velocities), we uniformly discretize the adversary position between [\SI{0}{m}, \SI{75}{m}] an the ego vehicle between [\SI{15}{m}, \SI{75}{m}], and the velocity between [\SI{0}{m/s}, \SI{20}{m/s}]. Interpolation was done using bilinear interpolation over the grid of states. 
 

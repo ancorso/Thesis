@@ -1,3 +1,25 @@
+This chapter summarizes the techniques developed in this thesis, highlights the contributions, and presents some possible areas of future work.
+
+\section{Summary}
+%todo
+
 \section{Summary of Contributions}
 
+\paragraph{A model for black-box safety validation of autonomous systems.} %todo
+\paragraph{A technique for generating interpretable failure descriptions.} %todo
+\paragraph{A state-dependent importance sampling distribution for approximating the distribution over failures.} %todo
+
+\paragraph{A problem decomposition technique to improve the scalability of safety validation algorithms for multi-agent systems.} %todo
+
+\paragraph{A transfer learning approach for improving the efficiency and performance of safety validation of multiple related systems.} %todo
+
 \section{Future Work}
+
+\paragraph{Applications to industrial driving policies and real world data distributions.} The safety validation algorithms discussed in this thesis were tested on relatively simple 2D driving simulators with rule-based autonomy. It remains an open question how these algorithms will work when used with more realistic driving environment and more advanced policies. Additionally, we use simplistic models of environment disturbances but it is possible to construct probabilistic behavior models from real world data cite[]. Future work should combine realistic simulators with disturbance models generated from real-world data. The challenges that may arise when using industrial simulators involve data efficiency, adversary controlability and choice of disturbance variables. Large scale simulators that render 3D graphics and vehicle dynamics are much more costly to simulate so data efficiency will be of critical importance. The simulators may also be very complex which could limit how agents in the scene are controlled, but also provide a vast number possible parameters to use as disturbances. More work needs to be done to identify which disturbances are the most useful for causing disturbances. 
+
+\paragraph{Adversarial testing with perceptual inputs.} Current work emphasizes the use of disturbances that represent high level perturbations to the system (such as the absolute noise in the detection of a pedestrian's position). Many autonomous systems use perceptual inputs for mapping their environment when are subject to adversarial examples under perturbations to pixel values[cite]. Recent work\cite{julian2020validation} combines black box adversarial testing with formal verification to find sequences of image perturbations that cause a system to fail. The limitation of this work is the requirement for small images and small neural networks. Future work should investigate how to scale up the formal verification procedure, or develop othe techniques to construct sequences of adversarial examples tp find failures. 
+
+
+\paragraph{Policy-gradient methods for estimating the distribution over failures.} Our proposed technique in \cref{ch5} constructs the distribution over failures by estimating the probability of failure at each state. We run into problems when the disturbance space is continuous or when the probability of failure difficult to represent using a neural network. In reinforcement learning, continuous actions can be used by representing the policy instead of the value function. By analogy, we could investigate the use of neural network policies to directly approximate the distribution over failures. Challenges would include the choice of cost function and network architecture to best represent the distribution over failures. 
+
+\paragraph{Continual learning for safety validation algorithms.} Although we have demonstrated performance and efficiency improvements by apply transfer learning to iterative safety validation, our approach is limited if the number of systems grows too large. Since we explicitly store and reference the safety validation policies from previous tasks, the complexity of the algorithm increases over time. The field of \emph{continual learning} tries to address these problems by developing algorithms that can retain competency on previous tasks without explicitly storing previous versions of a policy. Future work on iterative safety validation will include the application of continual learning algorithms to create adversaries that do not forget how to induce previously discovered failure modes. 

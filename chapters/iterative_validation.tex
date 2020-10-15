@@ -1,8 +1,4 @@
-% Intro the problem of safety validation
-Introducing autonomy into safety-critical domains, such as autonomous driving, aviation, and medicine, has the potential to improve both safety and efficiency. The consequences of operational errors of these systems include loss of property or human life, so extensive safety validation and testing is required before deployment. Black-box sampling approaches have emerged as a scalable safety validation tool for discovering failures in complex environments. Algorithms based on optimization, path planning, reinforcement learning and importance sampling have been explored in the literature, often with the goal of finding failures of a system with fewer samples or less computational effort. There has been little focus on the potential efficiency of validating many related systems sequentially. 
-
-% Paragraph on the types of problems that could benefit from iterative efficiency
-% The design cycle of safety critical systems is iterative. On each iteration, a new prototype of the system is developed and must be validated before deploying or iterating further. This process implies that safety validation algorithms will be used periodically during the design process, and will repeatedly be applied to closely-related systems. Another context in which safety validation may be applied sequentially, is that of a third-party regulatory body that certifies autonomous systems. Such an organization will perform safety validation on systems with similar goals but subtle behavioral differences. Safety validation of complex systems often requires significant computational effort, and most of the existing approaches start from scratch each time the system under test is changed. The need to frequently perform safety validation on related systems therefore imposes a large computational burden, but also an opportunity to improve safety validation efficiency. 
+In this chapter we consider the problem of validating many related systems sequentially. Most safety validation algorithms must start from scratch each time the system under test changes, but we demonstrate performance and efficiency benefits to sharing knowledge between safety validation tasks. We apply transfer learning algorithms to share knowledge between related tasks and perform experiments using the gridworld with adversary and crosswalk scenarios.
 
 \section{Motivation}
 Designing and certifying safety-critical systems generally involves assessing a sequence of closely related systems. Safety validation of complex systems often requires significant computational effort and existing approaches generally start from scratch each time the system under test is changed. The need to frequently perform safety validation on related systems therefore imposes a large computational burden, but also an opportunity to improve safety validation efficiency. 
@@ -10,15 +6,10 @@ Designing and certifying safety-critical systems generally involves assessing a 
 % What we did
 To improve the efficiency of safety validation across related systems, we use knowledge from the validation of previous systems to inform the validation of the next system. We formulate iterative safety validation as a transfer learning problem by modeling each safety validation task as a Markov decision process. The previously solved safety validation problems are used as the set of source tasks, and we transfer knowledge to future tasks in the form of action value functions. We use a set of state-dependent attention weights to automatically learn which previous solutions are applicable to the current problem.
 
-Existing safety validation algorithms use approaches from optimization~\cite{Mathesen2019falsification}, path-planning~\cite{zutshi2014multiple}, reinforcement-learning~\cite{lee2015adaptive}, and importance sampling~\cite{huang2017accelerated}, and often only address the validation of a single system. \\Textcite{uesato2019rigorous} use previous versions of a system to train a failure classifier that predicts which initial conditions of a system will lead to failure, but their approach is not applicable to sequential decision making problems of the type we consider. \\Textcite{wang2020falsification} alternately train an agent and perform safety validation on it to improve robustness. The safety validation algorithm warm starts with the parameters from the previous iteration to improve efficiency. In fact, any parametric safety validation algorithm~\cite{koren2018adaptive, Akazaki2018falsification, kim2016improving} could simply reuse parameters from previous tasks and then fine-tune them for better performance. We demonstrate in our experiments that a fine-tuning approach may work when the systems are very similar, but has poor performance when systems exhibit different behavior.
-
 We propose a new variation of the attend, adapt, and transfer (A2T) algorithm~\cite{rajendran2017attend} that transforms the state and action value spaces for each source task to increase knowledge transfer between dissimilar tasks and compare it to basic A2T and a fine-tuning baseline. We evaluate the initial performance, the final performance, and the number of training steps required to reach the same performance as a no-transfer algorithm. We consider four iterative safety validation tasks in gridworld and autonomous driving scenarios and demonstrate that transfer learning has the potential to significantly improve the performance and sample efficiency of safety validation algorithms.
 
 
-\section{Background}
-This section provides the necessary background for applying transfer learning to safety validation. We introduce Markov decision processes (MDPs), discuss ways to share knowledge between related MDPs, and formulate safety validation as a sequence of MDPs.
-
-\subsection{Transfer Learning}
+\section{Transfer Learning}
 % What is transfer learning for RL?
 Transfer learning is concerned with using knowledge gained by solving one task to improve the learning process in another related task~\cite{taylor2009transfer}. In reinforcement learning, each task is an MDP and each solution is a policy. When tasks have different state and action spaces, we require task mappings that relate the states and actions between tasks. Task mappings may be provided by a human~\cite{taylor2007transfer} or learned from data~\cite{taylor2008autonomous}. If the state and action spaces are the same, then tasks can share a variety of low-level information such as experience samples $(s, a, s', r)$, action value functions, policies, or models of the environment. High-level information, such as a set of options, shaping rewards or feature encodings, may also be transferred to improve learning on a new task. One challenge in transfer learning is \emph{negative transfer} where knowledge from one or more source tasks impairs the performance on the current task. Negative transfer can be mitigated using an attention mechanism, or a human oracle that decides which tasks are relevant~\cite{taylor2009transfer}. 
 
@@ -54,7 +45,7 @@ In the context of safety validation, we hypothesize two qualitatively distinct w
 \begin{figure}
 \centering
 \resizebox{0.7\columnwidth}{!}{\input{figures/iterative_validation/A2T_SAT}}
-\caption{Architecture of A2T with state and action transformation. The shaded boxes have learnable parameters. }
+\caption{Architecture of A2T with state and action transformation.}
 \label{fig:a2t_architecture}
 \end{figure}
 
@@ -102,65 +93,60 @@ The A2T algorithm with state and action value transformations can be encoded as 
     \label{fig:motivation}
 \end{figure}
 
-\vspace{-0.1 in}
 \paragraph{Motivation.} Here we provide some intuition for our choice of transfer learning algorithm and the reason for the state and action transformations. Suppose we are solving a sequence of tasks (\cref{fig:motivation}), each is a gridworld where an agent (blue circle) moves between adjacent squares attempting to achieve high reward (green squares) while avoiding states with low reward (red squares). Given the optimal action value function for a source MDP (\cref{fig:motiation_source}), we wish to transfer it to two related tasks. In the first transfer problem (\cref{fig:motivation_a2t}), the reward distribution is locally similar to the source MDP, and only differs in one state. In this case, a policy that works well in the source task will also work well in the new task, especially when the agent is in a state where the local reward landscape matches up (as depicted). A2T will work well in this setting because it can quickly learn attention weights that favor the source policy in most states, and only require our baseline solution when the agent is near the top right corner. In the second transfer problem (\cref{fig:motivation_sat}), A2T is likely to behave poorly because there are no states in which the source policy can be directly applied to achieve high reward. If, however, we could transform the state space by reflecting it across the diagonal and rotate the actions of the agent by \SI{90}{\degree}, then we could directly apply the source policy. This is the motivation for applying transformations both before and after the source solutions. 
 
 
 \section{Experiments}
 
-This section describes two safety validation problems: a gridworld scenario (GW) and an autonomous driving scenario (AD). Each scenario has two transfer learning problems, one for validating a learning system that improves over time, and the other for validating a set of comparable systems with different behaviors. We then describe the experimental setup and how we compute the evaluation metrics. 
+This section describes the iterative most likely failure analysis of the gridworld with an adversary and the crosswalk scenarios. We first describe how both scenarios are modified for iterative safety validation. Each scenario has two transfer learning problems, one for validating a learning system that improves over time, and the other for validating a set of comparable systems with different behaviors. We then describe the experimental setup and the results. 
 
 % Gridworld with adversary
 
-\subsection{Gridworld with Adversary}
-% \begin{figure}
-% \centering
-% \includegraphics[width=0.45\linewidth]{figures/iterative_validation/gridworld_with_adversary.pdf}
-% \caption{Gridworld with adversary scenario. }
-% \label{fig:gridworld_with_adv}
-% \end{figure}
-
-% Description of the MDP
-The first safety validation problem we model is a gridworld with two agents, shown in \cref{fig:gridworld_with_adv}. The system is the agent in blue who is trying to arrive at one of the squares with positive reward while avoiding the adversary (orange agent). Both agents are initialized randomly and can move to any adjacent or diagonal state that is not a wall (marked as black). As a safety validation MDP, the state is the grid location of both agents and the disturbances are the actions of the adversary: (up, down, left, right, up right, up left, down right, down left, stay). At each step, the blue agent chooses an action based on its policy and transitions to the appropriate state with probability \num{0.7} and transitions to a random feasible state with probability \num{0.3}.  Meanwhile, the orange agent transitions to the state specified by the disturbance $x$. The episode ends when the blue agent arrives at a square with positive reward or when the two agents collide in the same state, which is a failure of the system. We model each disturbance as equally likely to happen so we give a reward of \num{1} for finding a failure and \num{0} otherwise.  
+\subsection{Task Setup}
 
 % Description of the difference between tasks
-We design two sets of tasks that correspond to the learning system and comparable systems settings. For the learning system, the blue agent is trained using DQN against an orange agent that behaves randomly. Over $\num{e6}$ training steps, \num{10} versions of the system policy were stored, each with an increasing level of performance. Each safety validation task has the adversary validate an increasingly capable version of the learning system. For the comparable systems setting, each task has a different distribution of reward locations, reward values and location of walls. The system learns an optimal policy using dynamic programming~\cite{dmubook}, assuming the adversary behaves randomly. Each system is therefore equally competent, but some configurations of the gridworld are more challenging than others.
+The first safety validation problem we consider is the gridworld scenario with a single adversary. We design two sets of tasks that correspond to the learning system and comparable systems settings. For the learning system, the ego agent is trained using DQN against an orange agent that behaves randomly. Over $\num{e6}$ training steps, \num{10} versions of the system policy were stored, each with an increasing level of performance. Each safety validation task has the adversary validate an increasingly capable version of the learning system. The performance of the optimal policy on each task is measured on every other task and plotted in \cref{fig:ch7_comps_lgw} to observe the default transfer between tasks. 
+
+For the comparable systems setting, each task has a different distribution of reward locations, reward values and location of walls. The system learns an optimal policy using dynamic programming~\cite{dmubook}, assuming the adversary behaves randomly. Each system is therefore equally competent, but some configurations of the gridworld are more challenging than others. A similar comparison plot of the optimal policy for each tasks applied to all othere is shown in \cref{fig:ch7_comps_cgw}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/iterative_validation/gridworld_improving.png}
+    \caption{Task and policy comparisons for a learning gridworld agent.}
+    \label{fig:ch7_comps_lgw}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/iterative_validation/moving_rewards_heatmap_bigbatch.png}
+    \caption{Task and policy comparisons for comparable gridworld agents.}
+    \label{fig:ch7_comps_cgw}
+\end{figure}
 
 
-% Autonomous driving with blind spot
-\subsection{Autonomous Vehicle}
 \begin{figure}
 \centering
 \includegraphics[trim={0 7cm 10cm 6.5cm},clip, width=0.7\linewidth]{figures/iterative_validation/blindspot.pdf}
-\caption{Autonomous driving scenario}
+\caption{Crosswalk scenario with AV blindpsot. }
 \label{fig:av_blindspot}
 \end{figure}
 
 % Description of the MDP
-The second safety validation problem we model is an autonomous vehicle navigating an intersection with a crossing pedestrian, shown in \cref{fig:av_blindspot}. The system is a vehicle controlled by the intelligent driver model (IDM)~\cite{kesting2010enhanced}, a rule-based driving policy that avoids collisions, and we add a blind spot with a specified direction and angular width. The vehicle tries to reach the end of the road while yielding to the pedestrian. Both agents are initialized randomly in a starting range of initial conditions. 
+The second safety validation problem we model is a modified version of the crosswalk scenario where the vehicle has a blindspot as shown in \cref{fig:av_blindspot}. We design two sets of tasks corresponding to a learning system setting and a comparable systems setting. Since the autonomous vehicle does not use machine learning, we simulate an improvement by progressively shrinking the blind spot of the vehicle. The blind spot remains in the same direction (\SI{20}{\degree} from the horizontal), but reduces in width from \SI{30}{\degree} to \SI{6}{\degree} over \num{10} iterations. The vehicle therefore has a decreasing rate of failures over the tasks but there is some overlap in failure modes between adjacent tasks (see \cref{fig:ch7_comps_lad} for comparison of tasks and optimal policies). For the comparable systems setting, each system has a blind spot sampled uniformly at random with a direction in the range $[\SI{-30}{\degree}, \SI{30}{\degree}]$ and an angular width in the range $[\SI{3}{\degree}, \SI{9}{\degree}]$. From a population of \num{30} tasks, we selected \num{9} tasks that differed substantially, to make the transfer problem as challenging as possible within our setting. Two tasks differed if the optimal safety validation policy of one performs poorly on the other. We show the comparison of taks performance in \cref{fig:ch7_comps_cad}
 
-As a safety validation MDP, the state is the position and velocity of the agents and the disturbances are accelerations of the pedestrian. The pedestrian can accelerate up, down, left, or right by \SI{1}{m/s^2} with probability \num{0.01} or have no acceleration with probability \num{0.96}. The velocity of the pedestrian is limited to an absolute value of \SI{3}{m/s}. At each step, the vehicle chooses an acceleration based on the IDM rules and the location of the pedestrian.  The pedestrian acceleration is specified by the choice of disturbance. Both agents have their position and velocity updated deterministically from their current state and acceleration. The episode terminates when the vehicle reaches the end of the road safely or a collision occurs between the pedestrian and the vehicle. The reward function is given by \cref{eq:reward} where the set $E$ defined by any state where the vehicle and pedestrian overlap.  
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/iterative_validation/blindspot_improving_heatmap.png}
+    \caption{Task and policy comparisons for a learning autonomous driving agent.}
+    \label{fig:ch7_comps_lad}
+\end{figure}
 
-% \begin{table}
-% \small
-%     \centering
-%     \caption{Disturbance space for the pedestrian.}
-%     \label{tab:accelerations}
-%     \begin{tabular}{@{}lrr@{}} 
-%         \toprule
-%         \textbf{Disturbance} & \textbf{Acceleration} $(a_x, a_y)$ & \textbf{Probability} \\
-%         \midrule
-%         No disturbance &  (\SI{0}{m/s^2},  \SI{0}{m/s^2}) & \num{0.96}\\
-%         Accelerate right & (\SI{1}{m/s^2},  \SI{0}{m/s^2}) & \num{0.01}\\
-%         Accelerate left & (\SI{-1}{m/s^2},  \SI{0}{m/s^2}) & \num{0.01}\\
-%         Accelerate up & (\SI{0}{m/s^2},  \SI{1}{m/s^2}) & \num{0.01}\\
-%         Accelerate down & (\SI{0}{m/s^2},  \SI{-1}{m/s^2}) & \num{0.01}\\
-%         \bottomrule
-%     \end{tabular}
-% \end{table}
-
-% Description of the difference between tasks
-For the autonomous driving scenario, we also design two sets of tasks corresponding to a learning system setting and a comparable systems setting. Since the autonomous vehicle does not use machine learning, we simulate an improvement by progressively shrinking the blind spot of the vehicle. The blind spot remains in the same direction (\SI{20}{\degree} from the horizontal), but reduces in width from \SI{30}{\degree} to \SI{6}{\degree} over \num{10} iterations. The vehicle therefore has a decreasing rate of failures over the tasks but there is some overlap in failure modes between adjacent tasks. For the comparable systems setting, each system has a blind spot sampled uniformly at random with a direction in the range $[\SI{-30}{\degree}, \SI{30}{\degree}]$ and an angular width in the range $[\SI{3}{\degree}, \SI{9}{\degree}]$. From a population of \num{30} tasks, we selected \num{9} tasks that differed substantially, to make the transfer problem as challenging as possible within our setting. Two tasks differed if the optimal safety validation policy of one performs poorly on the other. 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/iterative_validation/blindspot_heatmap_bigbatch.png}
+    \caption{Task and policy comparisons for comparable autonomous driving agents.}
+    \label{fig:ch7_comps_cad}
+\end{figure}
 
 
 \subsection{Experimental Setup}
@@ -210,7 +196,7 @@ The metrics are normalized with reference to the learning curve of the no-transf
 We use the number of training steps rather than the wall clock time because we assume that the cost of running the simulator is much larger than the cost of updating the parameters of the model. This is a good assumption for high-fidelity simulators that are often used for validating safety-critical systems. We also assume that the training time of previous source tasks is a sunk cost and it is not included in our efficiency metric. This assumption is valid in the case of iterative safety validation because the new version of the system must be validated regardless of the approach used. When using A2T in a real-world setting, we would not solve each task from scratch and therefore the source solutions would take the form of A2T networks. A practitioner may wish to compress the A2T network~\cite{julian2019deep} into a traditional architecture before it is used as a source solution. We chose to use the networks trained from scratch for ease of implementation and to isolate the effects of transfer learning from other issues.
 
 
-\section{Results and Discussion}
+\subsection{Results}
 \begin{figure*}
     \centering
     \begin{subfigure}[b]{0.32\textwidth}
@@ -341,5 +327,9 @@ The A2T network with state and action transformations performs slightly worse th
 \paragraph{Summary.} From our experiments we conclude that transfer learning can be an effective strategy for improving performance and efficiency of safety validation algorithms. Transfer through fine-tuning can give a significant increase in jumpstart but often fails to reach the level of performance of a $Q$-network trained from scratch. The A2T networks also provides an increase in jumpstart as well as an increase in final performance. The use of a small attention network allows for quick adaptation to new domains as evidenced by the reduction in the number of training steps required to reach near-optimal performance. When the tasks differ significantly from each other, however, the basic A2T network may take longer than the no-transfer algorithm to reach near-optimal performance. We fix this problem by introducing state and action value transformations for each source solution and demonstrate improved training efficiency over the no-transfer algorithm.
 
 
-\section{Conclusion}
+\section{Discussion}
 The validation of safety-critical autonomous systems is crucial for their safe deployment. Existing algorithms for validation often start from scratch each time the system changes. The nature of system design implies that safety validation will be performed iteratively on related systems, and should therefore benefit from past experience. We formulate iterative safety validation as a transfer learning problem and demonstrate improvements in both efficiency and performance of transfer learning algorithms compared to a no-transfer baseline. We augmented the attend, adapt, and transfer algorithm with state and action value transformations to allow for more transfer between disparate tasks. We evaluated jumpstart, final performance, and steps to threshold metrics on four iterative safety validation problems in gridworld and autonomous driving domains. Future work will include exploring the failure modes discovered by each algorithm to gain insights into how transfer is occurring. These insights may help us understand under what conditions we can expect performance and efficiency improvements.
+
+Our work on iterative safety validation is related to some previous work on safety validation. \textcite{uesato2019rigorous} use previous versions of a system to train a failure classifier that predicts which initial conditions of a system will lead to failure, but their approach is not applicable to sequential decision making problems of the type we consider. \textcite{wang2020falsification} alternately train an agent and perform safety validation on it to improve robustness. The safety validation algorithm warm starts with the parameters from the previous iteration to improve efficiency. In fact, any parametric safety validation algorithm~\cite{koren2018adaptive, Akazaki2018falsification, kim2016improving} could simply reuse parameters from previous tasks and then fine-tune them for better performance. We demonstrated in our experiments, however, that a fine-tuning approach only seems effective when the systems are very similar, but has poor performance when systems exhibit different behavior.
+
+In the final chapter of the thesis we summarize the contributions of this work and discuss some directions for future work on each of the topics covered. 

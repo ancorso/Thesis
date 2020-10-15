@@ -1,18 +1,9 @@
-\todo{1. (30 min) Rewrite this intro}
-In the rest of the chapter we develop an algorithm for generating failure descriptions and test it on the autonomous driving scenarios. Failures are described using signal temporal logic (STL) expressions. In the first section we give the necessary background for compactly representing STL using a context-free grammar, sampling STL expressions, and optimizing them using genetic programming. We then describe our approach for generating failure descriptions, which requires the ability to sample time series that satisfy a given STL expression. Our sampling procedure involves sampling a random set of linear constraints that, when imposed on a time series, ensures the satisfaction of the desired expression. Lastly, we demonstrate that the interpretable safety validation algorithm can find interpretable failure descriptions and produce a diverse set of failure examples. 
-
-Lastly, we discuss techniques for modeling timeseries data that satisfy linear constraints including independent samples and series distributed according to a Gaussian process. 
+In this chapter we develop an algorithm for interpretable safety validation that generates failure descriptions in the form of signal temporal logic expressions. A failure description is any statement that defines a set of disturbance trajectories that cause the system to fail and is useful for understanding failure modes, producing failure examples. Failure descriptions are found using expression optimization and evaluated by sampling satisfying trajectories. We introduce a technique for sampling satisfying trajectories of STL specifications by applying a set of sufficient linear constraints to the disturbance model which can be done efficiently for independent disturbances and disturbances that are jointly distributed as a Gaussian process. Through experiments in two autonomous driving scenarios, we demonstrate that our interpretable safety validation algorithm can find failure descriptions, produce a diverse set of failure examples, and allow for a sensitivity analysis of the safety of the system with respect to important disturbance parameters. 
 
 \section{Motivation}
 
-\todo{
-2 - 30 min \\
-- Describe the upside of scenario-based testing (i.e. that each scenario involves a semantically similar situation in the environment even if some of the variables change.  and explain that black box testing, in general does not have this feature \\
-- Previous work -> Ritchie's work, as well as the airline setting?
-- Create an example where one trajectory is a failure and one is not
-}
 % Introduce the problem (motivation)
-One of the drawbacks to black-box safety validation techniques approaches is that they produce high-dimensional failure examples with no additional context about what it was about that trajectory that lead to a failures. 
+One of the drawbacks to black-box safety validation techniques approaches is that they produce high-dimensional failure examples with no additional context about what it was about that trajectory that lead to a failures. In scenario-based testing, by contrast, each scenario involves semantically similar disturbance trajectories which can provide clues to the source of an error. For example, suppose a black-box safety validation algorithm discovered a failure of an autonomous vehicle driving on the highway. It would not be clear from this one example if the failure was due to perception, planning, control or something else. If, however, we found that the vehicle failed a scenario designed to test its response to partially occluded stop signs, we would be justified in investigating the perception system. This work tries to bring a greater degree of context and interpretability to black safety validation algorithms. 
 
 % The approach we propose
 Our approach seeks to find a \emph{failure description} $\varphi$ such that any disturbance trajectory that satisfies the description will cause the SUT to fail. For falsification we want to find any such $\varphi$ where
@@ -25,16 +16,7 @@ For most likely failure analysis we want to find the $\varphi$ that produces fai
 \end{equation}
 where $p(\vec{x} \mid \vec{x} \in \varphi)$ is the probability density of disturbance trajectories that satisfy the description. 
 
-\todo{2.5 - 10 min, Explain the broad approach that we have}
-
-% Why is a fialure description a good thing?
-A failure description $\varphi$ contains more information than a single failure example. For example, 
-\todo{ 3 - 30 min \\
-- A failure description can produce failure examples by sampling from $p(\vec{x} \mid \vec{x} \in \varphi)$.
-- A failure example identifies the features of a disturbance trajectory that are sufficient to cause a failure (similar to a unit test). 
-- Given a failure description we can perform a sensitivity analysis to find the failure boundary under certain scenarios. 
-}
-
+A failure description $\varphi$ contains more information than a single failure example. For example, a single failure description can produce many failure examples by sampling from $p(\vec{x} \mid \vec{x} \in \varphi)$. It also identifies logical features of a disturbance trajectory that are sufficient to cause a failure. As in scenario-based testing, those features may provide clues to the source of the error in the system. Lastly, if the features are low dimensional, they can be used to perform a sensitivity analysis of the safety of the system with respect to the disturbance variables. 
 
 
 \section{STL Expression Optimization}
@@ -233,7 +215,8 @@ If the specification $\varphi$ is a failure description then trajectories that s
 
 
 \section{STL Satisfaction}
-A crucial piece of using expression optimization to find failure descriptions is the ability to sample a disturbance trajectory that satisfies a given specification $\varphi$. The naive approach is to sample from the distribution $p(\vec{x})$ until $\vec \in \varphi$. This approach, known as \emph{rejection sampling}, can sample exactly from the distribution $p(\vec{x} \mid \vec{x} \in \varphi)$ but can be inefficient if the specification $\varphi$ represents a rare event. \todo{5, 10 min, NP hardness of satisfying constraints}. To make the sampling tractable, we split the problem into two parts: sampling a set of linear constraints that are sufficient for STL satisfaction, and sampling a time series that satisfies those constraints. Our approach no longer samples exactly from $p(\vec{x} \mid \vec{x} \in \varphi)$, but approximates it while producing trajectories that satisfy the desired specification. In this section, we first describe how we sample a set of sufficient linear constraints, and then describe how to sample constrained trajectories from several useful distributions. Lastly, we describe a limited grammar that allows for sampling state-dependent specifications. 
+%todo:np hardness of satisfying stl statements?
+A crucial piece of using expression optimization to find failure descriptions is the ability to sample a disturbance trajectory that satisfies a given specification $\varphi$. The naive approach is to sample from the distribution $p(\vec{x})$ until $\vec \in \varphi$. This approach, known as \emph{rejection sampling}, can sample exactly from the distribution $p(\vec{x} \mid \vec{x} \in \varphi)$ but can be inefficient if the specification $\varphi$ represents a rare event. To make the sampling tractable, we split the problem into two parts: sampling a set of linear constraints that are sufficient for STL satisfaction, and sampling a time series that satisfies those constraints. Our approach no longer samples exactly from $p(\vec{x} \mid \vec{x} \in \varphi)$, but approximates it while producing trajectories that satisfy the desired specification. In this section, we first describe how we sample a set of sufficient linear constraints, and then describe how to sample constrained trajectories from several useful distributions. Lastly, we describe a limited grammar that allows for sampling state-dependent specifications. 
 
 \subsection{Sufficient Linear Constraints}
 
@@ -406,14 +389,13 @@ Up to this point we have assumed that the failure descriptions would only includ
 
 The restricted grammar is shown in \cref{eq:state_implies}. We consider expressions that are conjunctions of statements of the form $\square (\mathbb{K} \implies \mathbb{V})$. The operator $\varphi_1 \implies \varphi_2$ means that any time $\varphi_1$ is \True{} then $\varphi_2$ is true as well. The type $\mathbb{K}$ contains expressions that are formed from logical relationships between comparisons of state variables, while $\mathbb{V}$ is the same for disturbance variables. 
 \begin{equation}
-\label{eq:state_implies}
 \begin{split}
     \mathbb{B} &\mapsto \mathbb{B} \land \mathbb{B} \mid \square (\mathbb{K} \implies \mathbb{V}) \\
     \mathbb{K} &\mapsto \mathbb{K} \land \mathbb{K} \mid \mathbb{K} \lor \mathbb{K} \mid \neg \mathbb{K} \mid s \leq \mathbb{S} \mid s \geq \mathbb{S} \mid s = \mathbb{S} \\
     \mathbb{S} &\mapsto [s_{\min},s_{\max}] \\
     \mathbb{V} &\mapsto \mathbb{V} \land \mathbb{V} \mid \mathbb{V} \lor \mathbb{V} \mid \neg \mathbb{S} \mid x \leq \mathbb{X} \mid x \geq \mathbb{X} \mid x = \mathbb{X} \\
     \mathbb{X} &\mapsto [x_{\min},x_{\max}]
-\end{split}
+\end{split}\label{eq:state_implies}
 \end{equation}
 
 Expressions sampled from \cref{eq:state_implies} create a reactive policy for the disturbances, governed by which clauses $\mathbb{K}$ are \True{}. For example, consider the expression
@@ -566,10 +548,18 @@ and use it to sample \num{10} failure trajectores. We plot the velocity vs. the 
 
 \subsection{Pedestrian in Crosswalk}
 
-\paragraph{Scenario 1 - STL on signal}
+In the first set of experiments involving the pedestrian in a crosswalk we use the full STL grammar (\cref{eq:stl_grammar}) to sample expressions. The pedestrian accelerations in each direction were modeled as zero-mean Gaussian processes with a squared exponential kernel with parameters $\ell = 4$ and $\sigma^2 = 0.5$. The noise was modeled iid as zero mean Gaussians with parameters $\sigma_{r_x} = \sigma_{r_y} = 0.2$ and $\sigma_{v} = 0.5$. The initial condition for the vehicle was ($r_x^{\rm veh}$, $v_x^{\rm veh}$) = (\SI{2.291}{m}, \SI{10.80}{m/s}) and for the pedestrian ($r^{\rm ped}_x$, $r^{\rm ped}_y$, $v^{\rm ped}_x$, $v^{\rm ped}_y$) = (\SI{25}{m}, \SI{-5.93}{m}, \SI{1.78}{m/s}).
 
-The disturbances were modeled as zero-mean Gaussian processes with a squared exponential kernel with parameters $\ell = 4$ and $\sigma^2 = 0.5$. The noise was modeled iid as zero mean Gaussians with parameters $\sigma_{r_x} = \sigma_{r_y} = 0.2$ and $\sigma_{v} = 0.5$. The initial condition for the vehicle was ($r_x^{\rm veh}$, $v_x^{\rm veh}$) = (\SI{2.291}{m}, \SI{10.80}{m/s}) and for the pedestrian ($r^{\rm ped}_x$, $r^{\rm ped}_y$, $v^{\rm ped}_x$, $v^{\rm ped}_y$) = (\SI{25}{m}, \SI{-5.93}{m}, \SI{1.78}{m/s}). 
+The interpretable validation algorithm produced the failure description
+\begin{equation}
+\begin{split}
+\square_{[1,5]}(&(\delta a_x \leq 1.96) \land (\delta a_y \geq 0.71) \land \\
+&(\delta n_x \geq -0.24) \land (\delta n_y \leq 0.53) \land (-0.91 \leq \delta n_v \leq -0.63)) \label{eq:failure_description_pedstl} \text{,}
+\end{split}
+\end{equation}
+with failure rate and log-likelihood results shown in \cref{tab:ped_results_stl}.  We notice that although the cross entropy methods can produce a similarly hight rate of failures as the failure description, the log probability of those failures is significantly smaller. The failure description produces failure trajectories nearly 90\% of the time while retaining a log-likelihood similar to failures found through Monte Carlo sampling. 
 
+Some of the constraints in the failure description are unlikely to be applied (such as $\delta a_x \leq 1.96$), but the two most relevant disturbances seem to be the large acceleration in the $y$ direction and the large negative value for noise on the pedestrian motion. A bias in the noise on the pedestrian velocity early in the trajectory causes the ego vehicle to miscalculate when the pedestrian is going to cross into the street and it fails to stop in time. Ten example failure trajectories were generated fromt the failure description and plotted in \cref{fig:ped_stl_sample_failures}.
 
 \begin{table}
     \centering
@@ -587,19 +577,13 @@ The disturbances were modeled as zero-mean Gaussian processes with a squared exp
     \end{tabular}
 \end{table}
 
-\begin{equation}
-\begin{split}
-\square_{[1,5]}(&(\delta a_x \leq 1.96) \land (\delta a_y \geq 0.71) \land \\
-&(\delta n_x \geq -0.24) \land (\delta n_y \leq 0.53) \land (-0.91 \leq \delta n_v \leq -0.63)) \label{eq:failure_description_pedstl}
-\end{split}
-\end{equation}
-
 \begin{figure}
-    \includegraphics[width=0.85\textwidth]{figures/interpretable_validation/stl_failure_examples.png}
+    \includegraphics[width=0.8\textwidth]{figures/interpretable_validation/stl_failure_examples.png}
     \caption{Sample failure trajectories from pedestrian STL failure description (\cref{eq:failure_description_pedstl})}
     \label{fig:ped_stl_sample_failures}
 \end{figure}
 
+We can investigate which combination of acceleration and noise is critical for causing failures of this sort by doing a sensitivity analysis with respect to these to variables. \cref{fig:stl_ped_sensititivty} shows the failure rate over a range of values on the lower bound of $\delta a_y$ and the upper bound of $\delta n_v$. We notice that even for less restrictive values of the bound on $a_{\rm y}$, a small amount of negatively biased noise on the velocity tends to lead to collisions. This points to the need to improve the trajectory prediction of the autonomous vehicle. 
 
 \begin{figure}
     \centering
@@ -608,10 +592,20 @@ The disturbances were modeled as zero-mean Gaussian processes with a squared exp
     \label{fig:stl_ped_sensititivty}
 \end{figure}
 
-\paragraph{Scenario 2 - STL on policy}
+The second set of experiments with the pedestrian use the state-dependent STL grammar (\cref{eq:state_implies}) to sample expressions. For the state-dependent setting it is much easier if the disturbances are not correlated over time. We therefore modeled all of the disturbances as zero-mean Gaussians with standard deviations given by $\sigma_{a_x} = \sigma_{a_y} = 1$ and $\sigma_{r_x} = \sigma_{r_y} = \sigma_{v} = 0.5$. The initial condition for the vehicle was ($r_x^{\rm veh}$, $v_x^{\rm veh}$) = (\SI{9.64}{m}, \SI{9.34}{m/s}) and for the pedestrian ($r^{\rm ped}_x$, $r^{\rm ped}_y$, $v^{\rm ped}_x$, $v^{\rm ped}_y$) = (\SI{25}{m}, \SI{-6.99}{m}, \SI{1.94}{m/s}). 
 
-For the state-dependent setting it is much easier if the disturbances are not correlated over time. We therefore modeled all of the disturbances as zero-mean Gaussians with standard deviations given by $\sigma_{a_x} = \sigma_{a_y} = 1$ and $\sigma_{r_x} = \sigma_{r_y} = \sigma_{v} = 0.5$. The initial condition for the vehicle was ($r_x^{\rm veh}$, $v_x^{\rm veh}$) = (\SI{9.64}{m}, \SI{9.34}{m/s}) and for the pedestrian ($r^{\rm ped}_x$, $r^{\rm ped}_y$, $v^{\rm ped}_x$, $v^{\rm ped}_y$) = (\SI{25}{m}, \SI{-6.99}{m}, \SI{1.94}{m/s}). 
+Interpretable validation produced the STL expression
+\begin{equation}
+\begin{split}
+r_x^{\rm ped} \geq 20.23 &\implies \delta a_y \leq 1.67 \\
+r_x^{\rm veh} \geq 16.51 &\implies \delta n_y \geq 1.59 \\
+v^{\rm veh} \geq 0.26 &\implies \delta a_y \geq 1.10 \\
+(r_x^{\rm veh} \leq 27.87) \lor (r_x^{\rm veh} \geq 15.61) &\implies (\delta n_v \leq 0.20) \land (\delta a_x \leq 1.91)
+\end{split} \label{eq:failure_description_ped_state_dep} \text{,}
+\end{equation}
+with failure rate and log-likelihood results shown in \cref{tab:ped_results_state_dependent}. We see that the failure description produces failure trajectories almost every time, significantly more than either cross entropy approach. The log-likelihood of the failures from the failure description have lower log-likelihood than from the CEM, but the CEM lacks interpretability. 
 
+We again notice that some of the constraints are not likely to be applied but the bounds on the acceleration in the $y$ direction and noise on the $y$ position are strict. In this case, failure occurs because the vehicle observes that the pedestrian is in the road, and slows just the right amount for the accelerating pedestrian to collide with the side of the vehicle. If the vehicle had not slowed down it would have missed the pedestrian entirely.
 \begin{table}
     \centering
     \caption{Comparison of interpretable validation with state-dependent grammar to baselines for pedestrian scenario.}
@@ -629,22 +623,13 @@ For the state-dependent setting it is much easier if the disturbances are not co
 \end{table}
 
 
-
-\begin{equation}
-\begin{split}
-r_x^{\rm ped} \geq 20.23 &\implies \delta a_y \leq 1.67 \\
-r_x^{\rm veh} \geq 16.51 &\implies \delta n_y \geq 1.59 \\
-v^{\rm veh} \geq 0.26 &\implies \delta a_y \geq 1.10 \\
-(r_x^{\rm veh} \leq 27.87) \lor (r_x^{\rm veh} \geq 15.61) &\implies (\delta n_v \leq 0.20) \land (\delta a_x \leq 1.91)
-\end{split} \label{eq:failure_description_ped_state_dep}
-\end{equation}
-
 \begin{figure}
-    \includegraphics[width=0.85\textwidth]{figures/interpretable_validation/state_dep_failure_examples.png}
+    \includegraphics[width=0.8\textwidth]{figures/interpretable_validation/state_dep_failure_examples.png}
     \caption{Sample failure trajectories from pedestrian state-dependent failure description (\cref{eq:failure_description_ped_state_dep})}
     \label{fig:ped_state_dep_sample_failures}
 \end{figure}
 
+We can again investigate the sensitivity of this failure mode with respect to the restrictive bounds (shown in \cref{fig:ped_state_sensititivty}). We see that there is only a small area where this type of failure can occur. If we could guarantee that the longitudinal noise was always less than \SI{0.5}{m} then it would not be possible for this type of failure to occur if the pedestrian cannot accelerate by more than \SI{1.5}{m/s^2}. 
 
 \begin{figure}
     \centering
@@ -653,12 +638,17 @@ v^{\rm veh} \geq 0.26 &\implies \delta a_y \geq 1.10 \\
     \label{fig:ped_state_sensititivty}
 \end{figure}
 
+Through these experiments we see that interpretable safety validation provides a technique for generating failure descriptions that can produce a diverse set of high-likelihood failure examples. Additionally, we can use the low-dimensionality of the failure descriptions to perform a sensitivity analyses on the failure modes. 
+
 
 
 \section{Discussion}
+In this section we developed a technique for finding STL expressions that describe failure trajectories. The expressions are optimized using genetic programming and evaluated by computing the cost of satisfying trajectories. We introduced a constraint-based technique for sampling satisfying trajectories which can be used for simple disturbance models. Through some autonomous driving experiments, we demonstrated that interpretable validation can be used to find failure descritpions that reliable produce failure trajectories and provide some insight into the possible changes required of the system for it to perform safety.  
 
-\todo{13 - 1 hr - do a summary of our approach. Describe how it connects to other works, talk about some limitations and future work}
-The interpretable failures place minimal constraints on the trajectories so many of the disturbances are selected according to the true model of the environment, leading to the relatively high likelihood of the trajectory. With importance sampling, the distribution causes rare disturbances to be chosen with regularity, even when they are not critical for causing a failure. Many rare events cause the IS trajectories to have very low likelihood.
+We find that interpretable failure descriptions place minimal constraints on the disturbance trajectories, so many of the disturbances are selected according to the true model of the environment. Since rare event are only selected when they are needed to cause a failure, trajectories sampled from the failure description tend to have likelihood. Techniques that generally increase the probability of rare events (such as the iid cross entropy method) cause rare disturbances to be chosen with regularity, even when they are not required for causing a failure. This leads to failure trajectories with low log-probability. 
 
+This work on finding interpretable failure descriptions is related to the broader task of interpretable machine learning, where models classes are chosen so as to be understood by a human. Interpretable models must choose an output representation that is sufficiently expressive to compactly convey the desired information while having direct mappings to words and concepts. Decision trees use a branching set of rules to classify data \cite{breiman2017classification} or represent a reinforcement learning policy \cite{rodriguez2019interpretable}. Simple mathematical expressions can be used for regression~\cite{schielzeth2010simple}, governing equation discovery~\cite{brunton2016discovering} and as a reinforcement learning policy~\cite{hein2017particle}. Signal temporal logic (STL) has been used for logical clustering of high-dimensional trajectory data data~\cite{lee2018interpretable,vazquez2017logical} because it describes logical relationships between temporal variables and has a natural-language description that is easily understood.
 
-For an algorithm to be interpretable, its results must be readily understood by a human. Interpretable models must choose an output representation that is sufficiently expressive to compactly convey the desired information while having direct mappings to words and concepts. Decision trees use a branching set of rules to classify data \cite{breiman2017classification} or represent a reinforcement learning policy \cite{rodriguez2019interpretable}. Simple mathematical expressions can be used for regression~\cite{schielzeth2010simple}, governing equation discovery~\cite{brunton2016discovering} and as a reinforcement learning policy~\cite{hein2017particle}. Signal temporal logic (STL) is well-suited for high-dimensional time series data~\cite{lee2018interpretable,vazquez2017logical} because it describes logical relationships between temporal variables and has a natural-language description that is easily understood.
+Most similar to the present work that of \textcite{lee2018interpretable} where they generated STL descriptions of failure modes using grammar-based decision trees for classification. They were able to find interpretable features of the time series that differentiated failure modes, but did not generate specifications that were sufficient for describing them. 
+
+In the next chapter we approach the safety validation problem from an importance sampling perspective and try to construct the distribution over failures. The proposal distribution allows us to sample a diverse set of the most likely failures of a system and can be learned using reinforcement learning techniques. 
