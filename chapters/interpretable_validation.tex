@@ -1,12 +1,12 @@
-In this chapter we develop an algorithm for interpretable safety validation that generates failure descriptions in the form of signal temporal logic expressions. A failure description is any statement that defines a set of disturbance trajectories that cause the system to fail and is useful for understanding failure modes, producing failure examples. Failure descriptions are found using expression optimization and evaluated by sampling satisfying trajectories. We introduce a technique for sampling satisfying trajectories of STL specifications by applying a set of sufficient linear constraints to the disturbance model which can be done efficiently for independent disturbances and disturbances that are jointly distributed as a Gaussian process. Through experiments in two autonomous driving scenarios, we demonstrate that our interpretable safety validation algorithm can find failure descriptions, produce a diverse set of failure examples, and allow for a sensitivity analysis of the safety of the system with respect to important disturbance parameters. 
+In this chapter, we develop an algorithm for interpretable safety validation that generates failure descriptions in the form of signal temporal logic expressions. A failure description is any statement that defines a set of disturbance trajectories that cause the system to fail and is useful for understanding failure modes, producing failure examples. Failure descriptions are found using expression optimization and evaluated by sampling satisfying trajectories. We introduce a technique for sampling satisfying trajectories of STL specifications by applying a set of linear constraints to the disturbance model which can be done efficiently for independent disturbances and disturbances that are jointly distributed as a Gaussian process. Through experiments in two autonomous driving scenarios, we demonstrate that our interpretable safety validation algorithm can find failure descriptions, and produce a diverse set of failure examples. Failure descriptions may also be used to analyze the sensitivity of the safety of the system with respect to important disturbance parameters. 
 
 \section{Motivation}
 
 % Introduce the problem (motivation)
-One of the drawbacks to black-box safety validation techniques approaches is that they produce high-dimensional failure examples with no additional context about what it was about that trajectory that lead to a failures. In scenario-based testing, by contrast, each scenario involves semantically similar disturbance trajectories which can provide clues to the source of an error. For example, suppose a black-box safety validation algorithm discovered a failure of an autonomous vehicle driving on the highway. It would not be clear from this one example if the failure was due to perception, planning, control or something else. If, however, we found that the vehicle failed a scenario designed to test its response to partially occluded stop signs, we would be justified in investigating the perception system. This work tries to bring a greater degree of context and interpretability to black safety validation algorithms. 
+One of the drawbacks to black-box safety validation techniques approaches is that they do not produce high-level descriptions of failures and instead only produce high-dimensional failure examples. In scenario-based testing, by contrast, each scenario involves semantically similar disturbance trajectories which can provide clues to the source of an error. For example, suppose a black-box safety validation algorithm discovered a failure of an autonomous vehicle driving on the highway. It would not be clear from this one example if the failure was due to perception, planning, control or something else. If, however, we found that the vehicle failed in a scenario designed to test its response to partially occluded stop signs, we would be justified in investigating the perception system. This work tries to bring a greater degree of interpretability to black box safety validation algorithms. 
 
 % The approach we propose
-Our approach seeks to find a \emph{failure description} $\varphi$ such that any disturbance trajectory that satisfies the description will cause the SUT to fail. For falsification we want to find any such $\varphi$ where
+Our approach seeks to find a \emph{failure description} $\varphi$ such that any disturbance trajectory that satisfies the description will cause the system to fail. For falsification, we want to find any such $\varphi$ where
 \begin{equation}
     \vec{x} \in \varphi \implies f(\vec{x}) \not \in \psi \text{.}
 \end{equation}
@@ -62,7 +62,7 @@ For example, the context-free grammar for a simplified version of STL for a sing
 \end{equation}
 The type $\mathbb{B}$ is used for Boolean scalars, $\mathbb{S}$ is for Boolean series, $\mathbb{T}$ is for time, and $\mathbb{X}$ is for values of $x$. The logical operators apply element-wise on series. The symbol $\mid$ separates rules on the same line and $:$ indicates a range of symbols. In this work, time is discrete and the variable $x$ may be discrete or continuous. When $x$ is continuous, $\mathbb{X}$ is sampled uniformly at random in the range $[x_{\min}, x_{\max}]$.
 
-To generate an expression from a context-free grammar, we start by declaring the type of the desired expression and choose a production rule for that type. For example, if we want a valid STL expression we start with the type $\mathbb{B}$ and select a rule from the first line of \cref{eq:stl_grammar}. Then, for each type in the expression, we expand it using a compatible production rule. The process recurses until all types have been expanded by terminal production rules and the expression contains only symbols. To construct \cref{eq:example_stl_expression} we applied the production rules
+To generate an expression from a context-free grammar, we start by declaring the type of the desired expression and choose a production rule for that type. For example, if we want a valid STL, expression we start with the type $\mathbb{B}$ and select a rule from the first line of \cref{eq:stl_grammar}. Then, for each type in the expression, we expand it using a compatible production rule. The process recurses until all types have been expanded by terminal production rules and the expression contains only symbols. To construct \cref{eq:example_stl_expression} we applied the production rules
 \begin{align}
     \mathbb{B} &\mapsto \square_{[\mathbb{T},\mathbb{T}]}(\mathbb{S}) \\
     \mathbb{T} &\mapsto t_1 \\
@@ -70,7 +70,7 @@ To generate an expression from a context-free grammar, we start by declaring the
     \mathbb{S} &\mapsto x \leq \mathbb{X} \\
     \mathbb{X} &\mapsto 0 \text{.}
 \end{align}
-The selection of production rules can be done according to any distribution but it is common to choose them uniformly at random which favors shorter expressions~\cite{kochenderfer2019algorithms}. To implement grammars and expression sampling we use the package ExprRules.jl\footnote{https://github.com/sisl/ExprRules.jl}.
+The selection of production rules can be done according to any distribution but it is common to choose them uniformly at random which favors shorter expressions~\cite{kochenderfer2019algorithms}. To implement grammars and expression sampling we use the package ExprRules.jl.\footnote{https://github.com/sisl/ExprRules.jl}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -79,7 +79,7 @@ The selection of production rules can be done according to any distribution but 
 Genetic programming~\cite{kochenderfer2019algorithms, koza1992genetic} is a population-based optimization technique for expression trees that mimics the biological process of evolution. The algorithm (\cref{alg:genetic_programming}) takes as input a grammar $\mathcal{G}$, an expression cost function $c_\varphi$, and a population size $M$. To start, a population of $M$ expressions (or \emph{individuals}) is sampled from the grammar $\mathcal{G}$ (line \ref{line:gp_sample_pop}) using a uniform distribution over production rules. On each iteration, the cost of each expression is computed (line \ref{line:gp_compute_cost}) and used to select parents for reproduction (line \ref{line:gp_select}). The parents reproduce through a crossover operation to create a new population of $M$ children (line \ref{line:gp_select}). Then, some individuals are mutated to add new subtrees into the population (line \ref{line:gp_mutate}). Once the computational budget is exhausted, the individual with the lowest cost is returned (line \ref{line:gp_return}). We use the implementation of genetic programming from the ExprOptimiation.jl\footnote{https://github.com/sisl/ExprOptimization.jl} package.
 
 \begin{algorithm}
-\caption{Genetic Programming} \label{alg:genetic_programming}
+\caption{Genetic programming.} \label{alg:genetic_programming}
 \begin{algorithmic}[1]
     \Function{GeneticProgramming}{$\mathcal{G}$, $c_\varphi$, $M$}
     \State  $\vec{\varphi} \gets [\varphi_1, \ldots, \varphi_M]$ with  $\varphi_i \sim \mathcal{G}$ \label{line:gp_sample_pop}
@@ -95,7 +95,7 @@ Genetic programming~\cite{kochenderfer2019algorithms, koza1992genetic} is a popu
 \end{algorithm}
 
 
-\paragraph{Selection.} The selection procedure is designed to favor individuals with high \emph{fitness}. The fitness of an individual $\varphi_i$ is inversely related to its cost and can be computed as $\max \vec{c}_\varphi - c_\varphi(\varphi)$. Selection can be done using:
+\paragraph{Selection.} The selection procedure is designed to favor individuals with high \emph{fitness}. The fitness of an individual $\varphi_i$ is inversely related to its cost and can be computed as $\max \vec{c}_\varphi - c_\varphi(\varphi_i)$ where $\max \vec{c}_\varphi$ returns the largest cost in the population and $c_\varphi(\varphi_i)$ is the cost of individual $i$. Selection can be done using:
 \begin{itemize}
     \item \emph{Truncation selection}: Parents are sampled uniformly at random from the $M$ fittest individuals.
     \item \emph{Tournament selection}: Each parent is the fittest individual of a randomly sampled subpopulation.
@@ -192,12 +192,12 @@ Genetic programming~\cite{kochenderfer2019algorithms, koza1992genetic} is a popu
 
 
 \subsection{Failure Description Cost Functions}
-A cost function for finding STL expressions that describe failure trajectories is shown in \cref{alg:failure_description_cost_function} which takes as input an STL expression $\varphi$ and returns the average safety metric of $N$ disturbance trajectories that satisfy $\varphi$. We first check if the description is satisfiable (line \ref{line:fdcost_is_satisfiable}) in case we sample a logically inconsistent expression such as $\square (x \geq 1 \land x \leq -1)$. In practice, we assume that an expression is not satisfiable if the sampling procedure fails to produce valid samples, in which case we return the maximal cost value $c_{\rm max}$ (line \ref{line:fdcost_return_max_cost}). Otherwise, we obtain $N$ disturbance trajectories that satisfy $\varphi$ (line \ref{line:fdcost_sample_disturbance_trajectory}) and use them to compute an average safety metric. Lastly, we add a penalty term for the number of nodes in the expression to ensure that expressions remain parsimonious (line \ref{line:fdcost_compute_avg}).
+A cost function for finding STL expressions that describe failure trajectories is shown in \cref{alg:failure_description_cost_function} which takes as input an STL expression $\varphi$ and returns the average safety metric of $N$ disturbance trajectories that satisfy $\varphi$. We first check if the description is satisfiable (line \ref{line:fdcost_is_satisfiable}) in case we sample a logically inconsistent expression such as $\square (x \geq 1 \land x \leq -1)$. In practice, we assume that an expression is not satisfiable if the sampling procedure fails to produce valid samples, in which case we return the maximal cost value $c_{\rm max}$ (line \ref{line:fdcost_return_max_cost}). Otherwise, we obtain $N$ disturbance trajectories that satisfy $\varphi$ (line \ref{line:fdcost_sample_disturbance_trajectory}) and use them to estimate the expected value of the safety metric from the average. Lastly, we add a penalty term (with parameter $\lambda$) for the number of nodes in the tree to ensure that expressions remain parsimonious (line \ref{line:fdcost_compute_avg}).
 
 If the specification $\varphi$ is a failure description then trajectories that satisfy it should have a low value of the safety metric and lead to low cost, while the opposite is true if $\varphi$ has nothing to do with failures of the system. Therefore when $c_\varphi$ is used for optimization it should produce descriptions that frequently produce failure trajectories. If the probability is incorporated into $c(\vec{x})$ (as in \cref{eq:piecewise_cost}), then the optimization procedure will produce a failure description of the most likely failure modes. The most challenging part of computing the cost, however, is the need to sample trajectories that satisfy a given specification, which is the topic of the next section.
 
 \begin{algorithm}
-\caption{Failure description cost function with safety metric $c$ and number of samples $N$} \label{alg:failure_description_cost_function}
+\caption{Failure description cost function.} \label{alg:failure_description_cost_function}
 \begin{algorithmic}[1]
     \Function{$c_\varphi$}{$\varphi$}
     \If{\textproc{IsSatisfiable}($\varphi$)} \label{line:fdcost_is_satisfiable}
@@ -242,7 +242,7 @@ The function \textproc{ParseBounds} converts comparisons into lower and upper bo
     \vec{\ell} = [-\infty, \alpha, -\infty] \\
     \vec{u} = [\alpha, \infty, \infty] \text{.}
 \end{align}
-We perform a similar procedure for the $\varphi = (x \geq \alpha)$ expression. For equality comparison $\varphi = (x = \alpha)$, if $\varphi$ is \True{}, then we set both the lower and upper bounds to $\alpha$. If equality is \False{} then we need a different mechanism to represent the constraint. In our implementation of interpretable validation\footnote{https://github.com/sisl/InterpretableValidation.jl}, we store any values of $x$ that are not allowed at a given time and update the sampling distribution accordingly. 
+We perform a similar procedure for the $\varphi = (x \geq \alpha)$ expression. For equality comparison $\varphi = (x = \alpha)$, if $\varphi$ is \True{}, then we set both the lower and upper bounds to $\alpha$. If equality is \False{} then we need a different mechanism to represent the constraint. In our implementation of interpretable validation,\footnote{https://github.com/sisl/InterpretableValidation.jl} we store any values of $x$ that are not allowed at a given time and update the sampling distribution accordingly. 
 
 % Describe the update bounds function
 The function \textproc{UpdateBounds} combines sets of lower and upper bound constraints $(\vec{\ell}_1, \vec{u}_1)$ and $(\vec{\ell}_2, \vec{u}_2)$. The constraints are combined so the more restrictive constraint is always used:
@@ -279,7 +279,7 @@ The function \textproc{SampleChildrenAssignments} can be summarized by \cref{tab
 
 \begin{table}
     \centering
-    \caption{Representation of the \textproc{SampleChildrenAssignments} function}
+    \caption{Representation of the \textproc{SampleChildrenAssignments} function.}
     \label{tab:inverse_propositions}
     \begin{tabular}{cc} 
         \toprule
@@ -334,13 +334,13 @@ When the components of $x_t$ (denoted $x_{t,i}$ for the $i$th component) are als
 
 If the probability model of the $i$th component is uniform, then $x_{t,i}$ is distributed as
 \begin{equation}
-    x_{t,i} \sim \mathcal{U}_{l_{t, i},u_{t,i}}
+    x_{t,i} \sim \mathcal{U}(l_{t, i},u_{t,i})
 \end{equation}
-where $\mathcal{U}_{\ell, u}$ is the uniform distribution between $\ell$ and $u$. Similarly, if the probability model of the $i$th component is normal with mean $\mu_{t,i}$ and standard deviation $\sigma_{t,i}$, then $x_{t,i}$ is distributed as
+where $\mathcal{U}(\ell, u)$ is the uniform distribution between $\ell$ and $u$. Similarly, if the probability model of the $i$th component is normal with mean $\mu_{t,i}$ and standard deviation $\sigma_{t,i}$, then $x_{t,i}$ is distributed as
 \begin{equation}
-    x_{t,i} \sim \mathcal{N}_{\ell_{t,i},u_{t,i}}(\mu_{t,i}, {\sigma_{t,i}}^2)
+    x_{t,i} \sim \mathcal{N}(\ell_{t,i},u_{t,i}, \mu_{t,i}, {\sigma_{t,i}}^2)
 \end{equation}
-where $\mathcal{N}_{\ell,u}$ is the Gaussian distribution truncated between $\ell$ and $u$. The truncated normal distribution can be efficiently sampled from efficiently using the cumulative distribution function of a Gaussian. 
+where $\mathcal{N}(\ell,u, \mu, \sigma^2)$ is the Gaussian distribution truncated between $\ell$ and $u$ with mean $\mu$ and variance $\sigma^2$. The truncated normal distribution can be efficiently sampled from efficiently using the cumulative distribution function of a Gaussian. 
 
 
 
@@ -375,7 +375,7 @@ Suppose we know that another set of points at $\vec{t}^c$ have constrained value
 \end{split}
 \\
 \label{eq:constraint_dist}
-\vec{x}^c \mid \vec{x}^o &\sim \mathcal{N}_{\vec{\ell},\vec{u}}\big( \vec{\mu}(\vec{t}^c) + \tilde{\vec{K}}(\vec{t}^o, \vec{t}^c) ( \vec{x}^o - \vec{\mu}(\vec{t}^o)), \vec{\Sigma}(\vec{t}^o, \vec{t}^c, \vec{t}^c) \big)
+\vec{x}^c \mid \vec{x}^o &\sim \mathcal{N}(\vec{\ell},\vec{u}, \big( \vec{\mu}(\vec{t}^c) + \tilde{\vec{K}}(\vec{t}^o, \vec{t}^c) ( \vec{x}^o - \vec{\mu}(\vec{t}^o)), \vec{\Sigma}(\vec{t}^o, \vec{t}^c, \vec{t}^c) \big)
 \end{align}
 where
 \begin{align}
@@ -459,7 +459,7 @@ For LT1, we see that the optimal STL expression enforces a major acceleration in
         IV (LT1) & $\square_{[0, .36]} a_{\rm maj}$ & $0.968 \pm 0.003$ & $0.78 \pm 0.049$ \\
         IS (LT1) & - &$0.008 \pm 0.008$ & $0.11 \pm 0.099$ \\
         \midrule
-        IV (LT2) & $\square_{[0, 0]} B$ & $0.994 \pm .001$ & $0.82 \pm 0.049$ \\
+        IV (LT2) & $\square_{[0, 0]} B$ & $0.994 \pm 0.001$ & $0.82 \pm 0.049$ \\
         IS (LT2) & - & $0.092 \pm 0.036$ & $0.15 \pm 0.13$ \\
         \midrule
         IV (LT3) & $\square_{[0, .36]} B \lor d_{\rm maj}$ & $0.164 \pm 0.004$ & $0.75 \pm 0.029$ \\
@@ -486,7 +486,6 @@ For LT1, we see that the optimal STL expression enforces a major acceleration in
     \end{subfigure}
     \caption{Collision for LT1 at $t=(\SI{0}{s}, \SI{1.08}{s}, \SI{1.98}{s})$.}
     \label{fig:2car_LT1}
-    \vskip -0.2in
 \end{figure}
 
 
@@ -507,13 +506,11 @@ For LT1, we see that the optimal STL expression enforces a major acceleration in
     \end{subfigure}
     \caption{Collision for LT2 at $t=(\SI{0}{s}, \SI{0.72}{s}, \SI{1.26}{s})$.}
     \label{fig:2car_LT2}
-    \vskip -0.2in
 \end{figure}
 
 
 %%% Third initial condition
 \begin{figure}
-\vskip -0.2in
     \centering
     \begin{subfigure}[t]{0.33\columnwidth}
         \centering
@@ -540,26 +537,23 @@ and use it to sample \num{10} failure trajectores. We plot the velocity vs. the 
 
 \begin{figure}
     \centering
-    \includegraphics[scale=0.6]{figures/interpretable_validation/2car_sample_failures.pdf}
-    \caption{Sample failures that satisfy $\square_{[0, .36]} B \lor d_{\rm maj}$}
+    \input{figures/interpretable_validation/twocar_failure_examples}
+    \caption{Sample failures that satisfy $\square_{[0, 0.36]} B \lor d_{\rm maj}$}
     \label{fig:2car_failure_samples}
 \end{figure}
 
 
 \subsection{Pedestrian in Crosswalk}
 
-In the first set of experiments involving the pedestrian in a crosswalk we use the full STL grammar (\cref{eq:stl_grammar}) to sample expressions. The pedestrian accelerations in each direction were modeled as zero-mean Gaussian processes with a squared exponential kernel with parameters $\ell = 4$ and $\sigma^2 = 0.5$. The noise was modeled iid as zero mean Gaussians with parameters $\sigma_{r_x} = \sigma_{r_y} = 0.2$ and $\sigma_{v} = 0.5$. The initial condition for the vehicle was ($r_x^{\rm veh}$, $v_x^{\rm veh}$) = (\SI{2.291}{m}, \SI{10.80}{m/s}) and for the pedestrian ($r^{\rm ped}_x$, $r^{\rm ped}_y$, $v^{\rm ped}_x$, $v^{\rm ped}_y$) = (\SI{25}{m}, \SI{-5.93}{m}, \SI{1.78}{m/s}).
+In the first set of experiments involving the pedestrian in a crosswalk we use the full STL grammar (\cref{eq:stl_grammar}) to sample expressions. The pedestrian accelerations in each direction were modeled as zero-mean Gaussian processes with a squared exponential kernel with parameters $\ell = 4$ and $\sigma^2 = 0.5$. The noise was modeled iid as zero mean Gaussians with parameters $\sigma_{r_x} = \sigma_{r_y} = 0.2$ and $\sigma_{v} = 0.5$. The initial condition for the vehicle was ($r_x^{\rm veh}$, $v_x^{\rm veh}$) = (\SI{9.23}{m}, \SI{18.72}{m/s}) and for the pedestrian ($r^{\rm ped}_x$, $r^{\rm ped}_y$, $v^{\rm ped}_x$, $v^{\rm ped}_y$) = (\SI{25}{m}, \SI{-3.83}{m}, \SI{0.83}{m/s}, \SI{0}{m/s}).
 
 The interpretable validation algorithm produced the failure description
 \begin{equation}
-\begin{split}
-\square_{[1,5]}(&(\delta a_x \leq 1.96) \land (\delta a_y \geq 0.71) \land \\
-&(\delta n_x \geq -0.24) \land (\delta n_y \leq 0.53) \land (-0.91 \leq \delta n_v \leq -0.63)) \label{eq:failure_description_pedstl} \text{,}
-\end{split}
+\square_{[1,3]}\left((1.68 \leq \delta a_y \leq 2.69) \land (\delta a_x \geq 0.34) \land (\delta n_y \geq 0.13) \right) \label{eq:failure_description_pedstl} \text{.}
 \end{equation}
-with failure rate and log-likelihood results shown in \cref{tab:ped_results_stl}.  We notice that although the cross entropy methods can produce a similarly hight rate of failures as the failure description, the log probability of those failures is significantly smaller. The failure description produces failure trajectories nearly 90\% of the time while retaining a log-likelihood similar to failures found through Monte Carlo sampling. 
+In words, there is a positive lateral and longitudinal acceleration of the pedestrian early in the trajectory, combined with a positive bias in the noise. The vehicle initially does not think the pedestrian will reach the road before it passes, but the sudden change in pedestrain velocity leads to this being a miscalculation and a collision occurs. Ten example failure trajectories were generated from the failure description and plotted in \cref{fig:ped_stl_sample_failures}.
 
-Some of the constraints in the failure description are unlikely to be applied (such as $\delta a_x \leq 1.96$), but the two most relevant disturbances seem to be the large acceleration in the $y$ direction and the large negative value for noise on the pedestrian motion. A bias in the noise on the pedestrian velocity early in the trajectory causes the ego vehicle to miscalculate when the pedestrian is going to cross into the street and it fails to stop in time. Ten example failure trajectories were generated fromt the failure description and plotted in \cref{fig:ped_stl_sample_failures}.
+The failure rate and log-likelihood results for the failure description and the baseline are shown in \cref{tab:ped_results_stl}.  We notice that although the cross entropy methods can produce a similarly high rate of failures as the failure description, the log probability of those failures is significantly smaller. The failure description produces failure trajectories nearly 100\% of the time while retaining a log-likelihood similar to failures found through Monte Carlo sampling. 
 
 \begin{table}
     \centering
@@ -569,26 +563,26 @@ Some of the constraints in the failure description are unlikely to be applied (s
         \toprule
         \textbf{Method} & \textbf{Fail Rate} & \textbf{Log-Likelihood} \\
         \midrule
-        Monte Carlo & $0.121 \pm 0.010$ & $4.054 \pm 0.118$  \\
-        Cross entropy method (IID) & $0.661 \pm 0.015$ & $\num{-4.564e4} \pm \num{8.001e3}$\\
-        Cross entropy method (Trajectory) & $0.990 \pm 0.003$ & $-28.346 \pm 3.174$ \\
-        Interpretable validation & $0.883 \pm 0.010$ & $3.553 \pm 0.099$ \\
+        Monte Carlo & $0.003 \pm 0.002$ & $2.365 \pm 0.235$  \\
+        Cross entropy method (IID) & $0.865 \pm 0.011$ & $\num{-9.317e4} \pm \num{2.824e3}$\\
+        Cross entropy method (Trajectory) & $0.989 \pm 0.003$ & $-11.308 \pm 1.980$ \\
+        Interpretable validation & $0.960 \pm 0.006$ & $1.835 \pm 0.218$ \\
         \bottomrule
     \end{tabular}
 \end{table}
 
 \begin{figure}
-    \includegraphics[width=0.8\textwidth]{figures/interpretable_validation/stl_failure_examples.png}
-    \caption{Sample failure trajectories from pedestrian STL failure description (\cref{eq:failure_description_pedstl})}
+    \input{figures/interpretable_validation/stl_pedestrian_failure_examples}
+    \caption{Sample failure trajectories from pedestrian STL failure description (\cref{eq:failure_description_pedstl}).}
     \label{fig:ped_stl_sample_failures}
 \end{figure}
 
-We can investigate which combination of acceleration and noise is critical for causing failures of this sort by doing a sensitivity analysis with respect to these to variables. \cref{fig:stl_ped_sensititivty} shows the failure rate over a range of values on the lower bound of $\delta a_y$ and the upper bound of $\delta n_v$. We notice that even for less restrictive values of the bound on $a_{\rm y}$, a small amount of negatively biased noise on the velocity tends to lead to collisions. This points to the need to improve the trajectory prediction of the autonomous vehicle. 
+We can investigate which combination of acceleration and noise is critical for causing failures of this sort by doing a sensitivity analysis with respect to these to variables. \cref{fig:stl_ped_sensititivty} shows the failure rate over a range of values on the lower bounds of $\delta a_y$ and $\delta n_v$. There seems to be a critical threshold for $\delta a_y$ around \SI{1.5}{m/s^2} where collision becomes inevitable. At lower values of $\delta a_y$, higher values of noise are required to cause a collision. This suggests the need to improve the trajectory prediction of the autonomous vehicle or it needs to behave more conservatively to account for this type of pedestrian behavior. 
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/interpretable_validation/stl_result_sensitivity.png}
-    \caption{System sensitivity analysis for longitudinal acceleration bound and velocity noise upper bound}
+    \input{figures/interpretable_validation/stl_pedestrian_sensitivity}
+    \caption{System sensitivity analysis for longitudinal acceleration bound and velocity noise upper bound.}
     \label{fig:stl_ped_sensititivty}
 \end{figure}
 
@@ -622,10 +616,9 @@ We again notice that some of the constraints are not likely to be applied but th
     \end{tabular}
 \end{table}
 
-
 \begin{figure}
-    \includegraphics[width=0.8\textwidth]{figures/interpretable_validation/state_dep_failure_examples.png}
-    \caption{Sample failure trajectories from pedestrian state-dependent failure description (\cref{eq:failure_description_ped_state_dep})}
+    \input{figures/interpretable_validation/state_dep_failure_examples}
+    \caption{Sample failure trajectories from pedestrian state-dependent failure description (\cref{eq:failure_description_ped_state_dep}).}
     \label{fig:ped_state_dep_sample_failures}
 \end{figure}
 
@@ -633,8 +626,8 @@ We can again investigate the sensitivity of this failure mode with respect to th
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/interpretable_validation/state_dep_result_sensitivity.png}
-    \caption{System sensitivity analysis for longitudinal acceleration bound and longitudinal position noise bound}
+    \input{figures/interpretable_validation/state_dep_result_sensitivity}
+    \caption{System sensitivity analysis for longitudinal acceleration bound and longitudinal position noise bound.}
     \label{fig:ped_state_sensititivty}
 \end{figure}
 
@@ -643,11 +636,11 @@ Through these experiments we see that interpretable safety validation provides a
 
 
 \section{Discussion}
-In this section we developed a technique for finding STL expressions that describe failure trajectories. The expressions are optimized using genetic programming and evaluated by computing the cost of satisfying trajectories. We introduced a constraint-based technique for sampling satisfying trajectories which can be used for simple disturbance models. Through some autonomous driving experiments, we demonstrated that interpretable validation can be used to find failure descritpions that reliable produce failure trajectories and provide some insight into the possible changes required of the system for it to perform safety.  
+In this section, we developed a technique for finding STL expressions that describe failure trajectories. The expressions are optimized using genetic programming and evaluated by computing the cost of satisfying trajectories. We introduced a constraint-based technique for sampling satisfying trajectories which can be used for simple disturbance models. Through some autonomous driving experiments, we demonstrated that interpretable validation can be used to find failure descriptions that reliable produce failure trajectories and provide some insight into the possible changes required of the system for it to perform safety.  
 
 We find that interpretable failure descriptions place minimal constraints on the disturbance trajectories, so many of the disturbances are selected according to the true model of the environment. Since rare event are only selected when they are needed to cause a failure, trajectories sampled from the failure description tend to have likelihood. Techniques that generally increase the probability of rare events (such as the iid cross entropy method) cause rare disturbances to be chosen with regularity, even when they are not required for causing a failure. This leads to failure trajectories with low log-probability. 
 
-This work on finding interpretable failure descriptions is related to the broader task of interpretable machine learning, where models classes are chosen so as to be understood by a human. Interpretable models must choose an output representation that is sufficiently expressive to compactly convey the desired information while having direct mappings to words and concepts. Decision trees use a branching set of rules to classify data \cite{breiman2017classification} or represent a reinforcement learning policy \cite{rodriguez2019interpretable}. Simple mathematical expressions can be used for regression~\cite{schielzeth2010simple}, governing equation discovery~\cite{brunton2016discovering} and as a reinforcement learning policy~\cite{hein2017particle}. Signal temporal logic (STL) has been used for logical clustering of high-dimensional trajectory data data~\cite{lee2018interpretable,vazquez2017logical} because it describes logical relationships between temporal variables and has a natural-language description that is easily understood.
+This work on finding interpretable failure descriptions is related to the broader task of interpretable machine learning, where models classes are chosen so as to be understood by a human. Interpretable models must choose an output representation that is sufficiently expressive to compactly convey the desired information while having direct mappings to words and concepts. Decision trees use a branching set of rules to classify data \cite{breiman2017classification} or represent a reinforcement learning policy \cite{rodriguez2019interpretable}. Simple mathematical expressions can be used for regression~\cite{schielzeth2010simple}, governing equation discovery~\cite{brunton2016discovering}, and reinforcement learning~\cite{hein2017particle}. Signal temporal logic (STL) has been used for logical clustering of high-dimensional trajectory data data~\cite{lee2018interpretable,vazquez2017logical} because it describes logical relationships between temporal variables and has a natural-language description that is easily understood.
 
 Most similar to the present work that of \textcite{lee2018interpretable} where they generated STL descriptions of failure modes using grammar-based decision trees for classification. They were able to find interpretable features of the time series that differentiated failure modes, but did not generate specifications that were sufficient for describing them. 
 

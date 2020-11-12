@@ -129,7 +129,7 @@ There are many optimization algorithms that have been used for safety validation
 The basic approach is presented in \cref{alg:SA}. It begins by selecting a random starting disturbance trajectory $\vec{x}$ (line \ref{line:sa_init}). At each iteration, a new disturbance trajectory $\vec{x}^\prime$ is sampled from $T(\vec{x}^\prime \mid \vec{x})$ (line \ref{line:sa_sample}). If the new trajectory is a counterexample, then it is returned (line \ref{line:sa_counterexample_check}), otherwise it is subjected to an acceptance test with probability ${\rm exp}(-\beta(c(\vec{x}^\prime) - c(\vec{x})))$ (line \ref{line:sa_accept_reject}). If $\vec{x}^\prime$ is accepted, then it replaces $\vec{x}$, otherwise $\vec{x}$ is left unchanged. The procedure repeats until the computational budget is exhausted.
 
 \begin{algorithm}
-\caption{Simulated Annealing} \label{alg:SA}
+\caption{Simulated annealing.} \label{alg:SA}
 \begin{algorithmic}[1]
     \Function{SimulatedAnnealing}{$\beta$, $T$, $c$, $\epsilon$}
     \State Sample initial $\vec{x}$ \label{line:sa_init}
@@ -263,7 +263,7 @@ where $\alpha$ is the learning rate and loss function $L$ can be the mean square
 The target network parameters $\theta^-$ are periodically updated to $\theta$ after a specified number of training steps (line \ref{line:dqn_target_update}). After training has finished, the algorithm returns the model parameters that represent the optimal action value function. This function can be used as a disturbance policy to produces failure examples.
 
 \begin{algorithm}
-\caption{Deep $Q$-Learning} \label{alg:dqn}
+\caption{Deep $Q$-learning.} \label{alg:dqn}
 \begin{algorithmic}[1]
     \Function{DQN}{$s_0$, $S_{\rm fail}$}
     \State $B \gets \emptyset$ \label{line:dqn_initialize_buffer}
@@ -333,14 +333,12 @@ The cross-entropy method~\cite{rubinstein2013cross,de2005tutorial} iteratively l
     \theta^* = \argmin\limits_\theta D_{\rm KL}\infdivx{q^*(\vec{x})}{ q(\vec{x}; \theta)} \text{,}
 \end{equation}
 where $D_{\rm KL}$ calculates the KL-divergence. Substituting the definitions, we can arrive at a stochastic optimization program
-\begin{equation}
-\begin{split}
+\begin{align}
     \theta^* &= \argmin\limits_\theta {- \int_{\vec{x}}} q^*(\vec{x}) \log q(\vec{x}; \theta) d\vec{x} \\
     &= \argmax\limits_\theta \  \int_{\vec{x}} \frac{\mathds{1}{\{ c(\vec{x}) < \epsilon \}}p(\vec{x})}{P_{\rm fail}} \log q(\vec{x}; \theta) d\vec{x} \\
      &= \argmax\limits_\theta \ \mathbb{E}_{\varphi} \left[ \mathds{1}{\{ c(\vec{x}) < \epsilon \}} \frac{p(\vec{x})}{q(\vec{x}; \varphi)}\log q(\vec{x}; \theta) \right]  \\
      &\approx \argmax\limits_\theta \frac{1}{N} \sum_{i=1}^N \left[ \mathds{1}{\{ c(\vec{x}_i) < \epsilon \}} \frac{p(\vec{x}_i)}{q(\vec{x}_i; \varphi)}\log q(\vec{x}_i; \theta) \right] \label{eq:ce_max} \text{,}
-\end{split}
-\end{equation}
+\end{align}
 where $\varphi$ is any set of parameters and $\vec{x}_i$ are sampled from $q(\vec{x}; \varphi)$. \cref{eq:ce_max} can be solved analytically when the family of algorithms is in the natural exponential family (i.e. normal, exponential, Poisson, gamma, binomial, and others), and the solution corresponds to the maximum likelihood estimate of the parameters~\cite{de2005tutorial}.
 
 For an iterative solution to finding $\theta^*$, we start by choosing a set of starting parameters $\theta_0$ so that $q(\vec{x}; \theta_0)$ is close to $p(\vec{x})$. Then, we iterate $k=0,1,\ldots$
@@ -353,7 +351,7 @@ For an iterative solution to finding $\theta^*$, we start by choosing a set of s
 One major challenge to this approach is the rarity of failure events. If all samples have $c(\vec{x}) > \epsilon$, then $\hat{P}_{\rm fail} =0$ and the algorithm may not converge to the optimal proposal distribution. One solution is to adaptively update the safety threshold $\epsilon$ at each iteration. At iteration $k$, a safety threshold $\epsilon_k$ and a rarity parameter $\rho$ is chosen so that the fraction of samples that have $c(\vec{x}) < \epsilon_k$ is $\rho$. The parameter $\rho$ is also known as the quantile level and is often set in the range $\rho = [0.01, 0.2]$~\cite{kim2016improving,okelly2018scalable}. The entire algorithm is shown in \cref{alg:crossentropy}. Note that we assume $\rho N$ is an integer used for indexing on line \ref{line:ce_max}. 
 
 \begin{algorithm}
-\caption{Cross-Entropy Method} \label{alg:crossentropy}
+\caption{Cross-entropy method} \label{alg:crossentropy}
 \begin{algorithmic}[1]
     \Function{CrossEntropy}{$p$, $q$, $\theta_0$, $\rho$, $c$, $\epsilon$}
     \State $\theta \gets \theta_0$
@@ -377,7 +375,7 @@ One major challenge to this approach is the rarity of failure events. If all sam
 
 The cross-entropy method has been used to estimate the probability of failure for aircraft collision avoidance systems~\cite{kim2016improving} and autonomous vehicles~\cite{okelly2018scalable,zhao2016accelerated,huang2017accelerated}. Typically, probability distributions in the natural exponential family are used~\cite{kim2016improving,okelly2018scalable,zhao2016accelerated} so that cross-entropy updates can be performed analytically. \textcite{huang2017accelerated} propose a method for using piecewise exponential distributions for more flexibility while retaining the ability to compute updates analytically. \textcite{sankaranarayanan2012falsification}  discuss piecewise uniform distributions over the disturbance space, and techniques for factoring the space to reduce the number of parameters needed.
 
-\subsection{Strengths and limitations}
+\subsection{Strengths and Limitations}
 
 Each category of safety validation algorithm has benefits and drawbacks that depend on safety validation task and the details of the system and environment. We allude to some of these strengths and weaknesses in the preceding sections but here we try to spell them out with clarity
 

@@ -1,14 +1,15 @@
 % TikZ diagram for black-box safety validation problem formulation.
 \begin{tikzpicture}
-    \tikzstyle{every node}=[font=\small, align=center]
+    \tikzstyle{every node}=[font=\normalsize, align=center]
     \tikzset{
         n/.style={draw, rounded corners, minimum height=0.5cm, minimum width = 1.5cm},
-        n2/.style={n, minimum width=2.5cm},
+        n2/.style={n, minimum width=3.5cm},
+        n4/.style={n, minimum width=2.5cm},
         n3/.style={n, minimum width=0.6cm}
         }
     
     %state 
-    \node (state) [n, rotate=90] {\small State $s$};
+    \node (state) [n, rotate=90] { State $s$};
     
     %base network
     \node (base) [n2, fill=black!10, above right of=state, anchor=west, xshift=0.5cm] {Base network};
@@ -19,24 +20,24 @@
     \node (st) [n3, fill=black!10, right of=state, anchor=west, xshift = -0.25cm] {$g_s$};
     
     %Solutions
-    \node (solutionsback1) [n, right of=st, xshift=-.15cm, yshift=-0.1cm, anchor=west] {};
-    \node (solutionsback2) [n, fill=white, right of=st, xshift=-0.2cm, yshift=-0.05cm, anchor=west] {};
-    \node (solutions) [n, fill=white, right of=st, anchor=west, xshift = -0.25cm] {Solutions};
+    \node (solutionsback1) [n4, right of=st, xshift=-.15cm, yshift=-0.1cm, anchor=west] {};
+    \node (solutionsback2) [n4, fill=white, right of=st, xshift=-0.2cm, yshift=-0.05cm, anchor=west] {};
+    \node (solutions) [n4, fill=white, right of=st, anchor=west, xshift = -0.25cm] {Solutions};
     
     %Action Transforms
-    \node (atback1) [n3, fill=black!10, right of=solutions, anchor=west, xshift=0.25cm, yshift=-0.1cm] {};
-    \node (atback2) [n3, fill=black!10, right of=solutions, anchor=west, xshift=0.2cm, yshift=-0.05cm] {};
-    \node (at) [n3, fill=black!10, right of=solutions, anchor=west, xshift=0.15cm] {$g_x$};
+    \node (atback1) [n3, fill=black!10, right of=solutions, anchor=east, xshift=1.45cm, yshift=-0.1cm] {};
+    \node (atback2) [n3, fill=black!10, right of=solutions, anchor=east, xshift=1.4cm, yshift=-0.05cm] {};
+    \node (at) [n3, fill=black!10, right of=solutions, anchor=east, xshift=1.35cm] {$g_x$};
     
     %weights
     \node (attn) [n2, fill=black!10, below right of=state, anchor=west, xshift=0.5cm] {Attention network};
     
 
-    \node (values) [n, right of=base, anchor=west, xshift = 1.5cm] {values};
+    \node (values) [n, right of=base, anchor=east, xshift=3.5cm] {values};
     
-     \node (weights) [n, right of=attn, anchor=west, xshift=1.5cm] {weights};
+     \node (weights) [n, right of=attn, anchor=east, xshift=3.5cm] {weights};
      
-     \node (pfail) [n, minimum width = 0.5cm, right of=at, xshift=2.5cm] {$\hat{Q}(s)$};
+     \node (pfail) [n, minimum width = 0.5cm, right of=at, anchor=east, xshift=3.5cm] {$\hat{Q}(s)$};
     
 
     \draw[-latex] (state.south) -- (base.west);

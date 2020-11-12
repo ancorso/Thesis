@@ -1,5 +1,5 @@
 
-In this chapter we describe how to formulate the safety validation problem as a Markov decision process.  Given a system described as a policy and an environment modeled as an MDP, we construct an adversarial MDP whose solution uncovers failures of the system. We then give detailed examples of four MDPs and their adversarial versions which will be used in later chapters for safety validation experiments. First we describe a simple gridworld with success and failure states. The agent tries to reach a success state while disturbances perturb the transition of the agent. Then we describe a gridworld that has two agents: a system and an adversary. The system tries to arrive at a success state  and fails if the adversary tries collides with it. The next two adversarial MDPs involve the safety validation of a rule-based autonomous driving policy. In the first MDP, an autonomous vehicle tries to avoid a crossing pedestrian where the disturbances are the pedestrian motion and sensor noise. In the second MDP, an autonomous vehicle tries to make an unprotected left turn onto a highway with other driving agents with disturbances applied to their accelerations and turning behavior.
+In this chapter we describe how to formulate the safety validation problem as a Markov decision process.  Given a system described as a policy and an environment modeled as an MDP, we construct an adversarial MDP whose solution uncovers failures of the system. We then give detailed examples of four MDPs and their adversarial versions which will be used in later chapters for safety validation experiments. First we describe a simple gridworld with success and failure states. The agent tries to reach a success state while disturbances perturb the transition of the agent. Then we describe a gridworld that has two agents: a system and an adversary. The system tries to arrive at a success state and fails if the adversary collides with it. The next two adversarial MDPs involve the safety validation of a rule-based autonomous driving policy. In the first MDP, an autonomous vehicle tries to avoid a crossing pedestrian where the disturbances are the pedestrian motion and sensor noise. In the second MDP, an autonomous vehicle tries to make an unprotected left turn onto a highway with other driving agents with disturbances applied to their accelerations and turning behavior.
 
 \section{A Model for Adversarial Testing}
 
@@ -29,7 +29,8 @@ As pictured in \cref{fig:simple_gridworld}, the gridworld is defined on an $N_x 
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\textwidth]{figures/sample_systems/simple_gridworld.pdf}
+    \small
+    \includesvg[width=0.6\textwidth]{figures/sample_systems/simple_gridworld.svg}
     \caption{Simple Gridworld MDP.}
     \label{fig:simple_gridworld}
 \end{figure}
@@ -50,26 +51,28 @@ The implementation of both the base and adversarial MDP can be done using the \t
 
 
 \subsection{Gridworld with Adversary}
+\label{ch3:dw_w_adv}
 % Base MDP
 In order to increase the difficulty of the safety validation problem we introduce a new gridworld variation that includes an adversarial agent (shown in \cref{fig:gridworld_with_adversary}). Two agents move on an $N_x \times N_y$ gridworld: the ego agent (in blue) tries to reach states with high reward, while the adversary (in orange) tries to collide with the ego agent. The state of the environment is the grid location of each agent and the action space is [\emph{up}, \emph{down}, \emph{left}, \emph{right}, \emph{stay}, \emph{up-right}, \emph{up-left}, \emph{down-right}, \emph{down-left}], which control the transitions of the ego agent. For each episode the agents are initialized to a random non-terminal position. On each iteration both agents select an action and then transition to the corresponding cell with probability $p_{\rm success}$, or to another adjacent cell with probability $1-p_{\rm success}$. Some states are marked as impassible (shown in black), so if the agent would transition to an impassible state or out of bounds of the gridworld then it stays in its current state. The episode terminates when the ego agent reaches a terminal state (any state with positive reward) or the two agents overlap in the same state. The state space of this MDP is the square of the simple gridworld, but for modestly sized grids, dynamic programming is tractable for solving for the optimal ego policy. 
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\textwidth]{figures/sample_systems/gridworld_with_adversary.pdf}
+    \small
+    \includesvg[width=0.6\textwidth]{figures/sample_systems/gridworld_with_adversary.svg}
     \caption{Gridworld with Adversray MDP.}
     \label{fig:gridworld_with_adversary}
 \end{figure}
 
-For the adversarial MDP, we define a failure of the ego agent as a collision between the ego agen and the adversary. The disturbances are the actions of the adversarial agent and so the disturbance space is the same as the action space in the base MDP. The probability of each disturbance can be user specified. If we assume that the adversary moves entirely at random, then the probability of each disturbance would be $p(x \mid s) = 1 / 9$.
+For the adversarial MDP, we define a failure of the ego agent as a collision between the ego agent and the adversary. The disturbances are the actions of the adversarial agent and so the disturbance space is the same as the action space in the base MDP. The probability of each disturbance can be user specified. If we assume that the adversary moves entirely at random, then the probability of each disturbance would be $p(x \mid s) = 1 / 9$.
 
-Both the base MDP and the adversarial MDP can be implemented using the julia package AdversarialGridworld.jl\footnote{https://github.com/sisl/AdversarialGridworld.jl}. A gridworld with an adversary is defined by specifying the grid size, the location of terminal states, the rewards, and the location of impassible states and the probability of successful transitions $p_{\rm success}$. The MDP can be switched between base mode and adversarial mode. In base mode, the actions of the MDP correspond to the actions of the ego agent and the reward function returns positive reward when the ego agent reaches a reward state and negative reward for a collision. In adversarial mode, the actions of the MDP correspond to the adversary and the reward function gives a positive reward for collisions. In both modes, the agent that is not controlled by the actions of the MDP must have a policy associated with it.
+Both the base MDP and the adversarial MDP can be implemented using the julia package AdversarialGridworld.jl.\footnote{https://github.com/sisl/AdversarialGridworld.jl} A gridworld with an adversary is defined by specifying the grid size, the location of terminal states, the rewards, and the location of impassible states and the probability of successful transitions $p_{\rm success}$. The MDP can be switched between base mode and adversarial mode. In base mode, the actions of the MDP correspond to the actions of the ego agent and the reward function returns positive reward when the ego agent reaches a reward state and negative reward for a collision. In adversarial mode, the actions of the MDP correspond to the adversary and the reward function gives a positive reward for collisions. In both modes, the agent that is not controlled by the actions of the MDP must have a policy associated with it.
 
 \section{Autonomous Driving}
 % Why autonomous vehicles
 To complement the simplicity of the gridworld MDPs, we introduce two MDPs to model autonomous driving behavior in complex environments. Autonomous driving is an especially important domain for safety validation due to the recent development and deployment of autonomous vehicles~\cite{koopman2016challenges}. Safety validation of an autonomous driving policy is challenging due to the size of the state and disturbance spaces, the duration of the diving episodes, and the rarity of failure events.
 
 % How we model driving and adversarial driving MDPs
-To model driving scenarios in simulation we build off of the julia package AutomotiveSimulator.jl\footnote{https://github.com/sisl/AutomotiveSimulator.jl} which provides methods for constructing road geometries, vehicles, pedestrians and behavior models. To facilitate the construction of adversarial MDPs for driving scenarios, we developed the package AdversarialDriving.jl\footnote{https://github.com/sisl/AdversarialDriving.jl}. Adversarial driving scenarios are constructed from a set of agents where each agent is defined by
+To model driving scenarios in simulation we build off of the julia package AutomotiveSimulator.jl\footnote{https://github.com/sisl/AutomotiveSimulator.jl} which provides methods for constructing road geometries, vehicles, pedestrians and behavior models. To facilitate the construction of adversarial MDPs for driving scenarios, we developed the package AdversarialDriving.jl.\footnote{https://github.com/sisl/AdversarialDriving.jl} Adversarial driving scenarios are constructed from a set of agents where each agent is defined by
 \begin{itemize}
     \item An \emph{initialization function} that generates the initial state of the agent. The function may be deterministic or randomized, and is called each time the MDP is reset. 
     \item A \emph{behavior model} that determines the actions of the agent. For the system under test, the behavior model implements the autonomous driving policy we wish to test. For adversaries, the model implements their behavior and disturbances.
@@ -78,13 +81,10 @@ To model driving scenarios in simulation we build off of the julia package Autom
 
 % Description of the state space, action space, and  dynamics
 The MDP is constructed with an agent representing the system (called the ego vehicle), a vector of agents that act as the adversaries (either other vehicles or pedestrians), a road geometry, and the simulation timestep. The state and action spaces are dynamically constructed based on the number and type of agents in the scene. We assume that vehicles stay in their lane during the simulation and can therefore specify a vehicle's state using four state variables ($r$, $v$, $\ell$, $b$) where $r$ is the position along the lane, $v$ is the speed of the vehicle in the direction of the lane, $\ell$ is an integer representing which lane the vehicle is in, and $b$ is a Boolean that indicates if the vehicle's turn signal is on. Pedestrians can move in any direction so their state is described by two position and two velocity variables ($r_x$, $r_y$, $v_x$, $v_y$). At each step, vehicles can apply an acceleration in the direction of the direction of the lane and pedestrians can apply a 2D acceleration. The position and velocity of each agent (in each direction) is updated by the kinematic relation
-\begin{equation}
-\begin{split}
-    r_{t+\Delta t} &= r_t + v_t \Delta t + \frac{1}{2} a_t \Delta t^2 \\
-    v_{t+\Delta t} &= v_t + a_t \Delta t
-    \end{split}
-    \label{eq:kinematics}
-\end{equation}
+\begin{align}
+    r_{t+\Delta t} &= r_t + v_t \Delta t + \frac{1}{2} a_t \Delta t^2 \label{eq:kinematics_r} \\
+    v_{t+\Delta t} &= v_t + a_t \Delta t \label{eq:kinematics_v}
+\end{align}
 where $\Delta t$ is the simulation timestep. Additionally, vehicles that have the opportunity to make a turn can toggle their intention to turn and whether or not their turn signal is on. The policies we use to control agents in the scene are Markov, so the simulation can be initialized into an arbitrary state.
 
 
@@ -110,7 +110,6 @@ The driving policy that we use for vehicles is based on the intelligent driver m
         Maximum deceleration & $d_{\rm max}$ & \SI{9.0}{m/s^2} \\
         \bottomrule
     \end{tabular}
-    \vskip -0.2in
 \end{table}
 
 
@@ -171,15 +170,15 @@ The simulation environment is lower fidelity than simulators used in industry.  
 
 \subsection{Pedestrian in Crosswalk}
 % Description of the base MDP
-In the pedestrian crosswalk MDP shown in \cref{fig:pedestrian_crosswalk}, an autonomous vehicle approaches a crosswalk where a pedestrian is attempting to cross. The vehicle makes noisy observations of the pedestrian's position and velocity, and uses those observations with the intersection navigation algorithm (\cref{alg:intersection_navigation}) to determine its acceleration. Since there is only a single lane for the vehicle, the state space of the vehicle can be reduced to the longitudinal position and velocity ($r_x^{\rm veh}$, $v_x^{\rm veh}$) while the state of the pedestrian is the lateral and longitudinal position and velocity ($r^{\rm ped}_x$, $r^{\rm ped}_y$, $v^{\rm ped}_x$, $v^{\rm ped}_y$). The action space of the vehicle is the range of accelerations between $[-d_{\rm max}, a_{\rm max}]$. At the start of each episode, both agents are initialized randomly with the vehicle driving in the positive $x$-direction and the pedestrian is on the right side of the vehicle. At each step, both agents determine their accelerations and their position and velocity are updated according to the kinematic relations in \cref{eq:kinematics}. The episode ends if there is a collision between the vehicle and the pedestrian or if the vehicle makes it to the end of the roadway. Since the driving policy is rule-based and does not require any learning, we have no need to explicitly specify a reward for the base MDP. 
+In the pedestrian crosswalk MDP shown in \cref{fig:pedestrian_crosswalk}, an autonomous vehicle approaches a crosswalk where a pedestrian is attempting to cross. The vehicle makes noisy observations of the pedestrian's position and velocity, and uses those observations with the intersection navigation algorithm (\cref{alg:intersection_navigation}) to determine its acceleration. Since there is only a single lane for the vehicle, the state space of the vehicle can be reduced to the longitudinal position and velocity ($r_x^{\rm veh}$, $v_x^{\rm veh}$) while the state of the pedestrian is the lateral and longitudinal position and velocity ($r^{\rm ped}_x$, $r^{\rm ped}_y$, $v^{\rm ped}_x$, $v^{\rm ped}_y$). The action space of the vehicle is the range of accelerations between $[-d_{\rm max}, a_{\rm max}]$. At the start of each episode, both agents are initialized randomly with the vehicle driving in the positive $x$-direction and the pedestrian is on the right side of the vehicle. At each step, both agents determine their accelerations and their position and velocity are updated according to the kinematic relations in \cref{eq:kinematics_r,eq:kinematics_v}. The episode ends if there is a collision between the vehicle and the pedestrian or if the vehicle makes it to the end of the roadway. Since the driving policy is rule-based and does not require any learning, we have no need to explicitly specify a reward for the base MDP. 
 
 \begin{figure}
     \centering
     \begin{tikzpicture}
          \node (fig1) at (0,0)
            {\includegraphics[trim={0 5cm 0 5cm},clip, width=\textwidth]{figures/sample_systems/pedestrian_crosswalk.pdf}};
-         \draw[->] (5,-2.3)--(6,-2.3) node[right]{$x$};
-         \draw[->] (5,-2.3)--(5,-1.4) node[above]{$y$};
+         \draw[->] (-7,0)--(-6.5,0) node[right]{\small $x$};
+         \draw[->] (-7,0)--(-7,0.5) node[above]{\small $y$};
     \end{tikzpicture}
     \caption{Crosswalk MDP where the ego vehicle approaches a crosswalk while a pedestrian tries to cross. }
     \label{fig:pedestrian_crosswalk}
@@ -194,7 +193,7 @@ Failures of this scenario are defined by any collision between the pedestrian an
     \centering
     \caption{Continuous disturbance space for adversarial pedestrian in crosswalk MDP.}
     \label{tab:adversarial_ped_disturbance_space}
-    \begin{tabular}{@{}lrr@{}} 
+    \begin{tabular}{@{}lcc@{}} 
         \toprule
         \textbf{Disturbance} & \textbf{Independent} & \textbf{Correlated} \\
         \midrule

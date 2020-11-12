@@ -49,7 +49,7 @@
 \usepackage{amsthm}
 \usepackage{bbm}
 \usepackage[makeroom]{cancel}
-\usepackage[group-digits=integer,group-minimum-digits=4,group-separator={,},detect-all]{siunitx}
+\usepackage[per-mode=symbol,group-digits=integer,group-minimum-digits=4,group-separator={,},mode=math]{siunitx}
 
 % \usepackage{vector} % package included in this directory
 
@@ -109,7 +109,7 @@
 \usepgfplotslibrary{ternary}
 
 %% BIBLIOGRAPHY
-\usepackage[backend=bibtex,style=ieee,dashed=false]{biblatex}
+\usepackage[backend=bibtex,maxcitenames=2,mincitenames=2,style=ieee,dashed=false]{biblatex}
 
 \AtEveryBibitem{
 \clearfield{doi}

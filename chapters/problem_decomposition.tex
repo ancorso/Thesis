@@ -5,7 +5,7 @@ In this chapter we introduce a technique for improving the scalability of safety
 %todo:cite airspace density commment below
 Many of the most exciting use cases for autonomy require the system to interact with large number of other human and non-human agents. An autonomous driving policy must reason about a potentially large number other vehicles, pedestrians, cyclists, and traffic control systems, each with a wide variety of possible behaviors. Similarly, autonomous aircraft will soon have to navigate and avoid collisions in an increasingly dense airspace.
 
-Many of the challenges for safety validation are exacerbated when the environment contains multiple interacting agents. The dimensionality of both the disturbance and state space grows with each new agent in the environment. The search over disturbance trajectories, state-dependent policies, or the state space itself can quickly become intractable. As a probability, failures may be more or less likely with more agents, but the fraction of the disturbance trajectory space that leads to a failure will likely decrease due to the dramatic increase in the size of the disturbance trajectory space. 
+Many of the challenges for safety validation are exacerbated when the environment contains multiple interacting agents. The dimensionality of both the disturbance and state space grows with each new agent in the environment. The search over disturbance trajectories, state-dependent policies, or the state space itself can quickly become intractable. Failures may be more or less likely with more agents, but the fraction of the disturbance trajectory space that leads to a failure will likely decrease due to the dramatic increase in the size of the disturbance trajectory space. 
 
 As an example, consider the $5 \times 5$ adversarial gridworld problem depicted in \cref{fig:ch6_fullg} where an ego agent (blue) tries to avoid two adversarial agents (orange and red).  Each agent has a 2D position and four possible actions so the state space and disturbance space both grow exponentially with the number of agents. In this case, a failure occurs when all agents overlap on the same state, so failures become less likely with the number agents. Value iteration is tractable on this problem with two adversaries (which is why we include it as a test case), but becomes challenging with \num{3} agents and intractable with more.
 
@@ -104,7 +104,7 @@ During training we periodically computed the mean square log error between the e
 
 \begin{figure}
         \centering
-        \includegraphics[width=\textwidth]{figures/problem_decomposition/training_comparison.pdf}
+        \input{figures/problem_decomposition/training_comparison.tex}
         \caption{Training comparison between A2T and basic network.}
         \label{fig:ch6_adv_gridworld_training}
 \end{figure}
@@ -127,7 +127,7 @@ Finding failures in a complex driving scenario with multiple interacting agents 
 
 \begin{table}
     \centering
-    \caption{5-car Results}
+    \caption{5-car results.}
     \label{tab:ch6_5car_results}
     \begin{tabular}{@{}lll@{}} 
         \toprule
@@ -143,7 +143,7 @@ Finding failures in a complex driving scenario with multiple interacting agents 
 
 \begin{figure}
         \centering
-        \includegraphics[width=\textwidth]{figures/problem_decomposition/pfail_5car.pdf}
+        \input{figures/problem_decomposition/pfail_5car.tex}
         \caption{Comparison of techniques for $P_{\rm fail}$ estimation for the 5-car T-intersection scenario.}
         \label{fig:ch6_5car_pfail_estimation}
 \end{figure}
@@ -162,7 +162,7 @@ Finding failures in a complex driving scenario with multiple interacting agents 
     \centering
     \includegraphics[width=\textwidth, trim={2cm 5cm 1cm 0},clip]{figures/problem_decomposition/f1_18.pdf}
 \end{subfigure}
-    \caption{Collision in 5-car scenario at timesteps $t=[1,4,18]$}
+    \caption{Collision in 5-car scenario at timesteps $t=[1,4,18]$.}
     \label{fig:five_car_collision1}
     \vspace{-0.2in}
 \end{figure}
@@ -182,7 +182,7 @@ Finding failures in a complex driving scenario with multiple interacting agents 
     \centering
     \includegraphics[width=\textwidth, trim={2cm 5cm 1cm 0},clip]{figures/problem_decomposition/f2_27.pdf}
 \end{subfigure}
-    \caption{Collision in 5-car scenario at timesteps $t=[1,8,27]$}
+    \caption{Collision in 5-car scenario at timesteps $t=[1,8,27]$.}
     \label{fig:five_car_collision2}
     \vspace{-0.2in}
 \end{figure}

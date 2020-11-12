@@ -11,6 +11,9 @@
 \usepackage{vector}
 \renewcommand{\vec}[1]{\vect{#1}}
 
+\usepackage{svg}
+
+\usepackage{trimclip}
 
 \usepackage{csquotes}
 \usepackage{dsfont}
@@ -67,6 +70,54 @@
 
 \tikzset{nstyle/.style={draw, circle, minimum size=\nsize}}
 
+% This stuf is the preamble from pgfplotsx
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\usepgfplotslibrary{groupplots}
+\usepgfplotslibrary{polar}
+\usepgfplotslibrary{smithchart}
+\usepgfplotslibrary{statistics}
+\usepgfplotslibrary{dateplot}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{backgrounds}
+\usepgfplotslibrary{patchplots}
+\usepgfplotslibrary{fillbetween}
+\pgfplotsset{%
+layers/standard/.define layer set={%
+    background,axis background,axis grid,axis ticks,axis lines,axis tick labels,pre main,main,axis descriptions,axis foreground%
+}{grid style= {/pgfplots/on layer=axis grid},%
+    tick style= {/pgfplots/on layer=axis ticks},%
+    axis line style= {/pgfplots/on layer=axis lines},%
+    label style= {/pgfplots/on layer=axis descriptions},%
+    legend style= {/pgfplots/on layer=axis descriptions},%
+    title style= {/pgfplots/on layer=axis descriptions},%
+    colorbar style= {/pgfplots/on layer=axis descriptions},%
+    ticklabel style= {/pgfplots/on layer=axis tick labels},%
+    axis background@ style={/pgfplots/on layer=axis background},%
+    3d box foreground style={/pgfplots/on layer=axis foreground},%
+    },
+}
+
+\pgfplotsset{
+colormap={plots1}{rgb(0.00000000cm)=(1.00000000,0.00000000,0.00000000)
+rgb(0.25000000cm)=(1.00000000,0.53200400,0.53200400)
+rgb(0.50000000cm)=(1.00000000,1.00000000,1.00000000)
+rgb(0.75000000cm)=(0.51697700,0.75967200,0.55607000)
+rgb(1.00000000cm)=(0.00000000,0.50244900,0.08093390)},
+}
+\pgfplotsset{
+colormap={plots1}{rgb(0.00000000cm)=(1.00000000,0.00000000,0.00000000)
+rgb(0.25000000cm)=(1.00000000,0.53200400,0.53200400)
+rgb(0.50000000cm)=(1.00000000,1.00000000,1.00000000)
+rgb(0.75000000cm)=(0.51697700,0.75967200,0.55607000)
+rgb(1.00000000cm)=(0.00000000,0.50244900,0.08093390)},
+}
+
+\usetikzlibrary{external}
+\tikzexternalize[prefix=tikz/]
+
+
+
 % tall double line
 \usepackage{mathtools}
 \DeclarePairedDelimiterX{\infdivx}[2]{(}{)}{%
@@ -114,6 +165,7 @@
 \input{chapters/introduction}
 
 \chapter{Background}
+\label{ch2}
 \input{chapters/background}
 
 \chapter{Sample Systems}
@@ -128,7 +180,7 @@
 \label{ch5}
 \input{chapters/distribution_over_failures}
 
-\chapter{Scalability Through Problem Decomposition}
+\chapter{Scalability Through Problem \\Decomposition}
 \label{ch6}
 \input{chapters/problem_decomposition}
 

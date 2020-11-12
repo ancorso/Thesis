@@ -1,7 +1,7 @@
-In this chapter we consider the problem of validating many related systems sequentially. Most safety validation algorithms must start from scratch each time the system under test changes, but we demonstrate performance and efficiency benefits to sharing knowledge between safety validation tasks. We apply transfer learning algorithms to share knowledge between related tasks and perform experiments using the gridworld with adversary and crosswalk scenarios.
+In this chapter, we consider the problem of validating many related systems sequentially. Most safety validation algorithms must start from scratch each time the system under test changes, but we demonstrate performance and efficiency benefits to sharing knowledge between safety validation tasks. We apply transfer learning algorithms to share knowledge between related tasks and perform experiments using the gridworld and crosswalk scenarios.
 
 \section{Motivation}
-Designing and certifying safety-critical systems generally involves assessing a sequence of closely related systems. Safety validation of complex systems often requires significant computational effort and existing approaches generally start from scratch each time the system under test is changed. The need to frequently perform safety validation on related systems therefore imposes a large computational burden, but also an opportunity to improve safety validation efficiency. 
+Designing and certifying safety-critical autonomy generally involves assessing a sequence of closely related systems. Despite the similarity between systems, however, existing safety validation approaches generally start from scratch for each system. Since validation can be computationally expensive, repeated safety validation imposes a large computational burden, but also an opportunity to improve efficiency. 
 
 % What we did
 To improve the efficiency of safety validation across related systems, we use knowledge from the validation of previous systems to inform the validation of the next system. We formulate iterative safety validation as a transfer learning problem by modeling each safety validation task as a Markov decision process. The previously solved safety validation problems are used as the set of source tasks, and we transfer knowledge to future tasks in the form of action value functions. We use a set of state-dependent attention weights to automatically learn which previous solutions are applicable to the current problem.
@@ -18,13 +18,13 @@ Transfer learning algorithms can be evaluated against a no-transfer alternative 
 
 \begin{figure}
 \centering
-\includegraphics[width=0.8\linewidth]{figures/iterative_validation/transfer_metrics}
+\input{figures/iterative_validation/transfer_metrics}
 \caption{Metrics for evaluating transfer learning algorithms. }
 \label{fig:transfer_metrics}
 \end{figure}
 
 % How is safety validation a transfer learning problem
-Safety validation MDPs may differ in a variety of ways, which we can explain using an example based on autonomous driving. If validation is performed on two different road geometries (e.g. highway-driving  and an intersection), then the state space and disturbance space may be different. If we fix the road geometry, then the transition model may vary if we validate different driving policies. The reward function will vary if the disturbance model changes or we alter the set of failure states. In this work, we consider systems with different behavior operating in similar environments. We, therefore, assume that the state space, disturbance space, and reward function remain fixed while the transition model varies between tasks.
+In the domain of safety validation, tasks may differ in a variety of ways, which we illustrate with an autonomous driving example. If validation is performed on two different road geometries (e.g. highway-driving  and an intersection), then the state space and disturbance space may be different. If we fix the road geometry, then the transition model may vary if we validate different driving policies. The reward function will vary if the disturbance model changes or we alter the set of failure states. In this work, we consider systems with different behavior operating in similar environments. We, therefore, assume that the state space, disturbance space, and reward function remain fixed while the transition model varies between tasks.
 
 \section{Proposed Approach}
 This section describes our approach for improving iterative safety validation using transfer learning. We first show how to formulate iterative safety validation as a sequence of tasks and specify two ways that knowledge transfer may occur. We then introduce A2T as our choice of transfer learning algorithm and propose a modification to it.
@@ -44,7 +44,7 @@ In the context of safety validation, we hypothesize two qualitatively distinct w
 \subsection{Choice of Learning Algorithm}
 \begin{figure}
 \centering
-\resizebox{0.7\columnwidth}{!}{\input{figures/iterative_validation/A2T_SAT}}
+\input{figures/iterative_validation/A2T_SAT}
 \caption{Architecture of A2T with state and action transformation.}
 \label{fig:a2t_architecture}
 \end{figure}
@@ -105,23 +105,27 @@ This section describes the iterative most likely failure analysis of the gridwor
 \subsection{Task Setup}
 
 % Description of the difference between tasks
-The first safety validation problem we consider is the gridworld scenario with a single adversary. We design two sets of tasks that correspond to the learning system and comparable systems settings. For the learning system, the ego agent is trained using DQN against an orange agent that behaves randomly. Over $\num{e6}$ training steps, \num{10} versions of the system policy were stored, each with an increasing level of performance. Each safety validation task has the adversary validate an increasingly capable version of the learning system. The performance of the optimal policy on each task is measured on every other task and plotted in \cref{fig:ch7_comps_lgw} to observe the default transfer between tasks. 
+The first safety validation problem we consider is the gridworld scenario with a single adversary (see \cref{ch3:dw_w_adv}). We design two sets of tasks that correspond to the learning system and comparable systems settings. For the learning system, the ego agent is trained using DQN against an adversarial agent that behaves randomly. Over $\num{e6}$ training steps, \num{10} versions of the system policy were stored, each with an increasing level of performance. Each safety validation task has the adversary validate an increasingly capable version of the learning system. The performance of the optimal policy on each task is measured on every other task and plotted in \cref{fig:ch7_comps_lgw} to observe the baseline transfer between tasks. We note that each policy works best with the MDP it was trained on but also has a modest amount of transfer to nearby tasks.
 
-For the comparable systems setting, each task has a different distribution of reward locations, reward values and location of walls. The system learns an optimal policy using dynamic programming~\cite{dmubook}, assuming the adversary behaves randomly. Each system is therefore equally competent, but some configurations of the gridworld are more challenging than others. A similar comparison plot of the optimal policy for each tasks applied to all othere is shown in \cref{fig:ch7_comps_cgw}.
+For the comparable systems setting, each task has a different distribution of reward locations, reward values and location of walls. The system learns an optimal policy using dynamic programming~\cite{dmubook}, assuming the adversary behaves randomly. Each system is therefore equally competent, but some configurations of the gridworld are more challenging than others. A similar comparison plot of the optimal policy for each tasks applied to all others is shown in \cref{fig:ch7_comps_cgw}. In this setting, the transfer between tasks is minimal due to the diverse set of behaviors of the system. 
 
-\begin{figure}
+\begin{figure*}
     \centering
-    \includegraphics[width=0.7\textwidth]{figures/iterative_validation/gridworld_improving.png}
-    \caption{Task and policy comparisons for a learning gridworld agent.}
-    \label{fig:ch7_comps_lgw}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.7\textwidth]{figures/iterative_validation/moving_rewards_heatmap_bigbatch.png}
-    \caption{Task and policy comparisons for comparable gridworld agents.}
-    \label{fig:ch7_comps_cgw}
-\end{figure}
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \input{figures/iterative_validation/learning_gridworld_policy_comparision}
+        \caption{Learning system.}
+        \label{fig:ch7_comps_lgw}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \input{figures/iterative_validation/comparable_gridworld_policy_comparision}
+        \caption{Comparable systems.}
+        \label{fig:ch7_comps_cgw}
+    \end{subfigure}
+    \caption{Comparison of policies and tasks for the gridworld scenario.}
+\end{figure*}
 
 
 \begin{figure}
@@ -132,21 +136,26 @@ For the comparable systems setting, each task has a different distribution of re
 \end{figure}
 
 % Description of the MDP
-The second safety validation problem we model is a modified version of the crosswalk scenario where the vehicle has a blindspot as shown in \cref{fig:av_blindspot}. We design two sets of tasks corresponding to a learning system setting and a comparable systems setting. Since the autonomous vehicle does not use machine learning, we simulate an improvement by progressively shrinking the blind spot of the vehicle. The blind spot remains in the same direction (\SI{20}{\degree} from the horizontal), but reduces in width from \SI{30}{\degree} to \SI{6}{\degree} over \num{10} iterations. The vehicle therefore has a decreasing rate of failures over the tasks but there is some overlap in failure modes between adjacent tasks (see \cref{fig:ch7_comps_lad} for comparison of tasks and optimal policies). For the comparable systems setting, each system has a blind spot sampled uniformly at random with a direction in the range $[\SI{-30}{\degree}, \SI{30}{\degree}]$ and an angular width in the range $[\SI{3}{\degree}, \SI{9}{\degree}]$. From a population of \num{30} tasks, we selected \num{9} tasks that differed substantially, to make the transfer problem as challenging as possible within our setting. Two tasks differed if the optimal safety validation policy of one performs poorly on the other. We show the comparison of taks performance in \cref{fig:ch7_comps_cad}
+The second safety validation problem we model is a modified version of the crosswalk scenario where the vehicle has a blindspot as shown in \cref{fig:av_blindspot}. We design two sets of tasks corresponding to a learning system setting and a comparable systems setting. Since the autonomous vehicle does not use machine learning, we simulate an improvement by progressively shrinking the blind spot of the vehicle. The blind spot remains in the same direction (\SI{20}{\degree} from the horizontal), but reduces in width from \SI{30}{\degree} to \SI{6}{\degree} over \num{10} iterations. The vehicle therefore has a decreasing rate of failures over the tasks but there is some overlap in failure modes between adjacent tasks (see \cref{fig:ch7_comps_lad} for comparison of tasks and optimal policies). For the comparable systems setting, each system has a blind spot sampled uniformly at random with a direction in the range $[\SI{-30}{\degree}, \SI{30}{\degree}]$ and an angular width in the range $[\SI{3}{\degree}, \SI{9}{\degree}]$. From a population of \num{30} tasks, we selected \num{9} tasks that differed substantially, to make the transfer problem as challenging as possible within our setting. Two tasks differed if the optimal safety validation policy of one performs poorly on the other. We show the comparison of task performance in \cref{fig:ch7_comps_cad}.
 
-\begin{figure}
+\begin{figure*}
     \centering
-    \includegraphics[width=0.7\textwidth]{figures/iterative_validation/blindspot_improving_heatmap.png}
-    \caption{Task and policy comparisons for a learning autonomous driving agent.}
-    \label{fig:ch7_comps_lad}
-\end{figure}
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \input{figures/iterative_validation/learning_driver_policy_comparison}
+        \caption{Learning system.}
+        \label{fig:ch7_comps_lad}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \input{figures/iterative_validation/comparable_driver_policy_comparison.tex}
+        \caption{Comparable systems.}
+        \label{fig:ch7_comps_cad}
+    \end{subfigure}
+    \caption{Comparison of policies and tasks for the driving scenario.}
+\end{figure*}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.7\textwidth]{figures/iterative_validation/blindspot_heatmap_bigbatch.png}
-    \caption{Task and policy comparisons for comparable autonomous driving agents.}
-    \label{fig:ch7_comps_cad}
-\end{figure}
 
 
 \subsection{Experimental Setup}
@@ -201,21 +210,21 @@ We use the number of training steps rather than the wall clock time because we a
     \centering
     \begin{subfigure}[b]{0.32\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{figures/iterative_validation/gridworld_learning/jumpstart.pdf}
-        \caption{Jumpstart fractional improvement.}
+        \input{figures/iterative_validation/gridworld_learning/jumpstart.tex}
+        \caption{Jumpstart improvement.}
         \label{fig:gwl_jumpstart}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.32\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{figures/iterative_validation/gridworld_learning/peak_performance.pdf}
-        \caption{Final fractional improvement.}
+        \input{figures/iterative_validation/gridworld_learning/peak_performance.tex}
+        \caption{Final improvement.}
         \label{fig:gwl_final}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.32\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{figures/iterative_validation/gridworld_learning/steps_to_threshold.pdf}
+        \input{figures/iterative_validation/gridworld_learning/steps_to_threshold.tex}
         \caption{Step ratio to threshold.}
         \label{fig:gwl_step}
     \end{subfigure}
@@ -229,22 +238,22 @@ We use the number of training steps rather than the wall clock time because we a
     \centering
     \begin{subfigure}[b]{0.32\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{figures/iterative_validation/gridworld_comparison/jumpstart.pdf}
-        \caption{Jumpstart fractional improvement.}
+        \input{figures/iterative_validation/gridworld_comparison/jumpstart.tex}
+        \caption{\small Jumpstart improvement.}
         \label{fig:gwc_jumpstart}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.32\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{figures/iterative_validation/gridworld_comparison/peak_performance.pdf}
-        \caption{Final fractional improvement.}
+        \input{figures/iterative_validation/gridworld_comparison/peak_performance.tex}
+        \caption{\small Final improvement.}
         \label{fig:gwc_final}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.32\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{figures/iterative_validation/gridworld_comparison/steps_to_threshold.pdf}
-        \caption{Step ratio to threshold.}
+        \input{figures/iterative_validation/gridworld_comparison/steps_to_threshold.tex}
+        \caption{\small Step ratio to threshold.}
         \label{fig:gwc_step}
     \end{subfigure}
     \caption{Evaluation metrics for the gridworld scenario with comparable systems.}
@@ -258,21 +267,21 @@ We use the number of training steps rather than the wall clock time because we a
     \centering
     \begin{subfigure}[b]{0.32\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{figures/iterative_validation/driving_learning/jumpstart.pdf}
-        \caption{Jumpstart fractional improvement.}
+        \input{figures/iterative_validation/driving_learning/jumpstart.tex}
+        \caption{Jumpstart improvement.}
         \label{fig:adl_jumpstart}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.32\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{figures/iterative_validation/driving_learning/peak_performance.pdf}
-        \caption{Final fractional improvement.}
+        \input{figures/iterative_validation/driving_learning/peak_performance.tex}
+        \caption{Final improvement.}
         \label{fig:adl_final}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.32\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{figures/iterative_validation/driving_learning/steps_to_threshold.pdf}
+        \input{figures/iterative_validation/driving_learning/steps_to_threshold.tex}
         \caption{Step ratio to threshold.}
         \label{fig:adl_step}
     \end{subfigure}
@@ -287,21 +296,21 @@ We use the number of training steps rather than the wall clock time because we a
     \centering
     \begin{subfigure}[b]{0.32\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{figures/iterative_validation/driving_comparison/jumpstart.pdf}
-        \caption{Jumpstart fractional improvement.}
+        \input{figures/iterative_validation/driving_comparison/jumpstart.tex}
+        \caption{Jumpstart improvement.}
         \label{fig:adc_jumpstart}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.32\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{figures/iterative_validation/driving_comparison/peak_performance.pdf}
-        \caption{Final fractional improvement.}
+        \input{figures/iterative_validation/driving_comparison/peak_performance.tex}
+        \caption{Final improvement.}
         \label{fig:adc_final}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.32\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{figures/iterative_validation/driving_comparison/steps_to_threshold.pdf}
+        \input{figures/iterative_validation/driving_comparison/steps_to_threshold.tex}
         \caption{Step ratio to threshold.}
         \label{fig:adc_step}
     \end{subfigure}

@@ -1,4 +1,4 @@
-In this chapter we develop a technique for approximating the distribution over failure trajectories. We construct a state-dependent disturbance policy that, when rolled out, causes the system to fail. The distribution over failures allows us to sample a diverse set of likely failures as well as efficiently compute the probability of failure. We start by showing that a sampling distribution that is proportional to the probability of failure is an efficient proposal distribution, and is exactly the distribution over failures when the environment is deterministic. We then describe how to compute the probability of failure using a Bellman equation and approximate it using neural networks and local linear interpolation. Through experiments in the gridworld and T-intersection environments, we show that even when the estimate of the probability of failure has a large amount of error, we still obtain an efficient proposal distribution.
+In this chapter, we develop a technique for approximating the distribution over failure trajectories. We construct a state-dependent disturbance policy that, when rolled out, causes the system to fail. The distribution over failures allows us to sample a diverse set of likely failures as well as efficiently compute the probability of failure. We start by showing that a sampling distribution that is proportional to the probability of failure is an efficient proposal distribution, and is exactly the distribution over failures when the environment is deterministic. We then describe how to compute the probability of failure using a Bellman equation and approximate it using neural networks and local linear interpolation. Through experiments in the gridworld and T-intersection environments, we show that even when the estimate of the probability of failure has a large amount of error, we still obtain an efficient proposal distribution.
 
 \section{Motivation}
 
@@ -21,29 +21,31 @@ In the rest of the chapter, we propose a stochastic disturbance policy $q(x \mid
 
 \begin{figure*}
     \centering
+    \scriptsize
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{figures/distribution_over_failures/policy.pdf}
+        \includesvg[width=\textwidth]{figures/distribution_over_failures/policy.svg}
         \caption{Expert policy.}
         \label{fig:dof_policy}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{figures/distribution_over_failures/falsification_failure.pdf}
+        \includesvg[width=\textwidth]{figures/distribution_over_failures/falsification_failure.svg}
         \caption{Failure from falsification.}
         \label{fig:dof_falsification}
     \end{subfigure}
+    \par\medskip
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{figures/distribution_over_failures/most_likely_failure.pdf}
+        \includesvg[width=\textwidth]{figures/distribution_over_failures/most_likely_failure.svg}
         \caption{Most-likely failure.}
         \label{fig:dof_mostlikely_failure}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{figures/distribution_over_failures/distribution_over_failures.pdf}
+        \includesvg[width=\textwidth]{figures/distribution_over_failures/distribution_over_failures.svg}
         \caption{Samples from failure distribution.}
         \label{fig:dof_dof}
     \end{subfigure}
@@ -60,7 +62,7 @@ This section describes the problem of constructing a state-dependent importance 
 Suppose we wish to estimate the probability of failure $P_{\rm fail}$ of a system in an environment with states $s \in S$, subject to disturbances $x \in X$. A trajectory is $\vec{\tau} = [s_0, x_1, s_1, \ldots x_{t_{\rm max}}, s_{t_{\rm max}}]$ and has probability $p(\vec{\tau})$, which models the likelihood of state transitions and disturbances. A trajectory is a failure if the sequence of states violates the safety specification $\psi$ and we denote a failure trajectory of both states and disturbances as $\vec{\tau} \not \in \psi$. 
 
 % rehashing of importance sampling theory
-For importance sampling, we wish to develop a proposal distribution $q(\vec{\tau})$ that estimates the probability of failure with the minimal number of samples. An unbiased estimator of the probability of failure can be computed from $N$ independent samples $\vec{\tau}_i \sim q(\vec{\tau})$ as
+For importance sampling, we wish to develop a proposal distribution $q(\vec{\tau})$ that estimates the probability of failure with the minimal number of samples. An unbiased estimator of the probability of failure can be computed from $N$ independent samples $\vec{\tau}_i \sim q(\cdot)$ as
 \begin{equation}
 \hat{P}_{\rm fail} = \frac{1}{N} \sum_{i=1}^N \frac{p(\vec{\tau}_i) \mathds{1}{\{ \vec{\tau}_i \not \in \psi \}}}{q(\vec{\tau}_i)} \text{,} \label{eq:pfail_estimator}
 \end{equation}
@@ -71,7 +73,7 @@ The variance of $\hat{P}_{\rm fail}$ is given by
 \text{Var}_q\left[ \hat{P}_{\rm fail} \right] &= \frac{1}{N} \left( \mathbb{E}_q \left[\left(\frac{p(\vec{\tau}) \mathds{1}{\{ \vec{\tau} \not \in \psi \}}}{q(\vec{\tau})} \right)^2 \right] - \mathbb{E}_q\left[ \frac{p(\vec{\tau}) \mathds{1}{\{ \vec{\tau} \not \in \psi \}}}{q(\vec{\tau})}  \right]^2 \right) \label{eq:var_estimator}\\
 &= \frac{1}{N} \left(\mathbb{E}_p \left[\frac{p(\vec{\tau}) \mathds{1}{\{ \vec{\tau} \not \in \psi \}}}{q(\vec{\tau})} \right] - P_{\rm fail}^2 \right)\label{eq:pfail_variance}
 \end{align}
-where have used the fact that the estimator is unbiased so $\mathbb{E}_q\left[ \hat{P}_{\rm fail}  \right] = P_{\rm fail}$. From importance sampling theory (and by inspection of \cref{eq:var_estimator}), we know that the minimum variance proposal distribution is given by 
+where we have used the fact that the estimator is unbiased so $\mathbb{E}_q\left[ \hat{P}_{\rm fail}  \right] = P_{\rm fail}$. From importance sampling theory (and by inspection of \cref{eq:var_estimator}), we know that the minimum variance proposal distribution is given by 
 \begin{equation}
     q^*(\vec{\tau}) = \frac{p(\vec{\tau}) \mathds{1}{\{ \vec{\tau} \not \in \psi \}}}{P_{\rm fail}} \text{.}
 \end{equation}
@@ -86,7 +88,7 @@ where $\vec{\tau}_{0:t} = [s_0, x_1, s_1, \ldots, x_t, s_t]$. The full distribut
     q(\vec{\tau}) = p(s_0) \prod_{t = 1}^{t_{\rm max}} p(s_t \mid \vec{\tau}_{0:t-1}, x_t) q(x_t, \mid \vec{\tau}_{0:t-1}) \text{.} \label{eq:induced_distribution}
 \end{equation}
 
-\subsection{Proposal distribution}
+\subsection{Proposal Distribution}
 
 % Defining the proposal distribution
 We now present a proposal distribution that reduces the variance of $\hat{P}_{\rm fail}$ compared to Monte Carlo sampling and is optimal in the deterministic setting. Define the disturbance policy
@@ -123,7 +125,7 @@ If we use the disturbance policy to sample trajectories $\vec{\tau}$ and use the
 \begin{proposition}
 The variance of the failure probability estimate (\cref{eq:pfail_estimator}) under the proposal distribution $q^*$ is
 \begin{align}
-    \text{Var}_{q^*}\left[ \hat{P}_{\rm fail} \right] &= \frac{P_{\rm fail}^2}{N} \left( \mathbb{E}_{p_{\tau \mid \mathds{1} \{\vec{\tau} \not \in \psi\}}}  \left[ \prod_{t=0}^{t_{\rm max}} \frac{p(s_t \mid \vec{\tau}_{0:t-1}, x_t, \mathds{1} \left\{ \vec{\tau} \not \in \psi \right\})}{p(s_t \mid \vec{\tau}_{0:t-1}, x_t)} \right] - 1 \right) \text{,}
+    \text{Var}_{q^*}\left[ \hat{P}_{\rm fail} \right] &= \frac{P_{\rm fail}^2}{N} \left( \mathbb{E}_{p_{\tau \mid \mathds{1} \{\vec{\tau} \not \in \psi\}}}  \left[ \prod_{t=0}^{t_{\rm max}} \frac{p(s_t \mid \vec{\tau}_{0:t-1}, x_t, \vec{\tau} \not \in \psi)}{p(s_t \mid \vec{\tau}_{0:t-1}, x_t)} \right] - 1 \right) \text{,}
     % \\
     % &= \frac{P_{\rm fail}^2}{N} \left( \mathbb{E}_{p_{\tau \mid \mathds{1} \{\vec{\tau} \not \in \psi\}}}  \left[ \prod_{t=1}^{t_{\rm max}} \frac{P_{\rm fail}(\vec{\tau}_{0:t})}{P_{\rm fail}(\vec{\tau}_{0:t-1}, x_t)} \right] - 1 \right) \\
 \end{align}
@@ -136,17 +138,17 @@ To show this, we can start by substituting \cref{eq:full_proposal} into \cref{eq
 \end{equation}
 Then, applying Bayes' rule we have 
 \begin{equation}
-    P_{\rm fail}(\vec{\tau}_{0:t}) = \frac{p(\vec{\tau}_{0:t} \mid \mathds{1} \left\{ \vec{\tau} \not \in \psi \right\}) P_{\rm fail}}{p(\vec{\tau}_{0:t})} \text{.}
+    P_{\rm fail}(\vec{\tau}_{0:t}) = \frac{p(\vec{\tau}_{0:t} \mid \vec{\tau} \not \in \psi) P_{\rm fail}}{p(\vec{\tau}_{0:t})} \text{.}
 \end{equation}
 When substituted into the ratio term in \cref{eq:starting_variance_expression} we get
 \begin{align}
-    \prod_{t=1}^{t_{\rm max}} \frac{P_{\rm fail}(\vec{\tau}_{0:t-1})}{P_{\rm fail}(\vec{\tau}_{0:t-1}, x_t)} &= \prod_{t=1}^{t_{\rm max}} \frac{p(\vec{\tau}_{0:t-1} \mid \mathds{1} \left\{ \vec{\tau} \not \in \psi \right\}) p(\vec{\tau}_{0:t-1}, x_t)}{p(\vec{\tau}_{0:t-1}, x_t \mid \mathds{1} \left\{ \vec{\tau} \not \in \psi \right\}) p(\vec{\tau}_{0:t-1})} \\
-    &= \prod_{t=1}^{t_{\rm max}} \frac{p(x_t \mid \vec{\tau}_{0:t-1})}{p(x_t \mid \vec{\tau}_{0:t-1}, \mathds{1} \left\{ \vec{\tau} \not \in \psi \right\})} \\
-    &= \prod_{t=1}^{t_{\rm max}} \frac{p(x_t, s_t \mid \vec{\tau}_{0:t-1})p(s_t \mid \vec{\tau}_{0:t-1}, x_t, \mathds{1} \left\{ \vec{\tau} \not \in \psi \right\})}{p(x_t, s_t \mid \vec{\tau}_{0:t-1}, \mathds{1} \left\{ \vec{\tau} \not \in \psi \right\})p(s_t \mid \vec{\tau}_{0:t-1}, x_t)} \\
-    &= \frac{p(\vec{\tau})}{p(\vec{\tau} \mid \mathds{1} \left\{ \vec{\tau} \not \in \psi \right\})} \prod_{t=0}^{t_{\rm max}} \frac{p(s_t \mid \vec{\tau}_{0:t-1}, x_t, \mathds{1} \left\{ \vec{\tau} \not \in \psi \right\})}{p(s_t \mid \vec{\tau}_{0:t-1}, x_t)} \\
-    &= P_{\rm fail}\prod_{t=0}^{t_{\rm max}} \frac{p(s_t \mid \vec{\tau}_{0:t-1}, x_t, \mathds{1} \left\{ \vec{\tau} \not \in \psi \right\})}{p(s_t \mid \vec{\tau}_{0:t-1}, x_t)} \label{eq:simplified_ratio}
+    \prod_{t=1}^{t_{\rm max}} \frac{P_{\rm fail}(\vec{\tau}_{0:t-1})}{P_{\rm fail}(\vec{\tau}_{0:t-1}, x_t)} &= \prod_{t=1}^{t_{\rm max}} \frac{p(\vec{\tau}_{0:t-1} \mid \vec{\tau} \not \in \psi ) p(\vec{\tau}_{0:t-1}, x_t)}{p(\vec{\tau}_{0:t-1}, x_t \mid \vec{\tau} \not \in \psi ) p(\vec{\tau}_{0:t-1})} \\
+    &= \prod_{t=1}^{t_{\rm max}} \frac{p(x_t \mid \vec{\tau}_{0:t-1})}{p(x_t \mid \vec{\tau}_{0:t-1}, \vec{\tau} \not \in \psi )} \\
+    &= \prod_{t=1}^{t_{\rm max}} \frac{p(x_t, s_t \mid \vec{\tau}_{0:t-1})p(s_t \mid \vec{\tau}_{0:t-1}, x_t, \vec{\tau} \not \in \psi )}{p(x_t, s_t \mid \vec{\tau}_{0:t-1}, \vec{\tau} \not \in \psi )p(s_t \mid \vec{\tau}_{0:t-1}, x_t)} \\
+    &= \frac{p(\vec{\tau})}{p(\vec{\tau} \mid \vec{\tau} \not \in \psi )} \prod_{t=0}^{t_{\rm max}} \frac{p(s_t \mid \vec{\tau}_{0:t-1}, x_t, \vec{\tau} \not \in \psi )}{p(s_t \mid \vec{\tau}_{0:t-1}, x_t)} \\
+    &= P_{\rm fail}\prod_{t=0}^{t_{\rm max}} \frac{p(s_t \mid \vec{\tau}_{0:t-1}, x_t, \vec{\tau} \not \in \psi )}{p(s_t \mid \vec{\tau}_{0:t-1}, x_t)} \label{eq:simplified_ratio}
 \end{align}
-where we have used the fact $p(\vec{\tau} \mid \mathds{1} \left\{ \vec{\tau} \not \in \psi \right\}) =  p (\vec{\tau})/P_{\rm fail}$ to get \cref{eq:simplified_ratio}. Finally, we get the desired result by plugging \cref{eq:simplified_ratio} into \cref{eq:starting_variance_expression} and applying the identity
+where we have used the fact $p(\vec{\tau} \mid \vec{\tau} \not \in \psi ) =  p (\vec{\tau})/P_{\rm fail}$ to get \cref{eq:simplified_ratio}. Finally, we get the desired result by plugging \cref{eq:simplified_ratio} into \cref{eq:starting_variance_expression} and applying the identity
 \begin{align}
     \mathbb{E}_p \left[ \mathds{1} \{\vec{\tau} \not \in \psi\} f(\vec{\tau}) \right] &= \mathbb{E}_p \left[ \mathds{1} \{\vec{\tau} \not \in \psi\} \right] \mathbb{E}_{p_{\vec{\tau} \mid \mathds{1} \{\vec{\tau} \not \in \psi\}}}  \left[ f(\vec{\tau}) \right]  \\
     &= P_{\rm fail} \mathbb{E}_{p_{\vec{\tau} \mid \mathds{1} \{\vec{\tau} \not \in \psi\}}}  \left[ f(\vec{\tau}) \right]\text{.}
@@ -155,9 +157,9 @@ where we have used the fact $p(\vec{\tau} \mid \mathds{1} \left\{ \vec{\tau} \no
 
 The variance of the estimator from $q^*$ differs from the Monte Carlo estimator by the term
 \begin{equation}
-    \mathbb{E}_{p_{\tau \mid \mathds{1} \{\vec{\tau} \not \in \psi\}}}  \left[ \prod_{t=1}^{t_{\rm max}} \frac{p(s_t \mid \vec{\tau}_{0:t-1}, x_t, \mathds{1} \left\{ \vec{\tau} \not \in \psi \right\})}{p(s_t \mid \vec{\tau}_{0:t-1}, x_t)} \right] \text{.}
+    \mathbb{E}_{p_{\tau \mid \mathds{1} \{\vec{\tau} \not \in \psi\}}}  \left[ \prod_{t=1}^{t_{\rm max}} \frac{p(s_t \mid \vec{\tau}_{0:t-1}, x_t, \vec{\tau} \not \in \psi )}{p(s_t \mid \vec{\tau}_{0:t-1}, x_t)} \right] \text{.}
 \end{equation}
-We note that this term is always greater than $1$ and is maximized when the choice of disturbance has no influence on the next state of the environment. In that case, $P_{\rm fail}(\vec{\tau}_{0:t-1}) = P_{\rm fail}(\vec{\tau}_{0:t-1}, x_t)$ and we can see from  \cref{eq:starting_variance_expression}, that the variance increases to the Monte Carlo estimate. The less stochasitic the environment is given the state, the smaller the variance of the estimator. In the case where each state transition is deterministic given the disturbance, we have $p(s_t \mid \vec{\tau}_{0:t-1}, x_t, \mathds{1} \left\{ \vec{\tau} \not \in \psi \right\}) = p(s_t \mid \vec{\tau}_{0:t-1}, x_t)$, and the variance goes to zero, indicating that $q^*$ is the optimal importance sampling distribution. 
+We note that this term is always greater than $1$ and is maximized when the choice of disturbance has no influence on the next state of the environment. In that case, $P_{\rm fail}(\vec{\tau}_{0:t-1}) = P_{\rm fail}(\vec{\tau}_{0:t-1}, x_t)$ and we can see from  \cref{eq:starting_variance_expression}, that the variance increases to the Monte Carlo estimate. The less stochasitic the environment is given the state, the smaller the variance of the estimator. In the case where each state transition is deterministic given the disturbance, we have $p(s_t \mid \vec{\tau}_{0:t-1}, x_t, \vec{\tau} \not \in \psi ) = p(s_t \mid \vec{\tau}_{0:t-1}, x_t)$, and the variance goes to zero, indicating that $q^*$ is the optimal importance sampling distribution. 
 
 Assuming the environment does not have too much uncontrolled stochasticity, we can approximate the distribution over failures by sampling disturbances according to $q^*$. To compute $q^*$ we need $p(x \mid s)$, which is given, and $P_{\rm fail}(\cdot)$.  The following section describes how to efficiently compute the probability of failure as a function of the state when we can make the Markov assumption.
 
@@ -169,8 +171,8 @@ An efficient proposal distribution can computed using an estimate of the probabi
 With the Markov assumption, the probability of failure satisfies the Bellman equation
 \begin{equation}
     P_{\rm fail}(s) = \begin{cases}
-    1 & s \in S_{\rm fail} \\
-    0 & s \in S_{\rm term} \text{ and } s \not \in S_{\rm fail} \\
+    1 & \text{if } s \in S_{\rm fail} \\
+    0 & s \text{if } \in S_{\rm term} \text{ and } s \not \in S_{\rm fail} \\
     \sum_x p(x \mid s) P_{\rm fail}(s, x) & \text{otherwise}
     \end{cases} \label{eq:ch5_bellman}
 \end{equation}
@@ -214,7 +216,7 @@ Exact value iteration is guaranteed to converge to the true value function which
 
 \subsection{Deep Q-Learning}
 
-The DQN algorithm~\cite{mnih2015human} can easily be adapted to compute the probability of failure. The Q-network takes as input the state and outputs the probability of a failure for each disturbance, estimating $P_{\rm fail}(s, x)$. As in value iteration techniques, we start be assigning failure states a value of \num{1} and non-failure terminal states a value of \num{0} We use the same algorithm as \cref{alg:dqn} but alter the target (\cref{eq:ch2_dqn_target}) to be 
+The DQN algorithm~\cite{mnih2015human} can easily be adapted to compute the probability of failure. The Q-network takes as input the state and outputs the probability of a failure for each disturbance, estimating $P_{\rm fail}(s, x)$. As in value iteration techniques, we start be assigning failure states a value of \num{1} and non-failure terminal states a value of \num{0}. We use the same algorithm as \cref{alg:dqn} but alter the target (\cref{eq:ch2_dqn_target}) to be 
 \begin{equation}
     y(s, x, s^\prime; \theta^-) = \begin{cases}
     1 & \text{if } s^\prime \in S_{\rm fail} \\ 
@@ -222,7 +224,7 @@ The DQN algorithm~\cite{mnih2015human} can easily be adapted to compute the prob
     \sum_{x^\prime}p(x^\prime \mid s) P_{\rm fail}(s^\prime, x^\prime) & \text{otherwise} \\
     \end{cases} \text{.}
 \end{equation}
-Similar to traditional DQN, we collect new experience samples with an $\epsilon$-greedy approach. We sample a disturbance according to our current estimate of $q^*$ with probability $1-\epsilon$, and with probability $\epsilon$, we sample a random disturbance uniformly at random.
+Similar to traditional DQN, we collect new experience samples with an $\epsilon$-greedy approach. We sample a disturbance according to our current estimate of $q^*$ with probability $1-\epsilon$, and with probability $\epsilon$, we sample a disturbance uniformly at random.
 
 % Using the sigmoid activation
 In addition to changing the target and rollout policy, there are a few other changes that are necessary for training a good predictor of the probability of failure. First, we need to ensure that the network output is always between \num{0} and \num{1} to be a valid probability value. The easiest way to force this constraint is to have the last layer of the network be a sigmoid activation given by 
@@ -277,7 +279,7 @@ The first set of experiments use the simple gridworld scenario. We first show th
 The first set of experiments involves the simple gridworld scenario because it can be solved using exact value iteration. Access to the ground truth allows us to investigate the effect of errors in the estimate of the probability of failure and the use of approximate algorithms such as DQN. Using the reward distribution shown in \cref{fig:simple_gridworld}, we train an agent to expertly navigate the gridworld subject to a successful transition probability of $p_{\rm success} = 0.999$. We then construct an adversarial gridworld that controls the transitions of the agent and use it for the following experiments.
 
 % Noisy estimates
-To investigate the effect of errors in the estimate of the probability of failure we perturb the ground truth $P_{\rm fail}(s)$ and observe its effect on our performance metrics. To compute the noisy probability of failure estimate $\tilde{P}_{\rm fail}(s)$ at state $s$ we independently sample $\delta \mathcal{U}(-\delta_{\rm max}, \delta_{\rm max})$, and then multiply
+To investigate the effect of errors in the estimate of the probability of failure we perturb the ground truth $P_{\rm fail}(s)$ and observe its effect on our performance metrics. To compute the noisy probability of failure estimate $\tilde{P}_{\rm fail}(s)$ at state $s$ we independently sample $\delta \sim \mathcal{U}(-\delta_{\rm max}, \delta_{\rm max})$, and then multiply
 \begin{equation}
     \tilde{P}_{\rm fail}(s) = 10^\delta P_{\rm fail}(s) \text{.}
 \end{equation}
@@ -304,7 +306,7 @@ The results of experiments with $\delta_{\rm max} \in [1,2,3]$ are shown in \cre
 
 \begin{figure}
         \centering
-        \includegraphics[width=\textwidth]{figures/distribution_over_failures/pfail_gridworld_w_noise.pdf}
+        \input{figures/distribution_over_failures/pfail_gridworld_w_noise.tex}
         \caption{$P_{\rm fail}$ estimation with varying degrees of noise.}
         \label{fig:gridworld_pfail_W_noise_vs_samples}
 \end{figure}
@@ -317,7 +319,7 @@ We train a neural network that has two hidden layers (\num{64} and \num{32} hidd
 
 \begin{figure}
         \centering
-        \includegraphics[width=\textwidth]{figures/distribution_over_failures/dqn_training_history.pdf}
+        \input{figures/distribution_over_failures/dqn_training_history}
         \caption{MSLE between neural network and ground truth during training.}
         \label{fig:gridworld_pfail_dqn_training_hist}
 \end{figure}
@@ -366,14 +368,14 @@ We now compare the proposal distribution $q^*(x \mid s)$ (with $P_{\rm fail}(s)$
 
 \begin{figure}
         \centering
-        \includegraphics[width=\textwidth]{figures/distribution_over_failures/pfail_gridworld.pdf}
+        \input{figures/distribution_over_failures/pfail_gridworld.tex}
         \caption{Comparison of techniques for $P_{\rm fail}$ estimation for the simple gridworld.}
         \label{fig:gridworld_pfail_vs_samples}
 \end{figure}
 
 
 
-\subsection{T-intersection Scenario}
+\subsection{T-Intersection Scenario}
 \label{sec:ch5_Tint}
 We now turn to the more complex problem of discovering failures in the autonomous driving policy of the ego vehicle in the T-intersection scenario. The problem is more challenging due to the longer time horizon  and the continuous state space. In each episode, the agents are initialized with random positions in the range [\SI{5}{m}, \SI{35}{m}] (with respect to the start of their lane) and random velocities in the range [\SI{10}{m/s}, \SI{20}{m/s}]. The adversarial agent is initialized on the left with a random turn intention and match turn signal. Any initial condition that had a collision without any disturbance was not used in the analysis. 
 
@@ -382,7 +384,7 @@ In addition to all the baselines and DQN, we use local approximation value itera
 
 The failure rates and average failure log-likelihood is shown in \cref{tab:ch5_2car_results}. The uniform sampling distribution is able to increase the failure rate but at the cost of low-likelihood failures. The cross entropy method does not perform much better than basic Monte Carlo sampling. Both techniques that use $q^*$ have significantly higher failure rates and relatively high log-likelihoods. When $P_{\rm fail}(s)$ is estimated using DQN, we get a higher failure rate and log-likelihood compared to local approximation value iteration. Likewise, in the estimate of the probability of failure (\cref{fig:ch5_2car_pfail_estimation}) the DQN approach seems to have less variance than local approximation value iteration. 
 
-Local approximation value iteration may perform worse than DQN due to the requirement of such a coarse discretization of the state space. Small features in the landscape of $P_{\rm fail}(s)$ that are captured by a neural network may be missed using a coarse grid and linear interpolation, leading to less efficient proposal distribution.
+Local approximation value iteration may perform worse than DQN due to the requirement of such a coarse discretization of the state space. Small features in the landscape of $P_{\rm fail}(s)$ that are captured by a neural network may be missed using a coarse grid and linear interpolation, leading to a higher variance proposal distribution.
 
 \begin{table}
     \centering
@@ -403,7 +405,7 @@ Local approximation value iteration may perform worse than DQN due to the requir
 
 \begin{figure}
         \centering
-        \includegraphics[width=\textwidth]{figures/distribution_over_failures/pfail_2car_left.pdf}
+        \input{figures/distribution_over_failures/pfail_2car_left.tex}
         \caption{Comparison of techniques for $P_{\rm fail}$ estimation for the 2-car T-intersection scenario.}
         \label{fig:ch5_2car_pfail_estimation}
 \end{figure}
@@ -411,14 +413,14 @@ Local approximation value iteration may perform worse than DQN due to the requir
 \section{Discussion}
 
 % Summary of what the chapter was about
-In this chapter we argue that safety validation algorithms that optimize to find individual failure trajectories are insufficient for obtaining a diverse set of likely failures and for estimating the failure probability. One solution is to approximate the distribution over failures and use it as a stochastic policy for choosing disturbances. We showed that a distribution that is proportional to the probability of failure can be an efficient proposal distribution, and is optimal when applied to a deterministic environment. This insight reduces the problem of approximating the distribution over failure to estimating the probability of failure for each state and disturbance pair. 
+In this chapter, we argue that safety validation algorithms that optimize to find individual failure trajectories are insufficient for obtaining a diverse set of likely failures and for estimating the failure probability. One solution is to approximate the distribution over failures and use it as a stochastic policy for choosing disturbances. We showed that a distribution that is proportional to the probability of failure can be an efficient proposal distribution, and is optimal when applied to a deterministic environment. This insight reduces the problem of approximating the distribution over failure to estimating the probability of failure for each state and disturbance pair. 
 
 When we invoke the Markov assumption, we show that the probability of failure is the solution to a Bellman equation which can be solved exactly or approximately depending on the size of the state and disturbance space. We showed that a modified version of DQN can also approximate the probability of failure even when those probabilities are extremely small. Through experiments with the gridworld and T-intersection scenarios, we demonstrate that our proposal distribution is able to find more failures, find failures with high log-likelihood, and better estimate the probability of failure than baseline techniques. 
 
 % Relation to other work 
 The work presented in this chapter is related to several other approaches. Adaptive stress testing (AST)~\cite{lee2015adaptive,koren2018adaptive,corso2019adaptive,koren2019efficient} also frames the safety validation problem as a Markov decision process and uses reinforcement learning to find likely failures. AST optimizes for the most-likely failure and has been shown converge to individual failure modes~\cite{corso2019adaptive}. The field of statistical model checking~\cite{agha2018survey} deals with estimating the probability of failure of a system but relies on basic sampling techniques with an emphasis on hypothesis testing for making probabilistic safety claims.
 
-There is a large amount of literature where importance sampling has been applied to estimate the probability of failure (some of it is covered in \cref{sec:is}). Most relevant to this chapter is the work by \textcite{Chryssanthacopoulos2010}, where they apply a similar state-based importance sampling distribution to estimate the probability of failure of an aircraft collision avoidance system. The probability of failure is roughly estimated using local approximation value iteration and used to construct an importance sampling distribution. They do not, however, analyze the variance of the estimator or propose scalable techniques for estimating the probability of failure.  \textcite{uesato2019rigorous} also use an estimate of the probability of failure to choose initial conditions that cause an agent to failure. They do not extend their work to sequential decision making, but it is interesting to note that they derived the optimal sampling distribution for a single step stochastic simulator to be proportional to the $\sqrt{P_{\rm fail}}$. This insight does not, however, appear to be directly applicable to deriving the optimal state-dependent sampling distribution for sequential problems.
+There is a large amount of literature where importance sampling has been applied to estimate the probability of failure (some of it is covered in \cref{sec:is}). Most relevant to this chapter is the work by \textcite{Chryssanthacopoulos2010}, where they apply a similar state-based importance sampling distribution to estimate the probability of failure of an aircraft collision avoidance system. The probability of failure is roughly estimated using local approximation value iteration and used to construct an importance sampling distribution. They do not, however, analyze the variance of the estimator or propose scalable techniques for estimating the probability of failure.  \textcite{uesato2019rigorous} also use an estimate of the probability of failure to choose initial conditions that cause an agent to failure. They do not extend their work to sequential decision making, but we note that they derived the optimal sampling distribution for a single step stochastic simulator to be proportional to the $\sqrt{P_{\rm fail}}$. This insight does not, however, appear to be directly applicable to deriving the optimal state-dependent sampling distribution for sequential problems.
 
 % Limitations and introduction to the next chapter
 One of the biggest challenges to applying this technique to large problems is the scalability to larger state and disturbance spaces. Value iteration approaches explicitly iterate over states, while the quality of a neural network estimate will depend on having experience samples that sufficiently cover the state space. In the next chapter we introduce a scene decomposition technique that can improve the scalability of this technique. 

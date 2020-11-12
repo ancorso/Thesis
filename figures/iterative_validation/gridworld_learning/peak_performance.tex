@@ -1,0 +1,52 @@
+\begin{tikzpicture}[/tikz/background rectangle/.style={fill={rgb,1:red,1.0;green,1.0;blue,1.0}, draw opacity={0.0}}, show background rectangle]
+\begin{axis}[point meta max={nan}, point meta min={nan}, legend cell align={left}, title={}, title style={at={{(0.5,1)}}, anchor={south}, font={{\fontsize{14 pt}{18.2 pt}\selectfont}}, color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, rotate={0.0}}, legend style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, line width={1}, solid, fill={rgb,1:red,1.0;green,1.0;blue,1.0}, fill opacity={1.0}, text opacity={1.0}, font={{\fontsize{8 pt}{10.4 pt}\selectfont}},at={(0.01, 1.15)}, anchor={south west}, legend columns=-1}, legend style={/tikz/every even column/.append style={column sep=0.5cm}}, axis background/.style={fill={rgb,1:red,1.0;green,1.0;blue,1.0}, opacity={1.0}}, anchor={north west}, xshift={1.0mm}, yshift={-1.0mm}, width=\textwidth, height={35mm}, scaled x ticks={false}, xlabel={Task Iteration}, x tick style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, opacity={1.0}}, x tick label style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, opacity={1.0}, rotate={0}}, xlabel style={at={(ticklabel cs:0.5)}, anchor=near ticklabel, font={{\fontsize{8 pt}{10.4 pt}\selectfont}}, color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, rotate={0.0}}, xmajorgrids={true}, xmin={1.76}, xmax={10.24}, xtick={{2.0,4.0,6.0,8.0,10.0}}, xticklabels={{$2$,$4$,$6$,$8$,$10$}}, xtick align={inside}, xticklabel style={font={{\fontsize{8 pt}{10.4 pt}\selectfont}}, color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, rotate={0.0}}, x grid style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={0.1}, line width={0.5}, solid}, axis x line*={left}, x axis line style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, line width={1}, solid}, scaled y ticks={false}, ylabel={Final Improvement}, y tick style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, opacity={1.0}}, y tick label style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, opacity={1.0}, rotate={0}}, ylabel style={at={(ticklabel cs:0.5)}, anchor=near ticklabel, font={{\fontsize{8 pt}{10.4 pt}\selectfont}}, color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, rotate={0.0}}, ymajorgrids={true}, ymin={-0.9999999992516994}, ymax={1.4}, ytick={{-0.5,0.0,0.5,1.0}}, yticklabels={{$-0.5$,$0.0$,$0.5$,$1.0$}}, ytick align={inside}, yticklabel style={font={{\fontsize{8 pt}{10.4 pt}\selectfont}}, color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, rotate={0.0}}, y grid style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={0.1}, line width={0.5}, solid}, axis y line*={left}, y axis line style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, line width={1}, solid}]
+    \addplot[color={rgb,1:red,0.0;green,0.0;blue,0.0}, name path={48fdfafb-9d23-413b-a6ad-a374fc34b6af}, draw opacity={1.0}, line width={1}, dashdotted, mark={*}, mark size={1.125 pt}, mark repeat={1}, mark options={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, fill={rgb,1:red,0.0;green,0.0;blue,0.0}, fill opacity={1.0}, line width={0.75}, rotate={0}, solid}]
+        table[row sep={\\}]
+        {
+            \\
+            2.0  0.03367594816657809  \\
+            3.0  -0.07097311961060898  \\
+            4.0  0.06687817125438633  \\
+            5.0  0.16678621875512595  \\
+            6.0  0.09843160169116001  \\
+            7.0  0.5865169076602881  \\
+            8.0  -0.08001339757544591  \\
+            9.0  0.28600602437414385  \\
+            10.0  0.17532166490692389  \\
+        }
+        ;
+    \addlegendentry {A2T w/ SAVT}
+    \addplot[color={rgb,1:red,0.0;green,0.0;blue,0.0}, name path={0708b760-43cd-4e22-851e-b0e88496cb80}, draw opacity={1.0}, line width={1}, solid, mark={*}, mark size={1.125 pt}, mark repeat={1}, mark options={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, fill={rgb,1:red,0.0;green,0.0;blue,0.0}, fill opacity={1.0}, line width={0.75}, rotate={0}, solid}]
+        table[row sep={\\}]
+        {
+            \\
+            2.0  0.0979433272941114  \\
+            3.0  0.06459659586256183  \\
+            4.0  0.028538583298642704  \\
+            5.0  0.3141625774710388  \\
+            6.0  0.10870726139269066  \\
+            7.0  0.6544941263643854  \\
+            8.0  0.004687056164156816  \\
+            9.0  0.23378228208335256  \\
+            10.0  -0.09575985193285183  \\
+        }
+        ;
+    \addlegendentry {A2T}
+    \addplot[color={rgb,1:red,0.502;green,0.502;blue,0.502}, name path={7cb74daf-ee2a-4f82-a9c7-ba15682efcd2}, draw opacity={1.0}, line width={1}, dotted, mark={*}, mark size={1.125 pt}, mark repeat={1}, mark options={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, fill={rgb,1:red,0.502;green,0.502;blue,0.502}, fill opacity={1.0}, line width={0.75}, rotate={0}, solid}]
+        table[row sep={\\}]
+        {
+            \\
+            2.0  -0.21208241547548554  \\
+            3.0  -0.4826726471591091  \\
+            4.0  -0.6137214993031977  \\
+            5.0  -0.4162473345026299  \\
+            6.0  -0.7030827656063745  \\
+            7.0  -0.6224719176748725  \\
+            8.0  -0.9999999992516994  \\
+            9.0  -0.06976735363519794  \\
+            10.0  -0.827060504880624  \\
+        }
+        ;
+    \addlegendentry {Fine-tune}
+\end{axis}
+\end{tikzpicture}
