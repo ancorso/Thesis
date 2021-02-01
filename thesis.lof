@@ -1,0 +1,51 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\babel@toc {american}{}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces The design cycle of an autonomous system. \relax }}{2}{figure.caption.7}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Model of the safety validation problem.\relax }}{14}{figure.caption.14}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Simple Gridworld MDP.\relax }}{41}{figure.caption.27}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Gridworld with Adversray MDP.\relax }}{43}{figure.caption.28}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Crosswalk MDP where the ego vehicle approaches a crosswalk while a pedestrian tries to cross. \relax }}{49}{figure.caption.30}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces T-Intersection MDP where the ego vehicle tries to take unprotected left turn. \relax }}{51}{figure.caption.32}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Expression tree for $\square _{[t_1, t_2]} x > 0$.\relax }}{56}{figure.caption.35}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Crossover operation that creates a child from two parents by replacing the highlighted subtree of parent one with the highlighted subtree of parent 2.\relax }}{59}{figure.caption.38}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Mutation operation replaces a subtree with a randomly generated tree.\relax }}{59}{figure.caption.40}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Collision for LT1 at $t=(\SI {0}{s}, \SI {1.08}{s}, \SI {1.98}{s})$.\relax }}{72}{figure.caption.45}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Collision for LT2 at $t=(\SI {0}{s}, \SI {0.72}{s}, \SI {1.26}{s})$.\relax }}{72}{figure.caption.46}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Collision for LT3 at $t=(\SI {0}{s}, \SI {0.90}{s}, \SI {1.62}{s})$.\relax }}{72}{figure.caption.47}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Sample failures that satisfy $\square _{[0, 0.36]} B \lor d_{\rm maj}$\relax }}{73}{figure.caption.48}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Sample failure trajectories from pedestrian STL failure description.\relax }}{75}{figure.caption.50}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces System sensitivity analysis for longitudinal acceleration bound and velocity noise upper bound.\relax }}{76}{figure.caption.51}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Sample failure trajectories from pedestrian state-dependent failure description.\relax }}{78}{figure.caption.53}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces System sensitivity analysis for longitudinal acceleration bound and longitudinal position noise bound.\relax }}{79}{figure.caption.54}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Comparison of safety validation tasks.\relax }}{84}{figure.caption.55}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces $P_{\rm fail}$ estimation with varying degrees of noise.\relax }}{96}{figure.caption.57}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces MSLE between neural network and ground truth during training.\relax }}{97}{figure.caption.58}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Comparison of $P_{\rm fail}$ between DQN and exact value iteration.\relax }}{98}{figure.caption.59}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Comparison of techniques for $P_{\rm fail}$ estimation for the simple gridworld.\relax }}{99}{figure.caption.61}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Comparison of techniques for $P_{\rm fail}$ estimation for the 2-car T-intersection scenario.\relax }}{101}{figure.caption.63}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Example decomposition of the gridworld with two adversaries.\relax }}{106}{figure.caption.64}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces The A2T network. \relax }}{108}{figure.caption.65}%
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Training comparison between A2T and basic network.\relax }}{111}{figure.caption.66}%
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Comparison of techniques for $P_{\rm fail}$ estimation for the 5-car T-intersection scenario.\relax }}{113}{figure.caption.68}%
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Collision in 5-car scenario at timesteps $t=[1,4,18]$.\relax }}{114}{figure.caption.69}%
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Collision in 5-car scenario at timesteps $t=[1,8,27]$.\relax }}{115}{figure.caption.70}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {7.1}{\ignorespaces Metrics for evaluating transfer learning algorithms. \relax }}{120}{figure.caption.71}%
+\contentsline {figure}{\numberline {7.2}{\ignorespaces Architecture of A2T with state and action transformation.\relax }}{122}{figure.caption.72}%
+\contentsline {figure}{\numberline {7.3}{\ignorespaces Knowledge transfer scenarios.\relax }}{124}{figure.caption.73}%
+\contentsline {figure}{\numberline {7.4}{\ignorespaces Comparison of policies and tasks for the gridworld scenario.\relax }}{126}{figure.caption.75}%
+\contentsline {figure}{\numberline {7.5}{\ignorespaces Crosswalk scenario with AV blindpsot. \relax }}{126}{figure.caption.76}%
+\contentsline {figure}{\numberline {7.6}{\ignorespaces Comparison of policies and tasks for the driving scenario.\relax }}{127}{figure.caption.77}%
+\contentsline {figure}{\numberline {7.7}{\ignorespaces Evaluation metrics for the gridworld scenario with a learning system.\relax }}{130}{figure.caption.79}%
+\contentsline {figure}{\numberline {7.8}{\ignorespaces Evaluation metrics for the gridworld scenario with comparable systems.\relax }}{130}{figure.caption.80}%
+\contentsline {figure}{\numberline {7.9}{\ignorespaces Evaluation metrics for the autonomous driving scenario with a learning system.\relax }}{130}{figure.caption.81}%
+\contentsline {figure}{\numberline {7.10}{\ignorespaces Evaluation metrics for the autonomous driving scenario with a comparable systems.\relax }}{131}{figure.caption.82}%
+\addvspace {10\p@ }
+\contentsfinish 
+\contentsfinish 

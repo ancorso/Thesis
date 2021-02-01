@@ -55,7 +55,7 @@ In the rest of the chapter, we propose a stochastic disturbance policy $q(x \mid
 
 
 \section{State-Dependent Importance Sampling}
-This section describes the problem of constructing a state-dependent importance sampling distribution for efficiently estimating the probability of failure of a system. We first describe the sampling problem and then  propose a state-dependent disturbance distribution that produces low-variance estimates of the probability of failure. Through an analysis of variance, we show that our proposed distribution is optimal when the system and environment are deterministic given the disturbances.
+This section describes the problem of constructing a state-dependent importance sampling distribution for efficiently estimating the probability of failure of a system. We first describe the sampling problem and then propose a state-dependent disturbance distribution that produces low-variance estimates of the probability of failure. Through an analysis of variance, we show that our proposed distribution is optimal when the system and environment are deterministic given the disturbances.
 
 \subsection{Problem Setup}
 % Definition of notation
@@ -166,7 +166,7 @@ Assuming the environment does not have too much uncontrolled stochasticity, we c
 
 \section{Estimating the Probability of Failure}
 
-An efficient proposal distribution can computed using an estimate of the probability of failure for each trajectory segment. Estimating the probability of failure over the distribution of trajectories could quickly become intractable due to the dimensionality of the space of trajectories. The computation can be significantly simplified if we assume that the system and environment are Markov so the probability of failure only depends on the current state and the choice of the next diturbance. The Markov version of all the equations in the previous section can be obtained by letting $\vec{\tau}_{0,t} = s_t$ .
+An efficient proposal distribution can computed using an estimate of the probability of failure for each trajectory segment. Estimating the probability of failure over the distribution of trajectories could quickly become intractable due to the dimensionality of the space of trajectories. The computation can be significantly simplified if we assume that the system and environment are Markov so the probability of failure only depends on the current state and the choice of the next disturbance. The Markov version of all the equations in the previous section can be obtained by letting $\vec{\tau}_{0,t} = s_t$ .
 
 With the Markov assumption, the probability of failure satisfies the Bellman equation
 \begin{equation}
@@ -234,7 +234,7 @@ In addition to changing the target and rollout policy, there are a few other cha
 which maps the real numbers to the range $(0,1)$. 
 
 % Using the MSLE
-When estimating the probability of failure, we must also be careful in our choice of loss function. DQN usually employs the huber loss or the mean squared error loss but these loss functions do not handle differences in small values very well. Even if the network has many orders of magnitude error in a prediction of the probability of failure, the mean squared error of that prediction may still be small. We therefore employ the mean squared log error (MSLE) given by
+When estimating the probability of failure, we must also be careful in our choice of loss function. DQN usually employs the Huber loss or the mean squared error loss but these loss functions do not handle differences in small values very well. Even if the network has many orders of magnitude error in a prediction of the probability of failure, the mean squared error of that prediction may still be small. We therefore employ the mean squared log error (MSLE) given by
 \begin{equation}
     L_{\rm MSLE}(y, \hat{y}) = \frac{1}{N}\sum_{i=1}^N (\log(y + \epsilon) - \log(\hat{y} + \epsilon))^2
 \end{equation}
@@ -292,7 +292,7 @@ The results of experiments with $\delta_{\rm max} \in [1,2,3]$ are shown in \cre
     \centering
     \caption{Performance with noisy estimates of the probability of failure.}
     \label{tab:ch5_gridworld_noise_results}
-    \begin{tabular}{@{}lll@{}} 
+    \begin{tabular}{@{}lcc@{}} 
         \toprule
         \textbf{Noise Level} & \textbf{Failure Rate} & \textbf{Log-Likelihood}\\
         \midrule
@@ -354,13 +354,13 @@ We now compare the proposal distribution $q^*(x \mid s)$ (with $P_{\rm fail}(s)$
     \centering
     \caption{Simple gridworld failure results.}
     \label{tab:ch5_gridworld_results}
-    \begin{tabular}{@{}lll@{}} 
+    \begin{tabular}{@{}lcc@{}} 
         \toprule
         \textbf{Method} & \textbf{Failure Rate} & \textbf{Log Likelihood}\\
         \midrule
-        Monte Carlo & \num{0.001} \pm \num{0.001} & \num{-8.013} \pm \num{0.0} \\
-        Cross entropy method & \num{0.255} \pm \num{0.014} & \num{-36.431} \pm \num{2.05} \\
-        DQN & \num{0.98} \pm \num{0.004} & \num{-10.654} \pm \num{0.51} \\
+        Monte Carlo & \num{0.001} \pm \num{0.001} & \phantom{0}\num{-8.013} \pm \num{0.0}\phantom{00} \\
+        Cross entropy method & \num{0.255} \pm \num{0.014} & \num{-36.431} \pm \num{2.050} \\
+        DQN & \num{0.980} \pm \num{0.004} & \num{-10.654} \pm \num{0.510} \\
         Value iteration & \num{1.0} \pm \num{0.0} & \num{-11.375} \pm \num{0.604} \\
         \bottomrule
     \end{tabular}
@@ -390,15 +390,15 @@ Local approximation value iteration may perform worse than DQN due to the requir
     \centering
     \caption{Two car T-intersection results.}
     \label{tab:ch5_2car_results}
-    \begin{tabular}{@{}lll@{}} 
+    \begin{tabular}{@{}lcc@{}} 
         \toprule
         \textbf{Method} & \textbf{Failure Rate} & \textbf{Log Likelihood}\\
         \midrule
-        Monte Carlo & \num{0.0} \pm \num{0.0} & \num{-9.352} \pm \num{0.372} \\
+        Monte Carlo & \num{0.0} \pm \num{0.0} & \phantom{0}\num{-9.352} \pm \num{0.372} \\
         Uniform sampling & \num{0.087} \pm \num{0.009} & \num{-97.703} \pm \num{2.822} \\
         Cross entropy method & \num{0.007} \pm \num{0.003} & \num{-10.416} \pm \num{0.313} \\
         DQN & \num{0.365} \pm \num{0.015} & \num{-9.562} \pm \num{0.16} \\
-        Local Approximation VI & \num{0.214} \pm \num{0.013} & \num{-11.45} \pm \num{0.4} \\
+        Local Approximation VI & \num{0.214} \pm \num{0.013} & \num{-11.45} \pm \num{0.40} \\
         \bottomrule
     \end{tabular}
 \end{table}

@@ -1,0 +1,10 @@
+\contentsline {algorithm}{\numberline {2.1}{\ignorespaces Simulated annealing.\relax }}{21}{algorithm.2.1}%
+\contentsline {algorithm}{\numberline {2.2}{\ignorespaces Rapidly-exploring random tree.\relax }}{23}{algorithm.2.2}%
+\contentsline {algorithm}{\numberline {2.3}{\ignorespaces Deep $Q$-learning.\relax }}{29}{algorithm.2.3}%
+\contentsline {algorithm}{\numberline {2.4}{\ignorespaces Cross-entropy method.\relax }}{34}{algorithm.2.4}%
+\contentsline {algorithm}{\numberline {3.1}{\ignorespaces Intelligent Driver Model.\relax }}{46}{algorithm.3.1}%
+\contentsline {algorithm}{\numberline {3.2}{\ignorespaces Intersection navigation algorithm.\relax }}{48}{algorithm.3.2}%
+\contentsline {algorithm}{\numberline {4.1}{\ignorespaces Genetic programming.\relax }}{58}{algorithm.4.1}%
+\contentsline {algorithm}{\numberline {4.2}{\ignorespaces Failure description cost function.\relax }}{60}{algorithm.4.2}%
+\contentsline {algorithm}{\numberline {4.3}{\ignorespaces Sampling constraints for STL satisfaction\relax }}{63}{algorithm.4.3}%
+\contentsline {algorithm}{\numberline {5.1}{\ignorespaces Value Iteration for computing the probability of failure.\relax }}{91}{algorithm.5.1}%

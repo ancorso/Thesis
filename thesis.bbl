@@ -1,0 +1,5225 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\datalist[entry]{none/global//global/global}
+  \entry{world2019global}{report}{}
+    \name{author}{1}{}{%
+      {{hash=W}{%
+         family={{World Health Organization (WHO)}},
+         familyi={W\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {World Health Organization}%
+    }
+    \strng{namehash}{W1}
+    \strng{fullhash}{W1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Global status report on alcohol and health 2018}
+    \field{type}{techreport}
+    \field{year}{2019}
+  \endentry
+
+  \entry{singh2015critical}{report}{}
+    \name{author}{1}{}{%
+      {{hash=N}{%
+         family={{National Highway Traffic Safety Administration (NHTSA)}},
+         familyi={N\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {National Highway Traffic Safety Administration (NHTSA)}%
+    }
+    \strng{namehash}{N1}
+    \strng{fullhash}{N1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Critical reasons for crashes investigated in the national
+  motor vehicle crash causation survey}
+    \field{type}{techreport}
+    \field{year}{2015}
+  \endentry
+
+  \entry{federal2011introduction}{report}{}
+    \name{author}{1}{}{%
+      {{hash=F}{%
+         family={{Federal Aviation Administration (FAA)}},
+         familyi={F\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Federal Aviation Administration}%
+    }
+    \strng{namehash}{F1}
+    \strng{fullhash}{F1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Introduction to {TCAS II}: Version 7.1}
+    \field{type}{techreport}
+    \field{year}{2011}
+  \endentry
+
+  \entry{arino2002studies}{article}{}
+    \name{author}{8}{}{%
+      {{hash=AT}{%
+         family={Arino},
+         familyi={A\bibinitperiod},
+         given={T},
+         giveni={T},
+      }}%
+      {{hash=CK}{%
+         family={Carpenter},
+         familyi={C\bibinitperiod},
+         given={K},
+         giveni={K},
+      }}%
+      {{hash=CS}{%
+         family={Chabert},
+         familyi={C\bibinitperiod},
+         given={S},
+         giveni={S},
+      }}%
+      {{hash=HH}{%
+         family={Hutchinson},
+         familyi={H\bibinitperiod},
+         given={H},
+         giveni={H},
+      }}%
+      {{hash=MT}{%
+         family={Miquel},
+         familyi={M\bibinitperiod},
+         given={T},
+         giveni={T},
+      }}%
+      {{hash=RB}{%
+         family={Raynaud},
+         familyi={R\bibinitperiod},
+         given={B},
+         giveni={B},
+      }}%
+      {{hash=RK}{%
+         family={Rigotti},
+         familyi={R\bibinitperiod},
+         given={K},
+         giveni={K},
+      }}%
+      {{hash=VE}{%
+         family={Vallauri},
+         familyi={V\bibinitperiod},
+         given={E},
+         giveni={E},
+      }}%
+    }
+    \strng{namehash}{ATCK+1}
+    \strng{fullhash}{ATCKCSHHMTRBRKVE1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Studies on the safety of ACAS II in Europe}
+    \field{volume}{210}
+    \field{journaltitle}{Eurocontrol, Technical Rep. ACASA/WP-1.8 D}
+    \field{year}{2002}
+  \endentry
+
+  \entry{kochenderfer2012next}{article}{}
+    \name{author}{3}{}{%
+      {{hash=KMJ}{%
+         family={Kochenderfer},
+         familyi={K\bibinitperiod},
+         given={Mykel\bibnamedelima J},
+         giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+      {{hash=HJE}{%
+         family={Holland},
+         familyi={H\bibinitperiod},
+         given={Jessica\bibnamedelima E},
+         giveni={J\bibinitperiod\bibinitdelim E\bibinitperiod},
+      }}%
+      {{hash=CJP}{%
+         family={Chryssanthacopoulos},
+         familyi={C\bibinitperiod},
+         given={James\bibnamedelima P},
+         giveni={J\bibinitperiod\bibinitdelim P\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {{MIT} {L}incoln {L}aboratory}%
+    }
+    \strng{namehash}{KMJHJE+1}
+    \strng{fullhash}{KMJHJECJP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{1}
+    \field{pages}{17\bibrangedash 33}
+    \field{title}{Next-Generation Airborne Collision Avoidance System}
+    \field{volume}{19}
+    \field{journaltitle}{Lincoln Laboratory Journal}
+    \field{year}{2012}
+  \endentry
+
+  \entry{board2018preliminary}{report}{}
+    \name{author}{1}{}{%
+      {{hash=N}{%
+         family={{National Transportation Safety Board (NTSB)}},
+         familyi={N\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{N2}
+    \strng{fullhash}{N2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Preliminary report, highway, hwy18mh010}
+    \verb{url}
+    \verb https://www.ntsb.gov/investigations/AccidentReports/Reports/HWY18MH01
+    \verb 0-prelim.pdf
+    \endverb
+    \field{type}{techreport}
+    \field{year}{2018}
+  \endentry
+
+  \entry{shalev2017formal}{article}{}
+    \name{author}{3}{}{%
+      {{hash=SS}{%
+         family={{Shalev-Shwartz}},
+         familyi={S\bibinitperiod},
+         given={Shai},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=SS}{%
+         family={{Shammah}},
+         familyi={S\bibinitperiod},
+         given={Shaked},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=SA}{%
+         family={{Shashua}},
+         familyi={S\bibinitperiod},
+         given={Amnon},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \keyw{Computer Science - Robotics, Computer Science - Artificial
+  Intelligence, Statistics - Machine Learning}
+    \strng{namehash}{SSSS+1}
+    \strng{fullhash}{SSSSSA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{eid}{arXiv:1708.06374}
+    \verb{eprint}
+    \verb 1708.06374
+    \endverb
+    \field{pages}{arXiv:1708.06374}
+    \field{title}{{On a Formal Model of Safe and Scalable Self-driving Cars}}
+    \field{journaltitle}{arXiv e-prints}
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{cs.RO}
+    \field{month}{08}
+    \field{year}{2017}
+  \endentry
+
+  \entry{nister2019safety}{article}{}
+    \name{author}{4}{}{%
+      {{hash=ND}{%
+         family={Nistér},
+         familyi={N\bibinitperiod},
+         given={David},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=LHL}{%
+         family={Lee},
+         familyi={L\bibinitperiod},
+         given={Hon-Leung},
+         giveni={H\bibinithyphendelim L\bibinitperiod},
+      }}%
+      {{hash=NJ}{%
+         family={Ng},
+         familyi={N\bibinitperiod},
+         given={Julia},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=WY}{%
+         family={Wang},
+         familyi={W\bibinitperiod},
+         given={Yizhou},
+         giveni={Y\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {NVIDIA}%
+    }
+    \strng{namehash}{NDLHL+1}
+    \strng{fullhash}{NDLHLNJWY1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{The Safety Force Field}
+    \verb{url}
+    \verb https://www.nvidia.com/content/dam/en-zz/Solutions/self-driving-cars/
+    \verb safety-force-field/the-safety-force-field.pdf
+    \endverb
+    \field{year}{2019}
+  \endentry
+
+  \entry{sadigh2014learning}{inproceedings}{}
+    \name{author}{5}{}{%
+      {{hash=SD}{%
+         family={Sadigh},
+         familyi={S\bibinitperiod},
+         given={Dorsa},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=KES}{%
+         family={Kim},
+         familyi={K\bibinitperiod},
+         given={Eric\bibnamedelima S},
+         giveni={E\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+      {{hash=CS}{%
+         family={Coogan},
+         familyi={C\bibinitperiod},
+         given={Samuel},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=SSS}{%
+         family={Sastry},
+         familyi={S\bibinitperiod},
+         given={S\bibnamedelima Shankar},
+         giveni={S\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+      {{hash=SSA}{%
+         family={Seshia},
+         familyi={S\bibinitperiod},
+         given={Sanjit\bibnamedelima A},
+         giveni={S\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{SDKES+1}
+    \strng{fullhash}{SDKESCSSSSSSA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{IEEE Conference on Decision and Control}
+    \field{pages}{1091\bibrangedash 1096}
+    \field{title}{A learning based approach to control synthesis of markov
+  decision processes for linear temporal logic specifications}
+    \field{year}{2014}
+  \endentry
+
+  \entry{bouton2019reinforcement}{article}{}
+    \name{author}{6}{}{%
+      {{hash=BM}{%
+         family={{Bouton}},
+         familyi={B\bibinitperiod},
+         given={Maxime},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=KJ}{%
+         family={{Karlsson}},
+         familyi={K\bibinitperiod},
+         given={Jesper},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=NA}{%
+         family={{Nakhaei}},
+         familyi={N\bibinitperiod},
+         given={Alireza},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=FK}{%
+         family={{Fujimura}},
+         familyi={F\bibinitperiod},
+         given={Kikuo},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=KMJ}{%
+         family={{Kochenderfer}},
+         familyi={K\bibinitperiod},
+         given={Mykel\bibnamedelima J.},
+         giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+      {{hash=TJ}{%
+         family={{Tumova}},
+         familyi={T\bibinitperiod},
+         given={Jana},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \keyw{Computer Science - Robotics, Computer Science - Artificial
+  Intelligence}
+    \strng{namehash}{BMKJ+1}
+    \strng{fullhash}{BMKJNAFKKMJTJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{eid}{arXiv:1904.07189}
+    \verb{eprint}
+    \verb 1904.07189
+    \endverb
+    \field{pages}{arXiv:1904.07189}
+    \field{title}{{Reinforcement Learning with Probabilistic Guarantees for
+  Autonomous Driving}}
+    \field{journaltitle}{arXiv e-prints}
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{cs.RO}
+    \field{month}{04}
+    \field{year}{2019}
+  \endentry
+
+  \entry{moldovan2012risk}{incollection}{}
+    \name{author}{2}{}{%
+      {{hash=MTM}{%
+         family={Moldovan},
+         familyi={M\bibinitperiod},
+         given={Teodor\bibnamedelima M.},
+         giveni={T\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+      {{hash=AP}{%
+         family={Abbeel},
+         familyi={A\bibinitperiod},
+         given={Pieter},
+         giveni={P\bibinitperiod},
+      }}%
+    }
+    \name{editor}{4}{}{%
+      {{hash=PF}{%
+         family={Pereira},
+         familyi={P\bibinitperiod},
+         given={F.},
+         giveni={F\bibinitperiod},
+      }}%
+      {{hash=BCJC}{%
+         family={Burges},
+         familyi={B\bibinitperiod},
+         given={C.\bibnamedelima J.\bibnamedelima C.},
+         giveni={C\bibinitperiod\bibinitdelim J\bibinitperiod\bibinitdelim
+  C\bibinitperiod},
+      }}%
+      {{hash=BL}{%
+         family={Bottou},
+         familyi={B\bibinitperiod},
+         given={L.},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=WKQ}{%
+         family={Weinberger},
+         familyi={W\bibinitperiod},
+         given={K.\bibnamedelima Q.},
+         giveni={K\bibinitperiod\bibinitdelim Q\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Curran Associates, Inc.}%
+    }
+    \strng{namehash}{MTMAP1}
+    \strng{fullhash}{MTMAP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Advances in Neural Information Processing Systems 25}
+    \field{pages}{3131\bibrangedash 3139}
+    \field{title}{Risk Aversion in Markov Decision Processes via Near Optimal
+  Chernoff Bounds}
+    \verb{url}
+    \verb http://papers.nips.cc/paper/4514-risk-aversion-in-markov-decision-pro
+    \verb cesses-via-near-optimal-chernoff-bounds.pdf
+    \endverb
+    \field{year}{2012}
+  \endentry
+
+  \entry{tamar2014policy}{article}{}
+    \name{author}{3}{}{%
+      {{hash=TA}{%
+         family={Tamar},
+         familyi={T\bibinitperiod},
+         given={Aviv},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=GY}{%
+         family={Glassner},
+         familyi={G\bibinitperiod},
+         given={Yonatan},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=MS}{%
+         family={Mannor},
+         familyi={M\bibinitperiod},
+         given={Shie},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Citeseer}%
+    }
+    \strng{namehash}{TAGY+1}
+    \strng{fullhash}{TAGYMS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Policy gradients beyond expectations: Conditional
+  value-at-risk}
+    \field{journaltitle}{arXiv preprint arXiv:1404.3862}
+    \field{year}{2014}
+  \endentry
+
+  \entry{abbeel2005exploration}{inproceedings}{}
+    \name{author}{2}{}{%
+      {{hash=AP}{%
+         family={Abbeel},
+         familyi={A\bibinitperiod},
+         given={Pieter},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=NAY}{%
+         family={Ng},
+         familyi={N\bibinitperiod},
+         given={Andrew\bibnamedelima Y},
+         giveni={A\bibinitperiod\bibinitdelim Y\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{APNAY1}
+    \strng{fullhash}{APNAY1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Proceedings of the 22nd international conference on
+  Machine learning}
+    \field{pages}{1\bibrangedash 8}
+    \field{title}{Exploration and apprenticeship learning in reinforcement
+  learning}
+    \field{year}{2005}
+  \endentry
+
+  \entry{goodfellow2014explaining}{article}{}
+    \name{author}{3}{}{%
+      {{hash=GIJ}{%
+         family={Goodfellow},
+         familyi={G\bibinitperiod},
+         given={Ian\bibnamedelima J},
+         giveni={I\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+      {{hash=SJ}{%
+         family={Shlens},
+         familyi={S\bibinitperiod},
+         given={Jonathon},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=SC}{%
+         family={Szegedy},
+         familyi={S\bibinitperiod},
+         given={Christian},
+         giveni={C\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{GIJSJ+1}
+    \strng{fullhash}{GIJSJSC1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Explaining and harnessing adversarial examples}
+    \field{journaltitle}{arXiv preprint arXiv:1412.6572}
+    \field{year}{2014}
+  \endentry
+
+  \entry{moldovan2012safe}{article}{}
+    \name{author}{2}{}{%
+      {{hash=MT}{%
+         family={{Mihai Moldovan}},
+         familyi={M\bibinitperiod},
+         given={Teodor},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=AP}{%
+         family={{Abbeel}},
+         familyi={A\bibinitperiod},
+         given={Pieter},
+         giveni={P\bibinitperiod},
+      }}%
+    }
+    \keyw{Computer Science - Machine Learning}
+    \strng{namehash}{MTAP1}
+    \strng{fullhash}{MTAP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{eid}{arXiv:1205.4810}
+    \verb{eprint}
+    \verb 1205.4810
+    \endverb
+    \field{pages}{arXiv:1205.4810}
+    \field{title}{{Safe Exploration in Markov Decision Processes}}
+    \field{journaltitle}{arXiv e-prints}
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{cs.LG}
+    \field{month}{05}
+    \field{year}{2012}
+  \endentry
+
+  \entry{garcia2013safe}{article}{}
+    \name{author}{3}{}{%
+      {{hash=GJ}{%
+         family={Garc{\i}a},
+         familyi={G\bibinitperiod},
+         given={Javier},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=AD}{%
+         family={Acera},
+         familyi={A\bibinitperiod},
+         given={Daniel},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=FF}{%
+         family={Fern{\'a}ndez},
+         familyi={F\bibinitperiod},
+         given={Fernando},
+         giveni={F\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Citeseer}%
+    }
+    \strng{namehash}{GJAD+1}
+    \strng{fullhash}{GJADFF1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{pages}{14}
+    \field{title}{Safe reinforcement learning through probabilistic policy
+  reuse}
+    \field{journaltitle}{RLDM 2013}
+    \field{year}{2013}
+  \endentry
+
+  \entry{sui2015safe}{inproceedings}{}
+    \name{author}{4}{}{%
+      {{hash=SY}{%
+         family={Sui},
+         familyi={S\bibinitperiod},
+         given={Yanan},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=GA}{%
+         family={Gotovos},
+         familyi={G\bibinitperiod},
+         given={Alkis},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=BJ}{%
+         family={Burdick},
+         familyi={B\bibinitperiod},
+         given={Joel},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=KA}{%
+         family={Krause},
+         familyi={K\bibinitperiod},
+         given={Andreas},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{SYGA+1}
+    \strng{fullhash}{SYGABJKA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Conference on Machine Learning}
+    \field{pages}{997\bibrangedash 1005}
+    \field{title}{Safe exploration for optimization with Gaussian processes}
+    \field{year}{2015}
+  \endentry
+
+  \entry{garcia2015comprehensive}{article}{}
+    \name{author}{2}{}{%
+      {{hash=GJ}{%
+         family={Garc{\i}a},
+         familyi={G\bibinitperiod},
+         given={Javier},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=FF}{%
+         family={Fern{\'a}ndez},
+         familyi={F\bibinitperiod},
+         given={Fernando},
+         giveni={F\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{GJFF1}
+    \strng{fullhash}{GJFF1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{1}
+    \field{pages}{1437\bibrangedash 1480}
+    \field{title}{A comprehensive survey on safe reinforcement learning}
+    \field{volume}{16}
+    \field{journaltitle}{Journal of Machine Learning Research}
+    \field{year}{2015}
+  \endentry
+
+  \entry{amodei2016concrete}{article}{}
+    \name{author}{6}{}{%
+      {{hash=AD}{%
+         family={{Amodei}},
+         familyi={A\bibinitperiod},
+         given={Dario},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=OC}{%
+         family={{Olah}},
+         familyi={O\bibinitperiod},
+         given={Chris},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=SJ}{%
+         family={{Steinhardt}},
+         familyi={S\bibinitperiod},
+         given={Jacob},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=CP}{%
+         family={{Christiano}},
+         familyi={C\bibinitperiod},
+         given={Paul},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=SJ}{%
+         family={{Schulman}},
+         familyi={S\bibinitperiod},
+         given={John},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=MD}{%
+         family={{Man{\'e}}},
+         familyi={M\bibinitperiod},
+         given={Dan},
+         giveni={D\bibinitperiod},
+      }}%
+    }
+    \keyw{Computer Science - Artificial Intelligence, Computer Science -
+  Machine Learning}
+    \strng{namehash}{ADOC+1}
+    \strng{fullhash}{ADOCSJCPSJMD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{eid}{arXiv:1606.06565}
+    \verb{eprint}
+    \verb 1606.06565
+    \endverb
+    \field{title}{{Concrete Problems in AI Safety}}
+    \field{journaltitle}{arXiv e-prints}
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{cs.AI}
+    \field{month}{06}
+    \field{year}{2016}
+  \endentry
+
+  \entry{koopman2016challenges}{article}{}
+    \name{author}{2}{}{%
+      {{hash=KP}{%
+         family={Koopman},
+         familyi={K\bibinitperiod},
+         given={Philip},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=WM}{%
+         family={Wagner},
+         familyi={W\bibinitperiod},
+         given={Michael},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {JSTOR}%
+    }
+    \strng{namehash}{KPWM1}
+    \strng{fullhash}{KPWM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{1}
+    \field{pages}{15\bibrangedash 24}
+    \field{title}{Challenges in autonomous vehicle testing and validation}
+    \field{volume}{4}
+    \field{journaltitle}{SAE International Journal of Transportation Safety}
+    \field{year}{2016}
+  \endentry
+
+  \entry{alpern1987recognizing}{article}{}
+    \name{author}{2}{}{%
+      {{hash=AB}{%
+         family={Alpern},
+         familyi={A\bibinitperiod},
+         given={Bowen},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=SFB}{%
+         family={Schneider},
+         familyi={S\bibinitperiod},
+         given={Fred\bibnamedelima B.},
+         giveni={F\bibinitperiod\bibinitdelim B\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{ABSFB1}
+    \strng{fullhash}{ABSFB1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{3}
+    \field{pages}{117\bibrangedash 126}
+    \field{title}{Recognizing safety and liveness}
+    \field{volume}{2}
+    \field{journaltitle}{Distributed computing}
+    \field{year}{1987}
+  \endentry
+
+  \entry{hirshorn2017nasa}{book}{}
+    \name{author}{3}{}{%
+      {{hash=HSR}{%
+         family={Hirshorn},
+         familyi={H\bibinitperiod},
+         given={Steven\bibnamedelima R.},
+         giveni={S\bibinitperiod\bibinitdelim R\bibinitperiod},
+      }}%
+      {{hash=VLD}{%
+         family={Voss},
+         familyi={V\bibinitperiod},
+         given={Linda\bibnamedelima D.},
+         giveni={L\bibinitperiod\bibinitdelim D\bibinitperiod},
+      }}%
+      {{hash=BLK}{%
+         family={Bromley},
+         familyi={B\bibinitperiod},
+         given={Linda\bibnamedelima K.},
+         giveni={L\bibinitperiod\bibinitdelim K\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {NASA Special Publication}%
+    }
+    \strng{namehash}{HSRVLD+1}
+    \strng{fullhash}{HSRVLDBLK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{NASA Systems Engineering Handbook}
+    \field{year}{2017}
+  \endentry
+
+  \entry{katz2017reluplex}{inproceedings}{}
+    \name{author}{5}{}{%
+      {{hash=KG}{%
+         family={Katz},
+         familyi={K\bibinitperiod},
+         given={Guy},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=BC}{%
+         family={Barrett},
+         familyi={B\bibinitperiod},
+         given={Clark},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=DDL}{%
+         family={Dill},
+         familyi={D\bibinitperiod},
+         given={David\bibnamedelima L},
+         giveni={D\bibinitperiod\bibinitdelim L\bibinitperiod},
+      }}%
+      {{hash=JK}{%
+         family={Julian},
+         familyi={J\bibinitperiod},
+         given={Kyle},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=KMJ}{%
+         family={Kochenderfer},
+         familyi={K\bibinitperiod},
+         given={Mykel\bibnamedelima J},
+         giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{KGBC+1}
+    \strng{fullhash}{KGBCDDLJKKMJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Conference on Computer Aided Verification
+  (CAV)}
+    \field{pages}{97\bibrangedash 117}
+    \field{title}{Reluplex: An efficient SMT solver for verifying deep neural
+  networks}
+    \field{year}{2017}
+  \endentry
+
+  \entry{pnueli1977temporal}{inproceedings}{}
+    \name{author}{1}{}{%
+      {{hash=PA}{%
+         family={Pnueli},
+         familyi={P\bibinitperiod},
+         given={Amir},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{PA1}
+    \strng{fullhash}{PA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Foundations of Computer Science, 1977}
+    \field{pages}{46\bibrangedash 57}
+    \field{title}{The temporal logic of programs}
+    \field{year}{1977}
+  \endentry
+
+  \entry{clarke1981design}{inproceedings}{}
+    \name{author}{2}{}{%
+      {{hash=CEM}{%
+         family={Clarke},
+         familyi={C\bibinitperiod},
+         given={Edmund\bibnamedelima M},
+         giveni={E\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+      {{hash=EEA}{%
+         family={Emerson},
+         familyi={E\bibinitperiod},
+         given={E\bibnamedelima Allen},
+         giveni={E\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{CEMEEA1}
+    \strng{fullhash}{CEMEEA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Workshop on Logic of Programs}
+    \field{pages}{52\bibrangedash 71}
+    \field{title}{Design and synthesis of synchronization skeletons using
+  branching time temporal logic}
+    \field{year}{1981}
+  \endentry
+
+  \entry{emerson1986sometimes}{article}{}
+    \name{author}{2}{}{%
+      {{hash=EEA}{%
+         family={Emerson},
+         familyi={E\bibinitperiod},
+         given={E\bibnamedelima Allen},
+         giveni={E\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+      {{hash=HJY}{%
+         family={Halpern},
+         familyi={H\bibinitperiod},
+         given={Joseph\bibnamedelima Y},
+         giveni={J\bibinitperiod\bibinitdelim Y\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {ACM New York, NY, USA}%
+    }
+    \strng{namehash}{EEAHJY1}
+    \strng{fullhash}{EEAHJY1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{1}
+    \field{pages}{151\bibrangedash 178}
+    \field{title}{“Sometimes” and “not never” revisited: on branching
+  versus linear time temporal logic}
+    \field{volume}{33}
+    \field{journaltitle}{Journal of the ACM (JACM)}
+    \field{year}{1986}
+  \endentry
+
+  \entry{koymans1990specifying}{article}{}
+    \name{author}{1}{}{%
+      {{hash=KR}{%
+         family={Koymans},
+         familyi={K\bibinitperiod},
+         given={Ron},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{KR1}
+    \strng{fullhash}{KR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{pages}{255\bibrangedash 299}
+    \field{title}{Specifying real-time properties with metric temporal logic}
+    \field{volume}{2}
+    \field{journaltitle}{Real-Time Systems}
+    \field{year}{1990}
+  \endentry
+
+  \entry{maler2004monitoring}{incollection}{}
+    \name{author}{2}{}{%
+      {{hash=MO}{%
+         family={Maler},
+         familyi={M\bibinitperiod},
+         given={Oded},
+         giveni={O\bibinitperiod},
+      }}%
+      {{hash=ND}{%
+         family={Nickovic},
+         familyi={N\bibinitperiod},
+         given={Dejan},
+         giveni={D\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{MOND1}
+    \strng{fullhash}{MOND1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Formal Techniques, Modelling and Analysis of Timed and
+  Fault-Tolerant Systems}
+    \field{pages}{152\bibrangedash 166}
+    \field{title}{Monitoring Temporal Properties of Continuous Signals}
+    \field{year}{2004}
+  \endentry
+
+  \entry{lee2015adaptive}{inproceedings}{}
+    \name{author}{5}{}{%
+      {{hash=LR}{%
+         family={Lee},
+         familyi={L\bibinitperiod},
+         given={Ritchie},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=KMJ}{%
+         family={Kochenderfer},
+         familyi={K\bibinitperiod},
+         given={Mykel\bibnamedelima J},
+         giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+      {{hash=MOJ}{%
+         family={Mengshoel},
+         familyi={M\bibinitperiod},
+         given={Ole\bibnamedelima J},
+         giveni={O\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+      {{hash=BGP}{%
+         family={Brat},
+         familyi={B\bibinitperiod},
+         given={Guillaume\bibnamedelima P},
+         giveni={G\bibinitperiod\bibinitdelim P\bibinitperiod},
+      }}%
+      {{hash=OMP}{%
+         family={Owen},
+         familyi={O\bibinitperiod},
+         given={Michael\bibnamedelima P},
+         giveni={M\bibinitperiod\bibinitdelim P\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{LRKMJ+1}
+    \strng{fullhash}{LRKMJMOJBGPOMP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Digital Avionics Systems Conference (DASC)}
+    \field{pages}{6C2\bibrangedash 1}
+    \field{title}{Adaptive stress testing of airborne collision avoidance
+  systems}
+    \field{year}{2015}
+  \endentry
+
+  \entry{koren2018adaptive}{inproceedings}{}
+    \name{author}{4}{}{%
+      {{hash=KM}{%
+         family={Koren},
+         familyi={K\bibinitperiod},
+         given={Mark},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=AS}{%
+         family={Alsaif},
+         familyi={A\bibinitperiod},
+         given={Saud},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=LR}{%
+         family={Lee},
+         familyi={L\bibinitperiod},
+         given={Ritchie},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=KMJ}{%
+         family={Kochenderfer},
+         familyi={K\bibinitperiod},
+         given={Mykel\bibnamedelima J},
+         giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{KMAS+1}
+    \strng{fullhash}{KMASLRKMJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{IEEE Intelligent Vehicles Symposium (IV)}
+    \field{pages}{1\bibrangedash 7}
+    \field{title}{Adaptive stress testing for autonomous vehicles}
+    \field{year}{2018}
+  \endentry
+
+  \entry{leung2019backpropagation}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=LK}{%
+         family={Leung},
+         familyi={L\bibinitperiod},
+         given={Karen},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=AN}{%
+         family={Ar{\'e}chiga},
+         familyi={A\bibinitperiod},
+         given={Nikos},
+         giveni={N\bibinitperiod},
+      }}%
+      {{hash=PM}{%
+         family={Pavone},
+         familyi={P\bibinitperiod},
+         given={Marco},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{LKAN+1}
+    \strng{fullhash}{LKANPM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{IEEE Intelligent Vehicles Symposium (IV)}
+    \field{pages}{185\bibrangedash 192}
+    \field{title}{Backpropagation for parametric STL}
+    \field{year}{2019}
+  \endentry
+
+  \entry{delmas2019evaluation}{inproceedings}{}
+    \name{author}{4}{}{%
+      {{hash=DR}{%
+         family={Delmas},
+         familyi={D\bibinitperiod},
+         given={R{\'e}mi},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=LT}{%
+         family={Loquen},
+         familyi={L\bibinitperiod},
+         given={Thomas},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=BBJ}{%
+         family={Boada-Bauxell},
+         familyi={B\bibinithyphendelim B\bibinitperiod},
+         given={Josep},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=CM}{%
+         family={Carton},
+         familyi={C\bibinitperiod},
+         given={Mathieu},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{DRLT+1}
+    \strng{fullhash}{DRLTBBJCM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Workshop on Numerical Software
+  Verification}
+    \field{pages}{45\bibrangedash 59}
+    \field{title}{An Evaluation of {M}onte {C}arlo Tree Search for Property
+  Falsification on Hybrid Flight Control Laws}
+    \field{year}{2019}
+  \endentry
+
+  \entry{ernst2019arch}{article}{}
+    \name{author}{9}{}{%
+      {{hash=EG}{%
+         family={Ernst},
+         familyi={E\bibinitperiod},
+         given={Gidon},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=AP}{%
+         family={Arcaini},
+         familyi={A\bibinitperiod},
+         given={Paolo},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=DA}{%
+         family={Donze},
+         familyi={D\bibinitperiod},
+         given={Alexandre},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=FG}{%
+         family={Fainekos},
+         familyi={F\bibinitperiod},
+         given={Georgios},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=ML}{%
+         family={Mathesen},
+         familyi={M\bibinitperiod},
+         given={Logan},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=PG}{%
+         family={Pedrielli},
+         familyi={P\bibinitperiod},
+         given={Giulia},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=YS}{%
+         family={Yaghoubi},
+         familyi={Y\bibinitperiod},
+         given={Shakiba},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=YY}{%
+         family={Yamagata},
+         familyi={Y\bibinitperiod},
+         given={Yoriyuki},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=ZZ}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Zhenya},
+         giveni={Z\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {EasyChair}%
+    }
+    \strng{namehash}{EGAP+1}
+    \strng{fullhash}{EGAPDAFGMLPGYSYYZZ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{pages}{129\bibrangedash 140}
+    \field{title}{ARCH-COMP 2019 category report: falsification}
+    \field{volume}{61}
+    \field{journaltitle}{EPiC Series in Computing}
+    \field{year}{2019}
+  \endentry
+
+  \entry{julian2020validation}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=JKD}{%
+         family={Julian},
+         familyi={J\bibinitperiod},
+         given={Kyle\bibnamedelima D.},
+         giveni={K\bibinitperiod\bibinitdelim D\bibinitperiod},
+      }}%
+      {{hash=LR}{%
+         family={Lee},
+         familyi={L\bibinitperiod},
+         given={Ritchie},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=KMJ}{%
+         family={Kochenderfer},
+         familyi={K\bibinitperiod},
+         given={Mykel\bibnamedelima J.},
+         giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{JKDLR+1}
+    \strng{fullhash}{JKDLRKMJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{IEEE International Conference on Intelligent
+  Transportation Systems (ITSC)}
+    \field{title}{Validation of image-based neural network controllers through
+  adaptive stress testing}
+    \verb{url}
+    \verb https://arxiv.org/abs/2003.02381
+    \endverb
+    \field{year}{2020}
+  \endentry
+
+  \entry{kress2008automatically}{inproceedings}{}
+    \name{author}{2}{}{%
+      {{hash=KGH}{%
+         family={Kress-Gazit},
+         familyi={K\bibinithyphendelim G\bibinitperiod},
+         given={Hadas},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=PGJ}{%
+         family={Pappas},
+         familyi={P\bibinitperiod},
+         given={George\bibnamedelima J},
+         giveni={G\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \list{publisher}{1}{%
+      {IEEE Computer Society}%
+    }
+    \strng{namehash}{KGHPGJ1}
+    \strng{fullhash}{KGHPGJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Conference on Automation Science and
+  Engineering (CASE)}
+    \field{pages}{766\bibrangedash 771}
+    \field{title}{Automatically synthesizing a planning and control subsystem
+  for the DARPA Urban Challenge}
+    \field{year}{2008}
+  \endentry
+
+  \entry{qin2019automatic}{article}{}
+    \name{author}{4}{}{%
+      {{hash=QX}{%
+         family={{Qin}},
+         familyi={Q\bibinitperiod},
+         given={Xin},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=AN}{%
+         family={{Ar{\'e}chiga}},
+         familyi={A\bibinitperiod},
+         given={Nikos},
+         giveni={N\bibinitperiod},
+      }}%
+      {{hash=BA}{%
+         family={{Best}},
+         familyi={B\bibinitperiod},
+         given={Andrew},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=DJ}{%
+         family={{Deshmukh}},
+         familyi={D\bibinitperiod},
+         given={Jyotirmoy},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \keyw{Computer Science - Machine Learning, Computer Science - Artificial
+  Intelligence, Electrical Engineering and Systems Science - Systems and
+  Control}
+    \strng{namehash}{QXAN+1}
+    \strng{fullhash}{QXANBADJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{eid}{arXiv:1910.13645}
+    \verb{eprint}
+    \verb 1910.13645
+    \endverb
+    \field{pages}{arXiv:1910.13645}
+    \field{title}{{Automatic Testing and Falsification with Dynamically
+  Constrained Reinforcement Learning}}
+    \field{journaltitle}{arXiv e-prints}
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{cs.LG}
+    \field{month}{10}
+    \field{year}{2019}
+  \endentry
+
+  \entry{hekmatnejad2019encoding}{inproceedings}{}
+    \name{author}{7}{}{%
+      {{hash=HM}{%
+         family={Hekmatnejad},
+         familyi={H\bibinitperiod},
+         given={Mohammad},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=YS}{%
+         family={Yaghoubi},
+         familyi={Y\bibinitperiod},
+         given={Shakiba},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=DA}{%
+         family={Dokhanchi},
+         familyi={D\bibinitperiod},
+         given={Adel},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=AHB}{%
+         family={Amor},
+         familyi={A\bibinitperiod},
+         given={Heni\bibnamedelima Ben},
+         giveni={H\bibinitperiod\bibinitdelim B\bibinitperiod},
+      }}%
+      {{hash=SA}{%
+         family={Shrivastava},
+         familyi={S\bibinitperiod},
+         given={Aviral},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=KL}{%
+         family={Karam},
+         familyi={K\bibinitperiod},
+         given={Lina},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=FG}{%
+         family={Fainekos},
+         familyi={F\bibinitperiod},
+         given={Georgios},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{HMYS+1}
+    \strng{fullhash}{HMYSDAAHBSAKLFG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{IEEE International Conference on Formal Methods and
+  Models for System Design}
+    \field{pages}{1\bibrangedash 11}
+    \field{title}{Encoding and Monitoring Responsibility Sensitive Safety Rules
+  for Automated Vehicles in Signal Temporal Logic}
+    \field{year}{2019}
+  \endentry
+
+  \entry{hekmatnejad2020search}{article}{}
+    \name{author}{3}{}{%
+      {{hash=HM}{%
+         family={Hekmatnejad},
+         familyi={H\bibinitperiod},
+         given={Mohammad},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=HB}{%
+         family={Hoxha},
+         familyi={H\bibinitperiod},
+         given={Bardh},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=FG}{%
+         family={Fainekos},
+         familyi={F\bibinitperiod},
+         given={Georgios},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{HMHB+1}
+    \strng{fullhash}{HMHBFG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Search-based Test-Case Generation by Monitoring
+  Responsibility Safety Rules}
+    \field{journaltitle}{arXiv preprint arXiv:2005.00326}
+    \field{year}{2020}
+  \endentry
+
+  \entry{fainekos2009robustness}{article}{}
+    \name{author}{2}{}{%
+      {{hash=FGE}{%
+         family={Fainekos},
+         familyi={F\bibinitperiod},
+         given={Georgios\bibnamedelima E},
+         giveni={G\bibinitperiod\bibinitdelim E\bibinitperiod},
+      }}%
+      {{hash=PGJ}{%
+         family={Pappas},
+         familyi={P\bibinitperiod},
+         given={George\bibnamedelima J},
+         giveni={G\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Elsevier}%
+    }
+    \strng{namehash}{FGEPGJ1}
+    \strng{fullhash}{FGEPGJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{42}
+    \field{pages}{4262\bibrangedash 4291}
+    \field{title}{Robustness of temporal logic specifications for
+  continuous-time signals}
+    \field{volume}{410}
+    \field{journaltitle}{Theoretical Computer Science}
+    \field{year}{2009}
+  \endentry
+
+  \entry{Donze2010robust}{inproceedings}{}
+    \name{author}{2}{}{%
+      {{hash=DA}{%
+         family={Donz{\'e}},
+         familyi={D\bibinitperiod},
+         given={Alexandre},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=MO}{%
+         family={Maler},
+         familyi={M\bibinitperiod},
+         given={Oded},
+         giveni={O\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{DAMO1}
+    \strng{fullhash}{DAMO1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Conference on Formal Modeling and Analysis
+  of Timed Systems (FORMATS)}
+    \field{pages}{92\bibrangedash 106}
+    \field{title}{Robust satisfaction of temporal logic over real-valued
+  signals}
+    \field{year}{2010}
+  \endentry
+
+  \entry{yang2013dynamic}{thesis}{}
+    \name{author}{1}{}{%
+      {{hash=YH}{%
+         family={Yang},
+         familyi={Y\bibinitperiod},
+         given={Hengyi},
+         giveni={H\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{YH1}
+    \strng{fullhash}{YH1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Dynamic Programming algorithm for Computing Temporal Logic
+  Robustness}
+    \list{institution}{1}{%
+      {Arizona State University}%
+    }
+    \field{type}{mathesis}
+    \field{year}{2013}
+  \endentry
+
+  \entry{dreossi2015efficient}{inproceedings}{}
+    \name{author}{6}{}{%
+      {{hash=DT}{%
+         family={Dreossi},
+         familyi={D\bibinitperiod},
+         given={Tommaso},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=DT}{%
+         family={Dang},
+         familyi={D\bibinitperiod},
+         given={Thao},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=DA}{%
+         family={Donz{\'e}},
+         familyi={D\bibinitperiod},
+         given={Alexandre},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=KJ}{%
+         family={Kapinski},
+         familyi={K\bibinitperiod},
+         given={James},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=JX}{%
+         family={Jin},
+         familyi={J\bibinitperiod},
+         given={Xiaoqing},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=DJV}{%
+         family={Deshmukh},
+         familyi={D\bibinitperiod},
+         given={Jyotirmoy\bibnamedelima V},
+         giveni={J\bibinitperiod\bibinitdelim V\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{DTDT+1}
+    \strng{fullhash}{DTDTDAKJJXDJV1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{NASA Formal Methods Symposium (NFM)}
+    \field{pages}{127\bibrangedash 142}
+    \field{title}{Efficient guiding strategies for testing of temporal
+  properties of hybrid systems}
+    \field{year}{2015}
+  \endentry
+
+  \entry{ernst2019fast}{inproceedings}{}
+    \name{author}{4}{}{%
+      {{hash=EG}{%
+         family={Ernst},
+         familyi={E\bibinitperiod},
+         given={Gidon},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=SS}{%
+         family={Sedwards},
+         familyi={S\bibinitperiod},
+         given={Sean},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=ZZ}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Zhenya},
+         giveni={Z\bibinitperiod},
+      }}%
+      {{hash=HI}{%
+         family={Hasuo},
+         familyi={H\bibinitperiod},
+         given={Ichiro},
+         giveni={I\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{EGSS+1}
+    \strng{fullhash}{EGSSZZHI1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Conference on Quantitative Evaluation of
+  Systems (QEST)}
+    \field{pages}{165\bibrangedash 181}
+    \field{title}{Fast falsification of hybrid systems using probabilistically
+  adaptive input}
+    \field{year}{2019}
+  \endentry
+
+  \entry{pant2017smooth}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=PYV}{%
+         family={Pant},
+         familyi={P\bibinitperiod},
+         given={Yash\bibnamedelima Vardhan},
+         giveni={Y\bibinitperiod\bibinitdelim V\bibinitperiod},
+      }}%
+      {{hash=AH}{%
+         family={Abbas},
+         familyi={A\bibinitperiod},
+         given={Houssam},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=MR}{%
+         family={Mangharam},
+         familyi={M\bibinitperiod},
+         given={Rahul},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{PYVAH+1}
+    \strng{fullhash}{PYVAHMR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{IEEE Conference on Control Technology and Applications
+  (CCTA)}
+    \field{pages}{1235\bibrangedash 1240}
+    \field{title}{Smooth operator: Control using the smooth robustness of
+  temporal logic}
+    \field{year}{2017}
+  \endentry
+
+  \entry{zhang2019multi}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=ZZ}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Zhenya},
+         giveni={Z\bibinitperiod},
+      }}%
+      {{hash=HI}{%
+         family={Hasuo},
+         familyi={H\bibinitperiod},
+         given={Ichiro},
+         giveni={I\bibinitperiod},
+      }}%
+      {{hash=AP}{%
+         family={Arcaini},
+         familyi={A\bibinitperiod},
+         given={Paolo},
+         giveni={P\bibinitperiod},
+      }}%
+    }
+    \name{editor}{2}{}{%
+      {{hash=DI}{%
+         family={Dillig},
+         familyi={D\bibinitperiod},
+         given={Isil},
+         giveni={I\bibinitperiod},
+      }}%
+      {{hash=TS}{%
+         family={Tasiran},
+         familyi={T\bibinitperiod},
+         given={Serdar},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer International Publishing}%
+    }
+    \strng{namehash}{ZZHI+1}
+    \strng{fullhash}{ZZHIAP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Computer Aided Verification (CAV)}
+    \field{pages}{401\bibrangedash 420}
+    \field{title}{Multi-armed Bandits for Boolean Connectives in Hybrid System
+  Falsification}
+    \list{location}{1}{%
+      {Cham}%
+    }
+    \field{year}{2019}
+  \endentry
+
+  \entry{corso2020survey}{article}{}
+    \name{author}{5}{}{%
+      {{hash=CA}{%
+         family={{Corso}},
+         familyi={C\bibinitperiod},
+         given={Anthony},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=MRJ}{%
+         family={{Moss}},
+         familyi={M\bibinitperiod},
+         given={Robert\bibnamedelima J.},
+         giveni={R\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+      {{hash=KM}{%
+         family={{Koren}},
+         familyi={K\bibinitperiod},
+         given={Mark},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=LR}{%
+         family={{Lee}},
+         familyi={L\bibinitperiod},
+         given={Ritchie},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=KMJ}{%
+         family={{Kochenderfer}},
+         familyi={K\bibinitperiod},
+         given={Mykel\bibnamedelima J.},
+         giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+    }
+    \keyw{Computer Science - Machine Learning, Computer Science - Artificial
+  Intelligence, Electrical Engineering and Systems Science - Systems and
+  Control, Statistics - Machine Learning}
+    \strng{namehash}{CAMRJ+1}
+    \strng{fullhash}{CAMRJKMLRKMJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{eid}{arXiv:2005.02979}
+    \verb{eprint}
+    \verb 2005.02979
+    \endverb
+    \field{pages}{arXiv:2005.02979}
+    \field{title}{{A Survey of Algorithms for Black-Box Safety Validation}}
+    \field{journaltitle}{arXiv e-prints}
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{cs.LG}
+    \field{month}{05}
+    \field{year}{2020}
+  \endentry
+
+  \entry{kochenderfer2019algorithms}{book}{}
+    \name{author}{2}{}{%
+      {{hash=KMJ}{%
+         family={Kochenderfer},
+         familyi={K\bibinitperiod},
+         given={Mykel\bibnamedelima J},
+         giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+      {{hash=WTA}{%
+         family={Wheeler},
+         familyi={W\bibinitperiod},
+         given={Tim\bibnamedelima A},
+         giveni={T\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {MIT Press}%
+    }
+    \strng{namehash}{KMJWTA1}
+    \strng{fullhash}{KMJWTA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Algorithms for Optimization}
+    \field{year}{2019}
+  \endentry
+
+  \entry{esposito2004adaptive}{incollection}{}
+    \name{author}{3}{}{%
+      {{hash=EJM}{%
+         family={Esposito},
+         familyi={E\bibinitperiod},
+         given={Joel\bibnamedelima M},
+         giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+      {{hash=KJ}{%
+         family={Kim},
+         familyi={K\bibinitperiod},
+         given={Jongwoo},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=KV}{%
+         family={Kumar},
+         familyi={K\bibinitperiod},
+         given={Vijay},
+         giveni={V\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{EJMKJ+1}
+    \strng{fullhash}{EJMKJKV1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Algorithmic Foundations of Robotics VI}
+    \field{pages}{107\bibrangedash 121}
+    \field{title}{Adaptive {RRT}s for validating hybrid robotic control
+  systems}
+    \field{year}{2004}
+  \endentry
+
+  \entry{Nahhal2007Test}{inproceedings}{}
+    \name{author}{2}{}{%
+      {{hash=NT}{%
+         family={Nahhal},
+         familyi={N\bibinitperiod},
+         given={Tarik},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=DT}{%
+         family={Dang},
+         familyi={D\bibinitperiod},
+         given={Thao},
+         giveni={T\bibinitperiod},
+      }}%
+    }
+    \name{editor}{2}{}{%
+      {{hash=DW}{%
+         family={Damm},
+         familyi={D\bibinitperiod},
+         given={Werner},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=HH}{%
+         family={Hermanns},
+         familyi={H\bibinitperiod},
+         given={Holger},
+         giveni={H\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer Berlin Heidelberg}%
+    }
+    \strng{namehash}{NTDT1}
+    \strng{fullhash}{NTDT1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Computer Aided Verification}
+    \field{isbn}{978-3-540-73368-3}
+    \field{pages}{449\bibrangedash 462}
+    \field{title}{Test Coverage for Continuous and Hybrid Systems}
+    \list{location}{1}{%
+      {Berlin, Heidelberg}%
+    }
+    \field{year}{2007}
+  \endentry
+
+  \entry{dokhanchi2015requirements}{inproceedings}{}
+    \name{author}{5}{}{%
+      {{hash=DA}{%
+         family={Dokhanchi},
+         familyi={D\bibinitperiod},
+         given={Adel},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=ZA}{%
+         family={Zutshi},
+         familyi={Z\bibinitperiod},
+         given={Aditya},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=SRT}{%
+         family={Sriniva},
+         familyi={S\bibinitperiod},
+         given={Rahul\bibnamedelima T},
+         giveni={R\bibinitperiod\bibinitdelim T\bibinitperiod},
+      }}%
+      {{hash=SS}{%
+         family={Sankaranarayanan},
+         familyi={S\bibinitperiod},
+         given={Sriram},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=FG}{%
+         family={Fainekos},
+         familyi={F\bibinitperiod},
+         given={Georgios},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{DAZA+1}
+    \strng{fullhash}{DAZASRTSSFG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Conference on Embedded Software (EMSOFT)}
+    \field{pages}{31\bibrangedash 40}
+    \field{title}{Requirements driven falsification with coverage metrics}
+    \field{year}{2015}
+  \endentry
+
+  \entry{deshmukh2015stochastic}{inproceedings}{}
+    \name{author}{4}{}{%
+      {{hash=DJ}{%
+         family={Deshmukh},
+         familyi={D\bibinitperiod},
+         given={Jyotirmoy},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=JX}{%
+         family={Jin},
+         familyi={J\bibinitperiod},
+         given={Xiaoqing},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=KJ}{%
+         family={Kapinski},
+         familyi={K\bibinitperiod},
+         given={James},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=MO}{%
+         family={Maler},
+         familyi={M\bibinitperiod},
+         given={Oded},
+         giveni={O\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{DJJX+1}
+    \strng{fullhash}{DJJXKJMO1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Symposium on Automated Technology for
+  Verification and Analysis (ATVA)}
+    \field{pages}{500\bibrangedash 517}
+    \field{title}{Stochastic local search for falsification of hybrid systems}
+    \field{year}{2015}
+  \endentry
+
+  \entry{adimoolam2017classification}{inproceedings}{}
+    \name{author}{5}{}{%
+      {{hash=AA}{%
+         family={Adimoolam},
+         familyi={A\bibinitperiod},
+         given={Arvind},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=DT}{%
+         family={Dang},
+         familyi={D\bibinitperiod},
+         given={Thao},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=DA}{%
+         family={Donz{\'e}},
+         familyi={D\bibinitperiod},
+         given={Alexandre},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=KJ}{%
+         family={Kapinski},
+         familyi={K\bibinitperiod},
+         given={James},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=JX}{%
+         family={Jin},
+         familyi={J\bibinitperiod},
+         given={Xiaoqing},
+         giveni={X\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{AADT+1}
+    \strng{fullhash}{AADTDAKJJX1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Conference on Computer Aided Verification
+  (CAV)}
+    \field{pages}{483\bibrangedash 503}
+    \field{title}{Classification and coverage-based falsification for embedded
+  control systems}
+    \field{year}{2017}
+  \endentry
+
+  \entry{yaghoubi2019gray}{inproceedings}{}
+    \name{author}{2}{}{%
+      {{hash=YS}{%
+         family={Yaghoubi},
+         familyi={Y\bibinitperiod},
+         given={Shakiba},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=FG}{%
+         family={Fainekos},
+         familyi={F\bibinitperiod},
+         given={Georgios},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{YSFG1}
+    \strng{fullhash}{YSFG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{ACM International Conference on Hybrid Systems:
+  Computation and Control (HSCC)}
+    \field{pages}{179\bibrangedash 184}
+    \field{title}{Gray-box adversarial testing for control systems with machine
+  learning components}
+    \field{year}{2019}
+  \endentry
+
+  \entry{Mathesen2019falsification}{inproceedings}{}
+    \name{author}{4}{}{%
+      {{hash=ML}{%
+         family={Mathesen},
+         familyi={M\bibinitperiod},
+         given={Logan},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=YS}{%
+         family={Yaghoubi},
+         familyi={Y\bibinitperiod},
+         given={Shakiba},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=PG}{%
+         family={Pedrielli},
+         familyi={P\bibinitperiod},
+         given={Giulia},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=FG}{%
+         family={Fainekos},
+         familyi={F\bibinitperiod},
+         given={Georgios},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \list{language}{1}{%
+      {English (US)}%
+    }
+    \list{publisher}{1}{%
+      {IEEE Computer Society}%
+    }
+    \strng{namehash}{MLYS+1}
+    \strng{fullhash}{MLYSPGFG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Conference on Automation Science and
+  Engineering (CASE)}
+    \verb{doi}
+    \verb 10.1109/COASE.2019.8843005
+    \endverb
+    \field{pages}{991\bibrangedash 997}
+    \field{title}{Falsification of cyber-physical systems with robustness
+  uncertainty quantification through stochastic optimization with adaptive
+  restart}
+    \field{month}{08}
+    \field{year}{2019}
+  \endentry
+
+  \entry{zhao2003generating}{article}{}
+    \name{author}{3}{}{%
+      {{hash=ZQ}{%
+         family={Zhao},
+         familyi={Z\bibinitperiod},
+         given={Qianchuan},
+         giveni={Q\bibinitperiod},
+      }}%
+      {{hash=KBH}{%
+         family={Krogh},
+         familyi={K\bibinitperiod},
+         given={Bruce\bibnamedelima H},
+         giveni={B\bibinitperiod\bibinitdelim H\bibinitperiod},
+      }}%
+      {{hash=HP}{%
+         family={Hubbard},
+         familyi={H\bibinitperiod},
+         given={Paul},
+         giveni={P\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{ZQKBH+1}
+    \strng{fullhash}{ZQKBHHP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{4}
+    \field{pages}{49\bibrangedash 57}
+    \field{title}{Generating test inputs for embedded control systems}
+    \field{volume}{23}
+    \field{journaltitle}{IEEE Control Systems Magazine}
+    \field{year}{2003}
+  \endentry
+
+  \entry{zou2014safety}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=ZX}{%
+         family={Zou},
+         familyi={Z\bibinitperiod},
+         given={Xueyi},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=AR}{%
+         family={Alexander},
+         familyi={A\bibinitperiod},
+         given={Rob},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=MJ}{%
+         family={McDermid},
+         familyi={M\bibinitperiod},
+         given={John},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{ZXAR+1}
+    \strng{fullhash}{ZXARMJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Conference on Computer Safety, Reliability,
+  and Security (SafeComp)}
+    \field{pages}{33\bibrangedash 48}
+    \field{title}{Safety validation of sense and avoid algorithms using
+  simulation and evolutionary search}
+    \field{year}{2014}
+  \endentry
+
+  \entry{akazaki2017causality}{article}{}
+    \name{author}{3}{}{%
+      {{hash=AT}{%
+         family={Akazaki},
+         familyi={A\bibinitperiod},
+         given={Takumi},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=KY}{%
+         family={Kumazawa},
+         familyi={K\bibinitperiod},
+         given={Yoshihiro},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=HI}{%
+         family={Hasuo},
+         familyi={H\bibinitperiod},
+         given={Ichiro},
+         giveni={I\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ATKY+1}
+    \strng{fullhash}{ATKYHI1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Causality-Aided Falsification}
+    \field{volume}{257}
+    \field{journaltitle}{Electronic Proceedings in Theoretical Computer
+  Science}
+    \field{year}{2017}
+  \endentry
+
+  \entry{silvetti2017active}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=SS}{%
+         family={Silvetti},
+         familyi={S\bibinitperiod},
+         given={Simone},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=PA}{%
+         family={Policriti},
+         familyi={P\bibinitperiod},
+         given={Alberto},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=BL}{%
+         family={Bortolussi},
+         familyi={B\bibinitperiod},
+         given={Luca},
+         giveni={L\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{SSPA+1}
+    \strng{fullhash}{SSPABL1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Conference on Integrated Formal Methods
+  (iFM)}
+    \field{pages}{3\bibrangedash 17}
+    \field{title}{An active learning approach to the falsification of black box
+  cyber-physical systems}
+    \field{year}{2017}
+  \endentry
+
+  \entry{Deshmukh2017testing}{article}{}
+    \name{author}{5}{}{%
+      {{hash=DJ}{%
+         family={Deshmukh},
+         familyi={D\bibinitperiod},
+         given={Jyotirmoy},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=HM}{%
+         family={Horvat},
+         familyi={H\bibinitperiod},
+         given={Marko},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=JX}{%
+         family={Jin},
+         familyi={J\bibinitperiod},
+         given={Xiaoqing},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=MR}{%
+         family={Majumdar},
+         familyi={M\bibinitperiod},
+         given={Rupak},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=PVS}{%
+         family={Prabhu},
+         familyi={P\bibinitperiod},
+         given={Vinayak\bibnamedelima S.},
+         giveni={V\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Association for Computing Machinery}%
+    }
+    \strng{namehash}{DJHM+1}
+    \strng{fullhash}{DJHMJXMRPVS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1145/3126521
+    \endverb
+    \field{issn}{1539-9087}
+    \field{number}{5s}
+    \field{title}{Testing Cyber-Physical Systems through Bayesian Optimization}
+    \field{volume}{16}
+    \list{location}{1}{%
+      {New York, NY, USA}%
+    }
+    \field{journaltitle}{ACM Trans. Embed. Comput. Syst.}
+    \field{month}{09}
+    \field{year}{2017}
+  \endentry
+
+  \entry{mullins2018adaptive}{article}{}
+    \name{author}{4}{}{%
+      {{hash=MGE}{%
+         family={Mullins},
+         familyi={M\bibinitperiod},
+         given={Galen\bibnamedelima E},
+         giveni={G\bibinitperiod\bibinitdelim E\bibinitperiod},
+      }}%
+      {{hash=SPG}{%
+         family={Stankiewicz},
+         familyi={S\bibinitperiod},
+         given={Paul\bibnamedelima G},
+         giveni={P\bibinitperiod\bibinitdelim G\bibinitperiod},
+      }}%
+      {{hash=HRC}{%
+         family={Hawthorne},
+         familyi={H\bibinitperiod},
+         given={R\bibnamedelima Chad},
+         giveni={R\bibinitperiod\bibinitdelim C\bibinitperiod},
+      }}%
+      {{hash=GSK}{%
+         family={Gupta},
+         familyi={G\bibinitperiod},
+         given={Satyandra\bibnamedelima K},
+         giveni={S\bibinitperiod\bibinitdelim K\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Elsevier}%
+    }
+    \strng{namehash}{MGESPG+1}
+    \strng{fullhash}{MGESPGHRCGSK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{pages}{197\bibrangedash 215}
+    \field{title}{Adaptive Generation of Challenging Scenarios for Testing and
+  Evaluation of Autonomous Vehicles}
+    \field{volume}{137}
+    \field{journaltitle}{Journal of Systems and Software}
+    \field{year}{2018}
+  \endentry
+
+  \entry{abeysirigoonawardena2019generating}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=AY}{%
+         family={Abeysirigoonawardena},
+         familyi={A\bibinitperiod},
+         given={Yasasa},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=SF}{%
+         family={Shkurti},
+         familyi={S\bibinitperiod},
+         given={Florian},
+         giveni={F\bibinitperiod},
+      }}%
+      {{hash=DG}{%
+         family={Dudek},
+         familyi={D\bibinitperiod},
+         given={Gregory},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{AYSF+1}
+    \strng{fullhash}{AYSFDG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{IEEE International Conference on Robotics and Automation
+  (ICRA)}
+    \field{pages}{8271\bibrangedash 8277}
+    \field{title}{Generating adversarial driving scenarios in high-fidelity
+  simulators}
+    \field{year}{2019}
+  \endentry
+
+  \entry{yang2020stress}{inproceedings}{}
+    \name{author}{5}{}{%
+      {{hash=YX}{%
+         family={Yang},
+         familyi={Y\bibinitperiod},
+         given={Xuxi},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=EM}{%
+         family={Egorov},
+         familyi={E\bibinitperiod},
+         given={Maxim},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=EA}{%
+         family={Evans},
+         familyi={E\bibinitperiod},
+         given={Antony},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=MS}{%
+         family={Munn},
+         familyi={M\bibinitperiod},
+         given={Steven},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=WP}{%
+         family={Wei},
+         familyi={W\bibinitperiod},
+         given={Peng},
+         giveni={P\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{YXEM+1}
+    \strng{fullhash}{YXEMEAMSWP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{AIAA AVIATION Forum}
+    \field{pages}{2868}
+    \field{title}{Stress Testing of UAS Traffic Management Decision Making
+  Systems}
+    \field{year}{2020}
+  \endentry
+
+  \entry{annapureddy2010ant}{inproceedings}{}
+    \name{author}{2}{}{%
+      {{hash=AYSR}{%
+         family={Annapureddy},
+         familyi={A\bibinitperiod},
+         given={Yashwanth Singh\bibnamedelima Rahul},
+         giveni={Y\bibinitperiod\bibinitdelim S\bibinitperiod\bibinitdelim
+  R\bibinitperiod},
+      }}%
+      {{hash=FGE}{%
+         family={Fainekos},
+         familyi={F\bibinitperiod},
+         given={Georgios\bibnamedelima E},
+         giveni={G\bibinitperiod\bibinitdelim E\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{AYSRFGE1}
+    \strng{fullhash}{AYSRFGE1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Annual Conference on IEEE Industrial Electronics Society
+  (IECON)}
+    \field{pages}{91\bibrangedash 96}
+    \field{title}{Ant colonies for temporal logic falsification of hybrid
+  systems}
+    \field{year}{2010}
+  \endentry
+
+  \entry{hansen1996adapting}{inproceedings}{}
+    \name{author}{2}{}{%
+      {{hash=HN}{%
+         family={Hansen},
+         familyi={H\bibinitperiod},
+         given={Nikolaus},
+         giveni={N\bibinitperiod},
+      }}%
+      {{hash=OA}{%
+         family={Ostermeier},
+         familyi={O\bibinitperiod},
+         given={Andreas},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{HNOA1}
+    \strng{fullhash}{HNOA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{IEEE International Conference on Evolutionary
+  Computation}
+    \field{pages}{312\bibrangedash 317}
+    \field{title}{Adapting arbitrary normal mutation distributions in evolution
+  strategies: The covariance matrix adaptation}
+    \field{year}{1996}
+  \endentry
+
+  \entry{abbas2013probabilistic}{article}{}
+    \name{author}{5}{}{%
+      {{hash=AH}{%
+         family={Abbas},
+         familyi={A\bibinitperiod},
+         given={Houssam},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=FG}{%
+         family={Fainekos},
+         familyi={F\bibinitperiod},
+         given={Georgios},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=SS}{%
+         family={Sankaranarayanan},
+         familyi={S\bibinitperiod},
+         given={Sriram},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=IF}{%
+         family={Ivan{\v{c}}i{\'c}},
+         familyi={I\bibinitperiod},
+         given={Franjo},
+         giveni={F\bibinitperiod},
+      }}%
+      {{hash=GA}{%
+         family={Gupta},
+         familyi={G\bibinitperiod},
+         given={Aarti},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {ACM New York, NY, USA}%
+    }
+    \strng{namehash}{AHFG+1}
+    \strng{fullhash}{AHFGSSIFGA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{2s}
+    \field{pages}{1\bibrangedash 30}
+    \field{title}{Probabilistic temporal logic falsification of cyber-physical
+  systems}
+    \field{volume}{12}
+    \field{journaltitle}{ACM Transactions on Embedded Computing Systems (TECS)}
+    \field{year}{2013}
+  \endentry
+
+  \entry{luersen2004globalized}{article}{}
+    \name{author}{2}{}{%
+      {{hash=LMA}{%
+         family={Luersen},
+         familyi={L\bibinitperiod},
+         given={Marco\bibnamedelima A},
+         giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+      {{hash=LRR}{%
+         family={Le\bibnamedelima Riche},
+         familyi={L\bibinitperiod\bibinitdelim R\bibinitperiod},
+         given={Rodolphe},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Elsevier}%
+    }
+    \strng{namehash}{LMALRR1}
+    \strng{fullhash}{LMALRR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{23-26}
+    \field{pages}{2251\bibrangedash 2260}
+    \field{title}{Globalized Nelder--Mead method for engineering optimization}
+    \field{volume}{82}
+    \field{journaltitle}{Computers \& Structures}
+    \field{year}{2004}
+  \endentry
+
+  \entry{annapureddy2011staliro}{inproceedings}{}
+    \name{author}{4}{}{%
+      {{hash=AY}{%
+         family={Annapureddy},
+         familyi={A\bibinitperiod},
+         given={Yashwanth},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=LC}{%
+         family={Liu},
+         familyi={L\bibinitperiod},
+         given={Che},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=FG}{%
+         family={Fainekos},
+         familyi={F\bibinitperiod},
+         given={Georgios},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=SS}{%
+         family={Sankaranarayanan},
+         familyi={S\bibinitperiod},
+         given={Sriram},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{AYLC+1}
+    \strng{fullhash}{AYLCFGSS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Conference on Tools and Algorithms for the
+  Construction and Analysis of Systems (TACAS)}
+    \field{pages}{254\bibrangedash 257}
+    \field{title}{{S-TaLiRo: A Tool for Temporal Logic Falsification for Hybrid
+  Systems}}
+    \field{year}{2011}
+  \endentry
+
+  \entry{donze2010breach}{inproceedings}{}
+    \name{author}{1}{}{%
+      {{hash=DA}{%
+         family={Donz{\'e}},
+         familyi={D\bibinitperiod},
+         given={Alexandre},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{DA1}
+    \strng{fullhash}{DA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Conference on Computer Aided Verification
+  (CAV)}
+    \field{pages}{167\bibrangedash 170}
+    \field{title}{Breach, a toolbox for verification and parameter synthesis of
+  hybrid systems}
+    \field{year}{2010}
+  \endentry
+
+  \entry{aerts2018temporal}{inproceedings}{}
+    \name{author}{4}{}{%
+      {{hash=AA}{%
+         family={Aerts},
+         familyi={A\bibinitperiod},
+         given={Arend},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=MBT}{%
+         family={Minh},
+         familyi={M\bibinitperiod},
+         given={Bryan\bibnamedelima Tong},
+         giveni={B\bibinitperiod\bibinitdelim T\bibinitperiod},
+      }}%
+      {{hash=MMR}{%
+         family={Mousavi},
+         familyi={M\bibinitperiod},
+         given={Mohammad\bibnamedelima Reza},
+         giveni={M\bibinitperiod\bibinitdelim R\bibinitperiod},
+      }}%
+      {{hash=RMA}{%
+         family={Reniers},
+         familyi={R\bibinitperiod},
+         given={Michel\bibnamedelima A},
+         giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{AAMBT+1}
+    \strng{fullhash}{AAMBTMMRRMA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{IEEE International Conference on Software Testing,
+  Verification and Validation Workshops (ICSTW)}
+    \field{pages}{214\bibrangedash 223}
+    \field{title}{Temporal logic falsification of cyber-physical systems: An
+  input-signal-space optimization approach}
+    \field{year}{2018}
+  \endentry
+
+  \entry{lavalle2006planning}{book}{}
+    \name{author}{1}{}{%
+      {{hash=LSM}{%
+         family={LaValle},
+         familyi={L\bibinitperiod},
+         given={Steven\bibnamedelima M},
+         giveni={S\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Cambridge University Press}%
+    }
+    \strng{namehash}{LSM1}
+    \strng{fullhash}{LSM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Planning Algorithms}
+    \field{year}{2006}
+  \endentry
+
+  \entry{zutshi2014multiple}{inproceedings}{}
+    \name{author}{4}{}{%
+      {{hash=ZA}{%
+         family={Zutshi},
+         familyi={Z\bibinitperiod},
+         given={Aditya},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=DJV}{%
+         family={Deshmukh},
+         familyi={D\bibinitperiod},
+         given={Jyotirmoy\bibnamedelima V},
+         giveni={J\bibinitperiod\bibinitdelim V\bibinitperiod},
+      }}%
+      {{hash=SS}{%
+         family={Sankaranarayanan},
+         familyi={S\bibinitperiod},
+         given={Sriram},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=KJ}{%
+         family={Kapinski},
+         familyi={K\bibinitperiod},
+         given={James},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ZADJV+1}
+    \strng{fullhash}{ZADJVSSKJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Conference on Embedded Software (ICESS)}
+    \field{pages}{1\bibrangedash 10}
+    \field{title}{{Multiple shooting, CEGAR-based falsification for hybrid
+  systems}}
+    \field{year}{2014}
+  \endentry
+
+  \entry{lavalle1998rapidly}{report}{}
+    \name{author}{1}{}{%
+      {{hash=LSM}{%
+         family={Lavalle},
+         familyi={L\bibinitperiod},
+         given={Steven\bibnamedelima M.},
+         giveni={S\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{LSM2}
+    \strng{fullhash}{LSM2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Rapidly-Exploring Random Trees: A New Tool for Path Planning}
+    \list{institution}{1}{%
+      {Iowa State University}%
+    }
+    \field{type}{techreport}
+    \field{year}{1998}
+  \endentry
+
+  \entry{kim2005rrt}{report}{}
+    \name{author}{3}{}{%
+      {{hash=KJ}{%
+         family={Kim},
+         familyi={K\bibinitperiod},
+         given={Jongwoo},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=EJM}{%
+         family={Esposito},
+         familyi={E\bibinitperiod},
+         given={Joel\bibnamedelima M},
+         giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+      {{hash=KV}{%
+         family={Kumar},
+         familyi={K\bibinitperiod},
+         given={Vijay},
+         giveni={V\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{KJEJM+1}
+    \strng{fullhash}{KJEJMKV1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{An {RRT}-based algorithm for testing and validating
+  multi-robot controllers}
+    \list{institution}{1}{%
+      {Moore School of Electrical Engineering GRASP Lab}%
+    }
+    \field{type}{techreport}
+    \field{year}{2005}
+  \endentry
+
+  \entry{branicky2006sampling}{article}{}
+    \name{author}{4}{}{%
+      {{hash=BMS}{%
+         family={Branicky},
+         familyi={B\bibinitperiod},
+         given={Michael\bibnamedelima S},
+         giveni={M\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+      {{hash=CMM}{%
+         family={Curtiss},
+         familyi={C\bibinitperiod},
+         given={Michael\bibnamedelima M},
+         giveni={M\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+      {{hash=LJ}{%
+         family={Levine},
+         familyi={L\bibinitperiod},
+         given={Joshua},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=MS}{%
+         family={Morgan},
+         familyi={M\bibinitperiod},
+         given={Stuart},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {IET}%
+    }
+    \strng{namehash}{BMSCMM+1}
+    \strng{fullhash}{BMSCMMLJMS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{5}
+    \field{pages}{575\bibrangedash 590}
+    \field{title}{Sampling-based planning, control and verification of hybrid
+  systems}
+    \field{volume}{153}
+    \field{journaltitle}{IEEE Proceedings - Control Theory and Applications}
+    \field{year}{2006}
+  \endentry
+
+  \entry{dang2008sensitive}{inproceedings}{}
+    \name{author}{4}{}{%
+      {{hash=DT}{%
+         family={Dang},
+         familyi={D\bibinitperiod},
+         given={Thao},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=DA}{%
+         family={Donz{\'e}},
+         familyi={D\bibinitperiod},
+         given={Alexandre},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=MO}{%
+         family={Maler},
+         familyi={M\bibinitperiod},
+         given={Oded},
+         giveni={O\bibinitperiod},
+      }}%
+      {{hash=SN}{%
+         family={Shalev},
+         familyi={S\bibinitperiod},
+         given={Noa},
+         giveni={N\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{DTDA+1}
+    \strng{fullhash}{DTDAMOSN1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{IEEE Conference on Decision and Control (CDC)}
+    \field{pages}{4049\bibrangedash 4054}
+    \field{title}{Sensitive state-space exploration}
+    \field{year}{2008}
+  \endentry
+
+  \entry{plaku2009hybrid}{article}{}
+    \name{author}{3}{}{%
+      {{hash=PE}{%
+         family={Plaku},
+         familyi={P\bibinitperiod},
+         given={Erion},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=KLE}{%
+         family={Kavraki},
+         familyi={K\bibinitperiod},
+         given={Lydia\bibnamedelima E},
+         giveni={L\bibinitperiod\bibinitdelim E\bibinitperiod},
+      }}%
+      {{hash=VMY}{%
+         family={Vardi},
+         familyi={V\bibinitperiod},
+         given={Moshe\bibnamedelima Y},
+         giveni={M\bibinitperiod\bibinitdelim Y\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{PEKLE+1}
+    \strng{fullhash}{PEKLEVMY1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{2}
+    \field{pages}{157\bibrangedash 182}
+    \field{title}{Hybrid systems: from verification to falsification by
+  combining motion planning and discrete search}
+    \field{volume}{34}
+    \field{journaltitle}{Formal Methods in System Design}
+    \field{year}{2009}
+  \endentry
+
+  \entry{tuncali2019rapidly}{inproceedings}{}
+    \name{author}{2}{}{%
+      {{hash=TCE}{%
+         family={{Tuncali}},
+         familyi={T\bibinitperiod},
+         given={C.\bibnamedelima E.},
+         giveni={C\bibinitperiod\bibinitdelim E\bibinitperiod},
+      }}%
+      {{hash=FG}{%
+         family={{Fainekos}},
+         familyi={F\bibinitperiod},
+         given={G.},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{TCEFG1}
+    \strng{fullhash}{TCEFG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{IEEE Intelligent Transportation Systems Conference
+  (ITSC)}
+    \field{pages}{661\bibrangedash 666}
+    \field{title}{Rapidly-exploring Random Trees for Testing Automated
+  Vehicles}
+    \field{year}{2019}
+  \endentry
+
+  \entry{koschi2019computationally}{inproceedings}{}
+    \name{author}{4}{}{%
+      {{hash=KM}{%
+         family={Koschi},
+         familyi={K\bibinitperiod},
+         given={Markus},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=PC}{%
+         family={Pek},
+         familyi={P\bibinitperiod},
+         given={Christian},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=MS}{%
+         family={Maierhofer},
+         familyi={M\bibinitperiod},
+         given={Sebastian},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=AM}{%
+         family={Althoff},
+         familyi={A\bibinitperiod},
+         given={Matthias},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{KMPC+1}
+    \strng{fullhash}{KMPCMSAM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{IEEE International Conference on Intelligent
+  Transportation Systems (ITSC)}
+    \field{pages}{2879\bibrangedash 2886}
+    \field{title}{Computationally Efficient Safety Falsification of Adaptive
+  Cruise Control Systems}
+    \field{year}{2019}
+  \endentry
+
+  \entry{karaman2011sampling}{article}{}
+    \name{author}{2}{}{%
+      {{hash=KS}{%
+         family={Karaman},
+         familyi={K\bibinitperiod},
+         given={Sertac},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=FE}{%
+         family={Frazzoli},
+         familyi={F\bibinitperiod},
+         given={Emilio},
+         giveni={E\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Sage Publications Sage UK: London, England}%
+    }
+    \strng{namehash}{KSFE1}
+    \strng{fullhash}{KSFE1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{7}
+    \field{pages}{846\bibrangedash 894}
+    \field{title}{Sampling-based algorithms for optimal motion planning}
+    \field{volume}{30}
+    \field{journaltitle}{The International Journal of Robotics Research}
+    \field{year}{2011}
+  \endentry
+
+  \entry{dmubook}{book}{}
+    \name{author}{1}{}{%
+      {{hash=KMJ}{%
+         family={Kochenderfer},
+         familyi={K\bibinitperiod},
+         given={Mykel\bibnamedelima J.},
+         giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {MIT Press}%
+    }
+    \strng{namehash}{KMJ1}
+    \strng{fullhash}{KMJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Decision Making Under Uncertainty: Theory and Application}
+    \field{year}{2015}
+  \endentry
+
+  \entry{sutton2018reinforcement}{book}{}
+    \name{author}{2}{}{%
+      {{hash=SRS}{%
+         family={Sutton},
+         familyi={S\bibinitperiod},
+         given={Richard\bibnamedelima S},
+         giveni={R\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+      {{hash=BAG}{%
+         family={Barto},
+         familyi={B\bibinitperiod},
+         given={Andrew\bibnamedelima G},
+         giveni={A\bibinitperiod\bibinitdelim G\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {MIT press}%
+    }
+    \strng{namehash}{SRSBAG1}
+    \strng{fullhash}{SRSBAG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Reinforcement Learning: An Introduction}
+    \field{year}{2018}
+  \endentry
+
+  \entry{koren2019adaptive}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=KM}{%
+         family={Koren},
+         familyi={K\bibinitperiod},
+         given={Mark},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=CA}{%
+         family={Corso},
+         familyi={C\bibinitperiod},
+         given={Anthony},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=KMJ}{%
+         family={Kochenderfer},
+         familyi={K\bibinitperiod},
+         given={Mykel\bibnamedelima J.},
+         giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{KMCA+1}
+    \strng{fullhash}{KMCAKMJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Workshop on Safe Autonomy, Robotics: Science and Systems}
+    \field{title}{The adaptive stress testing formulation}
+    \field{year}{2019}
+  \endentry
+
+  \entry{kocsis2006bandit}{inproceedings}{}
+    \name{author}{2}{}{%
+      {{hash=KL}{%
+         family={Kocsis},
+         familyi={K\bibinitperiod},
+         given={Levente},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=SC}{%
+         family={Szepesv{\'a}ri},
+         familyi={S\bibinitperiod},
+         given={Csaba},
+         giveni={C\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{KLSC1}
+    \strng{fullhash}{KLSC1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{European Conference on Machine Learning (ECML)}
+    \field{pages}{282\bibrangedash 293}
+    \field{title}{Bandit based {M}onte-{C}arlo planning}
+    \field{year}{2006}
+  \endentry
+
+  \entry{coulom2007computing}{article}{}
+    \name{author}{1}{}{%
+      {{hash=CR}{%
+         family={Coulom},
+         familyi={C\bibinitperiod},
+         given={R{\'e}mi},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {IOS Press}%
+    }
+    \strng{namehash}{CR1}
+    \strng{fullhash}{CR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{4}
+    \field{pages}{198\bibrangedash 208}
+    \field{title}{Computing `{ELO} ratings' of move patterns in the game of Go}
+    \field{volume}{30}
+    \field{journaltitle}{ICGA Journal}
+    \field{year}{2007}
+  \endentry
+
+  \entry{chaslot2008progressive}{article}{}
+    \name{author}{5}{}{%
+      {{hash=CGMJB}{%
+         family={Chaslot},
+         familyi={C\bibinitperiod},
+         given={Guillaume M. J-B.},
+         giveni={G\bibinitperiod\bibinitdelim M\bibinitperiod\bibinitdelim
+  J\bibinithyphendelim B\bibinitperiod},
+      }}%
+      {{hash=WMHM}{%
+         family={Winands},
+         familyi={W\bibinitperiod},
+         given={Mark H.\bibnamedelima M.},
+         giveni={M\bibinitperiod\bibinitdelim H\bibinitperiod\bibinitdelim
+  M\bibinitperiod},
+      }}%
+      {{hash=HHJVD}{%
+         family={Herik},
+         familyi={H\bibinitperiod},
+         given={H.\bibnamedelima Jaap Van\bibnamedelima Den},
+         giveni={H\bibinitperiod\bibinitdelim J\bibinitperiod\bibinitdelim
+  V\bibinitperiod\bibinitdelim D\bibinitperiod},
+      }}%
+      {{hash=UJWHM}{%
+         family={Uiterwijk},
+         familyi={U\bibinitperiod},
+         given={Jos W. H.\bibnamedelima M.},
+         giveni={J\bibinitperiod\bibinitdelim W\bibinitperiod\bibinitdelim
+  H\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+      {{hash=BB}{%
+         family={Bouzy},
+         familyi={B\bibinitperiod},
+         given={Bruno},
+         giveni={B\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {World Scientific}%
+    }
+    \strng{namehash}{CGMJBWMHM+1}
+    \strng{fullhash}{CGMJBWMHMHHJVDUJWHMBB1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{03}
+    \field{pages}{343\bibrangedash 357}
+    \field{title}{Progressive strategies for {M}onte {C}arlo tree search}
+    \field{volume}{4}
+    \field{journaltitle}{New Mathematics and Natural Computation}
+    \field{year}{2008}
+  \endentry
+
+  \entry{wicker2018feature}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=WM}{%
+         family={Wicker},
+         familyi={W\bibinitperiod},
+         given={Matthew},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=HX}{%
+         family={Huang},
+         familyi={H\bibinitperiod},
+         given={Xiaowei},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=KM}{%
+         family={Kwiatkowska},
+         familyi={K\bibinitperiod},
+         given={Marta},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{WMHX+1}
+    \strng{fullhash}{WMHXKM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Conference on Tools and Algorithms for the
+  Construction and Analysis of Systems (TACAS)}
+    \field{pages}{408\bibrangedash 426}
+    \field{title}{Feature-guided black-box safety testing of deep neural
+  networks}
+    \field{year}{2018}
+  \endentry
+
+  \entry{zhang2018two}{article}{}
+    \name{author}{5}{}{%
+      {{hash=ZZ}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Zhenya},
+         giveni={Z\bibinitperiod},
+      }}%
+      {{hash=EG}{%
+         family={Ernst},
+         familyi={E\bibinitperiod},
+         given={Gidon},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=SS}{%
+         family={Sedwards},
+         familyi={S\bibinitperiod},
+         given={Sean},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=AP}{%
+         family={Arcaini},
+         familyi={A\bibinitperiod},
+         given={Paolo},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=HI}{%
+         family={Hasuo},
+         familyi={H\bibinitperiod},
+         given={Ichiro},
+         giveni={I\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{ZZEG+1}
+    \strng{fullhash}{ZZEGSSAPHI1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{11}
+    \field{pages}{2894\bibrangedash 2905}
+    \field{title}{Two-layered falsification of hybrid systems guided by {M}onte
+  {C}arlo tree search}
+    \field{volume}{37}
+    \field{journaltitle}{IEEE Transactions on Computer-Aided Design of
+  Integrated Circuits and Systems}
+    \field{year}{2018}
+  \endentry
+
+  \entry{mnih2015human}{article}{}
+    \true{moreauthor}
+    \true{morelabelname}
+    \name{author}{10}{}{%
+      {{hash=MV}{%
+         family={Mnih},
+         familyi={M\bibinitperiod},
+         given={Volodymyr},
+         giveni={V\bibinitperiod},
+      }}%
+      {{hash=KK}{%
+         family={Kavukcuoglu},
+         familyi={K\bibinitperiod},
+         given={Koray},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=SD}{%
+         family={Silver},
+         familyi={S\bibinitperiod},
+         given={David},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=RAA}{%
+         family={Rusu},
+         familyi={R\bibinitperiod},
+         given={Andrei\bibnamedelima A},
+         giveni={A\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+      {{hash=VJ}{%
+         family={Veness},
+         familyi={V\bibinitperiod},
+         given={Joel},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=BMG}{%
+         family={Bellemare},
+         familyi={B\bibinitperiod},
+         given={Marc\bibnamedelima G},
+         giveni={M\bibinitperiod\bibinitdelim G\bibinitperiod},
+      }}%
+      {{hash=GA}{%
+         family={Graves},
+         familyi={G\bibinitperiod},
+         given={Alex},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=RM}{%
+         family={Riedmiller},
+         familyi={R\bibinitperiod},
+         given={Martin},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=FAK}{%
+         family={Fidjeland},
+         familyi={F\bibinitperiod},
+         given={Andreas\bibnamedelima K},
+         giveni={A\bibinitperiod\bibinitdelim K\bibinitperiod},
+      }}%
+      {{hash=OG}{%
+         family={Ostrovski},
+         familyi={O\bibinitperiod},
+         given={Georg},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Nature Publishing Group}%
+    }
+    \strng{namehash}{MVKK+1}
+    \strng{fullhash}{MVKKSDRAAVJBMGGARMFAKOG+1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{7540}
+    \field{pages}{529\bibrangedash 533}
+    \field{title}{Human-level control through deep reinforcement learning}
+    \field{volume}{518}
+    \field{journaltitle}{Nature}
+    \field{year}{2015}
+  \endentry
+
+  \entry{Akazaki2018falsification}{inproceedings}{}
+    \name{author}{5}{}{%
+      {{hash=AT}{%
+         family={Akazaki},
+         familyi={A\bibinitperiod},
+         given={Takumi},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=LS}{%
+         family={Liu},
+         familyi={L\bibinitperiod},
+         given={Shuang},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=YY}{%
+         family={Yamagata},
+         familyi={Y\bibinitperiod},
+         given={Yoriyuki},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=DY}{%
+         family={Duan},
+         familyi={D\bibinitperiod},
+         given={Yihai},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=HJ}{%
+         family={Hao},
+         familyi={H\bibinitperiod},
+         given={Jianye},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer International Publishing}%
+    }
+    \strng{namehash}{ATLS+1}
+    \strng{fullhash}{ATLSYYDYHJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Symposium on Formal Methods (FM)}
+    \field{isbn}{978-3-319-95582-7}
+    \field{pages}{456\bibrangedash 465}
+    \field{title}{Falsification of Cyber-Physical Systems Using Deep
+  Reinforcement Learning}
+    \field{year}{2018}
+  \endentry
+
+  \entry{sutton2000policy}{inproceedings}{}
+    \name{author}{4}{}{%
+      {{hash=SRS}{%
+         family={Sutton},
+         familyi={S\bibinitperiod},
+         given={Richard\bibnamedelima S},
+         giveni={R\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+      {{hash=MDA}{%
+         family={McAllester},
+         familyi={M\bibinitperiod},
+         given={David\bibnamedelima A},
+         giveni={D\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+      {{hash=SSP}{%
+         family={Singh},
+         familyi={S\bibinitperiod},
+         given={Satinder\bibnamedelima P},
+         giveni={S\bibinitperiod\bibinitdelim P\bibinitperiod},
+      }}%
+      {{hash=MY}{%
+         family={Mansour},
+         familyi={M\bibinitperiod},
+         given={Yishay},
+         giveni={Y\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{SRSMDA+1}
+    \strng{fullhash}{SRSMDASSPMY1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Advances in Neural Information Processing Systems (NIPS)}
+    \field{pages}{1057\bibrangedash 1063}
+    \field{title}{Policy gradient methods for reinforcement learning with
+  function approximation}
+    \field{year}{2000}
+  \endentry
+
+  \entry{schulman2015trust}{inproceedings}{}
+    \name{author}{5}{}{%
+      {{hash=SJ}{%
+         family={Schulman},
+         familyi={S\bibinitperiod},
+         given={John},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=LS}{%
+         family={Levine},
+         familyi={L\bibinitperiod},
+         given={Sergey},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=AP}{%
+         family={Abbeel},
+         familyi={A\bibinitperiod},
+         given={Pieter},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=JM}{%
+         family={Jordan},
+         familyi={J\bibinitperiod},
+         given={Michael},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=MP}{%
+         family={Moritz},
+         familyi={M\bibinitperiod},
+         given={Philipp},
+         giveni={P\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{SJLS+1}
+    \strng{fullhash}{SJLSAPJMMP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Conference on Machine Learning (ICML)}
+    \field{pages}{1889\bibrangedash 1897}
+    \field{title}{Trust region policy optimization}
+    \field{year}{2015}
+  \endentry
+
+  \entry{koren2019efficient}{inproceedings}{}
+    \name{author}{2}{}{%
+      {{hash=KM}{%
+         family={Koren},
+         familyi={K\bibinitperiod},
+         given={Mark},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=KMJ}{%
+         family={Kochenderfer},
+         familyi={K\bibinitperiod},
+         given={Mykel\bibnamedelima J},
+         giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{KMKMJ1}
+    \strng{fullhash}{KMKMJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{IEEE International Conference on Intelligent
+  Transportation Systems (ITSC)}
+    \field{pages}{4178\bibrangedash 4183}
+    \field{title}{Efficient autonomy validation in simulation with adaptive
+  stress testing}
+    \field{year}{2019}
+  \endentry
+
+  \entry{corso2019adaptive}{inproceedings}{}
+    \name{author}{4}{}{%
+      {{hash=CA}{%
+         family={Corso},
+         familyi={C\bibinitperiod},
+         given={Anthony},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=DP}{%
+         family={Du},
+         familyi={D\bibinitperiod},
+         given={Peter},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=DCK}{%
+         family={Driggs-Campbell},
+         familyi={D\bibinithyphendelim C\bibinitperiod},
+         given={Katherine},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=KMJ}{%
+         family={Kochenderfer},
+         familyi={K\bibinitperiod},
+         given={Mykel\bibnamedelima J},
+         giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{CADP+1}
+    \strng{fullhash}{CADPDCKKMJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{IEEE International Conference on Intelligent
+  Transportation Systems (ITSC)}
+    \field{pages}{163\bibrangedash 168}
+    \field{title}{Adaptive Stress Testing with Reward Augmentation for
+  Autonomous Vehicle Validation}
+    \field{year}{2019}
+  \endentry
+
+  \entry{hochreiter1997long}{article}{}
+    \name{author}{2}{}{%
+      {{hash=HS}{%
+         family={Hochreiter},
+         familyi={H\bibinitperiod},
+         given={Sepp},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=SJ}{%
+         family={Schmidhuber},
+         familyi={S\bibinitperiod},
+         given={J{\"u}rgen},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {MIT Press}%
+    }
+    \strng{namehash}{HSSJ1}
+    \strng{fullhash}{HSSJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{8}
+    \field{pages}{1735\bibrangedash 1780}
+    \field{title}{Long short-term memory}
+    \field{volume}{9}
+    \field{journaltitle}{Neural Computation}
+    \field{year}{1997}
+  \endentry
+
+  \entry{mnih2016asynchronous}{inproceedings}{}
+    \name{author}{8}{}{%
+      {{hash=MV}{%
+         family={Mnih},
+         familyi={M\bibinitperiod},
+         given={Volodymyr},
+         giveni={V\bibinitperiod},
+      }}%
+      {{hash=BAP}{%
+         family={Badia},
+         familyi={B\bibinitperiod},
+         given={Adria\bibnamedelima Puigdomenech},
+         giveni={A\bibinitperiod\bibinitdelim P\bibinitperiod},
+      }}%
+      {{hash=MM}{%
+         family={Mirza},
+         familyi={M\bibinitperiod},
+         given={Mehdi},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=GA}{%
+         family={Graves},
+         familyi={G\bibinitperiod},
+         given={Alex},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=LT}{%
+         family={Lillicrap},
+         familyi={L\bibinitperiod},
+         given={Timothy},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=HT}{%
+         family={Harley},
+         familyi={H\bibinitperiod},
+         given={Tim},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=SD}{%
+         family={Silver},
+         familyi={S\bibinitperiod},
+         given={David},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=KK}{%
+         family={Kavukcuoglu},
+         familyi={K\bibinitperiod},
+         given={Koray},
+         giveni={K\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MVBAP+1}
+    \strng{fullhash}{MVBAPMMGALTHTSDKK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Conference on Machine Learning (ICML)}
+    \field{pages}{1928\bibrangedash 1937}
+    \field{title}{Asynchronous methods for deep reinforcement learning}
+    \field{year}{2016}
+  \endentry
+
+  \entry{kuutti2020training}{article}{}
+    \name{author}{3}{}{%
+      {{hash=KS}{%
+         family={{Kuutti}},
+         familyi={K\bibinitperiod},
+         given={Sampo},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=FS}{%
+         family={{Fallah}},
+         familyi={F\bibinitperiod},
+         given={Saber},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=BR}{%
+         family={{Bowden}},
+         familyi={B\bibinitperiod},
+         given={Richard},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \keyw{Computer Science - Machine Learning, Computer Science - Robotics,
+  Electrical Engineering and Systems Science - Systems and Control, Statistics
+  - Machine Learning}
+    \strng{namehash}{KSFS+1}
+    \strng{fullhash}{KSFSBR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{eid}{arXiv:2002.12078}
+    \verb{eprint}
+    \verb 2002.12078
+    \endverb
+    \field{pages}{arXiv:2002.12078}
+    \field{title}{{Training Adversarial Agents to Exploit Weaknesses in Deep
+  Control Policies}}
+    \field{journaltitle}{arXiv e-prints}
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{cs.LG}
+    \field{month}{02}
+    \field{year}{2020}
+  \endentry
+
+  \entry{behzadan2019adversarial}{article}{}
+    \name{author}{2}{}{%
+      {{hash=BV}{%
+         family={Behzadan},
+         familyi={B\bibinitperiod},
+         given={Vahid},
+         giveni={V\bibinitperiod},
+      }}%
+      {{hash=MA}{%
+         family={Munir},
+         familyi={M\bibinitperiod},
+         given={Arslan},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{BVMA1}
+    \strng{fullhash}{BVMA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Adversarial reinforcement learning framework for benchmarking
+  collision avoidance mechanisms in autonomous vehicles}
+    \field{journaltitle}{IEEE Intelligent Transportation Systems Magazine}
+    \field{year}{2019}
+  \endentry
+
+  \entry{lillicrap2015continuous}{article}{}
+    \name{author}{8}{}{%
+      {{hash=LTP}{%
+         family={{Lillicrap}},
+         familyi={L\bibinitperiod},
+         given={Timothy\bibnamedelima P.},
+         giveni={T\bibinitperiod\bibinitdelim P\bibinitperiod},
+      }}%
+      {{hash=HJJ}{%
+         family={{Hunt}},
+         familyi={H\bibinitperiod},
+         given={Jonathan\bibnamedelima J.},
+         giveni={J\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+      {{hash=PAe}{%
+         family={{Pritzel}},
+         familyi={P\bibinitperiod},
+         given={Alexand\bibnamedelima er},
+         giveni={A\bibinitperiod\bibinitdelim e\bibinitperiod},
+      }}%
+      {{hash=HN}{%
+         family={{Heess}},
+         familyi={H\bibinitperiod},
+         given={Nicolas},
+         giveni={N\bibinitperiod},
+      }}%
+      {{hash=ET}{%
+         family={{Erez}},
+         familyi={E\bibinitperiod},
+         given={Tom},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=TY}{%
+         family={{Tassa}},
+         familyi={T\bibinitperiod},
+         given={Yuval},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=SD}{%
+         family={{Silver}},
+         familyi={S\bibinitperiod},
+         given={David},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=WD}{%
+         family={{Wierstra}},
+         familyi={W\bibinitperiod},
+         given={Daan},
+         giveni={D\bibinitperiod},
+      }}%
+    }
+    \keyw{Computer Science - Machine Learning, Statistics - Machine Learning}
+    \strng{namehash}{LTPHJJ+1}
+    \strng{fullhash}{LTPHJJPAeHNETTYSDWD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{eid}{arXiv:1509.02971}
+    \verb{eprint}
+    \verb 1509.02971
+    \endverb
+    \field{pages}{arXiv:1509.02971}
+    \field{title}{{Continuous control with deep reinforcement learning}}
+    \field{journaltitle}{arXiv e-prints}
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{cs.LG}
+    \field{month}{09}
+    \field{year}{2015}
+  \endentry
+
+  \entry{glorot2010understanding}{inproceedings}{}
+    \name{author}{2}{}{%
+      {{hash=GX}{%
+         family={Glorot},
+         familyi={G\bibinitperiod},
+         given={Xavier},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=BY}{%
+         family={Bengio},
+         familyi={B\bibinitperiod},
+         given={Yoshua},
+         giveni={Y\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{GXBY1}
+    \strng{fullhash}{GXBY1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Conference on Artificial Intelligence and
+  Statistics (AISTATS)}
+    \field{pages}{249\bibrangedash 256}
+    \field{title}{Understanding the difficulty of training deep feedforward
+  neural networks}
+    \field{year}{2010}
+  \endentry
+
+  \entry{schaul2016prioritized}{inproceedings}{}
+    \name{author}{4}{}{%
+      {{hash=ST}{%
+         family={Schaul},
+         familyi={S\bibinitperiod},
+         given={Tom},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=QJ}{%
+         family={Quan},
+         familyi={Q\bibinitperiod},
+         given={John},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=AI}{%
+         family={Antonoglou},
+         familyi={A\bibinitperiod},
+         given={Ioannis},
+         giveni={I\bibinitperiod},
+      }}%
+      {{hash=SD}{%
+         family={Silver},
+         familyi={S\bibinitperiod},
+         given={David},
+         giveni={D\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{STQJ+1}
+    \strng{fullhash}{STQJAISD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Conference on Learning Representations}
+    \field{title}{Prioritized Experience Replay}
+    \field{year}{2016}
+  \endentry
+
+  \entry{huber1992robust}{incollection}{}
+    \name{author}{1}{}{%
+      {{hash=HPJ}{%
+         family={Huber},
+         familyi={H\bibinitperiod},
+         given={Peter\bibnamedelima J},
+         giveni={P\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{HPJ1}
+    \strng{fullhash}{HPJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Breakthroughs in Statistics}
+    \field{pages}{492\bibrangedash 518}
+    \field{title}{Robust estimation of a location parameter}
+    \field{year}{1992}
+  \endentry
+
+  \entry{hahn1972sample}{article}{}
+    \name{author}{1}{}{%
+      {{hash=HG}{%
+         family={Hahn},
+         familyi={H\bibinitperiod},
+         given={GJ},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{HG1}
+    \strng{fullhash}{HG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Sample sizes for {M}onte {C}arlo simulation}
+    \field{journaltitle}{IEEE Transactions on Systems, Man, and Cybernetics}
+    \field{year}{1972}
+  \endentry
+
+  \entry{kim2016improving}{article}{}
+    \name{author}{2}{}{%
+      {{hash=KY}{%
+         family={Kim},
+         familyi={K\bibinitperiod},
+         given={Youngjun},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=KMJ}{%
+         family={Kochenderfer},
+         familyi={K\bibinitperiod},
+         given={Mykel\bibnamedelima J},
+         giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{2}{%
+      {American Institute of Aeronautics}%
+      {Astronautics}%
+    }
+    \strng{namehash}{KYKMJ1}
+    \strng{fullhash}{KYKMJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{2}
+    \field{pages}{55\bibrangedash 62}
+    \field{title}{Improving aircraft collision risk estimation using the
+  cross-entropy method}
+    \field{volume}{24}
+    \field{journaltitle}{Journal of Air Transportation}
+    \field{year}{2016}
+  \endentry
+
+  \entry{uesato2019rigorous}{inproceedings}{}
+    \name{author}{9}{}{%
+      {{hash=UJ}{%
+         family={Uesato},
+         familyi={U\bibinitperiod},
+         given={Jonathan},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=KA}{%
+         family={Kumar},
+         familyi={K\bibinitperiod},
+         given={Ananya},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=SC}{%
+         family={Szepesv{\'{a}}ri},
+         familyi={S\bibinitperiod},
+         given={Csaba},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=ET}{%
+         family={Erez},
+         familyi={E\bibinitperiod},
+         given={Tom},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=RA}{%
+         family={Ruderman},
+         familyi={R\bibinitperiod},
+         given={Avraham},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=AK}{%
+         family={Anderson},
+         familyi={A\bibinitperiod},
+         given={Keith},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=DKD}{%
+         family={Dvijotham},
+         familyi={D\bibinitperiod},
+         given={Krishnamurthy\bibnamedelima (Dj)},
+         giveni={K\bibinitperiod\bibinitdelim D\bibinitperiod},
+      }}%
+      {{hash=HN}{%
+         family={Heess},
+         familyi={H\bibinitperiod},
+         given={Nicolas},
+         giveni={N\bibinitperiod},
+      }}%
+      {{hash=KP}{%
+         family={Kohli},
+         familyi={K\bibinitperiod},
+         given={Pushmeet},
+         giveni={P\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{UJKA+1}
+    \strng{fullhash}{UJKASCETRAAKDKDHNKP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Conference on Learning Representations}
+    \field{title}{Rigorous Agent Evaluation: An Adversarial Approach to Uncover
+  Catastrophic Failures}
+    \field{year}{2019}
+  \endentry
+
+  \entry{neufeld2014adaptive}{inproceedings}{}
+    \name{author}{4}{}{%
+      {{hash=NJ}{%
+         family={Neufeld},
+         familyi={N\bibinitperiod},
+         given={James},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=GA}{%
+         family={Gyorgy},
+         familyi={G\bibinitperiod},
+         given={Andras},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=SC}{%
+         family={Szepesvari},
+         familyi={S\bibinitperiod},
+         given={Csaba},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=SD}{%
+         family={Schuurmans},
+         familyi={S\bibinitperiod},
+         given={Dale},
+         giveni={D\bibinitperiod},
+      }}%
+    }
+    \name{editor}{2}{}{%
+      {{hash=XEP}{%
+         family={Xing},
+         familyi={X\bibinitperiod},
+         given={Eric\bibnamedelima P.},
+         giveni={E\bibinitperiod\bibinitdelim P\bibinitperiod},
+      }}%
+      {{hash=JT}{%
+         family={Jebara},
+         familyi={J\bibinitperiod},
+         given={Tony},
+         giveni={T\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {PMLR}%
+    }
+    \strng{namehash}{NJGA+1}
+    \strng{fullhash}{NJGASCSD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Conference on Machine Learning (ICML)}
+    \field{pages}{1944\bibrangedash 1952}
+    \field{series}{Proceedings of Machine Learning Research}
+    \field{title}{Adaptive Monte Carlo via Bandit Allocation}
+    \list{location}{1}{%
+      {Bejing, China}%
+    }
+    \field{month}{06}
+    \field{year}{2014}
+  \endentry
+
+  \entry{kahn1951estimation}{article}{}
+    \name{author}{2}{}{%
+      {{hash=KH}{%
+         family={Kahn},
+         familyi={K\bibinitperiod},
+         given={Herman},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=HTE}{%
+         family={Harris},
+         familyi={H\bibinitperiod},
+         given={Theodore\bibnamedelima E},
+         giveni={T\bibinitperiod\bibinitdelim E\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{KHHTE1}
+    \strng{fullhash}{KHHTE1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{pages}{27\bibrangedash 30}
+    \field{title}{Estimation of particle transmission by random sampling}
+    \field{volume}{12}
+    \field{journaltitle}{National Bureau of Standards Applied Mathematics
+  Series}
+    \field{year}{1951}
+  \endentry
+
+  \entry{norden2019efficient}{article}{}
+    \name{author}{3}{}{%
+      {{hash=NJ}{%
+         family={{Norden}},
+         familyi={N\bibinitperiod},
+         given={Justin},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=OM}{%
+         family={{O'Kelly}},
+         familyi={O\bibinitperiod},
+         given={Matthew},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=SA}{%
+         family={{Sinha}},
+         familyi={S\bibinitperiod},
+         given={Aman},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \keyw{Computer Science - Machine Learning, Computer Science - Robotics,
+  Statistics - Machine Learning}
+    \strng{namehash}{NJOM+1}
+    \strng{fullhash}{NJOMSA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{eid}{arXiv:1912.03618}
+    \verb{eprint}
+    \verb 1912.03618
+    \endverb
+    \field{pages}{arXiv:1912.03618}
+    \field{title}{{Efficient Black-box Assessment of Autonomous Vehicle
+  Safety}}
+    \field{journaltitle}{arXiv e-prints}
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{cs.LG}
+    \field{month}{12}
+    \field{year}{2019}
+  \endentry
+
+  \entry{huang2018versatile}{inproceedings}{}
+    \name{author}{5}{}{%
+      {{hash=HZ}{%
+         family={Huang},
+         familyi={H\bibinitperiod},
+         given={Zhiyuan},
+         giveni={Z\bibinitperiod},
+      }}%
+      {{hash=GY}{%
+         family={Guo},
+         familyi={G\bibinitperiod},
+         given={Yaohui},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=AM}{%
+         family={Arief},
+         familyi={A\bibinitperiod},
+         given={Mansur},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=LH}{%
+         family={Lam},
+         familyi={L\bibinitperiod},
+         given={Henry},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=ZD}{%
+         family={Zhao},
+         familyi={Z\bibinitperiod},
+         given={Ding},
+         giveni={D\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{HZGY+1}
+    \strng{fullhash}{HZGYAMLHZD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{American Control Conference (ACC)}
+    \field{pages}{4796\bibrangedash 4802}
+    \field{title}{A versatile approach to evaluating and testing automated
+  vehicles based on kernel methods}
+    \field{year}{2018}
+  \endentry
+
+  \entry{rubinstein2013cross}{book}{}
+    \name{author}{2}{}{%
+      {{hash=RRY}{%
+         family={Rubinstein},
+         familyi={R\bibinitperiod},
+         given={Reuven\bibnamedelima Y},
+         giveni={R\bibinitperiod\bibinitdelim Y\bibinitperiod},
+      }}%
+      {{hash=KDP}{%
+         family={Kroese},
+         familyi={K\bibinitperiod},
+         given={Dirk\bibnamedelima P},
+         giveni={D\bibinitperiod\bibinitdelim P\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer Science \& Business Media}%
+    }
+    \strng{namehash}{RRYKDP1}
+    \strng{fullhash}{RRYKDP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{The Cross-Entropy Method: A Unified Approach to Combinatorial
+  Optimization, {M}onte {C}arlo Simulation and Machine Learning}
+    \field{year}{2013}
+  \endentry
+
+  \entry{de2005tutorial}{article}{}
+    \name{author}{4}{}{%
+      {{hash=DBPT}{%
+         family={De\bibnamedelima Boer},
+         familyi={D\bibinitperiod\bibinitdelim B\bibinitperiod},
+         given={Pieter-Tjerk},
+         giveni={P\bibinithyphendelim T\bibinitperiod},
+      }}%
+      {{hash=KDP}{%
+         family={Kroese},
+         familyi={K\bibinitperiod},
+         given={Dirk\bibnamedelima P},
+         giveni={D\bibinitperiod\bibinitdelim P\bibinitperiod},
+      }}%
+      {{hash=MS}{%
+         family={Mannor},
+         familyi={M\bibinitperiod},
+         given={Shie},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=RRY}{%
+         family={Rubinstein},
+         familyi={R\bibinitperiod},
+         given={Reuven\bibnamedelima Y},
+         giveni={R\bibinitperiod\bibinitdelim Y\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{DBPTKDP+1}
+    \strng{fullhash}{DBPTKDPMSRRY1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{1}
+    \field{pages}{19\bibrangedash 67}
+    \field{title}{A tutorial on the cross-entropy method}
+    \field{volume}{134}
+    \field{journaltitle}{Annals of Operations Research}
+    \field{year}{2005}
+  \endentry
+
+  \entry{okelly2018scalable}{inproceedings}{}
+    \name{author}{5}{}{%
+      {{hash=OM}{%
+         family={O'Kelly},
+         familyi={O\bibinitperiod},
+         given={Matthew},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=SA}{%
+         family={Sinha},
+         familyi={S\bibinitperiod},
+         given={Aman},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=NH}{%
+         family={Namkoong},
+         familyi={N\bibinitperiod},
+         given={Hongseok},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=TR}{%
+         family={Tedrake},
+         familyi={T\bibinitperiod},
+         given={Russ},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=DJC}{%
+         family={Duchi},
+         familyi={D\bibinitperiod},
+         given={John\bibnamedelima C},
+         giveni={J\bibinitperiod\bibinitdelim C\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{OMSA+1}
+    \strng{fullhash}{OMSANHTRDJC1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Advances in Neural Information Processing Systems (NIPS)}
+    \field{pages}{9827\bibrangedash 9838}
+    \field{title}{Scalable end-to-end autonomous vehicle testing via rare-event
+  simulation}
+    \field{year}{2018}
+  \endentry
+
+  \entry{zhao2016accelerated}{article}{}
+    \name{author}{7}{}{%
+      {{hash=ZD}{%
+         family={Zhao},
+         familyi={Z\bibinitperiod},
+         given={Ding},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=LH}{%
+         family={Lam},
+         familyi={L\bibinitperiod},
+         given={Henry},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=PH}{%
+         family={Peng},
+         familyi={P\bibinitperiod},
+         given={Huei},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=BS}{%
+         family={Bao},
+         familyi={B\bibinitperiod},
+         given={Shan},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=LDJ}{%
+         family={LeBlanc},
+         familyi={L\bibinitperiod},
+         given={David\bibnamedelima J},
+         giveni={D\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+      {{hash=NK}{%
+         family={Nobukawa},
+         familyi={N\bibinitperiod},
+         given={Kazutoshi},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=PCS}{%
+         family={Pan},
+         familyi={P\bibinitperiod},
+         given={Christopher\bibnamedelima S},
+         giveni={C\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{ZDLH+1}
+    \strng{fullhash}{ZDLHPHBSLDJNKPCS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{3}
+    \field{pages}{595\bibrangedash 607}
+    \field{title}{Accelerated evaluation of automated vehicles safety in
+  lane-change scenarios based on importance sampling techniques}
+    \field{volume}{18}
+    \field{journaltitle}{IEEE Transactions on Intelligent Transportation
+  Systems}
+    \field{year}{2016}
+  \endentry
+
+  \entry{huang2017accelerated}{article}{}
+    \name{author}{4}{}{%
+      {{hash=HZ}{%
+         family={Huang},
+         familyi={H\bibinitperiod},
+         given={Zhiyuan},
+         giveni={Z\bibinitperiod},
+      }}%
+      {{hash=LH}{%
+         family={Lam},
+         familyi={L\bibinitperiod},
+         given={Henry},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=LDJ}{%
+         family={LeBlanc},
+         familyi={L\bibinitperiod},
+         given={David\bibnamedelima J},
+         giveni={D\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+      {{hash=ZD}{%
+         family={Zhao},
+         familyi={Z\bibinitperiod},
+         given={Ding},
+         giveni={D\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{HZLH+1}
+    \strng{fullhash}{HZLHLDJZD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{9}
+    \field{pages}{2845\bibrangedash 2855}
+    \field{title}{Accelerated evaluation of automated vehicles using piecewise
+  mixture models}
+    \field{volume}{19}
+    \field{journaltitle}{IEEE Transactions on Intelligent Transportation
+  Systems}
+    \field{year}{2017}
+  \endentry
+
+  \entry{sankaranarayanan2012falsification}{inproceedings}{}
+    \name{author}{2}{}{%
+      {{hash=SS}{%
+         family={Sankaranarayanan},
+         familyi={S\bibinitperiod},
+         given={Sriram},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=FG}{%
+         family={Fainekos},
+         familyi={F\bibinitperiod},
+         given={Georgios},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{SSFG1}
+    \strng{fullhash}{SSFG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{ACM International Conference on Hybrid Systems:
+  Computation and Control (HSCC)}
+    \field{pages}{125\bibrangedash 134}
+    \field{title}{Falsification of temporal properties of hybrid systems using
+  the cross-entropy method}
+    \field{year}{2012}
+  \endentry
+
+  \entry{koza1992genetic}{book}{}
+    \name{author}{1}{}{%
+      {{hash=KJR}{%
+         family={Koza},
+         familyi={K\bibinitperiod},
+         given={John\bibnamedelima R},
+         giveni={J\bibinitperiod\bibinitdelim R\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {MIT Press}%
+    }
+    \strng{namehash}{KJR1}
+    \strng{fullhash}{KJR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Genetic Programming: On the Programming of Computers by Means
+  of Natural Selection}
+    \field{volume}{1}
+    \field{year}{1992}
+  \endentry
+
+  \entry{williams2006gaussian}{book}{}
+    \name{author}{2}{}{%
+      {{hash=WCK}{%
+         family={Williams},
+         familyi={W\bibinitperiod},
+         given={Christopher\bibnamedelima KI},
+         giveni={C\bibinitperiod\bibinitdelim K\bibinitperiod},
+      }}%
+      {{hash=RCE}{%
+         family={Rasmussen},
+         familyi={R\bibinitperiod},
+         given={Carl\bibnamedelima Edward},
+         giveni={C\bibinitperiod\bibinitdelim E\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {MIT press Cambridge, MA}%
+    }
+    \strng{namehash}{WCKRCE1}
+    \strng{fullhash}{WCKRCE1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{3}
+    \field{title}{Gaussian processes for machine learning}
+    \field{volume}{2}
+    \field{year}{2006}
+  \endentry
+
+  \entry{jidling2017linearly}{inproceedings}{}
+    \name{author}{4}{}{%
+      {{hash=JC}{%
+         family={Jidling},
+         familyi={J\bibinitperiod},
+         given={Carl},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=WN}{%
+         family={Wahlstr{\"o}m},
+         familyi={W\bibinitperiod},
+         given={Niklas},
+         giveni={N\bibinitperiod},
+      }}%
+      {{hash=WA}{%
+         family={Wills},
+         familyi={W\bibinitperiod},
+         given={Adrian},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=STB}{%
+         family={Sch{\"o}n},
+         familyi={S\bibinitperiod},
+         given={Thomas\bibnamedelima B},
+         giveni={T\bibinitperiod\bibinitdelim B\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{JCWN+1}
+    \strng{fullhash}{JCWNWASTB1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Advances in Neural Information Processing Systems (NIPS)}
+    \field{pages}{1215\bibrangedash 1224}
+    \field{title}{Linearly Constrained {G}aussian Processes}
+    \field{year}{2017}
+  \endentry
+
+  \entry{botev2017normal}{article}{}
+    \name{author}{1}{}{%
+      {{hash=BZI}{%
+         family={Botev},
+         familyi={B\bibinitperiod},
+         given={Zdravko\bibnamedelima I},
+         giveni={Z\bibinitperiod\bibinitdelim I\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{BZI1}
+    \strng{fullhash}{BZI1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{1}
+    \field{pages}{125\bibrangedash 148}
+    \field{title}{The Normal Law Under Linear Restrictions: Simulation and
+  Estimation via Minimax Tilting}
+    \field{volume}{79}
+    \field{journaltitle}{Journal of the Royal Statistical Society: Series B}
+    \field{year}{2017}
+  \endentry
+
+  \entry{breiman2017classification}{book}{}
+    \name{author}{1}{}{%
+      {{hash=BL}{%
+         family={Breiman},
+         familyi={B\bibinitperiod},
+         given={Leo},
+         giveni={L\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Routledge}%
+    }
+    \strng{namehash}{BL1}
+    \strng{fullhash}{BL1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Classification and Regression Trees}
+    \field{year}{2017}
+  \endentry
+
+  \entry{rodriguez2019interpretable}{article}{}
+    \name{author}{4}{}{%
+      {{hash=RIDJ}{%
+         family={Rodriguez},
+         familyi={R\bibinitperiod},
+         given={Ivan Dario\bibnamedelima Jimenez},
+         giveni={I\bibinitperiod\bibinitdelim D\bibinitperiod\bibinitdelim
+  J\bibinitperiod},
+      }}%
+      {{hash=KT}{%
+         family={Killian},
+         familyi={K\bibinitperiod},
+         given={Taylor},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=SSH}{%
+         family={Son},
+         familyi={S\bibinitperiod},
+         given={Sung-Hyun},
+         giveni={S\bibinithyphendelim H\bibinitperiod},
+      }}%
+      {{hash=GM}{%
+         family={Gombolay},
+         familyi={G\bibinitperiod},
+         given={Matthew},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{RIDJKT+1}
+    \strng{fullhash}{RIDJKTSSHGM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{1903.09338}
+    \field{title}{Interpretable Reinforcement Learning via Differentiable
+  Decision Trees}
+    \field{journaltitle}{arXiv}
+    \field{year}{2019}
+  \endentry
+
+  \entry{schielzeth2010simple}{article}{}
+    \name{author}{1}{}{%
+      {{hash=SH}{%
+         family={Schielzeth},
+         familyi={S\bibinitperiod},
+         given={Holger},
+         giveni={H\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Wiley Online Library}%
+    }
+    \strng{namehash}{SH1}
+    \strng{fullhash}{SH1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{2}
+    \field{pages}{103\bibrangedash 113}
+    \field{title}{Simple means to Improve the Interpretability of Regression
+  Coefficients}
+    \field{volume}{1}
+    \field{journaltitle}{Methods in Ecology and Evolution}
+    \field{year}{2010}
+  \endentry
+
+  \entry{brunton2016discovering}{article}{}
+    \name{author}{3}{}{%
+      {{hash=BSL}{%
+         family={Brunton},
+         familyi={B\bibinitperiod},
+         given={Steven\bibnamedelima L},
+         giveni={S\bibinitperiod\bibinitdelim L\bibinitperiod},
+      }}%
+      {{hash=PJL}{%
+         family={Proctor},
+         familyi={P\bibinitperiod},
+         given={Joshua\bibnamedelima L},
+         giveni={J\bibinitperiod\bibinitdelim L\bibinitperiod},
+      }}%
+      {{hash=KJN}{%
+         family={Kutz},
+         familyi={K\bibinitperiod},
+         given={J\bibnamedelima Nathan},
+         giveni={J\bibinitperiod\bibinitdelim N\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {National Acad Sciences}%
+    }
+    \strng{namehash}{BSLPJL+1}
+    \strng{fullhash}{BSLPJLKJN1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{15}
+    \field{pages}{3932\bibrangedash 3937}
+    \field{title}{Discovering Governing Equations from Data by Sparse
+  Identification of Nonlinear Dynamical Systems}
+    \field{volume}{113}
+    \field{journaltitle}{Proceedings of the National Academy of Sciences}
+    \field{year}{2016}
+  \endentry
+
+  \entry{hein2017particle}{article}{}
+    \name{author}{4}{}{%
+      {{hash=HD}{%
+         family={Hein},
+         familyi={H\bibinitperiod},
+         given={Daniel},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=HA}{%
+         family={Hentschel},
+         familyi={H\bibinitperiod},
+         given={Alexander},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=RT}{%
+         family={Runkler},
+         familyi={R\bibinitperiod},
+         given={Thomas},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=US}{%
+         family={Udluft},
+         familyi={U\bibinitperiod},
+         given={Steffen},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Elsevier}%
+    }
+    \strng{namehash}{HDHA+1}
+    \strng{fullhash}{HDHARTUS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{pages}{87\bibrangedash 98}
+    \field{title}{Particle Swarm Optimization for Generating Interpretable
+  Fuzzy Reinforcement Learning Policies}
+    \field{volume}{65}
+    \field{journaltitle}{Engineering Applications of Artificial Intelligence}
+    \field{year}{2017}
+  \endentry
+
+  \entry{lee2018interpretable}{inproceedings}{}
+    \name{author}{4}{}{%
+      {{hash=LR}{%
+         family={Lee},
+         familyi={L\bibinitperiod},
+         given={Ritchie},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=KMJ}{%
+         family={Kochenderfer},
+         familyi={K\bibinitperiod},
+         given={Mykel\bibnamedelima J},
+         giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+      {{hash=MOJ}{%
+         family={Mengshoel},
+         familyi={M\bibinitperiod},
+         given={Ole\bibnamedelima J},
+         giveni={O\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+      {{hash=SJ}{%
+         family={Silbermann},
+         familyi={S\bibinitperiod},
+         given={Joshua},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{LRKMJ+1}
+    \strng{fullhash}{LRKMJMOJSJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{SIAM International Conference on Data Mining}
+    \field{pages}{216\bibrangedash 224}
+    \field{title}{Interpretable Categorization of Heterogeneous Time Series
+  Data}
+    \field{year}{2018}
+  \endentry
+
+  \entry{vazquez2017logical}{inproceedings}{}
+    \name{author}{4}{}{%
+      {{hash=VCM}{%
+         family={Vazquez-Chanlatte},
+         familyi={V\bibinithyphendelim C\bibinitperiod},
+         given={Marcell},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=DJV}{%
+         family={Deshmukh},
+         familyi={D\bibinitperiod},
+         given={Jyotirmoy\bibnamedelima V},
+         giveni={J\bibinitperiod\bibinitdelim V\bibinitperiod},
+      }}%
+      {{hash=JX}{%
+         family={Jin},
+         familyi={J\bibinitperiod},
+         given={Xiaoqing},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=SSA}{%
+         family={Seshia},
+         familyi={S\bibinitperiod},
+         given={Sanjit\bibnamedelima A},
+         giveni={S\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{VCMDJV+1}
+    \strng{fullhash}{VCMDJVJXSSA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Conference on Computer Aided Verification}
+    \field{pages}{305\bibrangedash 325}
+    \field{title}{Logical Clustering and Learning for Time-Series Data}
+    \field{year}{2017}
+  \endentry
+
+  \entry{agha2018survey}{article}{}
+    \name{author}{2}{}{%
+      {{hash=AG}{%
+         family={Agha},
+         familyi={A\bibinitperiod},
+         given={Gul},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=PK}{%
+         family={Palmskog},
+         familyi={P\bibinitperiod},
+         given={Karl},
+         giveni={K\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {ACM New York, NY, USA}%
+    }
+    \strng{namehash}{AGPK1}
+    \strng{fullhash}{AGPK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{1}
+    \field{pages}{1\bibrangedash 39}
+    \field{title}{A survey of statistical model checking}
+    \field{volume}{28}
+    \field{journaltitle}{ACM Transactions on Modeling and Computer Simulation
+  (TOMACS)}
+    \field{year}{2018}
+  \endentry
+
+  \entry{Chryssanthacopoulos2010}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=CJP}{%
+         family={Chryssanthacopoulos},
+         familyi={C\bibinitperiod},
+         given={James\bibnamedelima P.},
+         giveni={J\bibinitperiod\bibinitdelim P\bibinitperiod},
+      }}%
+      {{hash=KMJ}{%
+         family={Kochenderfer},
+         familyi={K\bibinitperiod},
+         given={Mykel\bibnamedelima J.},
+         giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+      {{hash=WRE}{%
+         family={Williams},
+         familyi={W\bibinitperiod},
+         given={Richard\bibnamedelima E.},
+         giveni={R\bibinitperiod\bibinitdelim E\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{CJPKMJ+1}
+    \strng{fullhash}{CJPKMJWRE1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{AIAA Non-Deterministic Approaches Conference}
+    \verb{doi}
+    \verb 10.2514/6.2010-3012
+    \endverb
+    \field{title}{Improved {Monte Carlo} sampling for conflict probability
+  estimation}
+    \list{location}{1}{%
+      {Orlando, Florida}%
+    }
+    \field{year}{2010}
+  \endentry
+
+  \entry{taylor2009transfer}{article}{}
+    \name{author}{2}{}{%
+      {{hash=TME}{%
+         family={Taylor},
+         familyi={T\bibinitperiod},
+         given={Matthew\bibnamedelima E},
+         giveni={M\bibinitperiod\bibinitdelim E\bibinitperiod},
+      }}%
+      {{hash=SP}{%
+         family={Stone},
+         familyi={S\bibinitperiod},
+         given={Peter},
+         giveni={P\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{TMESP1}
+    \strng{fullhash}{TMESP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{7}
+    \field{pages}{1633\bibrangedash 1685}
+    \field{title}{Transfer learning for reinforcement learning domains: A
+  survey.}
+    \field{volume}{10}
+    \field{journaltitle}{Journal of Machine Learning Research}
+    \field{year}{2009}
+  \endentry
+
+  \entry{rajendran2017attend}{inproceedings}{}
+    \name{author}{5}{}{%
+      {{hash=RJ}{%
+         family={Rajendran},
+         familyi={R\bibinitperiod},
+         given={Janarthanan},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=LAS}{%
+         family={Lakshminarayanan},
+         familyi={L\bibinitperiod},
+         given={Aravind\bibnamedelima S.},
+         giveni={A\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+      {{hash=KMM}{%
+         family={Khapra},
+         familyi={K\bibinitperiod},
+         given={Mitesh\bibnamedelima M.},
+         giveni={M\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+      {{hash=PP}{%
+         family={Prasanna},
+         familyi={P\bibinitperiod},
+         given={P.},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=RB}{%
+         family={Ravindran},
+         familyi={R\bibinitperiod},
+         given={Balaraman},
+         giveni={B\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{RJLAS+1}
+    \strng{fullhash}{RJLASKMMPPRB1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Conference on Learning Representations
+  (ICLR)}
+    \field{title}{Attend, Adapt and Transfer: Attentive Deep Architecture for
+  Adaptive Transfer from multiple sources in the same domain}
+    \field{year}{2017}
+  \endentry
+
+  \entry{rosenblatt2000optimal}{article}{}
+    \name{author}{1}{}{%
+      {{hash=RJK}{%
+         family={Rosenblatt},
+         familyi={R\bibinitperiod},
+         given={Julio\bibnamedelima K},
+         giveni={J\bibinitperiod\bibinitdelim K\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{RJK1}
+    \strng{fullhash}{RJK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{1}
+    \field{pages}{17\bibrangedash 25}
+    \field{title}{Optimal selection of uncertain actions by maximizing expected
+  utility}
+    \field{volume}{9}
+    \field{journaltitle}{Autonomous Robots}
+    \field{year}{2000}
+  \endentry
+
+  \entry{bouton2019decomposition}{article}{}
+    \name{author}{5}{}{%
+      {{hash=BM}{%
+         family={Bouton},
+         familyi={B\bibinitperiod},
+         given={Maxime},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=JKD}{%
+         family={Julian},
+         familyi={J\bibinitperiod},
+         given={Kyle\bibnamedelima D},
+         giveni={K\bibinitperiod\bibinitdelim D\bibinitperiod},
+      }}%
+      {{hash=NA}{%
+         family={Nakhaei},
+         familyi={N\bibinitperiod},
+         given={Alireza},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=FK}{%
+         family={Fujimura},
+         familyi={F\bibinitperiod},
+         given={Kikuo},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=KMJ}{%
+         family={Kochenderfer},
+         familyi={K\bibinitperiod},
+         given={Mykel\bibnamedelima J},
+         giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{BMJKD+1}
+    \strng{fullhash}{BMJKDNAFKKMJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{3}
+    \field{pages}{330\bibrangedash 352}
+    \field{title}{Decomposition methods with deep corrections for reinforcement
+  learning}
+    \field{volume}{33}
+    \field{journaltitle}{International Conference on Autonomous Agents and
+  Multiagent Systems (AAMAS)}
+    \field{year}{2019}
+  \endentry
+
+  \entry{chryssanthacopoulos2012decomposition}{article}{}
+    \name{author}{2}{}{%
+      {{hash=CJP}{%
+         family={Chryssanthacopoulos},
+         familyi={C\bibinitperiod},
+         given={James\bibnamedelima P},
+         giveni={J\bibinitperiod\bibinitdelim P\bibinitperiod},
+      }}%
+      {{hash=KMJ}{%
+         family={Kochenderfer},
+         familyi={K\bibinitperiod},
+         given={Mykel\bibnamedelima J},
+         giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{CJPKMJ1}
+    \strng{fullhash}{CJPKMJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{2}
+    \field{pages}{398\bibrangedash 405}
+    \field{title}{Decomposition methods for optimized collision avoidance with
+  multiple threats}
+    \field{volume}{35}
+    \field{journaltitle}{Journal of Guidance, Control, and Dynamics}
+    \field{year}{2012}
+  \endentry
+
+  \entry{taylor2007transfer}{article}{}
+    \name{author}{3}{}{%
+      {{hash=TME}{%
+         family={Taylor},
+         familyi={T\bibinitperiod},
+         given={Matthew\bibnamedelima E},
+         giveni={M\bibinitperiod\bibinitdelim E\bibinitperiod},
+      }}%
+      {{hash=SP}{%
+         family={Stone},
+         familyi={S\bibinitperiod},
+         given={Peter},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=LY}{%
+         family={Liu},
+         familyi={L\bibinitperiod},
+         given={Yaxin},
+         giveni={Y\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{TMESP+1}
+    \strng{fullhash}{TMESPLY1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{9}
+    \field{pages}{2125\bibrangedash 2167}
+    \field{title}{Transfer learning via inter-task mappings for temporal
+  difference learning}
+    \field{volume}{8}
+    \field{journaltitle}{Journal of Machine Learning Research}
+    \field{year}{2007}
+  \endentry
+
+  \entry{taylor2008autonomous}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=TME}{%
+         family={Taylor},
+         familyi={T\bibinitperiod},
+         given={Matthew\bibnamedelima E},
+         giveni={M\bibinitperiod\bibinitdelim E\bibinitperiod},
+      }}%
+      {{hash=KG}{%
+         family={Kuhlmann},
+         familyi={K\bibinitperiod},
+         given={Gregory},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=SP}{%
+         family={Stone},
+         familyi={S\bibinitperiod},
+         given={Peter},
+         giveni={P\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{TMEKG+1}
+    \strng{fullhash}{TMEKGSP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Conference on Autonomous Agents and
+  Multiagent Systems (AAMAS)}
+    \field{pages}{283\bibrangedash 290}
+    \field{title}{Autonomous transfer for reinforcement learning.}
+    \field{year}{2008}
+  \endentry
+
+  \entry{Hasselt2016deep}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=HHv}{%
+         family={Hasselt},
+         familyi={H\bibinitperiod},
+         given={Hado\bibnamedelima van},
+         giveni={H\bibinitperiod\bibinitdelim v\bibinitperiod},
+      }}%
+      {{hash=GA}{%
+         family={Guez},
+         familyi={G\bibinitperiod},
+         given={Arthur},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=SD}{%
+         family={Silver},
+         familyi={S\bibinitperiod},
+         given={David},
+         giveni={D\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{HHvGA+1}
+    \strng{fullhash}{HHvGASD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{AAAI Conference on Artificial Intelligence (AAAI)}
+    \field{pages}{2094–2100}
+    \field{title}{Deep Reinforcement Learning with Double Q-Learning}
+    \list{location}{1}{%
+      {Phoenix, Arizona}%
+    }
+    \field{year}{2016}
+  \endentry
+
+  \entry{julian2019deep}{article}{}
+    \name{author}{3}{}{%
+      {{hash=JKD}{%
+         family={Julian},
+         familyi={J\bibinitperiod},
+         given={Kyle\bibnamedelima D},
+         giveni={K\bibinitperiod\bibinitdelim D\bibinitperiod},
+      }}%
+      {{hash=KMJ}{%
+         family={Kochenderfer},
+         familyi={K\bibinitperiod},
+         given={Mykel\bibnamedelima J},
+         giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+      {{hash=OMP}{%
+         family={Owen},
+         familyi={O\bibinitperiod},
+         given={Michael\bibnamedelima P},
+         giveni={M\bibinitperiod\bibinitdelim P\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{2}{%
+      {American Institute of Aeronautics}%
+      {Astronautics}%
+    }
+    \strng{namehash}{JKDKMJ+1}
+    \strng{fullhash}{JKDKMJOMP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{3}
+    \field{pages}{598\bibrangedash 608}
+    \field{title}{Deep neural network compression for aircraft collision
+  avoidance systems}
+    \field{volume}{42}
+    \field{journaltitle}{Journal of Guidance, Control, and Dynamics}
+    \field{year}{2019}
+  \endentry
+
+  \entry{wang2020falsification}{article}{}
+    \name{author}{3}{}{%
+      {{hash=WX}{%
+         family={Wang},
+         familyi={W\bibinitperiod},
+         given={Xiao},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=NS}{%
+         family={Nair},
+         familyi={N\bibinitperiod},
+         given={Saasha},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=AM}{%
+         family={Althoff},
+         familyi={A\bibinitperiod},
+         given={Matthias},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \keyw{Computer Science - Robotics, Computer Science - Formal Languages and
+  Automata Theory, Computer Science - Machine Learning}
+    \strng{namehash}{WXNS+1}
+    \strng{fullhash}{WXNSAM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{eid}{arXiv:2007.00691}
+    \verb{eprint}
+    \verb 2007.00691
+    \endverb
+    \field{pages}{arXiv:2007.00691}
+    \field{title}{{Falsification-Based Robust Adversarial Reinforcement
+  Learning}}
+    \field{journaltitle}{arXiv e-prints}
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{cs.RO}
+    \field{month}{07}
+    \field{year}{2020}
+  \endentry
+
+  \entry{ellis2009modelling}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=ED}{%
+         family={Ellis},
+         familyi={E\bibinitperiod},
+         given={David},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=SE}{%
+         family={Sommerlade},
+         familyi={S\bibinitperiod},
+         given={Eric},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=RI}{%
+         family={Reid},
+         familyi={R\bibinitperiod},
+         given={Ian},
+         giveni={I\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{EDSE+1}
+    \strng{fullhash}{EDSERI1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{International Conference on Computer Vision (ICCV)}
+    \field{pages}{1229\bibrangedash 1234}
+    \field{title}{Modelling pedestrian trajectory patterns with gaussian
+  processes}
+    \field{year}{2009}
+  \endentry
+
+  \entry{sitawarin2018deceiving}{article}{}
+    \name{author}{5}{}{%
+      {{hash=SC}{%
+         family={{Sitawarin}},
+         familyi={S\bibinitperiod},
+         given={Chawin},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=NA}{%
+         family={{Nitin Bhagoji}},
+         familyi={N\bibinitperiod},
+         given={Arjun},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=MA}{%
+         family={{Mosenia}},
+         familyi={M\bibinitperiod},
+         given={Arsalan},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=CM}{%
+         family={{Chiang}},
+         familyi={C\bibinitperiod},
+         given={Mung},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=MP}{%
+         family={{Mittal}},
+         familyi={M\bibinitperiod},
+         given={Prateek},
+         giveni={P\bibinitperiod},
+      }}%
+    }
+    \keyw{Computer Science - Cryptography and Security, Computer Science -
+  Computer Vision and Pattern Recognition}
+    \strng{namehash}{SCNA+1}
+    \strng{fullhash}{SCNAMACMMP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{eid}{arXiv:1802.06430}
+    \verb{eprint}
+    \verb 1802.06430
+    \endverb
+    \field{pages}{arXiv:1802.06430}
+    \field{title}{{DARTS: Deceiving Autonomous Cars with Toxic Signs}}
+    \field{journaltitle}{arXiv e-prints}
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{cs.CR}
+    \field{month}{02}
+    \field{year}{2018}
+  \endentry
+\enddatalist
+\endinput

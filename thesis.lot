@@ -1,0 +1,25 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\babel@toc {american}{}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Default IDM parameter values.\relax }}{46}{table.caption.29}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Continuous disturbance space for adversarial pedestrian in crosswalk.\relax }}{50}{table.caption.31}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Continuous disturbance space for adversarial vehicles in T-intersection.\relax }}{51}{table.caption.33}%
+\contentsline {table}{\numberline {3.4}{\ignorespaces Discrete disturbance space for adversarial vehicles in T-intersection.\relax }}{52}{table.caption.34}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces Representation of the \textsc {SampleChildrenAssignments} function.\relax }}{64}{table.caption.41}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Comparing interpretable validation (IV) to importance sampling (IS) for three different initial conditions of the left-turn scenario.\relax }}{72}{table.caption.44}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Comparison of interpretable validation with STL grammar to baselines for pedestrian scenario.\relax }}{74}{table.caption.49}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces Comparison of interpretable validation with state-dependent grammar to baselines for pedestrian scenario.\relax }}{77}{table.caption.52}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces Performance with noisy estimates of the probability of failure.\relax }}{96}{table.caption.56}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Simple gridworld failure results.\relax }}{99}{table.caption.60}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces Two car T-intersection results.\relax }}{101}{table.caption.62}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {6.1}{\ignorespaces 5-car results.\relax }}{113}{table.caption.67}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {7.1}{\ignorespaces Network architectures and hyperparameters. \relax }}{128}{table.caption.78}%
+\addvspace {10\p@ }
+\contentsfinish 
+\contentsfinish 

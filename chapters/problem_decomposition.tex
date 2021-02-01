@@ -1,4 +1,4 @@
-In this chapter we introduce a technique for improving the scalability of safety validation algorithms for multi-agent systems. We first describe the problem of exponential growth of states and disturbances with respect to the number of adversarial entities. We then show how multi-agent safety validation problems can be decomposed into subproblems each involving the system interacting with a subset of the adversaries. The solution to these subproblems can be recombined using an attention network and a base network to correct for multi-agent interactions. We demonstrate the efficacy of scene decomposition by approximating the distribution over failures of a multi-agent gridworld and T-intersection scenario. 
+In this chapter we introduce a technique for improving the scalability of safety validation algorithms for multi-agent systems. We first describe the problem of exponential growth of states and disturbances with respect to the number of adversarial entities. We then show how multi-agent safety validation problems can be decomposed into subproblems each involving the system interacting with a subset of the adversaries. The solution to these subproblems can be recombined using an attention network and a base network to correct for multi-agent interactions. We demonstrate the efficacy of scene decomposition by approximating the distribution over failures of a multi-agent gridworld and T-intersection scenario.
 
 \section{Motivation}
 
@@ -129,12 +129,12 @@ Finding failures in a complex driving scenario with multiple interacting agents 
     \centering
     \caption{5-car results.}
     \label{tab:ch6_5car_results}
-    \begin{tabular}{@{}lll@{}} 
+    \begin{tabular}{@{}lcc@{}} 
         \toprule
         \textbf{Method} & \textbf{Failure Rate} & \textbf{Log Likelihood}\\
         \midrule
         Monte Carlo & \num{0.0} \pm \num{0.0} &  - \\
-        Uniform sampling & \num{0.031} \pm \num{0.005} & \num{-173.01} \pm \num{42.925} \\
+        Uniform sampling & \num{0.031} \pm \num{0.005} & \num{-173.01} \pm \num{42.93} \\
         Cross entropy method & \num{0.035} \pm \num{0.006} & \num{-82.672} \pm \num{7.342} \\
         DQN + A2T & \num{0.081} \pm \num{0.009} & \num{-19.938} \pm \num{7.317} \\
         \bottomrule
@@ -195,6 +195,8 @@ Multi-agent safety validation problems pose a challenge for safety validation al
 
 Using the ground truth of simple multi-agent gridworld problem, we showed that estimates of the probability of failure of the \num{3}-agent system were improved by referencing the probability of failure of the \num{2}-agent system. We then applied the decomposition approach to the T-intersection scenario with \num{4} adversaries. By decomposing the problem into two unique subproblems and recombining their solutions, we were able to approximate the distribution over failures and outperform baseline approaches. 
 
-In addition to the transfer learning literature, our approach to scene decomposition is also similar to the work of \textcite{bouton2019decomposition}. In that work they perform a similar pairwise decomposition to help train a safe driving policy. Each subproblem was solved for the optimal value function and the results were fused with simple aggregated by taking the max or mean. To account for multi-agent interactions, they learned an additive correction factor parameterized by a deep neural network. The A2T approach is more flexible because the combination of subproblem solutions is learned and state dependent. Unlike training an agent to drive, in the safety validation problem the action space scales with the number of agents, which adds an additional challenge to overcome.
+Decomposition of the $Q$-function has been effective for developing reinforcement learning agents. The technique proposed by \cite{sutton2000policy} creates a learning agent composed of individual subagents with different reward functions. Each subagent learns a $Q$ function based on its reward and provides this information to a centralized arbiter. The arbiter fuses the utility estimates together, and selects the action that maximizes the global utility (a similar approach was used by~\cite{rosenblatt2000optimal}). The $Q$-decomposition approach was used by \textcite{bouton2019decomposition} to learn a safe driving policy. In that work, they perform a similar pairwise decomposition of driving agents. Each subproblem was solved for the optimal value function and the results were fused with simple aggregation by taking the max or mean. To account for multi-agent interactions, they learned an additive correction factor, parameterized by a deep neural network. Utility decomposition has also been successful for developing collision avoidance strategies with multiple agents~\cite{chryssanthacopoulos2012decomposition}.
+
+The main distinction between $Q$-decomposition and our approach is that the joint problem has an action space that is the joint action space of the subproblems. When combining subproblem solutions, we need to select which agents act as well as what actions they choose, while the approach of \textcite{sutton2000policy} and \textcite{bouton2019reinforcement} fuses a set of proposed actions into a single action for the joint agent. Additionally, the A2T approach is more flexible because the combination of subproblem solutions is learned and state dependent. 
 
 In the next chapter we turn away from solving individual safety validation problems and consider the problem of iterative safety validation. We demonstrate that we can gain significant performance and efficiency improvement by storing and reusing safety validation knowledge across systems. 
